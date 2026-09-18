@@ -728,10 +728,14 @@ AC_SUBST(ffmpeg_options)
 [
 if test "x$CCACHE" = "x"
 then
-  MESON_CC="'$CC'"
+  # autoconf >=2.72 may append -std= flags to $CC; meson needs a word array
+  # (single quotes per word), not one long quoted string.
+  MESON_CC=$(printf "'%s', " $CC | sed "s/, $//")
+  MESON_CC="[$MESON_CC]"
   MESON_CXX="'$CXX'"
 else
-  MESON_CC="['$CCACHE', '$CC']"
+  MESON_CC=$(printf "'%s', " $CCACHE $CC | sed "s/, $//")
+  MESON_CC="[$MESON_CC]"
   MESON_CXX="['$CCACHE', '$CXX']"
 fi
 
