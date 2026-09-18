@@ -27,7 +27,7 @@
 		<string>@PLATFORM_BUNDLE_IDENTIFIER@</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
-			<string>kodi</string>
+			<string>mrmc</string>
 		</array>
 	</dict>
 	</array>

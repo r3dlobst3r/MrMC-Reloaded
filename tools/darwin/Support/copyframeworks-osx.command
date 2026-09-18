@@ -65,7 +65,7 @@ rm -rf "$TARGET_CONTENTS/Libraries"
 mkdir -p "$TARGET_CONTENTS/Libraries"
 
 echo "Creating icon"
-iconutil -c icns --output "$TARGET_CONTENTS/Resources/kodi.icns" "$SRCROOT/tools/darwin/packaging/media/osx/icon.iconset"
+iconutil -c icns --output "$TARGET_CONTENTS/Resources/mrmc.icns" "$SRCROOT/tools/darwin/packaging/media/osx/icon.iconset"
 
 cp -f "$SRCROOT/xbmc/platform/darwin/osx/Info.plist" "$TARGET_CONTENTS/"
 

@@ -97,7 +97,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kodi</string>
+				<string>mrmc</string>
 			</array>
 		</dict>
 	</array>

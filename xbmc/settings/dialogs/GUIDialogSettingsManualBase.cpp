@@ -1481,8 +1481,10 @@ void CGUIDialogSettingsManualBase::setSettingDetails(const std::shared_ptr<CSett
   if (setting == NULL)
     return;
 
-  if (level < SettingLevel::Basic)
-    level = SettingLevel::Basic;
+  // MrMC: keep only Standard and Expert levels
+  // Basic and Standard == Standard; Advanced and Expert == Expert
+  if (level < SettingLevel::Standard)
+    level = SettingLevel::Standard;
   else if (level > SettingLevel::Expert)
     level = SettingLevel::Expert;
 
