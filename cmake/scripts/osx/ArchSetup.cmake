@@ -58,9 +58,10 @@ list(APPEND DEPLIBS "-framework DiskArbitration" "-framework IOKit"
                     "-framework AVFoundation")
 
 if(ARCH STREQUAL aarch64)
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0)
+  # Xcode 27 SDKs refuse deployment targets below 12.0
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.0)
 else()
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 10.14)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 12.0)
 endif()
 set(CMAKE_XCODE_ATTRIBUTE_CLANG_LINK_OBJC_RUNTIME OFF)
 

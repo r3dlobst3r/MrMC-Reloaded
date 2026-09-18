@@ -471,7 +471,8 @@ case $host in
             target_minver="12.0"
           ;;
           osx)
-            target_minver="11.0"
+            # Xcode 27 SDKs refuse deployment targets below 12.0
+            target_minver="12.0"
           ;;
           *)
             AC_MSG_ERROR(invalid platform for architecture ($host))

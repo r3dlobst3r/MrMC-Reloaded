@@ -63,7 +63,19 @@ endif()
 set(CMAKE_SYSTEM_VERSION 1)
 
 # specify the cross compiler
-set(CMAKE_C_COMPILER @CC@)
+# autoconf >=2.72 may append -std= flags to CC (e.g. -std=gnu23); CMake cannot
+# parse a multi-word compiler, so split any extra flags into CMAKE_C_FLAGS.
+string(REPLACE " " ";" CC_LIST "@CC@")
+list(LENGTH CC_LIST CC_LIST_LEN)
+if(CC_LIST_LEN GREATER 1)
+  list(GET CC_LIST 0 CC_BIN)
+  list(SUBLIST CC_LIST 1 -1 CC_EXTRA)
+  string(REPLACE ";" " " CC_EXTRA_STR "${CC_EXTRA}")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CC_EXTRA_STR}")
+else()
+  set(CC_BIN "@CC@")
+endif()
+set(CMAKE_C_COMPILER ${CC_BIN})
 set(CMAKE_CXX_COMPILER @CXX@)
 set(CMAKE_AR @AR@ CACHE FILEPATH "Archiver")
 SET(CMAKE_AS @AS@ CACHE FILEPATH "Assembler")
