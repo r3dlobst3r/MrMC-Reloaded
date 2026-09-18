@@ -59,6 +59,9 @@ enable_arc()
 # Xcode strips dead code by default which breaks wrapping
 set(CMAKE_XCODE_ATTRIBUTE_DEAD_CODE_STRIPPING OFF)
 
+# Xcode 27 SDKs refuse deployment targets below tvOS/iOS 15.0
+set(CMAKE_OSX_DEPLOYMENT_TARGET 15.0)
+
 option(ENABLE_XCODE_ADDONBUILD "Enable Xcode automatic addon building?" OFF)
 
 # Unify output directories for iOS/tvOS packaging scripts

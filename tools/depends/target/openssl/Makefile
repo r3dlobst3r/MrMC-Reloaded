@@ -4,15 +4,31 @@ DEPS = ../../Makefile.include Makefile OPENSSL-VERSION ../../download-files.incl
 
 # configuration settings
 ifeq ($(OS), linux)
-  # Need to export our vars to override "default" conf data of openssl
   TARGETOPT=--with-zlib-include=$(PREFIX)/include --with-zlib-lib=$(PREFIX)/lib
-  CONFIGURE=MACHINE=$(PLATFORM) ./config no-shared zlib no-tests no-asm $(TARGETOPT) --prefix=$(PREFIX) --libdir=lib
+  CONFIGURE=./Configure no-shared zlib no-tests no-asm no-module  $(TARGETOPT) --prefix=$(PREFIX) --libdir=lib
+  ifeq ($(TARGET_PLATFORM),webos)
+    CONFIGURE+= linux-armv4
+    # Need to add "no-async" to avoid "setcontext is not implemented and will always fail" warning
+    TARGETOPT+= no-async
+  else
+    ifeq ($(CPU),aarch64)
+      CONFIGURE+= linux-aarch64
+    else ifeq ($(CPU),arm)
+      CONFIGURE+= linux-armv4
+    else ifeq ($(CPU),x86_64)
+      CONFIGURE+= linux-x86_64
+    else
+      # Fallback to base generic linux target
+      CONFIGURE+= linux-generic32
+    endif
+  endif
+else ifeq ($(OS), wasm)
+  CONFIGURE=./Configure no-shared no-asm no-tests no-module no-async no-afalgeng --prefix=$(PREFIX) --libdir=lib linux-generic32
 else
   ifeq ($(OS), android)
-    TARGETOPT=--with-zlib-include=$(PREFIX)/include --with-zlib-lib=$(PREFIX)/lib -D__ANDROID_API__=$(NDK_LEVEL)
-    # openssl 1.x incorrectly uses ANDROID_NDK_HOME, when openssl 3.x.x comes in use ANDROID_NDK_ROOT
-    # see https://github.com/openssl/openssl/pull/11206
-    export ANDROID_NDK_HOME=$(NDKROOT)
+    TARGETOPT=--with-zlib-include=$(PREFIX)/include --with-zlib-lib=$(PREFIX)/lib -U__ANDROID_API__ -D__ANDROID_API__=$(NDK_LEVEL)
+
+    export ANDROID_NDK_ROOT=$(NDKROOT)
     export PATH:=$(TOOLCHAIN)/bin:$(PATH)
     ifeq ($(MESON_CPU), aarch64)
       OPENSSLPLATFORM=android-arm64
@@ -24,18 +40,21 @@ else
     # LLVM 15 has raised this to error by default. drop back to warning
     CFLAGS+= -Wno-error=implicit-int
     export SDKROOT CFLAGS
-    OPENSSLPLATFORM=kodi-$(TARGET_PLATFORM)-$(CPU)
-    ifeq ($(TARGET_PLATFORM),appletvos)
+    OPENSSLPLATFORM=kodi-iphoneos-arm64
+
+    ifeq ($(findstring appletv,$(TARGET_PLATFORM)),appletv)
+      OPENSSLPLATFORM=kodi-appletvos-arm64
       # Need to add "no-async" to avoid "'setcontext' is unavailable: not available on tvOS" error
-      TARGETOPT=no-async
+      TARGETOPT+= no-async
     endif
   endif
   ifeq ($(OS), osx)
     OPENSSLPLATFORM=kodi-darwin64-$(CPU)
-    ASMFLAG=no-asm
   endif
 
-  CONFIGURE=./Configure $(OPENSSLPLATFORM) no-shared $(ASMFLAG) zlib no-tests $(TARGETOPT) --prefix=$(PREFIX)
+  # Openssl 3.2.0 allows no-apps no-docs as options. Use when we update further
+  # We explicitly use no-asm as there is a symbol clash with gnutls
+  CONFIGURE=./Configure no-shared zlib no-tests no-asm no-module  $(TARGETOPT) --prefix=$(PREFIX) $(OPENSSLPLATFORM)
 endif
 
 export CC CXX AR RANLIB
@@ -46,7 +65,7 @@ LIBDYLIB=$(PLATFORM)/libssl.a
 all: .installed-$(PLATFORM)
 
 
-$(PLATFORM): $(DEPS) | $(TARBALLS_LOCATION)/$(ARCHIVE).$(HASH_TYPE)
+.configured-$(PLATFORM): $(DEPS) | $(TARBALLS_LOCATION)/$(ARCHIVE).$(HASH_TYPE)
 	rm -rf $(PLATFORM); mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 ifeq ($(OS),android)
@@ -54,12 +73,10 @@ ifeq ($(OS),android)
 endif
 	cd $(PLATFORM); cp ../16-kodi.conf ./Configurations/
 	cd $(PLATFORM); $(CONFIGURE)
-	if test "$(OS)" = "darwin_embedded"; then \
-		sed -E -ie "s|static volatile sig_atomic_t intr_signal;|static volatile intr_signal;|" "$(PLATFORM)/crypto/ui/ui_openssl.c"; \
-	fi
 	sed -ie "s|PROGRAMS=|PROGRAMS=#|" "$(PLATFORM)/Makefile";
+	touch $@
 
-$(LIBDYLIB): $(PLATFORM)
+$(LIBDYLIB): .configured-$(PLATFORM)
 	$(MAKE) -C $(PLATFORM)
 	touch $@
 
@@ -69,8 +86,8 @@ $(LIBDYLIB): $(PLATFORM)
 
 clean:
 	$(MAKE) -C $(PLATFORM) clean
-	rm -f .installed-$(PLATFORM)
+	rm -f .installed-$(PLATFORM) .configured-$(PLATFORM)
 
 distclean::
-	rm -rf $(PLATFORM) .installed-$(PLATFORM)
+	rm -rf $(PLATFORM) .installed-$(PLATFORM) .configured-$(PLATFORM)
 
