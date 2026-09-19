@@ -42,6 +42,7 @@
 #include "pvr/guilib/PVRGUIActionsUtils.h"
 #include "pvr/recordings/PVRRecording.h"
 #include "pvr/timers/PVRTimerInfoTag.h"
+#include "services/ServicesManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingUtils.h"
 #include "settings/Settings.h"
@@ -1377,6 +1378,16 @@ bool CFileItem::IsPVR() const
 bool CFileItem::IsLiveTV() const
 {
   return URIUtils::IsLiveTV(m_strPath);
+}
+
+bool CFileItem::IsMediaServiceBased() const
+{
+  return CServicesManager::GetInstance().IsMediaServicesItem(*this);
+}
+
+bool CFileItem::IsMediaServicesCloudItem() const
+{
+  return CServicesManager::GetInstance().IsMediaServicesCloudItem(*this);
 }
 
 bool CFileItem::IsHD() const

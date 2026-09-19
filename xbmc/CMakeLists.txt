@@ -29,6 +29,9 @@ set(SOURCES AutoSwitch.cpp
             TextureDatabase.cpp
             ThumbLoader.cpp
             URL.cpp
+            network/TCPClient.cpp
+            utils/Base64URL.cpp
+            utils/md5.cpp
             Util.cpp
             XBDateTime.cpp)
 

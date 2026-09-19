@@ -2117,6 +2117,835 @@
     </category>
   </section>
   <section id="services" label="14036" help="36319">
+    <category id="plex" label="1236" help="1237">
+      <group id="1">
+        <setting id="plex.signin" type="string" label="1238" help="1239">
+          <level>0</level>
+          <default>Sign-in</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="plexsignin" setting="plex.signinpin" />
+            </dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="plex.signinpin" type="string" label="1246" help="1247">
+          <level>0</level>
+          <default>Sign-in</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="plexsigninpin" setting="plex.signin" />
+            </dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="plex.homeuser" type="string" label="1244" help="1245">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="enable">
+              <or>
+                <condition on="property" name="plexhomeuser" setting="plex.signin" />
+                <condition on="property" name="plexhomeuser" setting="plex.signinpin" />
+              </or>
+            </dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="plex.gdmserver" type="boolean" label="1242" help="1243">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.updatetime" type="integer" label="1250" help="1251">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum label="351">0</minimum>
+            <step>10</step>
+            <maximum>300</maximum>
+          </constraints>
+          <control type="spinner" format="string">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+      </group>
+      <group id="3">
+        <setting id="plex.limithometo" type="integer" label="37052" help="37053">
+          <level>0</level>
+          <default>2</default>
+          <constraints>
+            <options>
+              <option label="231">1</option>  <!-- None -->
+              <option label="37050">2</option>  <!--Local server only-->
+              <option label="37051">3</option>  <!--All servers-->
+            </options>
+          </constraints>
+          <control type="list" format="integer" />
+        </setting>
+      </group>
+      <group id="2">
+        <setting id="plex.transcode" type="boolean" label="1252" help="1253">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.quality" type="integer" parent="plex.transcode" label="1254" help="1255">
+          <level>0</level>
+          <default>4</default>
+          <dependencies>
+            <dependency type="visible" setting="plex.transcode">true</dependency>
+          </dependencies>
+          <constraints>
+            <options>
+              <option label="1276">1</option>  <!--320Kbps|576x320 -->
+              <option label="1277">2</option>  <!--720Kbps|720x480 -->
+              <option label="1278">3</option>  <!--1.5Mbps|1024x768 -->
+              <option label="1279">4</option>  <!--  2Mbps|1280x720 -->
+              <option label="1280">5</option>  <!--  3Mbps|1280x720 -->
+              <option label="1281">6</option>  <!--  4Mbps|1920x1080 -->
+              <option label="1282">7</option>  <!--  8Mbps|1920x1080 -->
+              <option label="1283">8</option>  <!-- 10Mbps|1920x1080 -->
+              <option label="1284">9</option>  <!-- 12Mbps|1920x1080 -->
+              <option label="1285">10</option> <!-- 20Mbps|1920x1080 -->
+              <option label="1286">11</option> <!-- 40Mbps|1920x1080 -->
+            </options>
+          </constraints>
+          <control type="list" format="string" />
+        </setting>
+        <setting id="plex.transcodeaudio" type="boolean" parent="plex.transcode" label="1292" help="1293">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="plex.transcode">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.transcodelocal" type="boolean" parent="plex.transcode" label="1288" help="1289">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="plex.transcode">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.transcodelocalexclusions" type="boolean" parent="plex.transcodelocal" label="1294" help="1291">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="visible" setting="plex.transcode">true</dependency>
+            <dependency type="visible" setting="plex.transcodelocal">false</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.transcodelocalexclusionshevc" type="boolean" parent="plex.transcodelocal" label="1295" help="1291">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="plex.transcode">true</dependency>
+            <dependency type="visible" setting="plex.transcodelocal">false</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="plex.myplexauthtoken" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="plex.homeuserthumb" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+      </group>
+    </category>
+<category id="emby" label="2105" help="2106">
+      <group id="1">
+        <setting id="emby.signin" type="string" label="2107" help="2108">
+          <level>0</level>
+          <default>Sign-in</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="embysignin" setting="emby.signinpin" />
+            </dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="emby.signinpin" type="string" label="2109" help="2110">
+          <level>0</level>
+          <default>Sign-in</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="embysigninpin" setting="emby.signin" />
+            </dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="emby.serversources" type="string" parent="emby.signinpin" label="2111" help="2112">
+          <level>0</level>
+          <default>All Sources</default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="emby.userid" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="emby.serverurl" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="emby.accesstoken" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="emby.savedsources" type="list[string]" label="" help="">
+          <level>0</level>
+          <default>None</default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <delimiter>|</delimiter>
+            <minimumitems>0</minimumitems>
+          </constraints>
+          <control type="list" format="string">
+            <multiselect>true</multiselect>
+          </control>
+          <visible>false</visible>
+        </setting>
+      </group>
+      <group id="2">
+        <setting id="emby.limithometo" type="integer" label="2113" help="2114">
+          <level>0</level>
+          <default>2</default>
+          <constraints>
+            <options>
+              <option label="231">1</option>  <!-- None -->
+              <option label="37050">2</option>  <!--Local server only-->
+              <option label="37051">3</option>  <!--All servers-->
+            </options>
+          </constraints>
+          <control type="list" format="integer" />
+        </setting>
+      </group>
+    </category>
+<category id="trakt" label="2120" help="2121">
+      <group id="1">
+        <setting id="trakt.signinpin" type="string" label="2122" help="2123">
+          <level>0</level>
+          <default>Sign-in</default>
+          <dependencies>
+            <dependency type="visible" on="property" name="traktsigninpin" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="trakt.actionafterlibraryupdate" type="integer" label="36638" help="36639">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="36640">0</option> <!-- No action -->
+              <option label="36641">1</option> <!-- Push -->
+              <option label="36642">2</option> <!-- Pull -->
+            </options>
+          </constraints>
+          <control type="list" format="string" />
+        </setting>
+        <setting id="trakt.pullwatched" type="string" label="36633" help="36634">
+          <level>0</level>
+          <default>Idle</default>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="trakt.pushwatched" type="string" label="36635" help="36636">
+          <level>0</level>
+          <default>Idle</default>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="trakt.accesstoken" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="trakt.accessrefreshtoken" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="trakt.accesstokenvalidity" type="integer" label="" help="">
+          <level>0</level>
+          <default>0</default>
+          <control type="edit" format="integer" />
+          <visible>false</visible>
+        </setting>
+      </group>
+    </category>
+<category id="lighteffects" label="857" help="858">
+      <group id="1">
+        <setting id="services.lighteffects" type="boolean" label="853" help="854">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="services.lighteffectsip" type="string" label="1009" help="855">
+        <dependencies>
+            <dependency type="enable">
+                <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+            </dependency>
+          </dependencies>
+          <level>1</level>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="services.lighteffectsport" type="integer" label="730" help="856">
+        <dependencies>
+            <dependency type="enable">
+                <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+            </dependency>
+          </dependencies>
+          <level>1</level>
+          <default>19333</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+      <group id="2">
+        <setting id="services.lighteffectsspeed" type="number" parent="services.lighteffects" label="863" help="864">
+          <level>1</level>
+          <default>100.0</default>
+          <constraints>
+            <minimum>0.0</minimum>
+            <step>1.0</step>
+            <maximum>100.0</maximum>
+          </constraints>
+          <control type="slider" format="number">
+            <formatlabel>862</formatlabel>
+          </control>
+          <dependencies>
+            <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectssaturation" type="number" parent="services.lighteffects" label="859" help="860">
+          <level>1</level>
+          <default>1.0</default>
+          <constraints>
+            <minimum>0.0</minimum>
+            <step>0.1</step>
+            <maximum>20.0</maximum>
+          </constraints>
+          <control type="slider" format="number">
+            <formatlabel>862</formatlabel>
+          </control>
+          <dependencies>
+            <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsvalue" type="number" parent="services.lighteffects" label="861" help="881">
+          <level>1</level>
+          <default>1.0</default>
+          <constraints>
+            <minimum>0.0</minimum>
+            <step>0.1</step>
+            <maximum>20.0</maximum>
+          </constraints>
+          <control type="slider" format="number">
+            <formatlabel>862</formatlabel>
+          </control>
+          <dependencies>
+            <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsthreshold" type="integer" parent="services.lighteffects" label="869" help="870">
+          <level>1</level>
+          <default>10</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>255</maximum>
+          </constraints>
+          <control type="slider" format="number">
+          </control>
+          <dependencies>
+            <condition on="setting" setting="services.lighteffects" operator="!is"></condition>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsinterpolation" type="boolean" parent="services.lighteffects" label="867" help="868">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="3">
+        <setting id="services.lighteffectsstaticon" type="boolean" label="871" help="872">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="services.lighteffectsstaticr" type="integer" parent="services.lighteffectsstaticon" label="873" help="874">
+          <level>1</level>
+          <default>123</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>255</maximum>
+          </constraints>
+          <control type="slider" format="number">
+          </control>
+          <dependencies>
+            <dependency type="visible" setting="services.lighteffectsstaticon">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsstaticg" type="integer" parent="services.lighteffectsstaticon" label="875" help="876">
+          <level>1</level>
+          <default>123</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>255</maximum>
+          </constraints>
+          <control type="slider" format="number">
+          </control>
+          <dependencies>
+            <dependency type="visible" setting="services.lighteffectsstaticon">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsstaticb" type="integer" parent="services.lighteffectsstaticon" label="877" help="878">
+          <level>1</level>
+          <default>123</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>255</maximum>
+          </constraints>
+          <control type="slider" format="number">
+          </control>
+          <dependencies>
+            <dependency type="visible" setting="services.lighteffectsstaticon">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="services.lighteffectsstaticscreensaver" type="boolean" parent="services.lighteffectsstaticon" label="879" help="880">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+          <dependencies>
+            <dependency type="visible" setting="services.lighteffectsstaticon">true</dependency>
+          </dependencies>
+        </setting>
+      </group>
+    </category>
+<category id="hue" label="14200" help="14201">
+      <group id="1" label="14200">
+        <setting id="services.hue" type="boolean" label="14202" help="14203">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.discover" type="string" label="14206" help="14207">
+          <level>0</level>
+          <default>Pair</default>
+          <control type="button" format="action"/>
+        </setting>
+        <setting id="hue.ip" type="string" label="1009">
+          <level>0</level>
+          <enabled>false</enabled>
+          <control type="edit" format="string"/>
+          <default/>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" on="property" name="hueenabled"/>
+          </dependencies>
+        </setting>
+        <setting id="hue.forceon" type="boolean" label="14229">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.forceonaftersunset" type="boolean" parent="hue.forceon" label="14234">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="hue.forceon">true</dependency>
+          </dependencies>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.dimdur" type="number" label="14216">
+          <level>0</level>
+          <default>4.0</default>
+          <constraints>
+            <minimum>0.0</minimum>
+            <step>0.5</step>
+            <maximum>10.0</maximum>
+          </constraints>
+          <control type="slider" format="number">
+            <formatlabel>862</formatlabel>
+          </control>
+        </setting>
+        <setting id="hue.dimpropdur" type="boolean" label="14217">
+          <level>0</level>
+          <default>false</default>
+          <visible>false</visible>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.continuous" type="boolean" label="14235" help="14236">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+          <visible>false</visible>
+        </setting>
+        <setting id="hue.username" type="string">
+          <level>0</level>
+          <visible>false</visible>
+          <default/>
+          <control type="edit" format="string"/>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="hue.clientkey" type="string">
+          <level>0</level>
+          <visible>false</visible>
+          <default/>
+          <control type="edit" format="string"/>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+      </group>
+      <group id="2" label="14226">
+        <setting id="hue.streamgroup" type="integer" label="14230">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="update" setting="hue.discover" />
+          </dependencies>
+          <constraints>
+            <options>huestreamgroups</options>
+          </constraints>
+          <control type="list" format="string"/>
+        </setting>
+        <setting id="hue.light1" type="integer" label="14228">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>huelights</options>
+          </constraints>
+          <dependencies>
+            <dependency type="update" setting="hue.discover" />
+          </dependencies>
+          <control type="list" format="string"/>
+        </setting>
+        <setting id="hue.light1mode" type="integer" parent="hue.light1" label="14211" help="14212">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="visible" setting="hue.light1" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>
+              <!-- Unused -->
+              <option label="14227">0</option>
+              <!-- Ambilight -->
+              <option label="14213">1</option>
+              <!-- Theater-->
+              <option label="14214">2</option>
+            </options>
+          </constraints>
+          <control type="list" format="integer"/>
+        </setting>
+        <setting id="hue.light2" type="integer" label="14228">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="update" setting="hue.discover" />
+            <dependency type="visible" setting="hue.light1" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>huelights</options>
+          </constraints>
+          <control type="list" format="string"/>
+        </setting>
+        <setting id="hue.light2mode" type="integer" parent="hue.light2" label="14211" help="14212">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="visible" setting="hue.light2" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>
+              <!-- Unused -->
+              <option label="14227">0</option>
+              <!-- Ambilight -->
+              <option label="14213">1</option>
+              <!-- Theater-->
+              <option label="14214">2</option>
+            </options>
+          </constraints>
+          <control type="list" format="integer"/>
+        </setting>
+        <setting id="hue.light3" type="integer" label="14228">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="update" setting="hue.discover" />
+            <dependency type="visible" setting="hue.light2" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>huelights</options>
+          </constraints>
+          <control type="list" format="string"/>
+        </setting>
+        <setting id="hue.light3mode" type="integer" parent="hue.light3" label="14211" help="14212">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="visible" setting="hue.light3" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>
+              <!-- Unused -->
+              <option label="14227">0</option>
+              <!-- Ambilight -->
+              <option label="14213">1</option>
+              <!-- Theater-->
+              <option label="14214">2</option>
+            </options>
+          </constraints>
+          <control type="list" format="integer"/>
+        </setting>
+        <setting id="hue.light4" type="integer" label="14228">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="visible" setting="hue.light3" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>huelights</options>
+          </constraints>
+          <control type="list" format="string"/>
+        </setting>
+        <setting id="hue.light4mode" type="integer" parent="hue.light4" label="14211" help="14212">
+          <level>0</level>
+          <default>0</default>
+          <dependencies>
+            <dependency type="update" setting="hue.discover" />
+            <dependency type="visible" setting="hue.light4" operator="!is">0</dependency>
+          </dependencies>
+          <constraints>
+            <options>
+              <!-- Unused -->
+              <option label="14227">0</option>
+              <!-- Ambilight -->
+              <option label="14213">1</option>
+              <!-- Theater-->
+              <option label="14214">2</option>
+            </options>
+          </constraints>
+          <control type="list" format="integer"/>
+        </setting>
+      </group>
+      <group id="3" label="14214">
+        <setting id="hue.dimmode" type="integer" label="14211" help="14212">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <!-- Lights -->
+              <option label="14238">0</option>
+              <!-- Scene -->
+              <option label="14239">1</option>
+            </options>
+          </constraints>
+          <control type="list" format="integer"/>
+        </setting>
+        <setting id="hue.dimbright" type="integer" label="14218">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">0</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+        <setting id="hue.dimscene" type="string" label="14240">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>huescenes</options>
+          </constraints>
+          <control type="list" format="string"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">1</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+        <setting id="hue.dimoverpausedbright" type="boolean" label="14219">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.dimpausedbright" type="integer" label="14220">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">0</condition>
+              <condition setting="hue.dimoverpausedbright" operator="is">true</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+        <setting id="hue.dimpausedscene" type="string" label="14241">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>huescenes</options>
+          </constraints>
+          <control type="list" format="string"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">1</condition>
+              <condition setting="hue.dimoverpausedbright" operator="is">true</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+        <setting id="hue.dimoverunbright" type="boolean" label="14221">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="hue.dimunbright" type="integer" label="14222">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">0</condition>
+              <condition setting="hue.dimoverunbright" operator="is">true</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+        <setting id="hue.dimstoppedscene" type="string" label="14242">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>huescenes</options>
+          </constraints>
+          <control type="list" format="string"/>
+          <dependencies>
+            <dependency type="visible">
+            <and>
+              <condition setting="hue.dimmode" operator="is">1</condition>
+              <condition setting="hue.dimoverunbright" operator="is">true</condition>
+            </and>
+            </dependency>
+          </dependencies>
+        </setting>
+      </group>
+      <group id="5" label="14231">
+        <setting id="hue.minbright" type="integer" label="14224">
+          <level>0</level>
+          <default>20</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer">
+          </control>
+        </setting>
+        <setting id="hue.maxbright" type="integer" label="14225">
+          <level>0</level>
+          <default>90</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer">
+          </control>
+        </setting>
+        <setting id="hue.colorbias" type="integer" label="14232" help="14233">
+          <level>0</level>
+          <default>90</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer">
+          </control>
+        </setting>
+      </group>
+    </category>
     <category id="general" label="16000" help="36320">
       <group id="1" label="13000">
         <setting id="services.devicename" type="string" label="1271" help="36321">
@@ -4253,6 +5082,30 @@
         <setting id="window.height" type="integer" label="0" help="36137">
           <level>4</level>
           <default>480</default>
+        </setting>
+      </group>
+    </category>
+  </section>
+<section id="plex-mrmc-internal" label="" help="">
+    <category id="general" label="0">
+      <group id="1">
+        <setting id="general.servertype" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
+        </setting>
+        <setting id="general.serveruuid" type="string" label="" help="">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          <visible>false</visible>
         </setting>
       </group>
     </category>
