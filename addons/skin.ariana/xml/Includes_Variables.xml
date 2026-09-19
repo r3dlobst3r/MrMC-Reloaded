@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <variable name="Home.Fanart" description="Art background Home ONLY">
+    <value condition="Control.HasFocus(8000)">$INFO[Container(8000).ListItem.Art(fanart)]</value>
+    <value condition="Control.HasFocus(8001)">$INFO[Container(8001).ListItem.Art(fanart)]</value>
+    <value condition="Control.HasFocus(8000)">$INFO[Container(8002).ListItem.Art(fanart)]</value>
+    <value condition="Control.HasFocus(8010)">$INFO[Container(8010).ListItem.Art(fanart)]</value>
+    <value condition="Control.HasFocus(8011)">$INFO[Container(8011).ListItem.Art(fanart)]</value>
+    <value>img/WhiteDot.png</value>
+  </variable>
+  <variable name="Background.Overlay" description="backgrounds">
+    <value condition="System.IsDarkInterface">background/DarkBG.png</value>
+    <value>background/LightBG.png</value>
+  </variable>
+  <variable name="Background.Art" description="Art backgrounds">
+    <value condition="Window.IsActive(MyPics.xml) + !IsEmpty(ListItem.Thumb)">$INFO[ListItem.Thumb]</value>
+    <value condition="!IsEmpty(ListItem.Art(fanart)) + !Skin.HasSetting(HideFanart)">$INFO[ListItem.Art(fanart)]</value>
+    <value>img/WhiteDot.png</value>
+  </variable>
+  <variable name="Overlay" description="Overlay image">
+    <value condition="ListItem.IsResumable">OverlayInProgress.png</value>
+    <value>$INFO[ListItem.Overlay]</value>
+  </variable>
+  <variable name="CurrentSubs" description="VideoMenu">
+    <value condition="VideoPlayer.HasSubtitles + VideoPlayer.SubtitlesEnabled">$LOCALIZE[462]: $LOCALIZE[305]</value>
+    <value condition="VideoPlayer.HasSubtitles + !VideoPlayer.SubtitlesEnabled">$LOCALIZE[462]: $LOCALIZE[1223]</value>
+    <value>$LOCALIZE[462]: $LOCALIZE[16018]</value>
+  </variable>
+  <variable name="GlobalHeadings" description="Global Headings">
+    <value condition="Window.IsActive(56) | Window.IsActive(SkinSettings.xml)">$LOCALIZE[20077]</value>
+    <value condition="Window.IsActive(Settings.xml)">$LOCALIZE[5]</value>
+    <value condition="Window.IsActive(AddonBrowser.xml) + IsEmpty(Container.FolderName)">$LOCALIZE[24001]</value>
+    <value condition="Window.IsActive(MyVideoPlaylist.xml)">$LOCALIZE[20012]</value>
+    <value condition="Window.IsActive(MyMusicPlaylist.xml)">$LOCALIZE[20011]</value>
+    <value condition="Window.IsActive(DialogVideoInfo.xml)">$LOCALIZE[20159]</value>
+    <value condition="Window.IsActive(DialogAlbumInfo.xml) + container.content(albums)">$LOCALIZE[13351]</value>
+    <value condition="Window.IsActive(DialogAlbumInfo.xml) + container.content(artists)">$LOCALIZE[21891]</value>
+    <value condition="Window.IsActive(DialogSongInfo.xml) + container.content(songs)">$LOCALIZE[658]</value>
+    <value condition="Window.IsActive(DialogAddonInfo.xml)">$LOCALIZE[24003]</value>
+    <value condition="Container.content(movies) + StringCompare(Container.FolderName,$LOCALIZE[369])">$LOCALIZE[20342]</value>
+    <value condition="Container.content(tvshows) + StringCompare(Container.FolderName,$LOCALIZE[369])">$LOCALIZE[20343]</value>
+    <value condition="Container.content(musicvideos) + StringCompare(Container.FolderName,$LOCALIZE[369])">$LOCALIZE[20389]</value>
+    <value condition="Window.IsActive(mypics.xml) + IsEmpty(Container.FolderName)">$LOCALIZE[1]</value>
+    <value>$INFO[Container.FolderName]</value>
+  </variable>
+  <variable name="TopLabel" description="Shown Above Plots and descriptions">
+    <value condition="!Container.content(Addons) + Window.IsActive(MyPics.xml)">$INFO[ListItem.Date,, • ]$INFO[ListItem.Size]</value>
+    <value condition="Container.content(Albums)">$INFO[ListItem.Label]</value>
+    <value condition="Container.Content(Episodes)">$INFO[ListItem.Season,$LOCALIZE[20373] , • ]$INFO[ListItem.Premiered,, • ]$INFO[ListItem.Duration,, $LOCALIZE[31297]]</value>
+    <value condition="Container.Content(Addons)">$INFO[ListItem.Property(Addon.Creator),  ]</value>
+    <value condition="Container.Content(songs)">$INFO[ListItem.Album]</value>
+    <value condition="Container.Content(MusicVideos)">$INFO[ListItem.Label]</value>
+    <value condition="Container.Content(Movies)">$INFO[ListItem.Year]$INFO[ListItem.Rating, • ]$INFO[ListItem.MPAA, • ]$INFO[ListItem.Genre, • ]</value>
+    <value condition="Container.Content(Seasons) | Container.Content(TVShows)">$INFO[ListItem.Year,, • ]$INFO[ListItem.Property(TotalEpisodes),, $LOCALIZE[20453]]$INFO[ListItem.MPAA, • ]</value>
+    <value>$INFO[ListItem.Label2]</value>
+  </variable>
+  <variable name="CodecList-Genre" description="Shown with Plots and descriptions">
+    <value condition="Container.Content(Episodes) | Container.Content(Movies) | Container.Content(musicvideos)">$LOCALIZE[544]: [UPPERCASE]$INFO[ListItem.VideoCodec]$INFO[ListItem.VideoResolution, / ]$INFO[ListItem.AudioCodec, • ]$INFO[ListItem.AudioChannels, / ][/UPPERCASE]</value>
+    <value condition="Container.Content(songs)">$LOCALIZE[544]: [UPPERCASE]$INFO[ListItem.AudioCodec, • ]$INFO[ListItem.AudioChannels, • ][/UPPERCASE]</value>
+    <value>$INFO[ListItem.Genre]</value>
+  </variable>
+  <variable name="500TopLabel" description="Shown Above Plots and descriptions">
+    <value condition="!Container.content(Addons) + Window.IsActive(MyPics.xml)">$INFO[ListItem.Date,, • ]$INFO[ListItem.Size]</value>
+    <value condition="Container.content(Albums)">$INFO[ListItem.Label]</value>
+    <value condition="Container.Content(Episodes)">$INFO[ListItem.Premiered,, • ]$INFO[ListItem.Duration,, $LOCALIZE[12391]]</value>
+    <value condition="Container.Content(Addons)">$INFO[ListItem.label2]$INFO[ListItem.Property(Addon.Creator), • ]</value>
+    <value condition="Container.Content(songs)">$INFO[ListItem.Album]</value>
+    <value condition="Container.Content(MusicVideos)">$INFO[ListItem.Label]</value>
+    <value condition="Container.Content(Movies)">$INFO[ListItem.Year,, • ]$INFO[ListItem.Duration,, $LOCALIZE[31297]]$INFO[ListItem.Rating, • ]</value>
+    <value condition="Container.Content(Seasons) | Container.Content(TVShows)">$INFO[ListItem.Year,, • ]$INFO[ListItem.Property(UnWatchedEpisodes),$LOCALIZE[16101] ] $INFO[ListItem.Property(TotalEpisodes),(, $LOCALIZE[20453])]</value>
+    <value>$INFO[ListItem.Label2]</value>
+  </variable>
+  <variable name="Plots" description="Plots and descriptions">
+    <value condition="Container.content(addons) + !IsEmpty(ListItem.Property(Addon.Description))">$INFO[ListItem.Property(Addon.Description)]</value>
+    <value condition="SubString(ListItem.Path,videodb://movies/sets/)">$LOCALIZE[20457]</value>
+    <value condition="[Container.Content(Movies) | Container.Content(TVShows) | Container.Content(Episodes)] + !IsEmpty(ListItem.Plot)">$INFO[ListItem.Plot]</value>
+    <value condition="Container.Content(Seasons) + !IsEmpty(Container.ShowPlot)">$INFO[Container.ShowPlot]</value>
+    <value condition="Container.Content(albums) + !IsEmpty(ListItem.Property(Album_Description))">$INFO[ListItem.Property(Album_Description)]</value>
+    <value condition="Container.Content(artists) + !IsEmpty(ListItem.Property(Artist_Description))">$INFO[ListItem.Property(Artist_Description)]</value>
+    <value condition="!IsEmpty(ListItem.Plot)">$INFO[ListItem.Plot]</value>
+  </variable>
+  <variable name="OverlayColour" description="Overlay">
+    <value condition="!System.IsDarkInterface">FFCED5E0</value>
+    <value>FF2A2C32</value>
+  </variable>
+  <variable name="LabelNFColour" description="LabelNF">
+    <value condition="!System.IsDarkInterface">FF111111</value>
+    <value>FFFFFFFF</value>
+  </variable>
+  <variable name="Label2Colour" description="Label2">
+    <value condition="!System.IsDarkInterface">FF575759</value>
+    <value>FF838485</value>
+  </variable>
+  <variable name="DisabledColour" description="Disabled">
+    <value condition="!System.IsDarkInterface">FF5e5e60</value>
+    <value>FF909192</value>
+  </variable>
+</includes>

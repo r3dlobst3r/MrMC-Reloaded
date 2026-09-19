@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol>-</defaultcontrol>
+  <animation effect="fade" time="500">WindowOpen</animation>
+  <animation effect="fade" time="300">WindowClose</animation>
+  <controls>
+    <control type="group" id="0">
+      <visible>!Window.IsActive(DialogFullscreenInfo.xml)</visible>
+      <left>0</left>
+      <top>75</top>
+      <animation effect="fade" time="200">VisibleChange</animation>
+      <control type="image" description="Info Background">
+        <left>0</left>
+        <top>-9</top>
+        <width>1920</width>
+        <height>216</height>
+        <texture>$VAR[Background.Overlay]</texture>
+      </control>
+      <control type="label" id="10" description="row 1 sys label">
+        <left>60</left>
+        <top>-8</top>
+        <width>1890</width>
+        <height>70</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <font>size17</font>
+        <label>-</label>
+      </control>
+      <control type="label" id="11" description="row 2 sys label">
+        <left>60</left>
+        <top>63</top>
+        <width>1890</width>
+        <height>70</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <font>size17</font>
+        <label>-</label>
+      </control>
+      <control type="label" id="12" description="row 3 sys label">
+        <left>60</left>
+        <top>129</top>
+        <width>1890</width>
+        <height>70</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <font>size17</font>
+        <label>-</label>
+      </control>
+    </control>
+  </controls>
+</window>

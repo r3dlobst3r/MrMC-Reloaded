@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+  <defaultcontrol always="true">901</defaultcontrol>
+  <visible>[[Player.Seeking | Player.DisplayAfterSeek | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Window.IsActive(videoosd)] + Window.IsActive(fullscreenvideo)] | [Window.IsActive(visualisation) + [Player.Showinfo | Window.IsActive(musicosd)]] | !IsEmpty(Player.SeekNumeric) | Window.IsActive(playercontrols)</visible>
+  <visible>!Window.IsActive(sliderdialog) + !Window.IsActive(subtitlesearch)</visible>
+  <controls>
+    <control type="group">
+      <include>OpenClose</include>
+      <top>88%</top>
+      <control type="label">
+        <left>60</left>
+        <top>-36</top>
+        <height>30</height>
+        <width>180</width>
+        <align>left</align>
+        <textcolor>white</textcolor>
+        <label>$INFO[System.Time]</label>
+        <font>size17</font>
+      </control>
+      <control type="label">
+        <right>60</right>
+        <top>-36</top>
+        <height>30</height>
+        <width>180</width>
+        <align>right</align>
+        <textcolor>white</textcolor>
+        <label>$INFO[Player.FinishTime]</label>
+        <font>size17</font>
+      </control>
+      <control type="progress" id="23">
+        <centerleft>50%</centerleft>
+        <width>1800</width>
+        <height>36</height>
+        <info>Player.Progress</info>
+      </control>
+      <control type="label">
+        <left>60</left>
+        <top>50</top>
+        <height>30</height>
+        <width>180</width>
+        <align>left</align>
+        <textcolor>white</textcolor>
+        <label>$INFO[Player.Time]</label>
+        <font>size17</font>
+      </control>
+      <control type="image" description="Buffer icon">
+        <visible>Player.Caching</visible>
+        <top>50</top>
+        <centerleft>50%</centerleft>
+        <include>SeekbarIconsCommons</include>
+        <texture border="2">busy/Busy.png</texture>
+        <animation effect="rotate" start="360" end="0" center="auto" time="1200" loop="true" pulse="true" condition="true">conditional</animation>
+      </control>
+      <control type="label">
+        <right>60</right>
+        <top>50</top>
+        <height>30</height>
+        <width>180</width>
+        <align>right</align>
+        <textcolor>white</textcolor>
+        <label>$INFO[Player.TimeRemaining]</label>
+        <font>size17</font>
+      </control>
+    </control>
+  </controls>
+</window>

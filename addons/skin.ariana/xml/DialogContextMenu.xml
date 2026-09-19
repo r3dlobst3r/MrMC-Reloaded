@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">996</defaultcontrol>
+  <controls>
+    <include>DialogFullBG</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="grouplist" id="996" description="Context menu container">
+        <centerleft>960</centerleft>
+        <height max="1000">auto</height>
+        <width>500</width>
+        <itemgap>12</itemgap>
+        <align>center</align>
+        <aligny>center</aligny>
+        <control type="textbox" id="8888">
+          <width>100%</width>
+          <height>150</height>
+          <font>size24B</font>
+          <label>[B]$INFO[ListItem.Label][/B]</label>
+          <align>center</align>
+          <aligny>center</aligny>
+          <textcolor>Selected</textcolor>
+        </control>
+        <control type="button" id="1000" description="Buttons">
+          <include>FocusButtonsAnimation</include>
+          <width>500</width>
+          <textoffsetx>0</textoffsetx>
+          <align>center</align>
+          <aligny>center</aligny>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

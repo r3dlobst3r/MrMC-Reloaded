@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">9000</defaultcontrol>
+  <controls>
+    <include>DialogFullBG</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" description="Heading">
+        <left>0</left>
+        <top>52</top>
+        <align>center</align>
+        <aligny>top</aligny>
+        <width>1920</width>
+        <height>75</height>
+        <textcolor>$VAR[LabelNFColour]</textcolor>
+        <font>size28B</font>
+        <label>[B]$LOCALIZE[10004][/B]</label>
+      </control>
+      <control type="panel" id="9000">
+        <centerleft>50%</centerleft>
+        <width>1720</width>
+        <centertop>55%</centertop>
+        <height>900</height>
+        <onup>noop</onup>
+        <ondown>noop</ondown>
+        <onleft>noop</onleft>
+        <onright>noop</onright>
+        <itemlayout height="140" width="860">
+          <control type="image">
+            <left>0</left>
+            <right>0</right>
+            <bottom>0</bottom>
+            <texture border="4">img/SettingsButtonNF.png</texture>
+            <bordersize>18</bordersize>
+          </control>
+          <control type="image">
+            <left>0</left>
+            <top>20</top>
+            <width>240</width>
+            <bottom>20</bottom>
+            <texture colordiffuse="LabelNF">$INFO[ListItem.Icon]</texture>
+            <bordersize>24</bordersize>
+            <align>center</align>
+            <aspectratio>keep</aspectratio>
+          </control>
+          <control type="label">
+            <left>240</left>
+            <top>0</top>
+            <aligny>center</aligny>
+            <height>140</height>
+            <font>size24B</font>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout height="140" width="860">
+          <control type="group">
+            <include>FocusButtonsAnimation</include>
+            <control type="image">
+              <left>0</left>
+              <right>0</right>
+              <bottom>0</bottom>
+              <texture border="9">img/SettingsButtonFO.png</texture>
+              <bordersize>18</bordersize>
+            </control>
+            <control type="image">
+              <left>0</left>
+              <top>20</top>
+              <width>240</width>
+              <bottom>20</bottom>
+              <texture colordiffuse="LabelFO">$INFO[ListItem.Icon]</texture>
+              <bordersize>24</bordersize>
+              <align>center</align>
+              <aspectratio>keep</aspectratio>
+            </control>
+            <control type="label">
+              <left>240</left>
+              <top>0</top>
+              <aligny>center</aligny>
+              <height>140</height>
+              <font>size24B</font>
+              <textcolor>LabelFO</textcolor>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+          </control>
+        </focusedlayout>
+        <content>
+          <item>
+            <label>$LOCALIZE[20094]</label>
+            <onclick>ActivateWindow(MediaSources,root)</onclick>
+            <icon>icons/NAS.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[480]</label>
+            <onclick>ActivateWindow(AppearanceSettings)</onclick>
+            <icon>icons/Appearance.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[14036]</label>
+            <onclick>ActivateWindow(ServiceSettings)</onclick>
+            <icon>icons/Network.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[13200]</label>
+            <onclick>ActivateWindow(Profiles)</onclick>
+            <icon>icons/Profiles.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[157]</label>
+            <onclick>ActivateWindow(VideosSettings)</onclick>
+            <icon>icons/Videos.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[13000]</label>
+            <onclick>ActivateWindow(SystemSettings)</onclick>
+            <icon>icons/System.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[1]</label>
+            <onclick>ActivateWindow(PicturesSettings)</onclick>
+            <icon>icons/Pictures.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[24001]</label>
+            <onclick>ActivateWindow(addonbrowser)</onclick>
+            <icon>icons/Addons.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[2]</label>
+            <onclick>ActivateWindow(MusicSettings)</onclick>
+            <icon>icons/Music.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[138]</label>
+            <onclick>ActivateWindow(systeminfo)</onclick>
+            <icon>icons/SysInfo.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[31033]</label>
+            <onclick>ActivateWindow(PVRSettings)</onclick>
+            <icon>icons/LiveTV.png</icon>
+          </item>
+          <item>
+            <label>$LOCALIZE[10003]</label>
+            <onclick>ActivateWindow(filemanager)</onclick>
+            <icon>icons/FileMan.png</icon>
+          </item>
+        </content>
+      </control>
+    </control>
+  </controls>
+</window>
