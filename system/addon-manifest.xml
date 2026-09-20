@@ -42,6 +42,15 @@
   <addon>screensaver.xbmc.builtin.dim</addon>
   <addon>script.module.pil</addon>
   <addon>script.module.pycryptodome</addon>
+  <addon>service.libraryautoupdate</addon>
+  <addon>script.xbmc.unpausejumpback</addon>
+  <addon>weather.metoffice</addon>
+  <addon>script.module.pytz</addon>
+  <addon>script.module.six</addon>
+  <addon>script.module.dateutil</addon>
+  <addon>script.module.kodi-six</addon>
+  <addon>script.module.future</addon>
+  <addon>script.module.bossanova808</addon>
   <addon>skin.estuary</addon>
   <addon>skin.ariana</addon>
   <addon>skin.amber</addon>

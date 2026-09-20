@@ -3409,7 +3409,7 @@
         </setting>
         <setting id="weather.addon" type="addon" label="24029" help="41201">
           <level>0</level>
-          <default></default>
+          <default>weather.metoffice</default>
           <constraints>
             <addontype>xbmc.python.weather</addontype>
             <allowempty>true</allowempty>

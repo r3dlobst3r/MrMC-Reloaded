@@ -41,3 +41,12 @@ addons/xbmc.metadata/*
 addons/xbmc.pvr/*
 addons/xbmc.python/*
 addons/xbmc.webinterface/*
+addons/service.libraryautoupdate/*
+addons/script.xbmc.unpausejumpback/*
+addons/weather.metoffice/*
+addons/script.module.pytz/*
+addons/script.module.dateutil/*
+addons/script.module.kodi-six/*
+addons/script.module.future/*
+addons/script.module.bossanova808/*
+addons/script.module.six/*

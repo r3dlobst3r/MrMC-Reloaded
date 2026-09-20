@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.module.bossanova808" name="Bossanova808 Dependencies" version="1.0.4" provider-name="bossanova808">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.module" library="resources/lib" />
+    <extension point="xbmc.addon.metadata">
+        <description lang="en_GB">Common code needed by Bossanova808 addons</description>
+        <platform>all</platform>
+        <license>GPL-3.0-only</license>
+        <website>https://github.com/bossanova808/script.module.bossanova808</website>
+        <source>https://github.com/bossanova808/script.module.bossanova808</source>
+        <news>v1.0.4
+- Add Playback.identity_key, a stable per-media identity (library dbid+type, falling back to path) for consumers that need to recognise repeat plays of the same item even when the reported path/file differs between plays
+- Add get_playcount_and_resume_point(), combining what were two separate JSON-RPC round trips into one, for consumers that need both
+</news>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+    </extension>
+</addon>
