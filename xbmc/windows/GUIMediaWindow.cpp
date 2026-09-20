@@ -152,6 +152,20 @@ bool CGUIMediaWindow::Load(TiXmlElement *pRootElement)
         m_viewControl.AddView(control);
     }
   }
+  else
+  {
+    // Backward-compat: older (MrMC) skins omit <views> and relied on Kodi's
+    // removed GetContainers() fallback. Register any container in the reserved
+    // 50-59 view-control range so the window never renders blank.
+    const int controlViewStart = 50;
+    const int controlViewEnd = 59;
+    for (int controlID = controlViewStart; controlID <= controlViewEnd; controlID++)
+    {
+      CGUIControl *control = GetControl(controlID);
+      if (control && control->IsContainer())
+        m_viewControl.AddView(control);
+    }
+  }
   m_viewControl.SetViewControlID(CONTROL_BTNVIEWASICONS);
 
   return true;
