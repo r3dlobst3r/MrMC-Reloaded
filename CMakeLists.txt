@@ -129,6 +129,11 @@ if(CORE_SYSTEM_NAME STREQUAL linux)
   option(ADDONS_CONFIGURE_AT_STARTUP "Configure binary addons at startup?" ON)
 endif()
 
+# Space-delimited list of binary addons to build via the `binary-addons` target.
+# Empty (default) builds the full upstream set; the App Store build pins this to
+# the bundled PVR/visualization set so no third-party addons are ever fetched.
+set(ADDONS_TO_BUILD "pvr.dvblink pvr.dvbviewer pvr.hdhomerun pvr.hts pvr.iptvsimple pvr.mediaportal.tvserver pvr.mythtv pvr.nextpvr pvr.stalker pvr.vbox pvr.vdr.vnsi pvr.vuplus visualization.spectrum visualization.waveform" CACHE STRING "Binary addons to build (space-delimited)")
+
 # set scope of INTERNAL_DEPS
 set_property(GLOBAL PROPERTY INTERNAL_DEPS_PROP)
 
@@ -609,6 +614,8 @@ endif()
 
 # Create target that allows to build binary-addons.
 # Use make binary-addons ADDONS="visualization.spectrum" to select the addons to build.
+# The App Store build sets ADDONS_TO_BUILD to a fixed, bundled set (see
+# tools/depends/target/binary-addons) so no third-party addons can be fetched.
 if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
   if(CMAKE_CROSSCOMPILING)
     set(_cross_args CROSS_COMPILING=yes)
@@ -619,12 +626,30 @@ if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
   else()
     set(_prefix ${CMAKE_INSTALL_PREFIX})
   endif()
+  if(ADDONS_TO_BUILD)
+    set(_addons "ADDONS=${ADDONS_TO_BUILD}")
+    # On darwin, `make binary-addons` installs into the SOURCE tree addons/ (see
+    # tools/depends/xbmc-addons.include, which hardcodes INSTALL_PREFIX to
+    # ../../../../../addons/). The app bundle is rsynced from the BUILD tree
+    # addons/, so copy each freshly built addon dir (metadata + dylib) across.
+    string(REPLACE " " ";" _addon_list "${ADDONS_TO_BUILD}")
+    foreach(_a ${_addon_list})
+      list(APPEND _copy_addons
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_SOURCE_DIR}/addons/${_a}
+                ${CMAKE_BINARY_DIR}/addons/${_a})
+    endforeach()
+  endif()
   add_custom_target(binary-addons
     COMMAND $(MAKE) -C ${CMAKE_SOURCE_DIR}/tools/depends/target/binary-addons clean
     COMMAND $(MAKE) -C ${CMAKE_SOURCE_DIR}/tools/depends/target/binary-addons VERBOSE=1 V=99
-                    PREFIX=${_prefix} INSTALL_PREFIX=${_prefix} ${_cross_args} ${_extra})
+                    PREFIX=${_prefix} INSTALL_PREFIX=${_prefix} ${_cross_args} ${_extra} ${_addons}
+    ${_copy_addons})
   unset(_cross_args)
   unset(_prefix)
+  unset(_addons)
+  unset(_addon_list)
+  unset(_copy_addons)
 endif()
 
 # Prepare add-on build env
