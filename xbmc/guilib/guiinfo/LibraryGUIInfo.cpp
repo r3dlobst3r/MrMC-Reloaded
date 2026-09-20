@@ -17,6 +17,8 @@
 #include "music/MusicDatabase.h"
 #include "music/MusicLibraryQueue.h"
 #include "profiles/ProfileManager.h"
+#include "services/ServicesManager.h"
+#include "settings/MediaSourceSettings.h"
 #include "settings/SettingsComponent.h"
 #include "utils/FileUtils.h"
 #include "utils/StringUtils.h"
@@ -282,6 +284,23 @@ bool CLibraryGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int contex
     case LIBRARY_IS_SCANNING_MUSIC:
     {
       value = CMusicLibraryQueue::GetInstance().IsScanningLibrary();
+      return true;
+    }
+    case LIBRARY_HAS_PICTURES:
+    {
+      VECSOURCES* pShares = CMediaSourceSettings::GetInstance().GetSources("pictures");
+      value = pShares->size() > 0;
+      return true;
+    }
+    case LIBRARY_HAS_FILES:
+    {
+      VECSOURCES* pShares = CMediaSourceSettings::GetInstance().GetSources("files");
+      value = pShares->size() > 0;
+      return true;
+    }
+    case LIBRARY_HASSERVICES:
+    {
+      value = CServicesManager::GetInstance().HasServices();
       return true;
     }
   }

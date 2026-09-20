@@ -463,6 +463,9 @@
 #define LIBRARY_IS_SCANNING         728
 #define LIBRARY_IS_SCANNING_VIDEO   729
 #define LIBRARY_IS_SCANNING_MUSIC   730
+#define LIBRARY_HAS_PICTURES        732
+#define LIBRARY_HAS_FILES           733
+#define LIBRARY_HASSERVICES         738
 #define LIBRARY_HAS_ROLE            735
 #define LIBRARY_HAS_BOXSETS         736
 #define LIBRARY_HAS_NODE            737

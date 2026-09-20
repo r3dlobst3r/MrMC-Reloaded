@@ -10292,6 +10292,8 @@ int CGUIInfoManager::TranslateSingleString(const std::string &strCondition, bool
         return LIBRARY_IS_SCANNING_VIDEO; //! @todo change to IsScanning(Video)
       else if (prop.name == "isscanningmusic")
         return LIBRARY_IS_SCANNING_MUSIC;
+      else if (prop.name == "hasservices")
+        return LIBRARY_HASSERVICES;
       else if (prop.name == "hascontent" && prop.num_params())
       {
         std::string cat = prop.param(0);
@@ -10314,6 +10316,10 @@ int CGUIInfoManager::TranslateSingleString(const std::string &strCondition, bool
           return LIBRARY_HAS_COMPILATIONS;
         else if (cat == "boxsets")
           return LIBRARY_HAS_BOXSETS;
+        else if (cat == "pictures")
+          return LIBRARY_HAS_PICTURES;
+        else if (cat == "files")
+          return LIBRARY_HAS_FILES;
         else if (cat == "role" && prop.num_params() > 1)
           return AddMultiInfo(CGUIInfo(LIBRARY_HAS_ROLE, prop.param(1), 0));
       }
