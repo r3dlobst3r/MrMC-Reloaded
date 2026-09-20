@@ -20,7 +20,6 @@
 
 #include "GUIWindowHome.h"
 
-#include "ContextMenuManager.h"
 #include "GUIUserMessages.h"
 #include "PlayListPlayer.h"
 #include "ServiceBroker.h"
@@ -438,7 +437,7 @@ bool CGUIWindowHome::PlayHomeShelfItem(const CFileItem& itemPtr)
     playlist.Clear();
     playlist.Add(items);
     // play full album, starting with first song...
-    CServiceBroker::GetPlaylistPlayer().Play(0);
+    CServiceBroker::GetPlaylistPlayer().Play(0, "");
   }
   else
   {
@@ -467,7 +466,7 @@ bool CGUIWindowHome::PlayHomeShelfItem(const CFileItem& itemPtr)
     playlist.Clear();
     playlist.Add(std::make_shared<CFileItem>(item));
     // play movie...
-    CServiceBroker::GetPlaylistPlayer().Play(0);
+    CServiceBroker::GetPlaylistPlayer().Play(0, "");
   }
   return true;
 }
@@ -548,8 +547,6 @@ void CGUIWindowHome::SetContextMenuItems(int iControl)
     choices.Add(3, 16104); // Mark as UnWatched
   else
     choices.Add(4, 16103); // Mark as Watched
-
-  CServiceBroker::GetContextMenuManager().AddVisibleItems(itemPtr, choices);
 
   int button = CGUIDialogContextMenu::ShowAndGetChoice(choices);
 
