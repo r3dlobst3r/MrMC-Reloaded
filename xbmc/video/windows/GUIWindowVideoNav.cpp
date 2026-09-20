@@ -12,6 +12,8 @@
 #include "GUIPassword.h"
 #include "PartyModeManager.h"
 #include "ServiceBroker.h"
+#include "addons/Skin.h"
+#include "services/ServicesManager.h"
 #include "Util.h"
 #include "dialogs/GUIDialogMediaSource.h"
 #include "dialogs/GUIDialogYesNo.h"
@@ -1043,9 +1045,36 @@ std::string CGUIWindowVideoNav::GetStartFolder(const std::string &dir)
 
   const auto it = map.find(StringUtils::ToLower(dir));
   if (it == map.end())
+  {
+    std::string lower = StringUtils::ToLower(dir);
+    if (lower == "movietitleslocal")
+      return "videodb://movies/titles/";
+    if (lower == "tvshowtitleslocal")
+      return "videodb://tvshows/titles/";
+    if (lower == "inprogressmovies")
+      return "library://video/inprogressmovies.xml/";
+    if (lower == "inprogressshows")
+      return "videodb://inprogresstvshows/";
     return CGUIWindowVideoBase::GetStartFolder(dir);
-  else
-    return it->second;
+  }
+
+  // MrMC: when a media service is active and the skin is not dynamic-home,
+  // route library browsing through the services:// aggregator instead of
+  // only the local database.
+  bool isDynamicHomeCompatible = (g_SkinInfo && g_SkinInfo->IsDynamicHomeCompatible());
+  if (CServicesManager::GetInstance().HasServices() && !isDynamicHomeCompatible)
+  {
+    std::string lower = it->first;
+    if (StringUtils::StartsWith(lower, "movie") ||
+        StringUtils::StartsWith(lower, "recentlyaddedmovies"))
+      return "services://movies/" + lower + "/";
+    if (StringUtils::StartsWith(lower, "tvshow") ||
+        StringUtils::StartsWith(lower, "recentlyaddedepisodes") ||
+        lower == "inprogresstvshows")
+      return "services://tvshows/" + lower + "/";
+  }
+
+  return it->second;
 }
 
 bool CGUIWindowVideoNav::ApplyWatchedFilter(CFileItemList &items)

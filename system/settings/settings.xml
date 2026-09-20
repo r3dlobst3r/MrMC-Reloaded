@@ -908,6 +908,11 @@
           <default>true</default>
           <control type="toggle" />
         </setting>
+        <setting id="videolibrary.watchedhomeshelfitems" type="boolean" label="41273" help="41274">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
         <setting id="videolibrary.cleanup" type="action" label="14247" help="36148">
           <level>2</level>
           <control type="button" format="action" />

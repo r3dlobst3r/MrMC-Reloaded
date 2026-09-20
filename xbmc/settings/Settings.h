@@ -67,6 +67,8 @@ public:
   static constexpr auto SETTING_SCREENSAVER_USEDIMONPAUSE = "screensaver.usedimonpause";
   static constexpr auto SETTING_WINDOW_WIDTH = "window.width";
   static constexpr auto SETTING_WINDOW_HEIGHT = "window.height";
+  static constexpr auto SETTING_VIDEOLIBRARY_WATCHEDHOMESHELFITEMS =
+      "videolibrary.watchedhomeshelfitems";
   static constexpr auto SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS = "videolibrary.showunwatchedplots";
   static constexpr auto SETTING_VIDEOLIBRARY_ACTORTHUMBS = "videolibrary.actorthumbs";
   static constexpr auto SETTING_MYVIDEOS_FLATTEN = "myvideos.flatten";

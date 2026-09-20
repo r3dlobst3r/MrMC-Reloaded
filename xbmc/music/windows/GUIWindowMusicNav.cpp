@@ -13,6 +13,8 @@
 #include "GUIUserMessages.h"
 #include "PartyModeManager.h"
 #include "ServiceBroker.h"
+#include "addons/Skin.h"
+#include "services/ServicesManager.h"
 #include "URL.h"
 #include "Util.h"
 #include "addons/AddonSystemSettings.h"
@@ -965,7 +967,28 @@ std::string CGUIWindowMusicNav::GetStartFolder(const std::string &dir)
 
   const auto it = map.find(StringUtils::ToLower(dir));
   if (it == map.end())
+  {
+    std::string lower = StringUtils::ToLower(dir);
+    if (lower == "rootlocal")
+      return "musicdb://root/";
+    if (lower == "root")
+    {
+      // MrMC: when a media service is active and the skin is not
+      // dynamic-home, route the music root through the services://
+      // aggregator; otherwise fall through to the music database root.
+      bool isDynamicHomeCompatible =
+          (g_SkinInfo && g_SkinInfo->IsDynamicHomeCompatible());
+      if (CServicesManager::GetInstance().HasServices() && !isDynamicHomeCompatible)
+        return "services://music/root/";
+    }
     return CGUIWindowMusicBase::GetStartFolder(dir);
-  else
-    return it->second;
+  }
+
+  // MrMC: services:// routing for aggregated music browsing
+  bool isDynamicHomeCompatible = (g_SkinInfo && g_SkinInfo->IsDynamicHomeCompatible());
+  if (CServicesManager::GetInstance().HasServices() && !isDynamicHomeCompatible &&
+      (it->first == "artists" || it->first == "albums" || it->first == "recentlyaddedalbums"))
+    return "services://music/" + it->first + "/";
+
+  return it->second;
 }

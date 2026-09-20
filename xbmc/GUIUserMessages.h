@@ -148,3 +148,7 @@ constexpr const int GUI_MSG_PLAYBACK_PAUSED = GUI_MSG_USER + 47;
 constexpr const int GUI_MSG_PLAYBACK_RESUMED = GUI_MSG_USER + 48;
 constexpr const int GUI_MSG_PLAYBACK_SEEKED = GUI_MSG_USER + 49;
 constexpr const int GUI_MSG_PLAYBACK_SPEED_CHANGED = GUI_MSG_USER + 50;
+
+// MrMC home shelf: request a home-shelf update. Param1 carries the
+// Audio/Video flags of which shelves need to be re-queried.
+constexpr const int GUI_MSG_SEND_HOME_UPDATE = GUI_MSG_USER + 51;

@@ -25729,3 +25729,13 @@ msgstr ""
 msgctxt "#41272"
 msgid "Always (including DVD)"
 msgstr ""
+
+#: mrmc-reloaded (was #1178)
+msgctxt "#41273"
+msgid "Show watched items on home screen"
+msgstr ""
+
+#: mrmc-reloaded (was #1179)
+msgctxt "#41274"
+msgid "Show or hide watched items in Recently Added home screen"
+msgstr ""
