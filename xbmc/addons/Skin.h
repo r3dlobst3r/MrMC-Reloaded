@@ -134,6 +134,12 @@ public:
    */
   bool IsDebugging() const { return m_debugging; }
 
+  /*! \brief Return whether the skin supports MrMC dynamic home content
+   \return true if dynamic home (set via dynamichome="true" on the xbmc.gui.skin
+   extension in addon.xml) is enabled for this skin.
+   */
+  bool IsDynamicHomeCompatible() const { return m_isDynamicHomeCompatible; }
+
   /*! \brief Get the id of the first window to load
    The first window is generally Startup.xml unless it doesn't exist or if the skinner
    has specified which start windows they support and the user is going to somewhere other
@@ -281,6 +287,7 @@ protected:
 
   std::vector<CStartupWindow> m_startupWindows;
   bool m_debugging;
+  bool m_isDynamicHomeCompatible;
 
   /*! Manager/Owner of skin timers */
   std::unique_ptr<CSkinTimerManager> m_skinTimerManager;

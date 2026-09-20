@@ -156,7 +156,8 @@ CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo,
   : CAddon(addonInfo, AddonType::SKIN),
     m_defaultRes(resolution),
     m_effectsSlowDown(1.f),
-    m_debugging(false)
+    m_debugging(false),
+    m_isDynamicHomeCompatible(false)
 {
   m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
 }
@@ -193,6 +194,7 @@ CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, AddonTyp
     m_effectsSlowDown = 1.f;
 
   m_debugging = Type(AddonType::SKIN)->GetValue("@debugging").asBoolean();
+  m_isDynamicHomeCompatible = Type(AddonType::SKIN)->GetValue("@dynamichome").asBoolean();
 
   m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
   LoadStartupWindows(addonInfo);

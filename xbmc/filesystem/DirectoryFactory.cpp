@@ -20,6 +20,9 @@
 #include "FavouritesDirectory.h"
 #include "LibraryDirectory.h"
 #include "EventsDirectory.h"
+#include "ServicesDirectory.h"
+#include "EmbyDirectory.h"
+#include "PlexDirectory.h"
 #include "AddonsDirectory.h"
 #include "SourcesDirectory.h"
 #include "FTPDirectory.h"
@@ -174,6 +177,9 @@ IDirectory* CDirectoryFactory::Create(const CURL& url)
   if (url.IsProtocol("musicsearch")) return new CMusicSearchDirectory();
   if (url.IsProtocol("videodb")) return new CVideoDatabaseDirectory();
   if (url.IsProtocol("library")) return new CLibraryDirectory();
+  if (url.IsProtocol("services")) return new CServicesDirectory();
+  if (url.IsProtocol("emby")) return new CEmbyDirectory();
+  if (url.IsProtocol("plex")) return new CPlexDirectory();
   if (url.IsProtocol("favourites")) return new CFavouritesDirectory();
 #if defined(TARGET_ANDROID)
   if (url.IsProtocol("androidapp")) return new CAndroidAppDirectory();

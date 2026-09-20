@@ -12,6 +12,7 @@ set(SOURCES AddonsDirectory.cpp
             DirectoryHistory.cpp
             DllLibCurl.cpp
             EventsDirectory.cpp
+            EmbyDirectory.cpp
             FavouritesDirectory.cpp
             FileCache.cpp
             File.cpp
@@ -24,6 +25,8 @@ set(SOURCES AddonsDirectory.cpp
             IFile.cpp
             ImageFile.cpp
             LibraryDirectory.cpp
+            PlexDirectory.cpp
+            ServicesDirectory.cpp
             MultiPathDirectory.cpp
             MultiPathFile.cpp
             MusicDatabaseDirectory.cpp
@@ -74,6 +77,7 @@ set(HEADERS AddonsDirectory.h
             DirectoryHistory.h
             DllLibCurl.h
             EventsDirectory.h
+            EmbyDirectory.h
             FTPDirectory.h
             FTPParse.h
             FavouritesDirectory.h
@@ -88,6 +92,8 @@ set(HEADERS AddonsDirectory.h
             IFileTypes.h
             ImageFile.h
             LibraryDirectory.h
+            PlexDirectory.h
+            ServicesDirectory.h
             MultiPathDirectory.h
             MultiPathFile.h
             MusicDatabaseDirectory.h
