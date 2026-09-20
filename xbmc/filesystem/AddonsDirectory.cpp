@@ -642,18 +642,6 @@ static void RootDirectory(CFileItemList& items)
     item->SetArt("icon", "DefaultAddonsRepo.png");
     items.Add(item);
   }
-  {
-    CFileItemPtr item(new CFileItem("addons://install/", false));
-    item->SetLabel(g_localizeStrings.Get(24041));
-    item->SetArt("icon", "DefaultAddonsZip.png");
-    items.Add(item);
-  }
-  {
-    CFileItemPtr item(new CFileItem("addons://search/", true));
-    item->SetLabel(g_localizeStrings.Get(137));
-    item->SetArt("icon", "DefaultAddonsSearch.png");
-    items.Add(item);
-  }
 }
 
 bool CAddonsDirectory::GetDirectory(const CURL& url, CFileItemList &items)

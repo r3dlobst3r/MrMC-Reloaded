@@ -633,6 +633,11 @@ private:
 
   void FindAddons(ADDON_INFO_LIST& addonmap, const std::string& path);
 
+  /*! \brief Scan the user addon directory (special://home/addons).
+  Disabled entirely on tvOS/iOS App Store builds where only bundled
+  addons may load. */
+  void FindUserAddons(ADDON_INFO_LIST& addonmap);
+
   /*!
      * @brief Fills the the provided vector with the list of incompatible
      * addons and returns if there's any.

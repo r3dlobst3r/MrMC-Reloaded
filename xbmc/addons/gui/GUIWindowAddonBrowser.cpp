@@ -193,39 +193,9 @@ void CGUIWindowAddonBrowser::OnEvent(const ADDON::AddonEvent& event)
   CServiceBroker::GetGUI()->GetWindowManager().SendThreadMessage(msg);
 }
 
-void CGUIWindowAddonBrowser::InstallFromZip()
-{
-  using namespace KODI::MESSAGING::HELPERS;
-
-  if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(
-          CSettings::SETTING_ADDONS_ALLOW_UNKNOWN_SOURCES))
-  {
-    if (ShowYesNoDialogText(13106, 36617, 186, 10004) == DialogResponse::CHOICE_YES)
-      CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow(
-          WINDOW_SETTINGS_SYSTEM, CSettings::SETTING_ADDONS_ALLOW_UNKNOWN_SOURCES);
-  }
-  else
-  {
-    // pop up filebrowser to grab an installed folder
-    VECSOURCES shares = *CMediaSourceSettings::GetInstance().GetSources("files");
-    CServiceBroker::GetMediaManager().GetLocalDrives(shares);
-    CServiceBroker::GetMediaManager().GetNetworkLocations(shares);
-    std::string path;
-    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, "*.zip", g_localizeStrings.Get(24041), path))
-    {
-      CAddonInstaller::GetInstance().InstallFromZip(path);
-    }
-  }
-}
-
 bool CGUIWindowAddonBrowser::OnClick(int iItem, const std::string& player)
 {
   CFileItemPtr item = m_vecItems->Get(iItem);
-  if (item->GetPath() == "addons://install/")
-  {
-    InstallFromZip();
-    return true;
-  }
   if (item->GetPath() == "addons://update_all/")
   {
     UpdateAddons updater;

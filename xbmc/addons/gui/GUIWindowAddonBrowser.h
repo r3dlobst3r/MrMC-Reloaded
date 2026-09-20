@@ -95,7 +95,6 @@ public:
 
   bool UseFileDirectories() override { return false; }
 
-  static void InstallFromZip();
 
 protected:
   bool OnClick(int iItem, const std::string& player = "") override;

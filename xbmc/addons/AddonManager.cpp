@@ -675,7 +675,7 @@ bool CAddonMgr::FindAddon(const std::string& addonId,
   // Confirm special://xbmcbin/addons and special://xbmc/addons are not the same
   if (!CSpecialProtocol::ComparePath("special://xbmcbin/addons", "special://xbmc/addons"))
     FindAddons(installedAddons, "special://xbmc/addons");
-  FindAddons(installedAddons, "special://home/addons");
+  FindUserAddons(installedAddons);
 
   const auto it = installedAddons.find(addonId);
   if (it == installedAddons.cend() || it->second->Version() != addonVersion)
@@ -699,6 +699,17 @@ bool CAddonMgr::FindAddon(const std::string& addonId,
   return true;
 }
 
+void CAddonMgr::FindUserAddons(ADDON_INFO_LIST& addonmap)
+{
+#if defined(TARGET_DARWIN_TVOS) || defined(TARGET_DARWIN_IOS)
+  // MrMC: App Store builds must not load user-installed addons - only
+  // addons shipped inside the app package are available.
+  return;
+#else
+  FindAddons(addonmap, "special://home/addons");
+#endif
+}
+
 bool CAddonMgr::FindAddons()
 {
   ADDON_INFO_LIST installedAddons;
@@ -707,7 +718,7 @@ bool CAddonMgr::FindAddons()
   // Confirm special://xbmcbin/addons and special://xbmc/addons are not the same
   if (!CSpecialProtocol::ComparePath("special://xbmcbin/addons", "special://xbmc/addons"))
     FindAddons(installedAddons, "special://xbmc/addons");
-  FindAddons(installedAddons, "special://home/addons");
+  FindUserAddons(installedAddons);
 
   std::set<std::string> installed;
   for (const auto& addon : installedAddons)

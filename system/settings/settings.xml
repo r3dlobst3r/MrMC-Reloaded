@@ -4464,11 +4464,13 @@
         <setting id="addons.unknownsources" type="boolean" label="41237" help="41238">
           <level>0</level>
           <default>false</default>
+          <visible>false</visible>
           <control type="toggle" />
         </setting>
         <setting id="addons.updatemode" type="integer" parent="addons.unknownsources" label="36422" help="41217">
           <level>1</level>
           <default>0</default>
+          <visible>false</visible>
           <constraints>
             <options>
               <option label="41221">0</option> <!-- OFFICIAL_ONLY -->
