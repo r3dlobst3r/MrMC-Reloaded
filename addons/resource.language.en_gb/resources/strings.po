@@ -25744,3 +25744,8 @@ msgstr ""
 msgctxt "#41275"
 msgid "In progress Movies"
 msgstr ""
+
+#: mrmc-reloaded
+msgctxt "#41276"
+msgid "Would you like to sign-out of {} service?"
+msgstr ""
