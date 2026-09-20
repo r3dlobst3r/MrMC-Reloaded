@@ -1,1 +1,3 @@
 xbmc/contrib/kissfft                  kissfft
+xbmc/contrib/easywsclient             easywsclient
+xbmc/contrib/libmicrossdp             libmicrossdp

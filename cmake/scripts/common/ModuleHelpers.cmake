@@ -224,7 +224,8 @@ macro(BUILD_DEP_TARGET)
   if(CMAKE_ARGS)
     set(CMAKE_ARGS CMAKE_ARGS ${CMAKE_ARGS}
                              -DPROJECTSOURCE=${PROJECTSOURCE}
-                             "-DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}")
+                             "-DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}"
+                             "-DCMAKE_POLICY_VERSION_MINIMUM=3.5")
 
     # We dont have a toolchain for windows, so manually add all the cmake
     # build arguments we may want

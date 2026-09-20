@@ -1,18 +1,5 @@
-cmake_minimum_required(VERSION 3.4.1)
+set(SOURCES easywsclient.cpp)
 
-get_property(rtdir GLOBAL PROPERTY ROOT_DIR)
-include ( ${rtdir}/includes.cmake )
+set(HEADERS easywsclient.hpp)
 
-set (my_SOURCES
-  easywsclient.cpp
-  )
-
-file(GLOB my_HEADERS *.h)
-
-add_library(
-  easywsclient
-  STATIC
-
-  ${my_SOURCES}
-  ${my_HEADERS}
-  )
+core_add_library(easywsclient)

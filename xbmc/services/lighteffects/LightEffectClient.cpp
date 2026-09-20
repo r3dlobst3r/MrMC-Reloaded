@@ -337,7 +337,7 @@ void CLightEffectClient::GetRGBFromLight(CLight &light, float rgb[])
   light.count = 0;
 
   // apply value/saturation if different from default
-  if (m_value != 1.0 || m_saturation != 1.0)
+  if (m_value != 1.0f || m_saturation != 1.0f)
   {
     // convert to hsv
     float hsv[3];

@@ -1,18 +1,5 @@
-cmake_minimum_required(VERSION 3.4.1)
+set(SOURCES ssdp.c)
 
-get_property(rtdir GLOBAL PROPERTY ROOT_DIR)
-include ( ${rtdir}/includes.cmake )
+set(HEADERS ssdp.h)
 
-set (my_SOURCES
-  ssdp.c
-  )
-
-file(GLOB my_HEADERS *.h)
-
-add_library(
-  libmicrossdp
-  STATIC
-
-  ${my_SOURCES}
-  ${my_HEADERS}
-  )
+core_add_library(libmicrossdp)

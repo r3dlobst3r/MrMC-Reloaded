@@ -80,6 +80,15 @@ namespace XFILE
       void SetBufferSize(unsigned int size);
 
       const CHttpHeader& GetHttpHeader() const { return m_state->m_httpheader; }
+      // MrMC service helpers: response code / content encoding access.
+      // Kodi 21 removed the public accessors; verbosity is now global,
+      // so SetSilent only records the request.
+      long GetResponseCode() const { return m_httpresponse; }
+      std::string GetContentEncoding() const
+      {
+        return m_state->m_httpheader.GetValue("content-encoding");
+      }
+      void SetSilent(bool silent) { m_silent = silent; }
       std::string GetURL(void);
       std::string GetRedirectURL();
 
@@ -173,6 +182,7 @@ namespace XFILE
       std::string m_httpauth;
       std::string m_cipherlist;
       bool m_ftppasvip;
+      bool m_silent{false};
       int m_connecttimeout;
       int m_redirectlimit;
       int m_lowspeedtime;

@@ -120,7 +120,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             pItem->SetLabel(title);
             curl.SetFileName("Items/" + content.id + "/Images/Primary");
             pItem->SetArt("thumb", curl.Get());
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
 #if defined(EMBY_DEBUG_VERBOSE)
             CLog::Log(LOGDEBUG, "CEmbyDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -133,7 +133,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
           curl.SetProtocol(client->GetProtocol());
           curl.SetFileName(contents[0].prefix);
           //client->GetMovies(items, curl.Get()); ????
-          CDirectory::GetDirectory("emby://movies/" + basePath + "/" + Base64URL::Encode(curl.Get()), items);
+          CDirectory::GetDirectory("emby://movies/" + basePath + "/" + Base64URL::Encode(curl.Get()), items, "", DIR_FLAG_DEFAULTS);
           items.SetContent("movies");
           CEmbyUtils::SetEmbyItemProperties(items, "movies", client);
           for (int item = 0; item < items.Size(); ++item)
@@ -250,7 +250,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             pItem->SetLabel(title);
             curl.SetFileName("Items/" + content.id + "/Images/Primary");
             pItem->SetArt("thumb", curl.Get());
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
 #if defined(EMBY_DEBUG_VERBOSE)
            CLog::Log(LOGDEBUG, "CEmbyDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -263,7 +263,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
           curl.SetProtocol(client->GetProtocol());
           curl.SetFileName(contents[0].prefix);
           //client->GetTVShows(items, curl.Get()); ????
-          CDirectory::GetDirectory("emby://tvshows/" + basePath + "/" + Base64URL::Encode(curl.Get()), items);
+          CDirectory::GetDirectory("emby://tvshows/" + basePath + "/" + Base64URL::Encode(curl.Get()), items, "", DIR_FLAG_DEFAULTS);
           CEmbyUtils::SetEmbyItemProperties(items, "tvshows", client);
           for (int item = 0; item < items.Size(); ++item)
             CEmbyUtils::SetEmbyItemProperties(*items[item], "tvshows", client);
@@ -386,7 +386,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             pItem->SetLabel(title);
             curl.SetFileName("Items/" + content.id + "/Images/Primary");
             pItem->SetArt("thumb", curl.Get());
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
 #if defined(EMBY_DEBUG_VERBOSE)
             CLog::Log(LOGDEBUG, "CEmbyDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -503,7 +503,15 @@ bool CEmbyDirectory::FindByBroadcast(CFileItemList& items)
         return rtn;
       }
 
-      socket->SetBroadCast(true);
+      // Kodi 21 dropped CUDPSocket::SetBroadCast; enable SO_BROADCAST directly
+      int broadcast = 1;
+      if (setsockopt(socket->Socket(), SOL_SOCKET, SO_BROADCAST, &broadcast,
+                     sizeof(broadcast)) != 0)
+      {
+        CLog::Log(LOGERROR, "CEmbyDirectory:FindByBroadcast could not enable SO_BROADCAST");
+        delete socket;
+        return rtn;
+      }
       // create and add our socket to the 'select' listener
       broadcastListener = new SOCKETS::CSocketListener();
       broadcastListener->AddSocket(socket);
@@ -552,7 +560,7 @@ bool CEmbyDirectory::FindByBroadcast(CFileItemList& items)
                   data[ServerPropertyAddress].asString());
           if (!embyServerInfo.ServerId.empty())
           {
-            CLog::Log(LOGNOTICE, "CEmbyDirectory:FindByBroadcast Server found {}",
+            CLog::Log(LOGINFO, "CEmbyDirectory:FindByBroadcast Server found {}",
                       embyServerInfo.ServerName);
             CFileItemPtr local(new CFileItem("", true));
             CURL curl1(embyServerInfo.LocalAddress);

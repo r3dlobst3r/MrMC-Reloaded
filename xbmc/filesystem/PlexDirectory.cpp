@@ -57,7 +57,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   vdatabase.Close();
   CMusicDatabase mdatabase;
   mdatabase.Open();
-  bool hasMusic = mdatabase.HasContent();
+  bool hasMusic = mdatabase.GetSongsCount() > 0;
   mdatabase.Close();
 
   
@@ -94,7 +94,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             if (!value.empty() && (value[0] == '/'))
               StringUtils::TrimLeft(value, "/");
             curl.SetFileName(value);
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
             client->AddSectionItem(pItem);
             CLog::Log(LOGDEBUG, "CPlexDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -106,7 +106,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
           curl.SetProtocol(client->GetProtocol());
           std::string filename = StringUtils::Format("%s/%s", contents[0].section.c_str(), (basePath == "titles"? "all":""));
           curl.SetFileName(filename);
-          CDirectory::GetDirectory("plex://movies/" + basePath + "/" + Base64URL::Encode(curl.Get()), items);
+          CDirectory::GetDirectory("plex://movies/" + basePath + "/" + Base64URL::Encode(curl.Get()), items, "", DIR_FLAG_DEFAULTS);
           items.SetContent("movies");
           CPlexUtils::SetPlexItemProperties(items, client);
           for (int item = 0; item < items.Size(); ++item)
@@ -230,7 +230,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             if (!value.empty() && (value[0] == '/'))
               StringUtils::TrimLeft(value, "/");
             curl.SetFileName(value);
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
             client->AddSectionItem(pItem);
             CLog::Log(LOGDEBUG, "CPlexDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -242,7 +242,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
           curl.SetProtocol(client->GetProtocol());
           std::string filename = StringUtils::Format("%s/%s", contents[0].section.c_str(), (basePath == "titles"? "all":""));
           curl.SetFileName(filename);
-          CDirectory::GetDirectory("plex://tvshows/" + basePath + "/" + Base64URL::Encode(curl.Get()), items);
+          CDirectory::GetDirectory("plex://tvshows/" + basePath + "/" + Base64URL::Encode(curl.Get()), items, "", DIR_FLAG_DEFAULTS);
           CPlexUtils::SetPlexItemProperties(items, client);
           for (int item = 0; item < items.Size(); ++item)
             CPlexUtils::SetPlexItemProperties(*items[item], client);
@@ -383,7 +383,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             if (!value.empty() && (value[0] == '/'))
               StringUtils::TrimLeft(value, "/");
             curl.SetFileName(value);
-            pItem->SetIconImage(curl.Get());
+            pItem->SetArt("icon", curl.Get());
             items.Add(pItem);
             client->AddSectionItem(pItem);
             CLog::Log(LOGDEBUG, "CPlexDirectory::GetDirectory client({}), title({})", client->GetServerName(), title);
@@ -396,7 +396,7 @@ bool CPlexDirectory::GetDirectory(const CURL& url, CFileItemList &items)
           curl.SetProtocol(client->GetProtocol());
           std::string filename = StringUtils::Format("%s/%s", contents[0].section.c_str(), pathsection.c_str());
           curl.SetFileName(filename);
-          CDirectory::GetDirectory("plex://music/" + basePath + "/" + Base64URL::Encode(curl.Get()), items);
+          CDirectory::GetDirectory("plex://music/" + basePath + "/" + Base64URL::Encode(curl.Get()), items, "", DIR_FLAG_DEFAULTS);
           items.SetContent("artists");
           CPlexUtils::SetPlexItemProperties(items, client);
           for (int item = 0; item < items.Size(); ++item)

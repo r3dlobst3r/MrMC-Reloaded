@@ -23,7 +23,7 @@
 #include "FileItem.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
-#include "application/ApplicationComponents.h"
+#include "addons/addoninfo/AddonType.h"
 #include "application/Application.h"
 #include "filesystem/Directory.h"
 #include "guilib/GUIWindow.h"
@@ -36,7 +36,9 @@
 #include "services/ServicesManager.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
+#include "threads/CriticalSection.h"
 #include "utils/StringUtils.h"
+#include "video/VideoDbUrl.h"
 #include "utils/log.h"
 #include "video/VideoDatabase.h"
 #include "video/VideoInfoTag.h"
@@ -47,8 +49,6 @@
 #endif
 
 #define NUM_ITEMS 10
-
-using namespace ADDON;
 
 CHomeShelfJob::CHomeShelfJob(int flag)
 {
@@ -65,8 +65,8 @@ CHomeShelfJob::CHomeShelfJob(int flag)
   std::string skinId = CServiceBroker::GetSettingsComponent()
                            ->GetSettings()
                            ->GetString(CSettings::SETTING_LOOKANDFEEL_SKIN);
-  AddonPtr addon;
-  if (CServiceBroker::GetAddonMgr().GetAddon(skinId, addon, ADDON_SKIN))
+  ADDON::AddonPtr addon;
+  if (CServiceBroker::GetAddonMgr().GetAddon(skinId, addon, ADDON::AddonType::SKIN, ADDON::OnlyEnabled::CHOICE_YES))
   {
     if (skinId == "skin.ariana")
       m_compatibleSkin = true;
@@ -86,7 +86,7 @@ CHomeShelfJob::~CHomeShelfJob()
 
 bool CHomeShelfJob::UpdateVideo()
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
 
   CLog::Log(LOGDEBUG, "CHomeShelfJob::UpdateVideo() - Running HomeShelf screen update");
 
@@ -243,7 +243,7 @@ bool CHomeShelfJob::UpdateVideo()
 
 bool CHomeShelfJob::UpdateMusic()
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
 
   CLog::Log(LOGDEBUG, "CHomeShelfJob::UpdateMusic() - Running HomeShelf screen update");
 
@@ -258,7 +258,7 @@ bool CHomeShelfJob::UpdateMusic()
   {
     CMusicDatabase musicdatabase;
     musicdatabase.Open();
-    if (musicdatabase.HasContent())
+    if (musicdatabase.GetSongsCount() > 0)
     {
       VECALBUMS albums;
       musicdatabase.GetRecentlyAddedAlbums(albums, NUM_ITEMS);
@@ -296,43 +296,43 @@ bool CHomeShelfJob::UpdateMusic()
 
 void CHomeShelfJob::UpdateTvItemsRA(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfTVRA);
 }
 
 void CHomeShelfJob::UpdateTvItemsPR(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfTVPR);
 }
 
 void CHomeShelfJob::UpdateMovieItemsRA(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfMoviesRA);
 }
 
 void CHomeShelfJob::UpdateMovieItemsPR(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfMoviesPR);
 }
 
 void CHomeShelfJob::UpdateContinueWatchingItems(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfContinueWatching);
 }
 
 void CHomeShelfJob::UpdateMusicAlbumItems(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfMusicAlbums);
 }
 
 void CHomeShelfJob::UpdateMusicVideoItems(CFileItemList* list)
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
   list->Assign(*m_HomeShelfMusicVideos);
 }
 
@@ -340,13 +340,13 @@ bool CHomeShelfJob::DoWork()
 {
   bool ret = true;
 
-  if (CServiceBroker::GetAppComponents().GetComponent<CApplication>()->IsStopping())
+  if (g_application.IsStopping())
     return ret;
 
   if (m_flag & Audio)
     ret &= UpdateMusic();
 
-  if (CServiceBroker::GetAppComponents().GetComponent<CApplication>()->IsStopping())
+  if (g_application.IsStopping())
     return ret;
 
   if (m_flag & Video)

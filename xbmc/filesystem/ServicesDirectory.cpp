@@ -22,6 +22,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
+#include "URL.h"
 #include "filesystem/Directory.h"
 #include "guilib/LocalizeStrings.h"
 #include "music/MusicDatabase.h"
@@ -147,7 +148,7 @@ bool CServicesDirectory::GetDirectory(const CURL& url, CFileItemList& items)
     {
       CMusicDatabase database;
       database.Open();
-      bool hasMusic = database.HasContent();
+      bool hasMusic = database.GetSongsCount() > 0;
       database.Close();
 
       if (hasMusic)

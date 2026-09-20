@@ -15,7 +15,8 @@ macro(buildPCRE)
               "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/002-all-enable_docs_pc.patch"
               "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/003-all-postfix.patch"
               "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/004-win-pdb.patch"
-              "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/jit_aarch64.patch")
+              "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/jit_aarch64.patch"
+              "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/005-cmake4-cmp0026.patch")
 
   if(CORE_SYSTEM_NAME STREQUAL darwin_embedded)
     list(APPEND patches "${CORE_SOURCE_DIR}/tools/depends/target/${MODULE_LC}/tvos-bitcode-fix.patch"

@@ -429,7 +429,7 @@ void CHueServices::Process()
   float fR = 0.0f, fG = 0.0f, fB = 0.0f;
   float fx = 0.0, fy = 0.0, fY = 0.0;
   float minL = 0.0f, maxL = 1.0f, biasC = 0.0f;
-  float fu_old = 0.0, fv_old = 0.0;
+  float fu_old = 0.0f, fv_old = 0.0f;
 
   m_continuous = CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_SERVICES_HUE_CONTINUOUS);
   m_dim_mode = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_DIMMODE);
@@ -517,7 +517,7 @@ void CHueServices::Process()
           unsigned char *pixels = provider->GetBuffer();
           for (int y = 0; y < m_height; ++y)
           {
-            double rR = 0.0, rG = 0.0, rB = 0.0;
+            float rR = 0.0f, rG = 0.0f, rB = 0.0f;
             int row = m_width * y * 4;
             for (int x = 0; x < m_width; ++x)
             {
@@ -528,10 +528,11 @@ void CHueServices::Process()
             }
 
             // ignore black rows
-            rR = ClampValue((rR / (float) (m_width)) / 255.0f, 0.0f, 1.0f);
-            rG = ClampValue((rG / (float) (m_width)) / 255.0f, 0.0f, 1.0f);
-            rB = ClampValue((rB / (float) (m_width)) / 255.0f, 0.0f, 1.0f);
-            double rY = (0.2126 * rR + 0.7152 * rG + 0.0722 * rB);
+            rR = ClampValue((rR / m_width) / 255.0f, 0.0f, 1.0f);
+            rG = ClampValue((rG / m_width) / 255.0f, 0.0f, 1.0f);
+            rB = ClampValue((rB / m_width) / 255.0f, 0.0f, 1.0f);
+            double rY = (0.2126 * static_cast<double>(rR) + 0.7152 * static_cast<double>(rG) +
+                         0.0722 * static_cast<double>(rB));
             if (rY > 0.01)
             {
               fR += rR;
@@ -551,9 +552,10 @@ void CHueServices::Process()
           // Skip imperceptible color updates (+ bias)
           float u, v;
           CHueUtils::xy2uv(x, y, u, v);
-          double color_dist = sqrt(pow(u - fu_old, 2) + pow(v - fv_old, 2));
+          double color_dist = std::sqrt(std::pow(static_cast<double>(u) - static_cast<double>(fu_old), 2.0) +
+                                       std::pow(static_cast<double>(v) - static_cast<double>(fv_old), 2.0));
 
-          if (color_dist > biasC)
+          if (color_dist > static_cast<double>(biasC))
           {
             //CLog::Log(LOGDEBUG, "Hue - Color bias = %f, dist = %f", biasC, color_dist);
             fx = x;

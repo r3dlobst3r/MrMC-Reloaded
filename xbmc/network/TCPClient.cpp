@@ -62,7 +62,7 @@ int CTCPClient::Open(const std::string &address, int port, int timeout_us, bool 
       return FAIL;
   }
 
-  struct sockaddr_in server = {0};
+  struct sockaddr_in server{};
   server.sin_port = htons(port);
   server.sin_family = AF_INET;
   server.sin_addr.s_addr = inet_addr(address.c_str());

@@ -21,7 +21,10 @@
 #include "GUIWindowHome.h"
 
 #include "GUIUserMessages.h"
+#include "playlists/PlayList.h"
 #include "PlayListPlayer.h"
+#include "threads/CriticalSection.h"
+#include "filesystem/VideoDatabaseDirectory.h"
 #include "ServiceBroker.h"
 #include "application/ApplicationComponents.h"
 #include "application/ApplicationPlayer.h"
@@ -201,11 +204,11 @@ void CGUIWindowHome::OnJobComplete(unsigned int jobID, bool success, CJob* job)
 
   if (jobFlag & Video)
   {
-    CSingleLock lock(m_critsection);
+    std::unique_lock<CCriticalSection> lock(m_critsection);
     {
       // these can alter the gui lists and cause renderer crashing
       // if gui lists are yanked out from under rendering. Needs lock.
-      CSingleLock lockGfx(CServiceBroker::GetWinSystem()->GetGfxContext());
+      std::unique_lock<CCriticalSection> lockGfx(CServiceBroker::GetWinSystem()->GetGfxContext());
 
       homeShelfJob->UpdateTvItemsRA(m_HomeShelfTVRA);
       homeShelfJob->UpdateTvItemsPR(m_HomeShelfTVPR);
@@ -233,7 +236,7 @@ void CGUIWindowHome::OnJobComplete(unsigned int jobID, bool success, CJob* job)
 
   if (jobFlag & Audio)
   {
-    CSingleLock lock(m_critsection);
+    std::unique_lock<CCriticalSection> lock(m_critsection);
 
     homeShelfJob->UpdateMusicAlbumItems(m_HomeShelfMusicAlbums);
     CGUIMessage messageAlbums(GUI_MSG_LABEL_BIND, GetID(), CONTROL_HOMESHELFMUSICALBUMS, 0, 0,
@@ -276,7 +279,7 @@ bool CGUIWindowHome::OnMessage(CGUIMessage& message)
         auto newItem = std::dynamic_pointer_cast<CFileItem>(message.GetItem());
         if (newItem && IsActive())
         {
-          CSingleLock lock(m_critsection);
+          std::unique_lock<CCriticalSection> lock(m_critsection);
           if (newItem->HasVideoInfoTag() &&
               newItem->GetVideoInfoTag()->m_type == MediaTypeMovie)
           {
@@ -296,7 +299,7 @@ bool CGUIWindowHome::OnMessage(CGUIMessage& message)
         auto newItem = std::dynamic_pointer_cast<CFileItem>(message.GetItem());
         if (newItem && IsActive())
         {
-          CSingleLock lock(m_critsection);
+          std::unique_lock<CCriticalSection> lock(m_critsection);
           if (newItem->HasVideoInfoTag() &&
               newItem->GetVideoInfoTag()->m_type == MediaTypeMovie)
           {
@@ -346,7 +349,7 @@ bool CGUIWindowHome::OnMessage(CGUIMessage& message)
       if (selectAction && shelfList)
       {
         int item = GetSelectedItem(iControl);
-        CSingleLock lock(m_critsection);
+        std::unique_lock<CCriticalSection> lock(m_critsection);
         if (item >= 0 && item < shelfList->Size())
         {
           CFileItemPtr itemPtr = shelfList->Get(item);
@@ -360,7 +363,7 @@ bool CGUIWindowHome::OnMessage(CGUIMessage& message)
       if (selectAction && iControl == CONTROL_HOMESHELFMUSICALBUMS)
       {
         int item = GetSelectedItem(iControl);
-        CSingleLock lock(m_critsection);
+        std::unique_lock<CCriticalSection> lock(m_critsection);
         if (item >= 0 && item < m_HomeShelfMusicAlbums->Size())
         {
           CFileItemPtr itemPtr = m_HomeShelfMusicAlbums->Get(item);
@@ -444,7 +447,7 @@ bool CGUIWindowHome::PlayHomeShelfItem(const CFileItem& itemPtr)
     CFileItem item(itemPtr);
     if (item.HasVideoInfoTag() && item.GetVideoInfoTag()->GetResumePoint().IsPartWay())
     {
-      std::string resumeString = VIDEO::GetResumeString(item);
+      std::string resumeString = VIDEO_UTILS::GetResumeString(item);
       if (!resumeString.empty())
       {
         CContextButtons choices;
@@ -455,7 +458,7 @@ bool CGUIWindowHome::PlayHomeShelfItem(const CFileItem& itemPtr)
         if (value < 0)
           return false;
         if (value == VIDEO::GUILIB::ACTION_RESUME)
-          item.m_lStartOffset = STARTOFFSET_RESUME;
+          item.SetStartOffset(STARTOFFSET_RESUME);
       }
     }
 
@@ -473,7 +476,7 @@ bool CGUIWindowHome::PlayHomeShelfItem(const CFileItem& itemPtr)
 
 void CGUIWindowHome::ClearHomeShelfItems()
 {
-  CSingleLock lock(m_critsection);
+  std::unique_lock<CCriticalSection> lock(m_critsection);
 
   CFileItemList* tempClearItems = new CFileItemList;
   CGUIMessage messageTVRA(GUI_MSG_LABEL_BIND, GetID(), CONTROL_HOMESHELFTVSHOWSRA, 0, 0,
@@ -502,7 +505,7 @@ void CGUIWindowHome::SetContextMenuItems(int iControl)
   CFileItemPtr itemPtr;
   CFileItemList* shelfList = nullptr;
   {
-    CSingleLock lock(m_critsection);
+    std::unique_lock<CCriticalSection> lock(m_critsection);
     if (iControl == CONTROL_HOMESHELFMOVIESRA)
       shelfList = m_HomeShelfMoviesRA;
     else if (iControl == CONTROL_HOMESHELFMOVIESPR)
