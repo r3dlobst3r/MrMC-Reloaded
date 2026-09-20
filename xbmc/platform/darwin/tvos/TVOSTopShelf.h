@@ -12,19 +12,15 @@
 
 class CFileItemList;
 
-typedef enum
-{
-  MOVIES = 0,
-  TV_SHOWS = 1
-} TVOSTopShelfItemsCategory;
-
-
 class CTVOSTopShelf
 {
 public:
   static CTVOSTopShelf& GetInstance();
   void RunTopShelf();
-  void SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCategory category);
+  void SetTopShelfItems(CFileItemList& moviesRA,
+                        CFileItemList& tvRA,
+                        CFileItemList& moviesPR,
+                        CFileItemList& tvPR);
   void HandleTopShelfUrl(const std::string& url, const bool run);
 
 private:

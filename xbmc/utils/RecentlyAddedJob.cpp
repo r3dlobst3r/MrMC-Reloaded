@@ -150,9 +150,11 @@ bool CRecentlyAddedJob::UpdateVideo()
   }
 
 #if defined(TARGET_DARWIN_TVOS)
-  // Add recently added Movies and TvShows items on tvOS Kodi TopShelf
-  CTVOSTopShelf::GetInstance().SetTopShelfItems(items, TVOSTopShelfItemsCategory::MOVIES);
-  CTVOSTopShelf::GetInstance().SetTopShelfItems(TVShowItems, TVOSTopShelfItemsCategory::TV_SHOWS);
+  // Add recently added Movies and TvShows items on tvOS TopShelf
+  // (in-progress rows are only filled by CHomeShelfJob)
+  CFileItemList emptyMoviesPR;
+  CFileItemList emptyTvPR;
+  CTVOSTopShelf::GetInstance().SetTopShelfItems(items, TVShowItems, emptyMoviesPR, emptyTvPR);
 #endif
 
   i = 0;

@@ -25739,3 +25739,8 @@ msgstr ""
 msgctxt "#41274"
 msgid "Show or hide watched items in Recently Added home screen"
 msgstr ""
+
+#: mrmc-reloaded (was #627)
+msgctxt "#41275"
+msgid "In progress Movies"
+msgstr ""

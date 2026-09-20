@@ -46,7 +46,10 @@ CTVOSTopShelf& CTVOSTopShelf::GetInstance()
   return sTopShelf;
 }
 
-void CTVOSTopShelf::SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCategory category)
+void CTVOSTopShelf::SetTopShelfItems(CFileItemList& moviesRA,
+                                     CFileItemList& tvRA,
+                                     CFileItemList& moviesPR,
+                                     CFileItemList& tvPR)
 {
   @autoreleasepool
   {
@@ -152,40 +155,70 @@ void CTVOSTopShelf::SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCate
         };
 
 
-    // Based on category type, add items in TopShelf shared dict
-    switch (category)
+    // Recently added Movies
+    fillSharedDicts(
+        moviesRA, @"movies", @(g_localizeStrings.Get(20386).c_str()),
+        [](const CFileItemPtr& videoItem) {
+          if (videoItem->HasArt("poster"))
+            return videoItem->GetArt("poster");
+          else
+            return videoItem->GetArt("thumb");
+        },
+        [](const CFileItemPtr& videoItem) { return videoItem->GetLabel(); });
+
+    // Recently added Episodes
     {
-      case TVOSTopShelfItemsCategory::MOVIES:
-        fillSharedDicts(
-            items, @"movies", @(g_localizeStrings.Get(20386).c_str()),
-            [](const CFileItemPtr& videoItem) {
-              if (videoItem->HasArt("poster"))
-                return videoItem->GetArt("poster");
-              else
-                return videoItem->GetArt("thumb");
-            },
-            [](const CFileItemPtr& videoItem) { return videoItem->GetLabel(); });
-        break;
-      case TVOSTopShelfItemsCategory::TV_SHOWS:
-        CVideoDatabase videoDb;
-        videoDb.Open();
-        fillSharedDicts(
-            items, @"tvshows", @(g_localizeStrings.Get(20387).c_str()),
-            [&videoDb](const CFileItemPtr& videoItem)
-            {
-              int season = videoItem->GetVideoInfoTag()->m_iIdSeason;
-              return season > 0 ? videoDb.GetArtForItem(season, MediaTypeSeason, "poster")
-                                : std::string{};
-            },
-            [](const CFileItemPtr& videoItem)
-            {
-              return StringUtils::Format("{} s{:02}e{:02}",
-                                         videoItem->GetVideoInfoTag()->m_strShowTitle,
-                                         videoItem->GetVideoInfoTag()->m_iSeason,
-                                         videoItem->GetVideoInfoTag()->m_iEpisode);
-            });
-        videoDb.Close();
-        break;
+      CVideoDatabase videoDb;
+      videoDb.Open();
+      fillSharedDicts(
+          tvRA, @"tvshows", @(g_localizeStrings.Get(20387).c_str()),
+          [&videoDb](const CFileItemPtr& videoItem)
+          {
+            int season = videoItem->GetVideoInfoTag()->m_iIdSeason;
+            return season > 0 ? videoDb.GetArtForItem(season, MediaTypeSeason, "poster")
+                              : std::string{};
+          },
+          [](const CFileItemPtr& videoItem)
+          {
+            return StringUtils::Format("{} s{:02}e{:02}",
+                                       videoItem->GetVideoInfoTag()->m_strShowTitle,
+                                       videoItem->GetVideoInfoTag()->m_iSeason,
+                                       videoItem->GetVideoInfoTag()->m_iEpisode);
+          });
+      videoDb.Close();
+    }
+
+    // In-Progress Movies
+    fillSharedDicts(
+        moviesPR, @"moviespr", @(g_localizeStrings.Get(41275).c_str()),
+        [](const CFileItemPtr& videoItem) {
+          if (videoItem->HasArt("poster"))
+            return videoItem->GetArt("poster");
+          else
+            return videoItem->GetArt("thumb");
+        },
+        [](const CFileItemPtr& videoItem) { return videoItem->GetLabel(); });
+
+    // In-Progress Episodes
+    {
+      CVideoDatabase videoDb;
+      videoDb.Open();
+      fillSharedDicts(
+          tvPR, @"tvshowspr", @(g_localizeStrings.Get(626).c_str()),
+          [&videoDb](const CFileItemPtr& videoItem)
+          {
+            int season = videoItem->GetVideoInfoTag()->m_iIdSeason;
+            return season > 0 ? videoDb.GetArtForItem(season, MediaTypeSeason, "poster")
+                              : std::string{};
+          },
+          [](const CFileItemPtr& videoItem)
+          {
+            return StringUtils::Format("{} s{:02}e{:02}",
+                                       videoItem->GetVideoInfoTag()->m_strShowTitle,
+                                       videoItem->GetVideoInfoTag()->m_iSeason,
+                                       videoItem->GetVideoInfoTag()->m_iEpisode);
+          });
+      videoDb.Close();
     }
 
     // Set TopShelf new categories
