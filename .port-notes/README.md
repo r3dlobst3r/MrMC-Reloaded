@@ -33,3 +33,43 @@
 
 - `additive-since-mb.txt` — files added by MrMC since merge-base (1,188 lines). Accurate map of new files.
 - `modified-since-mb.txt` — superset; includes cherry-picked upstream work (1,658 lines). Use with caution.
+
+## Binary addons (PVR + visualizations)
+
+Built via `tools/depends/target/binary-addons` against the `mrmc` (not `kodi`) header
+bindings. The bindings install to `build/include/mrmc/`, so most addons use
+`${KODI_INCLUDE_DIR}/..` to reach the `kodi/AddonBase.h` include path; a
+`kodi -> mrmc` symlink is created in `build/include/` to satisfy them.
+
+**ADDONS_TO_BUILD** (14 addons; `pvr.tvmosaic` has no Omega definition and is
+intentionally dropped):
+```
+pvr.dvblink pvr.dvbviewer pvr.hdhomerun pvr.hts pvr.iptvsimple
+pvr.mediaportal.tvserver pvr.mythtv pvr.nextpvr pvr.stalker pvr.vbox
+pvr.vdr.vnsi pvr.vuplus visualization.spectrum visualization.waveform
+```
+
+**Build reproducibility gotchas** — these edits are applied to *extracted* addon
+sources under `build/<addon>/` and are REVERTED whenever ExternalProject
+re-runs download/extract. A clean build needs them re-applied (or converted to
+`PATCH_COMMAND` patches):
+1. `pvr.mediaportal.tvserver` + `pvr.vuplus` `CMakeLists.txt`: use
+   `${TINYXML_INCLUDE_DIRS}` (plural) — their `FindTinyXML.cmake` only defines the
+   plural var, not `${TINYXML_INCLUDE_DIR}`.
+2. `pvr.vuplus` `CMakeLists.txt`: `${KODI_INCLUDE_DIR}` → `${KODI_INCLUDE_DIR}/..`
+   (every other addon already uses `/..`).
+3. `visualization.spectrum` + `visualization.waveform` `CMakeLists.txt`:
+   `${GLM_INCLUDE_DIR}` → `${GLM_INCLUDE_DIR}/..` (glm's `Findglm.cmake` uses
+   `PATH_SUFFIXES glm`, but sources `#include <glm/glm.hpp>`).
+4. `Toolchain_binaddons.cmake`: `CMAKE_C_COMPILER ... -std=gnu23` →
+   `-std=gnu17` (auto-detected `-std=gnu23` breaks K&R C in mediaportal's bundled
+   live555). Persist via `tools/depends/target/Toolchain_binaddons.cmake.in`.
+5. glm dependency: append `-Wno-reserved-identifier` to its
+   `add_compile_options(-Werror -Weverything ...)` (glm builds with `-Weverything`).
+6. zlib tarball: re-download from `mirrors.kodi.tv/build-deps/sources/` if the
+   `zlib.net` URL 404s (empty tarball).
+
+Built `.dylib` files land in `addons/<addon-id>/` and are **gitignored**; they are
+regenerated at build time by the `binary-addons` target (or
+`make -C tools/depends/target/binary-addons ADDONS="..."`). The app bundle picks
+them up automatically via `CopyRootFiles-*.command` rsyncing `addons/`.

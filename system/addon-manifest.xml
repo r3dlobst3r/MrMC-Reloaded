@@ -23,6 +23,20 @@
   <addon>kodi.binary.instance.vfs</addon>
   <addon>kodi.binary.instance.videocodec</addon>
   <addon>kodi.binary.instance.visualization</addon>
+  <addon>pvr.dvblink</addon>
+  <addon>pvr.dvbviewer</addon>
+  <addon>pvr.hdhomerun</addon>
+  <addon>pvr.hts</addon>
+  <addon>pvr.iptvsimple</addon>
+  <addon>pvr.mediaportal.tvserver</addon>
+  <addon>pvr.mythtv</addon>
+  <addon>pvr.nextpvr</addon>
+  <addon>pvr.stalker</addon>
+  <addon>pvr.vbox</addon>
+  <addon>pvr.vdr.vnsi</addon>
+  <addon>pvr.vuplus</addon>
+  <addon>visualization.spectrum</addon>
+  <addon>visualization.waveform</addon>
   <addon>kodi.resource</addon>
   <addon>metadata.album.universal</addon>
   <addon>metadata.artists.universal</addon>
