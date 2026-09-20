@@ -38,7 +38,6 @@
             <include>HeaderSlideEffectTopBar</include>
             <visible>!Skin.HasSetting(BlackGlassMode)</visible>
             <animation effect="slide" tween="circle" easing="out" time="250" start="0,0" end="-2690,0" condition="Control.HasFocus(505050)">conditional</animation>
-            <include condition="!Skin.HasSetting(BlackGlassMode)+Skin.HasSetting(plexbmc)">PlexbmcFixTrick</include>
             <include condition="!Skin.HasSetting(BlackGlassMode)">View_50</include>
             <include condition="!Skin.HasSetting(BlackGlassMode)">Info_50_List</include>
             <include condition="!Skin.HasSetting(BlackGlassMode)">View_51_Panel</include>
@@ -54,9 +53,9 @@
             <include condition="!Skin.HasSetting(BlackGlassMode)">View_5050_CardList</include>
             <!-- COMMON -->
             <control type="group">
-                <visible>[ListItem.IsParentFolder+
+                <visible>[StringCompare(ListItem.Label,..)+
                     ![Control.IsVisible(5050)|Control.IsVisible(53)|Control.IsVisible(57)|Control.IsVisible(58)|Control.IsVisible(59)]]|
-                    [[Control.IsVisible(50)|Control.IsVisible(51)|Control.IsVisible(52)|Control.IsVisible(54)|Control.IsVisible(55)|Control.IsVisible(56)]+String.IsEmpty(ListItem.Plot)+String.IsEmpty(ListItem.AddonDescription)]|
+                    [[Control.IsVisible(50)|Control.IsVisible(51)|Control.IsVisible(52)|Control.IsVisible(54)|Control.IsVisible(55)|Control.IsVisible(56)]+IsEmpty(ListItem.Plot)+IsEmpty(ListItem.Property(Addon.Description))]|
                     [control.hasfocus(60)+[Control.IsVisible(50)|Control.IsVisible(52)|Control.IsVisible(54)]]</visible>
                 <include>Icon_Fade</include>
                 <include>DetatchedThumb_50</include>
@@ -74,7 +73,6 @@
             <control type="group">
                 <animation effect="slide" tween="circle" easing="out" time="250" start="0,0" end="580,0" condition="[ControlGroup(9000).HasFocus()|Control.HasFocus(8999)]+!Skin.HasSetting(DisableSlidingAnimations)">conditional</animation>
                 <animation effect="slide" tween="circle" easing="out" time="250" start="0,0" end="-2090,0" condition="Control.HasFocus(505050)">conditional</animation>
-                <include condition="Skin.HasSetting(BlackGlassMode)+Skin.HasSetting(plexbmc)">PlexbmcFixTrick</include>
                 <include condition="Skin.HasSetting(BlackGlassMode)">View_50_BG</include>
                 <include condition="Skin.HasSetting(BlackGlassMode)">View_53_Grid</include>
                 <include condition="Skin.HasSetting(BlackGlassMode)">View_55_BigPanel_BG</include>
@@ -83,7 +81,7 @@
                 <include condition="Skin.HasSetting(BlackGlassMode)">Info_50_List_BG</include>
                 <!-- COMMON -->
                 <control type="group">
-                    <visible>[ListItem.IsParentFolder+![Control.IsVisible(5050)|Control.IsVisible(53)|Control.IsVisible(57)|Control.IsVisible(58)|Control.IsVisible(59)]]|[[Control.IsVisible(50)|Control.IsVisible(55)|Control.IsVisible(56)]+![!String.IsEmpty(ListItem.Plot)|!String.IsEmpty(ListItem.AddonDescription)]]</visible>
+                    <visible>[StringCompare(ListItem.Label,..)+![Control.IsVisible(5050)|Control.IsVisible(53)|Control.IsVisible(57)|Control.IsVisible(58)|Control.IsVisible(59)]]|[[Control.IsVisible(50)|Control.IsVisible(55)|Control.IsVisible(56)]+![!IsEmpty(ListItem.Plot)|!IsEmpty(ListItem.Property(Addon.Description))]]</visible>
                     <include>Icon_Fade</include>
                     <include>DetatchedThumb_50_BG</include>
                     <include>DetatchedThumb_55_BG</include>
@@ -142,18 +140,15 @@
                     <include>LeftMenuButton</include>
                     <label>$LOCALIZE[13319]</label>
                 </control>
-                <control type="edit" id="19">
+                <control type="button" id="19">
                     <visible>Container.CanFilter + !Container.CanFilterAdvanced</visible>
-                    <description>Filter</description>
-                    <textwidth>520</textwidth>
                     <include>LeftMenuButton</include>
-                    <label>587</label>
+                    <label>$LOCALIZE[137]</label>
                 </control>
-                <control type="radiobutton" id="20">
+                <control type="button" id="199">
                     <visible>Container.CanFilterAdvanced</visible>
-                    <description>Filter</description>
                     <include>LeftMenuButton</include>
-                    <label>587</label>
+                    <label>$LOCALIZE[587]</label>
                     <onclick>right</onclick>
                     <onclick>Filter</onclick>
                 </control>

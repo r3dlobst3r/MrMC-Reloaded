@@ -2,6 +2,7 @@
 <window type="dialog">
     <defaultcontrol always="true">9000</defaultcontrol>
     <include>DialogOpenClose</include>
+    <zorder>10</zorder>
     <controls>
         <include>DimBG</include>
         <control type="group">
@@ -10,7 +11,7 @@
                 <!-- default group -->
                 <visible>![Window.IsVisible(script-ExtendedInfo Script-DialogInfo.xml)|Window.IsVisible(script-script.extendedinfo-DialogInfo.xml)]</visible>
                 <posy>-4</posy>
-                <include content="WindowClosingButton">
+                <include name="WindowClosingButton">
                     <param name="id" value="0"/>
                     <param name="x" value="1737"/>
                     <param name="y" value="21"/>
@@ -23,7 +24,7 @@
                     <texture border="84">common/bg_dialog.png</texture>
                 </control>
                 <control type="label">
-                    <animation effect="slide" start="0,0" end="0,-12" time="0" condition="!String.IsEmpty(ListItem.EpisodeName)">Conditional</animation>
+                    <animation effect="slide" start="0,0" end="0,-12" time="0" condition="!IsEmpty(ListItem.EpisodeName)">Conditional</animation>
                     <posx>223</posx>
                     <posy>104</posy>
                     <width>1474</width>
@@ -183,7 +184,7 @@
                     </control>
                     <control type="button" id="6">
                         <description>Record</description>
-                        <label></label>
+                        <label>-</label>
                         <visible>Window.IsActive(PVRGuideInfo)</visible>
                         <include>RightDialogButton</include>
                     </control>

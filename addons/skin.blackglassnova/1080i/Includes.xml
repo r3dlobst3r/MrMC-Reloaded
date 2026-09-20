@@ -4,28 +4,24 @@
 
     CUSTOM WINDOWS LIST
     _1114 Quit * define Quit menu
-    _1115 CustomPlexHomeSettings.xml * Plex Items Settings
     _1118 Custom_FullscreenMusic * start fullscreen audio playback
     _1119 CustomAddons * browse addons united under the same roof
     _1120 CustomStartupWindow.xml * define startup window
 
    -->
+
     <include file="Includes_Variables.xml"/>
     <include file="Includes_Codec.xml"/>
     <include file="Includes_CustomColors.xml"/>
     <include file="Includes_PVR.xml"/>
     <include file="Includes_Animations.xml"/>
     <include file="Includes_Expressions.xml"/>
-    <include file="Includes_DialogSelect.xml"/>
     <include file="defaults.xml"/>
     <include file="Includes_Home_Common.xml"/>
-    <include file="Includes_Home_Common_Plexbmc.xml"/>
     <include file="Includes_Horizontal_Home.xml"/>
     <include file="Includes_Horizontal_Home_BG.xml"/>
     <include file="Includes_Vertical_Home.xml"/>
-    <include file="Includes_Shelf_Plexbmc_Contents.xml"/>
     <include file="Includes_Weather.xml"/>
-    <include file="Includes_SkinShortcuts.xml"/>
     <include file="View_50.xml"/>
     <include file="View_50_BG.xml"/>
     <include file="View_51_Panel.xml"/>
@@ -50,7 +46,7 @@
             <texture>common/BlackDot.png</texture>
         </control>
         <control type="multiimage">
-            <visible>[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)] + Skin.HasSetting(MusicPlayingFanart) + !String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow))</visible>
+            <visible>[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)] + Skin.HasSetting(MusicPlayingFanart) + !IsEmpty(Window(Visualisation).Property(ArtistSlideshow))</visible>
             <include>KenBurns</include>
             <include>Dimensions_Fullscreen</include>
             <imagepath background="true">$INFO[Window(Visualisation).Property(ArtistSlideshow)]</imagepath>
@@ -62,7 +58,7 @@
             <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
         </control>
         <control type="image">
-            <visible>[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)] + Skin.HasSetting(MusicPlayingFanart) + String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow))</visible>
+            <visible>[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)] + Skin.HasSetting(MusicPlayingFanart) + IsEmpty(Window(Visualisation).Property(ArtistSlideshow))</visible>
             <include>Dimensions_Fullscreen</include>
             <include>KenBurns</include>
             <fadetime>400</fadetime>
@@ -72,7 +68,7 @@
             <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
         </control>
         <control type="visualisation">
-            <visible>[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)]</visible>
+            <visible>[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))] + [Skin.HasSetting(Show_Player)|window.isactive(visualisation)]</visible>
             <posx>0</posx>
             <posy>0</posy>
             <width>1920</width>
@@ -91,9 +87,9 @@
         <posy>-30</posy>
         <width>1</width>
         <height>1</height>
-        <label></label>
-        <texturenofocus></texturenofocus>
-        <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]"></texturefocus>
+        <label>-</label>
+        <texturenofocus>-</texturenofocus>
+        <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">-</texturefocus>
         <texturenofocus>common/WhiteDotT.png</texturenofocus>
         <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">common/BlackDotT.png</texturefocus>
     </include>
@@ -115,8 +111,8 @@
     <include name="TopBarButton">
         <width>50</width>
         <height>50</height>
-        <font></font>
-        <label></label>
+        <font>-</font>
+        <label>-</label>
     </include>
     <include name="FakeTopBarButton">
         <width>5</width>
@@ -126,7 +122,7 @@
     <include name="TopBar">
         <control type="button" id="8998">
             <description>Fake button for mouse control</description>
-            <animation type="Conditional" reversible="true" condition="$EXP[PlayingNowIsVisible]">
+            <animation type="Conditional" reversible="true" condition="[Control.IsVisible(495678)]">
                 <effect type="slide" start="0,0" end="0,60" time="150" delay="0" tween="circle" easing="inout"/>
             </animation>
             <posx>295</posx>
@@ -215,6 +211,7 @@
                     <onclick>PlayerControl(Next)</onclick>
                 </control>
                 <control type="button" id="1616">
+                    <visible>!System.Platform.IOS + !System.Platform.TVOS</visible>
                     <visible>!Player.Muted</visible>
                     <include>TopBarButton</include>
                     <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_volume_mute_focus.png</texturefocus>
@@ -222,6 +219,7 @@
                     <onclick>Mute</onclick>
                 </control>
                 <control type="button" id="16161">
+                    <visible>!System.Platform.IOS + !System.Platform.TVOS</visible>
                     <visible>Player.Muted</visible>
                     <include>TopBarButton</include>
                     <texturefocus colordiffuse="red">topbar/topbar_volume_mute_focus.png</texturefocus>
@@ -229,12 +227,14 @@
                     <onclick>Mute</onclick>
                 </control>
                 <control type="button" id="1618">
+                    <visible>!System.Platform.IOS + !System.Platform.TVOS</visible>
                     <include>TopBarButton</include>
                     <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_volume_down_focus.png</texturefocus>
                     <texturenofocus>topbar/topbar_volume_down_nofocus.png</texturenofocus>
                     <onclick>VolumeDown</onclick>
                 </control>
                 <control type="button" id="1620">
+                    <visible>!System.Platform.IOS + !System.Platform.TVOS</visible>
                     <include>TopBarButton</include>
                     <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_volume_up_focus.png</texturefocus>
                     <texturenofocus>topbar/topbar_volume_up_nofocus.png</texturenofocus>
@@ -254,6 +254,7 @@
                     <onclick>ActivateWindow(Settings,return)</onclick>
                 </control>
                 <control type="button" id="1626">
+                    <visible>!System.Platform.IOS + !System.Platform.TVOS</visible>
                     <include>TopBarButton</include>
                     <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_shutdown_focus.png</texturefocus>
                     <texturenofocus>topbar/topbar_shutdown_nofocus.png</texturenofocus>
@@ -268,7 +269,7 @@
                 <texture border="3">list/bg_facade_nofocus_top.png</texture>
             </control>
             <control type="image">
-                <visible>$EXP[TopBarHasFocus]</visible>
+                <visible>[ControlGroup(9900).HasFocus()|Control.HasFocus(8998)]</visible>
                 <include>VisibleFadeEffect</include>
                 <posx>-80</posx>
                 <posy>60</posy>
@@ -316,7 +317,7 @@
             <control type="group">
                 <visible>!Window.isvisible(DialogVideoInfo.xml)</visible>
                 <include>HeaderSlideEffectTopBar</include>
-                <visible>$EXP[TopBarHasFocus]</visible>
+                <visible>[ControlGroup(9900).HasFocus()|Control.HasFocus(8998)]</visible>
                 <include>VisibleFadeEffect</include>
                 <posy>-60</posy>
                 <control type="image">
@@ -346,7 +347,7 @@
                 <aligny>top</aligny>
                 <font>WindowTitleFont</font>
                 <textcolor>WindowTitleColor</textcolor>
-                <shadowcolor></shadowcolor>
+                <shadowcolor>-</shadowcolor>
                 <label>$INFO[System.Time]</label>
             </control>
             <control type="label">
@@ -362,7 +363,7 @@
                 <aligny>top</aligny>
                 <font>WindowTitleSubFont</font>
                 <textcolor>WindowTitleSubColor</textcolor>
-                <shadowcolor></shadowcolor>
+                <shadowcolor>-</shadowcolor>
                 <label>$INFO[System.Date]</label>
             </control>
             <control type="image">
@@ -377,22 +378,12 @@
                 <visible>PVR.IsRecording</visible>
                 <animation effect="fade" start="65" time="3000" condition="true" pulse="true">Conditional</animation>
             </control>
-            <control type="image">
-                <visible>Player.Muted</visible>
-                <include>VisibleFadeEffect</include>
-                <posx>1881</posx>
-                <posy>-25</posy>
-                <width>64</width>
-                <height>64</height>
-                <texture>VolumeMuted.png</texture>
-                <animation effect="fade" start="65" time="3000" condition="true" pulse="true">Conditional</animation>
-                <animation effect="zoom" start="100" end="70" time="100" center="auto" condition="Pvr.IsRecording">Conditional</animation>
-            </control>
         </control>
     </include>
     <include name="NowPlaying">
         <control type="group">
-            <include>PlexbmcFixTrick</include>
+            <!-- MrMC Reloaded: PlexbmcFixTrick is not defined; removed -->
+            <!--<include>PlexbmcFixTrick</include>-->
             <control type="button" id="505050">
                 <visible>[!Skin.HasSetting(BlackGlassMode)+!window.isactive(home)]|[Skin.HasSetting(BlackGlassMode)+!window.isactive(home)+!Skin.HasSetting(DisableFanart)]</visible>
                 <posx>1820</posx>
@@ -422,7 +413,7 @@
             </control>
             <include>TopBar</include>
             <control type="group" id="495678">
-                <visible>[[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))]|Player.HasVideo]+[window.isactive(AddonBrowser.xml)|window.isactive(FileManager.xml)|window.isactive(Home.xml)|window.isactive(MyMusicNav.xml)|window.isactive(MyMusicSongs.xml)|window.isactive(MyPics.xml)|window.isactive(MyPrograms.xml)|window.isactive(MyPVRChannels.xml)|window.isactive(MyPVRGuide.xml)|window.isactive(MyPVRRecordings.xml)|window.isactive(MyPVRSearch.xml)|window.isactive(MyPVRTimers.xml)|window.isactive(MyVideoNav.xml)|window.isactive(MyWeather.xml)|window.isactive(CustomAddons.xml)]</visible>
+                <visible>[[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))]|Player.HasVideo]+[window.isactive(AddonBrowser.xml)|window.isactive(FileManager.xml)|window.isactive(Home.xml)|window.isactive(MyMusicNav.xml)|window.isactive(MyMusicSongs.xml)|window.isactive(MyPics.xml)|window.isactive(MyPrograms.xml)|window.isactive(MyPVRChannels.xml)|window.isactive(MyPVRGuide.xml)|window.isactive(MyPVRRecordings.xml)|window.isactive(MyPVRSearch.xml)|window.isactive(MyPVRTimers.xml)|window.isactive(MyVideoNav.xml)|window.isactive(MyWeather.xml)|window.isactive(CustomAddons.xml)]</visible>
                 <animation effect="slide" tween="circle" easing="out" time="250" start="0,0" end="580,0" condition="[ControlGroup(9000).HasFocus()|Control.HasFocus(8999)]+Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">conditional</animation>
                 <animation effect="slide" start="0,-88" end="0,0" time="200">Visible</animation>
                 <animation effect="slide" start="0,0" end="0,-88" time="200">Hidden</animation>
@@ -435,7 +426,7 @@
                     <texture>common/bg_dialog.png</texture>
                 </control>
                 <control type="label">
-                    <visible>[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))]</visible>
+                    <visible>[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))]</visible>
                     <posx>360</posx>
                     <posy>0</posy>
                     <height>46</height>
@@ -447,7 +438,7 @@
                     <label>$INFO[MusicPlayer.Artist,,  •  ]$INFO[MusicPlayer.Title,[COLOR=AlternateColor],[/COLOR]]</label>
                 </control>
                 <control type="label">
-                    <visible>[Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))]</visible>
+                    <visible>[Player.HasAudio + IsEmpty(Window(videolibrary).Property(PlayingBackgroundMedia))]</visible>
                     <posx>1555</posx>
                     <posy>0</posy>
                     <height>46</height>
@@ -468,7 +459,7 @@
                     <align>left</align>
                     <font>NotificationFont</font>
                     <textcolor>MainColor</textcolor>
-                    <label>$INFO[VideoPlayer.ChannelNumberLabel,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
+                    <label>$INFO[VideoPlayer.ChannelNumber,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
                 </control>
                 <control type="label">
                     <visible>Player.hasvideo + !VideoPlayer.Content(livetv)</visible>
@@ -724,7 +715,7 @@
         <width>1200</width>
         <aligny>top</aligny>
         <font>WindowTitleFont</font>
-        <shadowcolor></shadowcolor>
+        <shadowcolor>-</shadowcolor>
         <textcolor>WindowTitleColor</textcolor>
     </include>
     <include name="WindowTitleSub">
@@ -736,7 +727,7 @@
         <aligny>top</aligny>
         <font>WindowTitleSubFont</font>
         <textcolor>WindowTitleSubColor</textcolor>
-        <shadowcolor></shadowcolor>
+        <shadowcolor>-</shadowcolor>
     </include>
     <include name="FacadeNumItems">
         <include>VisibleFadeEffect</include>
@@ -765,8 +756,8 @@
             <posy>0</posy>
             <width>627</width>
             <height>980</height>
-            <label></label>
-            <font></font>
+            <label>-</label>
+            <font>-</font>
             <include>HiddenButton</include>
             <visible>true</visible>
         </control>
@@ -819,6 +810,8 @@
         <width>578</width>
         <font>LeftMenuButtonFont</font>
         <align>left</align>
+        <spinposx>39</spinposx>
+        <radioposx>519</radioposx>
         <radioposx>505</radioposx>
         <textoffsetx>TextMargin</textoffsetx>
         <include>TextureFocus</include>
@@ -839,21 +832,21 @@
         <alttexturenofocus border="4">list/bg_facade_nofocus.png</alttexturenofocus>
     </include>
     <include name="VerticalScroller">
-        <texturesliderbackground></texturesliderbackground>
+        <texturesliderbackground>-</texturesliderbackground>
         <texturesliderbar border="0,31,0,31">buttons/Scrollbar_Vertical_NoFocus.png</texturesliderbar>
-        <texturesliderbarfocus border="0,31,0,31" colordiffuse="$VAR[Picked.Highlight.Color]">buttons/Scrollbar_Vertical_Focus.png</texturesliderbarfocus>
-        <textureslidernib></textureslidernib>
-        <textureslidernibfocus></textureslidernibfocus>
+        <texturesliderbarfocus border="0,31,0,31">buttons/Scrollbar_Vertical_Focus.png</texturesliderbarfocus>
+        <textureslidernib>-</textureslidernib>
+        <textureslidernibfocus>-</textureslidernibfocus>
         <showonepage>false</showonepage>
         <orientation>vertical</orientation>
         <width>42</width>
     </include>
     <include name="HorizontalScroller">
-        <texturesliderbackground></texturesliderbackground>
+        <texturesliderbackground>-</texturesliderbackground>
         <texturesliderbar border="31,0,31,0">buttons/Scrollbar_Horizontal_NoFocus.png</texturesliderbar>
-        <texturesliderbarfocus border="31,0,31,0" colordiffuse="$VAR[Picked.Highlight.Color]">buttons/Scrollbar_Horizontal_Focus.png</texturesliderbarfocus>
-        <textureslidernib></textureslidernib>
-        <textureslidernibfocus></textureslidernibfocus>
+        <texturesliderbarfocus border="31,0,31,0">buttons/Scrollbar_Horizontal_Focus.png</texturesliderbarfocus>
+        <textureslidernib>-</textureslidernib>
+        <textureslidernibfocus>-</textureslidernibfocus>
         <showonepage>false</showonepage>
         <orientation>horizontal</orientation>
         <height>42</height>
@@ -869,7 +862,7 @@
         <height>90</height>
         <align>center</align>
         <aligny>center</aligny>
-        <radioposx>215</radioposx>
+        <radioposx>229</radioposx>
         <font>ExtraSmallButtonFont</font>
         <textoffsetx>0</textoffsetx>
         <textcolor>AlternateColor</textcolor>
@@ -891,7 +884,7 @@
                 <texture border="3">list/bg_facade_nofocus.png</texture>
             </control>
             <control type="label">
-                <visible>!String.IsEqual(ListItem.Label,)</visible>
+                <visible>!StringCompare(ListItem.Label,)</visible>
                 <posx>TextMargin</posx>
                 <height>71</height>
                 <width>1041</width>
@@ -902,7 +895,7 @@
             </control>
             <control type="label">
                 <posx>645r</posx>
-                <visible>!String.IsEqual(ListItem.Label,) + [!String.IsEqual(ListItem.Label2,$LOCALIZE[106])+!String.IsEqual(ListItem.Label2,$LOCALIZE[107])]</visible>
+                <visible>!StringCompare(ListItem.Label,)</visible>
                 <height>71</height>
                 <width>600</width>
                 <align>right</align>
@@ -912,7 +905,7 @@
                 <scroll>false</scroll>
             </control>
             <control type="label">
-                <visible>String.IsEqual(ListItem.Label,)</visible>
+                <visible>StringCompare(ListItem.Label,)</visible>
                 <posx>TextMargin</posx>
                 <posy>10</posy>
                 <height>78</height>
@@ -921,24 +914,6 @@
                 <textcolor>AlternateColor</textcolor>
                 <label>$INFO[ListItem.Label2]</label>
                 <scroll>false</scroll>
-            </control>
-            <control type="image">
-                <visible>!String.IsEqual(ListItem.Label,) + String.IsEqual(ListItem.Label2,$LOCALIZE[106])</visible>
-                <posx>1128</posx>
-                <posy>0</posy>
-                <height>73</height>
-                <width>58</width>
-                <aspectratio align="right" aligny="center">keep</aspectratio>
-                <texture>buttons/RadioOffNF.png</texture>
-            </control>
-            <control type="image">
-                <visible>!String.IsEqual(ListItem.Label,) + String.IsEqual(ListItem.Label2,$LOCALIZE[107])</visible>
-                <posx>1128</posx>
-                <posy>0</posy>
-                <height>73</height>
-                <width>58</width>
-                <aspectratio align="right" aligny="center">keep</aspectratio>
-                <texture>buttons/RadioOnNF.png</texture>
             </control>
         </itemlayout>
         <focusedlayout width="1231" height="73">
@@ -950,7 +925,7 @@
                 <include>FacadeFocus</include>
             </control>
             <control type="label">
-                <visible>!String.IsEqual(ListItem.Label,)</visible>
+                <visible>!StringCompare(ListItem.Label,)</visible>
                 <posx>TextMargin</posx>
                 <height>71</height>
                 <width>1041</width>
@@ -960,7 +935,7 @@
             </control>
             <control type="label">
                 <posx>645r</posx>
-                <visible>!String.IsEqual(ListItem.Label,) + [!String.IsEqual(ListItem.Label2,$LOCALIZE[106])+!String.IsEqual(ListItem.Label2,$LOCALIZE[107])]</visible>
+                <visible>!StringCompare(ListItem.Label,)</visible>
                 <height>71</height>
                 <width>600</width>
                 <align>right</align>
@@ -969,7 +944,7 @@
                 <label>$INFO[ListItem.Label2]</label>
             </control>
             <control type="label">
-                <visible>String.IsEqual(ListItem.Label,)</visible>
+                <visible>StringCompare(ListItem.Label,)</visible>
                 <posx>TextMargin</posx>
                 <posy>10</posy>
                 <height>78</height>
@@ -977,24 +952,6 @@
                 <font>LeftMenuTitleFont</font>
                 <textcolor>MainColor</textcolor>
                 <label>$INFO[ListItem.Label2]</label>
-            </control>
-            <control type="image">
-                <visible>!String.IsEqual(ListItem.Label,) + String.IsEqual(ListItem.Label2,$LOCALIZE[106])</visible>
-                <posx>1128</posx>
-                <posy>0</posy>
-                <height>73</height>
-                <width>58</width>
-                <aspectratio align="right" aligny="center">keep</aspectratio>
-                <texture>buttons/RadioOffFO.png</texture>
-            </control>
-            <control type="image">
-                <visible>!String.IsEqual(ListItem.Label,) + String.IsEqual(ListItem.Label2,$LOCALIZE[107])</visible>
-                <posx>1128</posx>
-                <posy>0</posy>
-                <height>73</height>
-                <width>58</width>
-                <aspectratio align="right" aligny="center">keep</aspectratio>
-                <texture>buttons/RadioOnFO.png</texture>
             </control>
         </focusedlayout>
     </include>
@@ -1081,15 +1038,15 @@
     </include>
     <include name="OSDInfoPanel">
         <control type="group">
-            <visible>!Window.IsVisible(DialogPlayerProcessInfo.xml)</visible>
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
+            <posy>30</posy>
             <control type="group">
                 <!-- CLEAR ART / LOGO -->
                 <control type="image">
                     <visible>Skin.HasSetting(EnableClearArt)</visible>
                     <animation type="Conditional" pulse="true" reversible="false" condition="Skin.HasSetting(EnableClearLogo)+
-                    [!String.IsEmpty(Player.Art(clearlogo))|!String.IsEmpty(Player.Art(tvshow.clearlogo))]+
-                    [!String.IsEmpty(Player.Art(clearart))|!String.IsEmpty(Player.Art(tvshow.clearart))]">
+                    [!IsEmpty(Player.Art(clearlogo))|!IsEmpty(Player.Art(tvshow.clearlogo))]+
+                    [!IsEmpty(Player.Art(clearart))|!IsEmpty(Player.Art(tvshow.clearart))]">
                         <effect type="slide" start="0,0" end="0,0" time="1500" delay="3500"/>
                         <effect type="fade" start="100" end="0" time="500" delay="3000"/>
                     </animation>
@@ -1103,8 +1060,8 @@
                 <control type="image">
                     <visible>Skin.HasSetting(EnableClearLogo)</visible>
                     <animation type="Conditional" pulse="true" reversible="false" condition="Skin.HasSetting(EnableClearArt)+
-                    [!String.IsEmpty(Player.Art(clearlogo))|!String.IsEmpty(Player.Art(tvshow.clearlogo))]+
-                    [!String.IsEmpty(Player.Art(clearart))|!String.IsEmpty(Player.Art(tvshow.clearart))]">
+                    [!IsEmpty(Player.Art(clearlogo))|!IsEmpty(Player.Art(tvshow.clearlogo))]+
+                    [!IsEmpty(Player.Art(clearart))|!IsEmpty(Player.Art(tvshow.clearart))]">
                         <effect type="slide" start="0,0" end="0,0" time="1500" delay="3500"/>
                         <effect type="fade" start="0" end="100" time="500" delay="3000"/>
                     </animation>
@@ -1118,7 +1075,7 @@
             </control>
             <control type="group">
                 <visible>![Player.ShowInfo + VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)]</visible>
-                <include content="WindowClosingButton">
+                <include name="WindowClosingButton">
                     <param name="id" value="9001"/>
                     <param name="x" value="1637"/>
                     <param name="y" value="479"/>
@@ -1154,8 +1111,8 @@
                 <texture>list/bg_facade_vertical.png</texture>
             </control>
             <!-- CDART VIDEO -->
-            <include content="DiscArt">
-                <param name="visible" value="!String.IsEmpty(VideoPlayer.Cover)+VideoPlayer.Content(movies)"/>
+            <include name="DiscArt">
+                <param name="visible" value="!IsEmpty(VideoPlayer.Cover)+VideoPlayer.Content(movies)"/>
                 <param name="x" value="147"/>
                 <param name="y" value="565"/>
                 <param name="width" value="356"/>
@@ -1182,7 +1139,7 @@
                     <width>930</width>
                     <font>InfoTitleFont</font>
                     <textcolor>MainColor</textcolor>
-                    <label>$INFO[VideoPlayer.ChannelNumberLabel,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
+                    <label>$INFO[VideoPlayer.ChannelNumber,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
                 </control>
                 <control type="label">
                     <visible>!VideoPlayer.Content(livetv)</visible>
@@ -1243,7 +1200,7 @@
     <include name="ScrollOffsetLabel">
         <!--<visible>Container.Scrolling</visible>-->
         <visible>Skin.HasSetting(ScrollOffsetLabelEnabled)</visible>
-        <visible>Container.Scrolling + [String.IsEqual(Container.SortMethod,$LOCALIZE[551]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561]) | String.IsEqual(Container.SortMethod,$LOCALIZE[558]) | String.IsEqual(Container.SortMethod,$LOCALIZE[557]) | String.IsEqual(Container.SortMethod,$LOCALIZE[556])]</visible>
+        <visible>Container.Scrolling + [StringCompare(Container.SortMethod,$LOCALIZE[551]) | StringCompare(Container.SortMethod,$LOCALIZE[561]) | StringCompare(Container.SortMethod,$LOCALIZE[558]) | StringCompare(Container.SortMethod,$LOCALIZE[557]) | StringCompare(Container.SortMethod,$LOCALIZE[556])]</visible>
         <include>Icon_Fade</include>
         <control type="image">
             <left>0</left>
@@ -1275,7 +1232,7 @@
             <texturenofocus>topbar/topbar_exit_nofocus.png</texturenofocus>
             <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_exit_focus.png</texturefocus>
             <onclick>back</onclick>
-            <label></label>
+            <label>-</label>
         </control>
     </include>
     <include name="ClearArtLogo">
@@ -1306,7 +1263,7 @@
     </include>
     <include name="DiscArt">
         <control type="group">
-            <visible>!Skin.HasSetting(plexbmc)+Skin.HasSetting(EnableCdArt)</visible>
+            <visible>Skin.HasSetting(EnableCdArt)</visible>
             <visible>$PARAM[visible]</visible>
             <include>VisibleFadeEffectDelay</include>
             <control type="image">
@@ -1322,7 +1279,7 @@
     </include>
     <include name="StudioArt">
         <control type="group">
-            <visible>!Skin.HasSetting(plexbmc)+Skin.HasSetting(EnableStudioArt)</visible>
+            <visible>Skin.HasSetting(EnableStudioArt)</visible>
             <control type="image">
                 <animation effect="slide" start="0,0" end="1,1" time="0" reversible="false" condition="true">Conditional</animation>
                 <visible>$PARAM[visible]</visible>
@@ -1355,10 +1312,10 @@
             <height>$PARAM[height]</height>
             <width>$PARAM[width]</width>
             <texturebg border="$PARAM[borderbg]" colordiffuse="$PARAM[coldiffbg]">$PARAM[texturebg]</texturebg>
-            <lefttexture></lefttexture>
+            <lefttexture>-</lefttexture>
             <midtexture border="$PARAM[border]">$PARAM[gfx]</midtexture>
-            <righttexture></righttexture>
-            <overlaytexture></overlaytexture>
+            <righttexture>-</righttexture>
+            <overlaytexture>-</overlaytexture>
             <info>$PARAM[info]</info>
             <colordiffuse>$PARAM[colordiffuse]</colordiffuse>
             <reveal>$PARAM[reveal]</reveal>

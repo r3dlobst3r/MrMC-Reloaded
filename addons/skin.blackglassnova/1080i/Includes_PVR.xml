@@ -1,33 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <includes>
-    <include name="PVRChannelNumericInput">
-        <control type="group">
-            <visible>!String.IsEmpty(PVR.ChannelNumberInput)</visible>
-            <include>VisibleFadeEffect</include>
-            <control type="image">
-                <centerleft>50%</centerleft>
-                <centertop>50%</centertop>
-                <width>190</width>
-                <height>100</height>
-                <texture border="45">buttons/bg_button_focus_white.png</texture>
-            </control>
-            <control type="label">
-                <posx>0</posx>
-                <posy>0</posy>
-                <height>1080</height>
-                <width>1920</width>
-                <align>center</align>
-                <font>InfoTitleFont</font>
-                <textcolor>MainColor</textcolor>
-                <label>[B]$INFO[PVR.ChannelNumberInput][/B]</label>
-            </control>
-        </control>
-    </include>
     <include name="PVROSDChannelListSmall">
         <control type="group">
-            <posy>30</posy>
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="9001"/>
                 <param name="x" value="1635"/>
                 <param name="y" value="487"/>
@@ -92,7 +68,7 @@
                         <width>1364</width>
                         <texture border="3">list/bg_facade_nofocus.png</texture>
                     </control>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="!ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -108,7 +84,7 @@
                         <param name="info" value="ListItem.Progress"/>
                         <param name="reveal" value="true"/>
                     </include>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -192,7 +168,7 @@
                         <width>1364</width>
                         <include>FacadeFocus</include>
                     </control>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="!ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -208,7 +184,7 @@
                         <param name="info" value="ListItem.Progress"/>
                         <param name="reveal" value="true"/>
                     </include>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -293,13 +269,12 @@
                 <onright>NextChannelGroup</onright>
             </control>
         </control>
-        <include>PVRChannelNumericInput</include>
     </include>
     <include name="PVROSDChannelListBig">
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
-            <posy>-420</posy>
-            <include content="WindowClosingButton">
+            <posy>-450</posy>
+            <include name="WindowClosingButton">
                 <param name="id" value="9001"/>
                 <param name="x" value="1635"/>
                 <param name="y" value="487"/>
@@ -364,7 +339,7 @@
                         <width>1364</width>
                         <texture border="3">list/bg_facade_nofocus.png</texture>
                     </control>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="!ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -380,7 +355,7 @@
                         <param name="info" value="ListItem.Progress"/>
                         <param name="reveal" value="true"/>
                     </include>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -464,7 +439,7 @@
                         <width>1364</width>
                         <include>FacadeFocus</include>
                     </control>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="!ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -480,7 +455,7 @@
                         <param name="info" value="ListItem.Progress"/>
                         <param name="reveal" value="true"/>
                     </include>
-                    <include content="ProgressBar">
+                    <include name="ProgressBar">
                         <param name="id" value="0"/>
                         <param name="visible" value="ListItem.IsRecording"/>
                         <param name="x" value="0"/>
@@ -565,12 +540,11 @@
                 <onright>NextChannelGroup</onright>
             </control>
         </control>
-        <include>PVRChannelNumericInput</include>
     </include>
     <include name="PVROSDChannelListSmallGuide">
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="9001"/>
                 <param name="x" value="1635"/>
                 <param name="y" value="487"/>
@@ -590,7 +564,7 @@
                 <texture border="3">list/bg_facade_nofocus_top.png</texture>
             </control>
             <control type="label">
-                <visible>!String.IsEmpty(Container(11).ListItem.StartDate)</visible>
+                <visible>!IsEmpty(Container(11).ListItem.StartDate)</visible>
                 <posx>381</posx>
                 <posy>562</posy>
                 <height>36</height>
@@ -600,7 +574,7 @@
                 <label>[B]$INFO[VideoPlayer.ChannelNumberLabel,,  •  ]$INFO[VideoPlayer.ChannelName][/B]  •  $INFO[Container(11).ListItem.StartDate]</label>
             </control>
             <control type="label">
-                <visible>String.IsEmpty(Container(11).ListItem.StartDate)</visible>
+                <visible>IsEmpty(Container(11).ListItem.StartDate)</visible>
                 <posx>381</posx>
                 <posy>562</posy>
                 <height>36</height>
@@ -763,7 +737,7 @@
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <posy>-450</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1635"/>
                 <param name="y" value="487"/>
@@ -783,7 +757,7 @@
                 <texture border="3">list/bg_facade_nofocus_top.png</texture>
             </control>
             <control type="label">
-                <visible>!String.IsEmpty(Container(11).ListItem.StartDate)</visible>
+                <visible>!IsEmpty(Container(11).ListItem.StartDate)</visible>
                 <posx>381</posx>
                 <posy>562</posy>
                 <height>36</height>
@@ -793,7 +767,7 @@
                 <label>[B]$INFO[VideoPlayer.ChannelNumberLabel,,  •  ]$INFO[VideoPlayer.ChannelName][/B]  •  $INFO[Container(11).ListItem.StartDate]</label>
             </control>
             <control type="label">
-                <visible>String.IsEmpty(Container(11).ListItem.StartDate)</visible>
+                <visible>IsEmpty(Container(11).ListItem.StartDate)</visible>
                 <posx>381</posx>
                 <posy>562</posy>
                 <height>36</height>

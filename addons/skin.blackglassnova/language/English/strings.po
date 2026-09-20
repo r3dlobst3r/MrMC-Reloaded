@@ -53,7 +53,7 @@ msgid "Go Plex"
 msgstr ""
 
 msgctxt "#31009"
-msgid "Go Kodi"
+msgid "Go MrMC"
 msgstr ""
 
 msgctxt "#31010"
@@ -396,7 +396,17 @@ msgctxt "#31095"
 msgid "Card List"
 msgstr ""
 
-#empty strings from id 31096 to 31109
+#: /xml/VideoOSD.xml
+msgctxt "#31096"
+msgid "Toggle language"
+msgstr ""
+
+#: /xml/VideoOSD.xml
+msgctxt "#31097"
+msgid "Toggle audio stream"
+msgstr ""
+
+#empty strings from id 31098 to 31109
 
 msgctxt "#31110"
 msgid "Edit Background for Media Type"
@@ -765,13 +775,17 @@ msgctxt "#31910"
 msgid "Maps"
 msgstr ""
 
-#empty strings from id 31911 to 31916
+msgctxt "#31911"
+msgid "Display posters for shelf episodes"
+msgstr ""
+
+#empty strings from id 31912 to 31916
 
 msgctxt "#31917"
 msgid "Stop playback on return to menu"
 msgstr ""
 
-#empty strings from id 31918 to 31931
+#empty strings from id 31918 to 31930
 
 msgctxt "#31931"
 msgid "On Deck"

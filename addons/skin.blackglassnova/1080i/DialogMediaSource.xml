@@ -11,7 +11,7 @@
         <include>DimBG</include>
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1637"/>
                 <param name="y" value="240"/>
@@ -178,7 +178,7 @@
                 <aligny>center</aligny>
                 <texturefocus border="40">buttons/bg_button_text_focus.png</texturefocus>
                 <texturenofocus border="40">buttons/bg_button_text_nofocus.png</texturenofocus>
-                <label></label>
+                <label>-</label>
                 <onup>10</onup>
                 <onleft>12</onleft>
                 <onright>12</onright>

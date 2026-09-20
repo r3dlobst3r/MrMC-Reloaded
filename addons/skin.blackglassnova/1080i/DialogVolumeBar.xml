@@ -9,8 +9,8 @@
             <visible>!Player.Muted + !Player.passthrough</visible>
             <include>VisibleFadeEffect</include>
             <posx>735</posx>
-            <posy>435</posy>
-            <include content="WindowClosingButton">
+            <posy>665</posy>
+            <include name="WindowClosingButton">
                 <param name="id" value="9001"/>
                 <param name="x" value="400"/>
                 <param name="y" value="-36"/>
@@ -46,7 +46,7 @@
                 <textcolor>MainColor</textcolor>
                 <label>$LOCALIZE[13376]</label>
             </control>
-            <include content="ProgressBar">
+            <include name="ProgressBar">
                 <param name="id" value="20"/>
                 <param name="visible" value="true"/>
                 <param name="x" value="50"/>

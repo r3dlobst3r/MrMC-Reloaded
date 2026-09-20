@@ -8,7 +8,7 @@
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <posy>-10</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1867"/>
                 <param name="y" value="80"/>
@@ -75,7 +75,7 @@
                             <width>635</width>
                             <font>FacadeListMainFont</font>
                             <textcolor>ListNoFocusColor</textcolor>
-                            <label>$INFO[ListItem.Label2]: $INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.Property(AddonName)]: $INFO[ListItem.Property(Name)]</label>
                             <scroll>false</scroll>
                         </control>
                         <control type="label">
@@ -104,7 +104,7 @@
                             <width>635</width>
                             <font>FacadeListMainFont</font>
                             <textcolor>ListFocusColor</textcolor>
-                            <label>$INFO[ListItem.Label2]: $INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.Property(AddonName)]: $INFO[ListItem.Property(Name)]</label>
                         </control>
                         <control type="label">
                             <posx>30</posx>
@@ -178,7 +178,7 @@
                             <width>635</width>
                             <font>FacadeListMainFont</font>
                             <textcolor>ListNoFocusColor</textcolor>
-                            <label>$INFO[ListItem.Property(Number)] - $INFO[ListItem.Label2]: $INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.Property(Number)] - $INFO[ListItem.Property(AddonName)]: $INFO[ListItem.Property(Name)]</label>
                             <scroll>false</scroll>
                         </control>
                         <control type="label">
@@ -207,7 +207,7 @@
                             <width>635</width>
                             <font>FacadeListMainFont</font>
                             <textcolor>ListFocusColor</textcolor>
-                            <label>$INFO[ListItem.Property(Number)] - $INFO[ListItem.Label2]: $INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.Property(Number)] - $INFO[ListItem.Property(AddonName)]: $INFO[ListItem.Property(Name)]</label>
                         </control>
                         <control type="label">
                             <posx>30</posx>
@@ -304,6 +304,43 @@
                             <label>$INFO[ListItem.Label]</label>
                         </control>
                     </focusedlayout>
+                    <content>
+                        <item id="91">
+                            <label>$LOCALIZE[15057]</label>
+                            <label2>$LOCALIZE[15114]</label2>
+                            <visible>true</visible>
+                            <onclick>noop</onclick>
+                            <property name="currentMode">InputResampling</property>
+                        </item>
+                        <item id="92">
+                            <label>$LOCALIZE[15058]</label>
+                            <label2>$LOCALIZE[15113]</label2>
+                            <visible>true</visible>
+                            <onclick>noop</onclick>
+                            <property name="currentMode">Preprocessing</property>
+                        </item>
+                        <item id="93">
+                            <label>$LOCALIZE[15059]</label>
+                            <label2>$LOCALIZE[15115]</label2>
+                            <visible>true</visible>
+                            <onclick>noop</onclick>
+                            <property name="currentMode">Masterprocessing</property>
+                        </item>
+                        <item id="94">
+                            <label>$LOCALIZE[15060]</label>
+                            <label2>$LOCALIZE[15117]</label2>
+                            <visible>true</visible>
+                            <onclick>noop</onclick>
+                            <property name="currentMode">Postprocessing</property>
+                        </item>
+                        <item id="95">
+                            <label>$LOCALIZE[15061]</label>
+                            <label2>$LOCALIZE[15116]</label2>
+                            <visible>true</visible>
+                            <onclick>noop</onclick>
+                            <property name="currentMode">OutputResampling</property>
+                        </item>
+                    </content>
                 </control>
                 <control type="scrollbar" id="9060">
                     <posx>402</posx>
@@ -344,7 +381,7 @@
                     <control type="radiobutton" id="22">
                         <description>Default RadioButton</description>
                         <label>15064</label>
-                        <radioposx>332</radioposx>
+                        <radioposx>346</radioposx>
                         <textwidth>272</textwidth>
                         <width>433</width>
                         <include>LeftMenuButton</include>

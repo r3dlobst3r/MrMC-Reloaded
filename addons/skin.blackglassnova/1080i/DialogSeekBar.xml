@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window type="dialog">
-    <visible>!Window.IsVisible(DialogPlayerProcessInfo.xml)</visible>
     <visible>![Skin.HasSetting(DisableOSDInfoOnPause)+Player.Paused]|Window.IsVisible(VideoOSD.xml)</visible>
-    <visible>![Window.IsVisible(SliderDialog) | Window.IsVisible(OSDVideoSettings) | Window.IsVisible(OSDAudioSettings) | Window.IsVisible(VideoBookmarks) | Window.IsActive(script-XBMC-Subtitles-main.xml)]</visible>
-    <visible>Window.IsActive(DialogFullScreenInfo.xml) | Window.IsActive(VideoOSD.xml) | [Window.IsVisible(FullScreenVideo) + !System.IdleTime(20) + [Player.Seeking | Player.DisplayAfterSeek | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | !String.IsEmpty(PVR.ChannelNumberInput)]]</visible>
+    <visible>![Window.IsVisible(SliderDialog) | Window.IsVisible(OSDVideoSettings) | Window.IsVisible(OSDAudioSettings) | Window.IsVisible(VideoBookmarks) | Window.IsActive(DialogSubtitles.xml) | Window.IsActive(DialogSelect.xml) | Window.IsActive(MyVideoPlaylist.xml) | Window.IsActive(Settings.xml) | Window.IsActive(DialogButtonMenu.xml)]</visible>
+    <visible>[Window.IsActive(Custom_1102_OsdSettings.xml) | Window.IsActive(Custom_1101_SettingsList.xml) | Window.IsActive(OSDSettings.xml) | Window.IsActive(DialogFullScreenInfo.xml) | Window.IsActive(VideoOSD.xml) | [Window.IsVisible(FullScreenVideo) + [Player.Caching | Player.Seeking | player.forwarding | player.rewinding | Player.DisplayAfterSeek | Player.Paused]]]</visible>
     <include>OSDFade</include>
-    <zorder>3</zorder>
+    <zorder>0</zorder>
+    <onunload>Dialog.Close(osdsettings)</onunload>
     <controls>
         <control type="image">
-            <visible>Window.IsActive(VideoOSD.xml)</visible>
+            <visible>Window.IsActive(VideoOSD.xml) | Window.IsActive(Custom_1102_OsdSettings.xml) | Window.IsActive(Custom_1101_SettingsList.xml) | Window.IsActive(OSDSettings.xml) </visible>
             <include>VisibleFadeEffect</include>
             <posx>-150</posx>
             <posy>-3</posy>
             <texture>common/basichome_upper_gradient.png</texture>
             <width>2220</width>
-            <height>440</height>
+            <height>540</height>
         </control>
         <control type="image">
-            <visible>Window.IsActive(VideoOSD.xml)</visible>
+            <visible>Window.IsActive(VideoOSD.xml) | Window.IsActive(Custom_1102_OsdSettings.xml) | Window.IsActive(Custom_1101_SettingsList.xml) | Window.IsActive(OSDSettings.xml) </visible>
             <include>VisibleFadeEffect</include>
             <posx>-150</posx>
             <posy>-3</posy>
             <texture>common/basichome_upper_gradient.png</texture>
             <width>2220</width>
-            <height>440</height>
+            <height>540</height>
         </control>
         <control type="image">
             <posx>-15</posx>
@@ -47,19 +47,19 @@
             <visible>VideoPlayer.Content(livetv)</visible>
             <posx>64</posx>
             <posy>0</posy>
-            <width>1370</width>
+            <width>1270</width>
             <height>52</height>
             <align>left</align>
             <aligny>center</aligny>
             <font>OSDFont</font>
             <shadowcolor>ShadowColor</shadowcolor>
-            <label>$INFO[VideoPlayer.ChannelNumberLabel,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
+            <label>$INFO[VideoPlayer.ChannelNumber,,  •  ]$INFO[VideoPlayer.ChannelName]$INFO[VideoPlayer.Title,  •  ]</label>
         </control>
         <control type="label">
             <visible>!VideoPlayer.Content(livetv)</visible>
             <posx>64</posx>
             <posy>0</posy>
-            <width>1370</width>
+            <width>1270</width>
             <height>52</height>
             <align>left</align>
             <aligny>center</aligny>
@@ -103,7 +103,7 @@
             <label></label>
         </control>
         <control type="group">
-            <visible>Window.IsActive(DialogFullScreenInfo.xml) | [Player.Seeking | Player.DisplayAfterSeek | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | !String.IsEmpty(PVR.ChannelNumberInput) | Window.IsActive(videoosd.xml)]</visible>
+            <!--<visible>Window.IsActive(DialogFullScreenInfo.xml) | Window.IsActive(Custom_1102_OsdSettings.xml) | Window.IsActive(Custom_1101_SettingsList.xml) | [Player.Seeking | Player.DisplayAfterSeek | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Window.IsActive(videoosd.xml)]</visible>-->
             <include>OSDVisibleFadeEffect</include>
             <posy>0</posy>
             <control type="image">
@@ -113,7 +113,7 @@
                 <height>54</height>
                 <texture border="3">OSD/osd_progress_background.png</texture>
             </control>
-            <include content="ProgressBar">
+            <include name="ProgressBar">
                 <param name="id" value="0"/>
                 <param name="visible" value="Player.Caching"/>
                 <param name="x" value="0"/>
@@ -129,7 +129,7 @@
                 <param name="info" value="Player.CacheLevel"/>
                 <param name="reveal" value="false"/>
             </include>
-            <include content="ProgressBar">
+            <include name="ProgressBar">
                 <param name="id" value="0"/>
                 <param name="visible" value="!Player.ChannelPreviewActive"/>
                 <param name="x" value="0"/>
@@ -145,7 +145,7 @@
                 <param name="info" value="Player.ProgressCache"/>
                 <param name="reveal" value="false"/>
             </include>
-            <include content="ProgressBar">
+            <include name="ProgressBar">
                 <param name="id" value="23"/>
                 <param name="visible" value="true"/>
                 <param name="x" value="0"/>
@@ -161,7 +161,7 @@
                 <param name="info" value="Player.Progress"/>
                 <param name="reveal" value="false"/>
             </include>
-            <include content="ProgressBar">
+            <include name="ProgressBar">
                 <param name="id" value="0"/>
                 <param name="visible" value="PVR.IsTimeShift + !Player.ChannelPreviewActive"/>
                 <param name="x" value="0"/>
@@ -263,6 +263,7 @@
             <animation effect="slide" start="0,0" end="0,70" time="100" condition="window.IsActive(VideoOSD.xml)+window.IsActive(DialogFullScreenInfo.xml)">conditional</animation>
             <visible>!Skin.HasSetting(DisablePauseIconOSD)</visible>
             <visible>!Player.Caching</visible>
+            <visible>!Window.IsVisible(DialogSubtitles.xml)</visible>
             <include>OSDVisibleFadeEffect</include>
             <posy>0</posy>
             <control type="image">
@@ -299,6 +300,5 @@
             <include>OSDVisibleFadeEffect</include>
             <include>OSDInfoPanel</include>
         </control>
-        <include>PVRChannelNumericInput</include>
     </controls>
 </window>

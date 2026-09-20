@@ -180,20 +180,20 @@
         <texturenofocus border="27">common/JewelCase.png</texturenofocus>
         <onclick>noop</onclick>
     </include>
-    <include name="WidgetPlex">
-        <control type="group" id="401$PARAM[id]">
-            <animation effect="slide" tween="circle" time="150" start="0,0" end="0,400" reversible="true" condition="$EXP[HomeWidgetSelectorHasFocus]|ControlGroup(401$PARAM[id]).HasFocus">Conditional</animation>
-            <animation effect="fade" time="200" start="100" end="0" reversible="true" condition="![$EXP[HomeWidgetSelectorHasFocus]|ControlGroup(401$PARAM[id]).HasFocus]">Conditional</animation>
+    <include name="WidgetMrMC">
+        <control type="group" id="4$PARAM[id]">
+            <animation effect="slide" tween="circle" time="150" start="0,0" end="0,400" reversible="true" condition="[Control.hasfocus(701)|Control.hasfocus(7018)|Control.hasfocus(7019)|Control.hasfocus(7010)]|ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+            <animation effect="fade" time="200" start="100" end="0" reversible="true" condition="![[Control.hasfocus(701)|Control.hasfocus(7018)|Control.hasfocus(7019)|Control.hasfocus(7010)]|ControlGroup(4$PARAM[id]).HasFocus]">Conditional</animation>
             <control type="group">
                 <visible>Control.IsVisible($PARAM[id])</visible>
                 <control type="image">
-                    <visible>Integer.IsGreater(Container($PARAM[id]).NumItems,0)</visible>
+                    <visible>IntegerGreaterThan(Container($PARAM[id]).NumItems,0)</visible>
                     <visible>![
-                        String.IsEmpty(Container($PARAM[id]).ListItem.Property(Year))+
-                        String.IsEmpty(Container($PARAM[id]).ListItem.Property(Mpaa))+
-                        String.IsEmpty(Container($PARAM[id]).ListItem.Label2)+
-                        String.IsEmpty(Container($PARAM[id]).ListItem.Property(Genre))+
-                        String.IsEmpty(Container($PARAM[id]).ListItem.Property(SeasonEpisode))
+                        IsEmpty(Container($PARAM[id]).ListItem.Year)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Mpaa)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Label2)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Genre)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Episode)
                         ]</visible>
                     <posx>0</posx>
                     <posy>909</posy>
@@ -202,7 +202,7 @@
                     <texture border="3">list/bg_facade_nofocus_top.png</texture>
                 </control>
                 <control type="image">
-                    <visible>Integer.IsGreater(Container($PARAM[id]).NumItems,0)+!Skin.HasSetting(BlackGlassMode)</visible>
+                    <visible>IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Skin.HasSetting(BlackGlassMode)</visible>
                     <posx>0</posx>
                     <posy>999</posy>
                     <width>1920</width>
@@ -210,7 +210,7 @@
                     <texture border="3">list/bg_facade_nofocus_top.png</texture>
                 </control>
                 <control type="button">
-                    <visible>!Integer.IsGreater(Container($PARAM[id]).NumItems,0)</visible>
+                    <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)</visible>
                     <posx>0</posx>
                     <posy>50</posy>
                     <width>1920</width>
@@ -219,7 +219,7 @@
                 </control>
             </control>
             <control type="fixedlist" id="$PARAM[id]">
-                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(401$PARAM[id]).HasFocus">Conditional</animation>
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
                 <visible>Container(701).HasFocus($PARAM[id])</visible>
                 <onright>$PARAM[id]</onright>
                 <onup>9900</onup>
@@ -227,7 +227,6 @@
                 <onleft condition="Skin.HasSetting(VerticalHome)">701</onleft>
                 <onleft>$PARAM[id]</onleft>
                 <include>Widget_$PARAM[gfxType]</include>
-                <include>$PARAM[content]</include>
             </control>
             <control type="group">
                 <visible>Control.IsVisible($PARAM[id])</visible>
@@ -239,8 +238,8 @@
                 </control>
                 <control type="image">
                     <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
-                    <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(401$PARAM[id]).HasFocus">Conditional</animation>
-                    <visible>!Integer.IsGreater(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
+                    <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                    <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
                     <include>Widget_Empty_$PARAM[gfxType]</include>
                     <texture>defaultEmptyBig.png</texture>
                     <fadetime>300</fadetime>
@@ -313,27 +312,174 @@
             </control>
             <control type="button" id="$PARAM[id]">
                 <include>ListFocusAnimation</include>
-                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(401$PARAM[id]).HasFocus">Conditional</animation>
-                <visible>Integer.IsEqual(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
                 <onup>9900</onup>
                 <ondown>701</ondown>
                 <include>Widget_Empty_Border_$PARAM[gfxType]</include>
             </control>
             <control type="image">
                 <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
-                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(401$PARAM[id]).HasFocus">Conditional</animation>
-                <visible>Integer.IsEqual(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
                 <include>Widget_Empty_Reflection_$PARAM[gfxType]</include>
             </control>
         </control>
     </include>
-    <include name="Vertical_WidgetPlex">
-        <control type="group" id="401$PARAM[id]">
+    <include name="WidgetMrMCCustom">
+        <control type="group" id="4$PARAM[id]">
+            <animation effect="slide" tween="circle" time="150" start="0,0" end="0,400" reversible="true" condition="[Control.hasfocus(701)|Control.hasfocus(7018)|Control.hasfocus(7019)|Control.hasfocus(7010)]|ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+            <animation effect="fade" time="200" start="100" end="0" reversible="true" condition="![[Control.hasfocus(701)|Control.hasfocus(7018)|Control.hasfocus(7019)|Control.hasfocus(7010)]|ControlGroup(4$PARAM[id]).HasFocus]">Conditional</animation>
+            <control type="group">
+                <visible>Control.IsVisible($PARAM[id])</visible>
+                <control type="image">
+                    <visible>IntegerGreaterThan(Container($PARAM[id]).NumItems,0)</visible>
+                    <visible>![
+                        IsEmpty(Container($PARAM[id]).ListItem.Year)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Mpaa)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Label2)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Genre)+
+                        IsEmpty(Container($PARAM[id]).ListItem.Episode)
+                        ]</visible>
+                    <posx>0</posx>
+                    <posy>909</posy>
+                    <width>1920</width>
+                    <height>73</height>
+                    <texture border="3">list/bg_facade_nofocus_top.png</texture>
+                </control>
+                <control type="image">
+                    <visible>IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Skin.HasSetting(BlackGlassMode)</visible>
+                    <posx>0</posx>
+                    <posy>999</posy>
+                    <width>1920</width>
+                    <height>73</height>
+                    <texture border="3">list/bg_facade_nofocus_top.png</texture>
+                </control>
+                <control type="button">
+                    <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)</visible>
+                    <posx>0</posx>
+                    <posy>50</posy>
+                    <width>1920</width>
+                    <height>990</height>
+                    <include>HiddenButton</include>
+                </control>
+            </control>
+            <control type="fixedlist" id="$PARAM[id]">
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                <visible>Container(701).HasFocus($PARAM[id])</visible>
+                <onright>$PARAM[id]</onright>
+                <onup>9900</onup>
+                <ondown>701</ondown>
+                <onleft condition="Skin.HasSetting(VerticalHome)">701</onleft>
+                <onleft>$PARAM[id]</onleft>
+                <include>Widget_$PARAM[gfxType]</include>
+                <content limit="$PARAM[limit]" sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[target]" >$PARAM[content]</content>
+            </control>
+            <control type="group">
+                <visible>Control.IsVisible($PARAM[id])</visible>
+                <control type="image">
+                    <visible>Container($PARAM[id]).IsUpdating</visible>
+                    <animation effect="rotate" center="auto" start="360" end="0" time="1500" loop="true" tween="circle" easing="inout" condition="true">Conditional</animation>
+                    <include>Widget_Empty_$PARAM[gfxType]</include>
+                    <texture>OSD/loading.png</texture>
+                </control>
+                <control type="image">
+                    <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
+                    <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                    <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
+                    <include>Widget_Empty_$PARAM[gfxType]</include>
+                    <texture>defaultEmptyBig.png</texture>
+                    <fadetime>300</fadetime>
+                </control>
+                <control type="label">
+                    <posx>100</posx>
+                    <posy>925</posy>
+                    <width>1720</width>
+                    <height>45</height>
+                    <align>center</align>
+                    <font>InfoTitleFont</font>
+                    <textcolor>MainColor</textcolor>
+                    <shadowcolor>ShadowColor</shadowcolor>
+                    <label>$PARAM[labelTitle]</label>
+                </control>
+                <control type="label">
+                    <posx>30</posx>
+                    <posy>1010</posy>
+                    <height>33</height>
+                    <width>1120</width>
+                    <align>left</align>
+                    <font>InfoDetailsFont</font>
+                    <textcolor>AlternateColor</textcolor>
+                    <label>$PARAM[labelLeft]</label>
+                </control>
+                <control type="label">
+                    <posx>205</posx>
+                    <posy>1010</posy>
+                    <height>33</height>
+                    <width>1520</width>
+                    <align>center</align>
+                    <font>InfoDetailsFont</font>
+                    <textcolor>AlternateColor</textcolor>
+                    <label>$PARAM[labelCenter]</label>
+                </control>
+                <control type="group">
+                    <visible>$PARAM[visibilityLabelRight]</visible>
+                    <control type="image">
+                        <posx>1860</posx>
+                        <posy>1009</posy>
+                        <include>Stars</include>
+                    </control>
+                    <control type="label">
+                        <posx>1835</posx>
+                        <posy>1010</posy>
+                        <height>33</height>
+                        <width>1120</width>
+                        <align>right</align>
+                        <font>InfoDetailsFont</font>
+                        <textcolor>AlternateColor</textcolor>
+                        <label fallback="0.0">$PARAM[labelRight]</label>
+                    </control>
+                </control>
+                <control type="button">
+                    <posx>0</posx>
+                    <posy>50</posy>
+                    <width>830</width>
+                    <height>990</height>
+                    <include>HiddenButton</include>
+                    <onclick>Control.Move($PARAM[id],-1)</onclick>
+                </control>
+                <control type="button">
+                    <posx>1090</posx>
+                    <posy>50</posy>
+                    <width>830</width>
+                    <height>990</height>
+                    <include>HiddenButton</include>
+                    <onclick>Control.Move($PARAM[id],1)</onclick>
+                </control>
+            </control>
+            <control type="button" id="$PARAM[id]">
+                <include>ListFocusAnimation</include>
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
+                <onup>9900</onup>
+                <ondown>701</ondown>
+                <include>Widget_Empty_Border_$PARAM[gfxType]</include>
+            </control>
+            <control type="image">
+                <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
+                <animation effect="fade" time="200" start="100" end="75" reversible="true" condition="!ControlGroup(4$PARAM[id]).HasFocus">Conditional</animation>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)+Container(701).HasFocus($PARAM[id])</visible>
+                <include>Widget_Empty_Reflection_$PARAM[gfxType]</include>
+            </control>
+        </control>
+    </include>
+    <include name="Vertical_WidgetMrMC">
+        <control type="group" id="4$PARAM[id]">
             <include>OpenCloseVisible</include>
             <visible>$PARAM[visibility]</visible>
             <height>$PARAM[height]</height>
             <control type="image">
-                <visible>!Integer.IsEqual(Container($PARAM[id]).Numitems,0)</visible>
+                <visible>IntegerGreaterThan(Container($PARAM[id]).Numitems,0)</visible>
                 <posx>-50</posx>
                 <posy>$PARAM[gradientY]</posy>
                 <width>2020</width>
@@ -355,12 +501,11 @@
                 <onup>$PARAM[onup]</onup>
                 <ondown>$PARAM[ondown]</ondown>
                 <onleft>300</onleft>
-                <include content="Vertical_Widget_$PARAM[gfxType]">
+                <include name="Vertical_Widget_$PARAM[gfxType]">
                     <param name="id" value="$PARAM[id]"/>
                     <param name="labelTitle" value="$PARAM[labelTitle]"/>
                     <param name="labelSubTitle" value="$PARAM[labelSubTitle]"/>
                 </include>
-                <include>$PARAM[content]</include>
             </control>
             <control type="image">
                 <visible>Container($PARAM[id]).IsUpdating</visible>
@@ -370,13 +515,69 @@
             </control>
             <control type="image">
                 <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
-                <visible>!Integer.IsGreater(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
                 <include>Vertical_Widget_Empty_$PARAM[gfxType]</include>
                 <texture>defaultEmptyBig.png</texture>
                 <fadetime>300</fadetime>
             </control>
             <control type="button" id="$PARAM[id]">
-                <visible>Integer.IsEqual(Container($PARAM[id]).Numitems,0)</visible>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)</visible>
+                <onup>$PARAM[onup]</onup>
+                <ondown>$PARAM[ondown]</ondown>
+                <include>Vertical_Widget_Empty_Border_$PARAM[gfxType]</include>
+            </control>
+        </control>
+    </include>
+    <include name="Vertical_WidgetMrMCCustom">
+        <control type="group" id="4$PARAM[id]">
+            <include>OpenCloseVisible</include>
+            <visible>$PARAM[visibility]</visible>
+            <height>$PARAM[height]</height>
+            <control type="image">
+                <visible>IntegerGreaterThan(Container($PARAM[id]).Numitems,0)</visible>
+                <posx>-50</posx>
+                <posy>$PARAM[gradientY]</posy>
+                <width>2020</width>
+                <height>400</height>
+                <texture>common/vertical_widget_gradient.png</texture>
+            </control>
+            <control type="label">
+                <posx>120</posx>
+                <posy>30</posy>
+                <height>40</height>
+                <width>1920</width>
+                <font>FacadeListMainFont</font>
+                <textcolor>MainColor</textcolor>
+                <scroll>false</scroll>
+                <label>$PARAM[title]</label>
+            </control>
+            <control type="list" id="$PARAM[id]">
+                <onright>$PARAM[onright]</onright>
+                <onup>$PARAM[onup]</onup>
+                <ondown>$PARAM[ondown]</ondown>
+                <onleft>300</onleft>
+                <include name="Vertical_Widget_$PARAM[gfxType]">
+                    <param name="id" value="$PARAM[id]"/>
+                    <param name="labelTitle" value="$PARAM[labelTitle]"/>
+                    <param name="labelSubTitle" value="$PARAM[labelSubTitle]"/>
+                </include>
+                <content limit="$PARAM[limit]" sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[target]" >$PARAM[content]</content>
+            </control>
+            <control type="image">
+                <visible>Container($PARAM[id]).IsUpdating</visible>
+                <animation effect="rotate" center="auto" start="360" end="0" time="1500" loop="true" tween="circle" easing="inout" condition="true">Conditional</animation>
+                <include>Vertical_Widget_Empty_$PARAM[gfxType]</include>
+                <texture>OSD/loading.png</texture>
+            </control>
+            <control type="image">
+                <animation effect="zoom" start="95,95" end="100,100" time="150" center="auto" tween="back" easing="out" reversible="false" condition="Control.HasFocus($PARAM[id])">Conditional</animation>
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).NumItems,0)+!Container($PARAM[id]).IsUpdating</visible>
+                <include>Vertical_Widget_Empty_$PARAM[gfxType]</include>
+                <texture>defaultEmptyBig.png</texture>
+                <fadetime>300</fadetime>
+            </control>
+            <control type="button" id="$PARAM[id]">
+                <visible>!IntegerGreaterThan(Container($PARAM[id]).Numitems,0)</visible>
                 <onup>$PARAM[onup]</onup>
                 <ondown>$PARAM[ondown]</ondown>
                 <include>Vertical_Widget_Empty_Border_$PARAM[gfxType]</include>
@@ -604,7 +805,7 @@
         <orientation>horizontal</orientation>
         <focusposition>2</focusposition>
         <movement>0</movement>
-        <preloaditems>4</preloaditems>
+        <!--<preloaditems>4</preloaditems>-->
         <itemlayout height="1050" width="384">
             <control type="group">
                 <posy>539</posy>
@@ -1013,7 +1214,7 @@
         <orientation>horizontal</orientation>
         <focusposition>2</focusposition>
         <movement>0</movement>
-        <preloaditems>4</preloaditems>
+        <!--<preloaditems>4</preloaditems>-->
         <itemlayout height="1050" width="384">
             <control type="group">
                 <posy>539</posy>
@@ -1203,1918 +1404,639 @@
     </include>
     <include name="ShelfIcons">
         <content>
-            <!--PLEX RECENTLY ADDED-->
-            <item id="212">
-                <visible>Skin.HasSetting(plexbmc) + Container(300).HasFocus(50)</visible>
+            <item id="8000">
+                <visible>Container(300).HasFocus(4)</visible>
                 <include>VisibleFadeEffect</include>
                 <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(212)</onclick>
-                <onup>SetFocus(212)</onup>
+                <onclick>SetFocus(8000)</onclick>
+                <onup>SetFocus(8000)</onup>
             </item>
-            <item id="311">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),movie)</visible>
+            <item id="8001">
+                <visible>Container(300).HasFocus(5)</visible>
                 <include>VisibleFadeEffect</include>
                 <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(311)</onclick>
-                <onup>SetFocus(311)</onup>
+                <onclick>SetFocus(8001)</onclick>
+                <onup>SetFocus(8001)</onup>
             </item>
-            <item id="411">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),show)</visible>
+            <item id="8002">
+                <visible>Container(300).HasFocus(6)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[132]  •  $LOCALIZE[31961]</label>
+                <onclick>SetFocus(8002)</onclick>
+                <onup>SetFocus(8002)</onup>
+            </item>
+            <item id="8003">
+                <visible>Container(300).HasFocus(13)</visible>
                 <include>VisibleFadeEffect</include>
                 <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(411)</onclick>
-                <onup>SetFocus(411)</onup>
-            </item>
-            <item id="511">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),artist)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(511)</onclick>
-                <onup>SetFocus(511)</onup>
-            </item>
-            <item id="900">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),photo)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(900)</onclick>
-                <onup>SetFocus(900)</onup>
-            </item>
-            <item id="901">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Label,$LOCALIZE[31010])</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31961]</label>
-                <onclick>SetFocus(901)</onclick>
-                <onup>SetFocus(901)</onup>
-            </item>
-            <!--PLEX RECENTLY VIEWED-->
-            <item id="312">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),movie)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31011]</label>
-                <onclick>SetFocus(312)</onclick>
-                <onup>SetFocus(312)</onup>
-            </item>
-            <item id="412">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),show)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31011]</label>
-                <onclick>SetFocus(412)</onclick>
-                <onup>SetFocus(412)</onup>
-            </item>
-            <!--PLEX RECENTLY VIEWED SHOWS-->
-            <item id="413">
-                <visible>Skin.HasSetting(plexbmc) + String.IsEqual(Container(300).ListItem.Property(type),show)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$LOCALIZE[31932]</label>
-                <onclick>SetFocus(413)</onclick>
-                <onup>SetFocus(413)</onup>
-            </item>
-
-            <!--CUSTOM WIDGETS-->
-
-            <!--WIDGET 1-->
-            <item id="700011">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(1)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700011)</onclick>
-                <onup>SetFocus(700011)</onup>
-            </item>
-            <item id="700012">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(2)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700012)</onclick>
-                <onup>SetFocus(700012)</onup>
-            </item>
-            <item id="700013">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(3)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700013)</onclick>
-                <onup>SetFocus(700013)</onup>
-            </item>
-            <item id="700014">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(4)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700014)</onclick>
-                <onup>SetFocus(700014)</onup>
-            </item>
-            <item id="700015">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(5)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700015)</onclick>
-                <onup>SetFocus(700015)</onup>
-            </item>
-            <item id="700016">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(6)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700016)</onclick>
-                <onup>SetFocus(700016)</onup>
-            </item>
-            <item id="700017">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(7)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700017)</onclick>
-                <onup>SetFocus(700017)</onup>
-            </item>
-            <item id="700018">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(8)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700018)</onclick>
-                <onup>SetFocus(700018)</onup>
-            </item>
-            <item id="700019">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(9)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(700019)</onclick>
-                <onup>SetFocus(700019)</onup>
-            </item>
-            <item id="7000110">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(10)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000110)</onclick>
-                <onup>SetFocus(7000110)</onup>
-            </item>
-            <item id="7000111">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(11)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000111)</onclick>
-                <onup>SetFocus(7000111)</onup>
-            </item>
-            <item id="7000112">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(12)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000112)</onclick>
-                <onup>SetFocus(7000112)</onup>
-            </item>
-            <item id="7000113">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(13)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000113)</onclick>
-                <onup>SetFocus(7000113)</onup>
-            </item>
-            <item id="7000114">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(14)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000114)</onclick>
-                <onup>SetFocus(7000114)</onup>
-            </item>
-            <item id="7000115">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(15)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000115)</onclick>
-                <onup>SetFocus(7000115)</onup>
-            </item>
-            <item id="7000116">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(16)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000116)</onclick>
-                <onup>SetFocus(7000116)</onup>
-            </item>
-            <item id="7000117">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(17)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000117)</onclick>
-                <onup>SetFocus(7000117)</onup>
-            </item>
-            <item id="7000118">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(18)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000118)</onclick>
-                <onup>SetFocus(7000118)</onup>
-            </item>
-            <item id="7000119">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(19)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000119)</onclick>
-                <onup>SetFocus(7000119)</onup>
-            </item>
-            <item id="7000120">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(20)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000120)</onclick>
-                <onup>SetFocus(7000120)</onup>
-            </item>
-            <item id="7000121">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(21)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000121)</onclick>
-                <onup>SetFocus(7000121)</onup>
-            </item>
-            <item id="7000122">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(22)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000122)</onclick>
-                <onup>SetFocus(7000122)</onup>
-            </item>
-            <item id="7000123">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(23)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000123)</onclick>
-                <onup>SetFocus(7000123)</onup>
-            </item>
-            <item id="7000124">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(24)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000124)</onclick>
-                <onup>SetFocus(7000124)</onup>
-            </item>
-            <item id="7000125">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(25)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000125)</onclick>
-                <onup>SetFocus(7000125)</onup>
-            </item>
-            <item id="7000126">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(26)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000126)</onclick>
-                <onup>SetFocus(7000126)</onup>
-            </item>
-            <item id="7000127">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(27)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000127)</onclick>
-                <onup>SetFocus(7000127)</onup>
-            </item>
-            <item id="7000128">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(28)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000128)</onclick>
-                <onup>SetFocus(7000128)</onup>
-            </item>
-            <item id="7000129">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(29)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000129)</onclick>
-                <onup>SetFocus(7000129)</onup>
-            </item>
-            <item id="7000130">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(30)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000130)</onclick>
-                <onup>SetFocus(7000130)</onup>
-            </item>
-            <item id="7000131">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(31)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000131)</onclick>
-                <onup>SetFocus(7000131)</onup>
-            </item>
-            <item id="7000132">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(32)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000132)</onclick>
-                <onup>SetFocus(7000132)</onup>
-            </item>
-            <item id="7000133">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(33)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000133)</onclick>
-                <onup>SetFocus(7000133)</onup>
-            </item>
-            <item id="7000134">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(34)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000134)</onclick>
-                <onup>SetFocus(7000134)</onup>
-            </item>
-            <item id="7000135">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(35)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000135)</onclick>
-                <onup>SetFocus(7000135)</onup>
-            </item>
-            <item id="7000136">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(36)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000136)</onclick>
-                <onup>SetFocus(7000136)</onup>
-            </item>
-            <item id="7000137">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(37)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000137)</onclick>
-                <onup>SetFocus(7000137)</onup>
-            </item>
-            <item id="7000138">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(38)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000138)</onclick>
-                <onup>SetFocus(7000138)</onup>
-            </item>
-            <item id="7000139">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(39)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000139)</onclick>
-                <onup>SetFocus(7000139)</onup>
-            </item>
-            <item id="7000140">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(40)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000140)</onclick>
-                <onup>SetFocus(7000140)</onup>
-            </item>
-            <item id="7000141">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(41)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000141)</onclick>
-                <onup>SetFocus(7000141)</onup>
-            </item>
-            <item id="7000142">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(42)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000142)</onclick>
-                <onup>SetFocus(7000142)</onup>
-            </item>
-            <item id="7000143">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(43)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000143)</onclick>
-                <onup>SetFocus(7000143)</onup>
-            </item>
-            <item id="7000144">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(44)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000144)</onclick>
-                <onup>SetFocus(7000144)</onup>
-            </item>
-            <item id="7000145">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(45)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000145)</onclick>
-                <onup>SetFocus(7000145)</onup>
-            </item>
-            <item id="7000146">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(46)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000146)</onclick>
-                <onup>SetFocus(7000146)</onup>
-            </item>
-            <item id="7000147">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(47)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000147)</onclick>
-                <onup>SetFocus(7000147)</onup>
-            </item>
-            <item id="7000148">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(48)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000148)</onclick>
-                <onup>SetFocus(7000148)</onup>
-            </item>
-            <item id="7000149">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetName))+Container(300).HasFocus(49)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetName)]</label>
-                <onclick>SetFocus(7000149)</onclick>
-                <onup>SetFocus(7000149)</onup>
-            </item>
-
-            <!--WIDGET 2-->
-            <item id="700021">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(1)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700021)</onclick>
-                <onup>SetFocus(700021)</onup>
-            </item>
-            <item id="700022">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(2)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700022)</onclick>
-                <onup>SetFocus(700022)</onup>
-            </item>
-            <item id="700023">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(3)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700023)</onclick>
-                <onup>SetFocus(700023)</onup>
-            </item>
-            <item id="700024">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(4)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700024)</onclick>
-                <onup>SetFocus(700024)</onup>
-            </item>
-            <item id="700025">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(5)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700025)</onclick>
-                <onup>SetFocus(700025)</onup>
-            </item>
-            <item id="700026">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(6)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700026)</onclick>
-                <onup>SetFocus(700026)</onup>
-            </item>
-            <item id="700027">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(7)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700027)</onclick>
-                <onup>SetFocus(700027)</onup>
-            </item>
-            <item id="700028">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(8)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700028)</onclick>
-                <onup>SetFocus(700028)</onup>
-            </item>
-            <item id="700029">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(9)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(700029)</onclick>
-                <onup>SetFocus(700029)</onup>
-            </item>
-            <item id="7000210">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(10)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000210)</onclick>
-                <onup>SetFocus(7000210)</onup>
-            </item>
-            <item id="7000211">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(11)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000211)</onclick>
-                <onup>SetFocus(7000211)</onup>
-            </item>
-            <item id="7000212">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(12)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000212)</onclick>
-                <onup>SetFocus(7000212)</onup>
-            </item>
-            <item id="7000213">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(13)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000213)</onclick>
-                <onup>SetFocus(7000213)</onup>
-            </item>
-            <item id="7000214">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(14)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000214)</onclick>
-                <onup>SetFocus(7000214)</onup>
-            </item>
-            <item id="7000215">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(15)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000215)</onclick>
-                <onup>SetFocus(7000215)</onup>
-            </item>
-            <item id="7000216">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(16)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000216)</onclick>
-                <onup>SetFocus(7000216)</onup>
-            </item>
-            <item id="7000217">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(17)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000217)</onclick>
-                <onup>SetFocus(7000217)</onup>
-            </item>
-            <item id="7000218">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(18)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000218)</onclick>
-                <onup>SetFocus(7000218)</onup>
-            </item>
-            <item id="7000219">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(19)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000219)</onclick>
-                <onup>SetFocus(7000219)</onup>
-            </item>
-            <item id="7000220">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(20)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000220)</onclick>
-                <onup>SetFocus(7000220)</onup>
-            </item>
-            <item id="7000221">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(21)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000221)</onclick>
-                <onup>SetFocus(7000221)</onup>
-            </item>
-            <item id="7000222">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(22)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000222)</onclick>
-                <onup>SetFocus(7000222)</onup>
-            </item>
-            <item id="7000223">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(23)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000223)</onclick>
-                <onup>SetFocus(7000223)</onup>
-            </item>
-            <item id="7000224">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(24)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000224)</onclick>
-                <onup>SetFocus(7000224)</onup>
-            </item>
-            <item id="7000225">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(25)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000225)</onclick>
-                <onup>SetFocus(7000225)</onup>
-            </item>
-            <item id="7000226">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(26)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000226)</onclick>
-                <onup>SetFocus(7000226)</onup>
-            </item>
-            <item id="7000227">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(27)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000227)</onclick>
-                <onup>SetFocus(7000227)</onup>
-            </item>
-            <item id="7000228">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(28)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000228)</onclick>
-                <onup>SetFocus(7000228)</onup>
-            </item>
-            <item id="7000229">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(29)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000229)</onclick>
-                <onup>SetFocus(7000229)</onup>
-            </item>
-            <item id="7000230">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(30)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000230)</onclick>
-                <onup>SetFocus(7000230)</onup>
-            </item>
-            <item id="7000231">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(31)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000231)</onclick>
-                <onup>SetFocus(7000231)</onup>
-            </item>
-            <item id="7000232">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(32)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000232)</onclick>
-                <onup>SetFocus(7000232)</onup>
-            </item>
-            <item id="7000233">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(33)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000233)</onclick>
-                <onup>SetFocus(7000233)</onup>
-            </item>
-            <item id="7000234">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(34)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000234)</onclick>
-                <onup>SetFocus(7000234)</onup>
-            </item>
-            <item id="7000235">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(35)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000235)</onclick>
-                <onup>SetFocus(7000235)</onup>
-            </item>
-            <item id="7000236">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(36)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000236)</onclick>
-                <onup>SetFocus(7000236)</onup>
-            </item>
-            <item id="7000237">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(37)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000237)</onclick>
-                <onup>SetFocus(7000237)</onup>
-            </item>
-            <item id="7000238">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(38)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000238)</onclick>
-                <onup>SetFocus(7000238)</onup>
-            </item>
-            <item id="7000239">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(39)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000239)</onclick>
-                <onup>SetFocus(7000239)</onup>
-            </item>
-            <item id="7000240">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(40)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000240)</onclick>
-                <onup>SetFocus(7000240)</onup>
-            </item>
-            <item id="7000241">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(41)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000241)</onclick>
-                <onup>SetFocus(7000241)</onup>
-            </item>
-            <item id="7000242">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(42)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000242)</onclick>
-                <onup>SetFocus(7000242)</onup>
-            </item>
-            <item id="7000243">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(43)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000243)</onclick>
-                <onup>SetFocus(7000243)</onup>
-            </item>
-            <item id="7000244">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(44)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000244)</onclick>
-                <onup>SetFocus(7000244)</onup>
-            </item>
-            <item id="7000245">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(45)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000245)</onclick>
-                <onup>SetFocus(7000245)</onup>
-            </item>
-            <item id="7000246">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(46)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000246)</onclick>
-                <onup>SetFocus(7000246)</onup>
-            </item>
-            <item id="7000247">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(47)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000247)</onclick>
-                <onup>SetFocus(7000247)</onup>
-            </item>
-            <item id="7000248">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(48)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000248)</onclick>
-                <onup>SetFocus(7000248)</onup>
-            </item>
-            <item id="7000249">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.1))+Container(300).HasFocus(49)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.1)]</label>
-                <onclick>SetFocus(7000249)</onclick>
-                <onup>SetFocus(7000249)</onup>
-            </item>
-
-            <!--WIDGET 3-->
-            <item id="700031">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(1)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700031)</onclick>
-                <onup>SetFocus(700031)</onup>
-            </item>
-            <item id="700032">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(2)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700032)</onclick>
-                <onup>SetFocus(700032)</onup>
-            </item>
-            <item id="700033">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(3)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700033)</onclick>
-                <onup>SetFocus(700033)</onup>
-            </item>
-            <item id="700034">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(4)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700034)</onclick>
-                <onup>SetFocus(700034)</onup>
-            </item>
-            <item id="700035">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(5)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700035)</onclick>
-                <onup>SetFocus(700035)</onup>
-            </item>
-            <item id="700036">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(6)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700036)</onclick>
-                <onup>SetFocus(700036)</onup>
-            </item>
-            <item id="700037">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(7)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700037)</onclick>
-                <onup>SetFocus(700037)</onup>
-            </item>
-            <item id="700038">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(8)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700038)</onclick>
-                <onup>SetFocus(700038)</onup>
-            </item>
-            <item id="700039">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(9)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(700039)</onclick>
-                <onup>SetFocus(700039)</onup>
-            </item>
-            <item id="7000310">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(10)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000310)</onclick>
-                <onup>SetFocus(7000310)</onup>
-            </item>
-            <item id="7000311">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(11)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000311)</onclick>
-                <onup>SetFocus(7000311)</onup>
-            </item>
-            <item id="7000312">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(12)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000312)</onclick>
-                <onup>SetFocus(7000312)</onup>
-            </item>
-            <item id="7000313">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(13)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000313)</onclick>
-                <onup>SetFocus(7000313)</onup>
-            </item>
-            <item id="7000314">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(14)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000314)</onclick>
-                <onup>SetFocus(7000314)</onup>
-            </item>
-            <item id="7000315">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(15)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000315)</onclick>
-                <onup>SetFocus(7000315)</onup>
-            </item>
-            <item id="7000316">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(16)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000316)</onclick>
-                <onup>SetFocus(7000316)</onup>
-            </item>
-            <item id="7000317">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(17)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000317)</onclick>
-                <onup>SetFocus(7000317)</onup>
-            </item>
-            <item id="7000318">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(18)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000318)</onclick>
-                <onup>SetFocus(7000318)</onup>
-            </item>
-            <item id="7000319">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(19)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000319)</onclick>
-                <onup>SetFocus(7000319)</onup>
-            </item>
-            <item id="7000320">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(20)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000320)</onclick>
-                <onup>SetFocus(7000320)</onup>
-            </item>
-            <item id="7000321">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(21)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000321)</onclick>
-                <onup>SetFocus(7000321)</onup>
-            </item>
-            <item id="7000322">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(22)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000322)</onclick>
-                <onup>SetFocus(7000322)</onup>
-            </item>
-            <item id="7000323">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(23)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000323)</onclick>
-                <onup>SetFocus(7000323)</onup>
-            </item>
-            <item id="7000324">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(24)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000324)</onclick>
-                <onup>SetFocus(7000324)</onup>
-            </item>
-            <item id="7000325">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(25)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000325)</onclick>
-                <onup>SetFocus(7000325)</onup>
-            </item>
-            <item id="7000326">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(26)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000326)</onclick>
-                <onup>SetFocus(7000326)</onup>
-            </item>
-            <item id="7000327">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(27)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000327)</onclick>
-                <onup>SetFocus(7000327)</onup>
-            </item>
-            <item id="7000328">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(28)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000328)</onclick>
-                <onup>SetFocus(7000328)</onup>
-            </item>
-            <item id="7000329">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(29)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000329)</onclick>
-                <onup>SetFocus(7000329)</onup>
-            </item>
-            <item id="7000330">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(30)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000330)</onclick>
-                <onup>SetFocus(7000330)</onup>
-            </item>
-            <item id="7000331">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(31)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000331)</onclick>
-                <onup>SetFocus(7000331)</onup>
-            </item>
-            <item id="7000332">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(32)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000332)</onclick>
-                <onup>SetFocus(7000332)</onup>
-            </item>
-            <item id="7000333">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(33)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000333)</onclick>
-                <onup>SetFocus(7000333)</onup>
-            </item>
-            <item id="7000334">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(34)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000334)</onclick>
-                <onup>SetFocus(7000334)</onup>
-            </item>
-            <item id="7000335">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(35)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000335)</onclick>
-                <onup>SetFocus(7000335)</onup>
-            </item>
-            <item id="7000336">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(36)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000336)</onclick>
-                <onup>SetFocus(7000336)</onup>
-            </item>
-            <item id="7000337">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(37)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000337)</onclick>
-                <onup>SetFocus(7000337)</onup>
-            </item>
-            <item id="7000338">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(38)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000338)</onclick>
-                <onup>SetFocus(7000338)</onup>
-            </item>
-            <item id="7000339">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(39)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000339)</onclick>
-                <onup>SetFocus(7000339)</onup>
-            </item>
-            <item id="7000340">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(40)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000340)</onclick>
-                <onup>SetFocus(7000340)</onup>
-            </item>
-            <item id="7000341">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(41)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000341)</onclick>
-                <onup>SetFocus(7000341)</onup>
-            </item>
-            <item id="7000342">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(42)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000342)</onclick>
-                <onup>SetFocus(7000342)</onup>
-            </item>
-            <item id="7000343">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(43)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000343)</onclick>
-                <onup>SetFocus(7000343)</onup>
-            </item>
-            <item id="7000344">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(44)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000344)</onclick>
-                <onup>SetFocus(7000344)</onup>
-            </item>
-            <item id="7000345">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(45)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000345)</onclick>
-                <onup>SetFocus(7000345)</onup>
-            </item>
-            <item id="7000346">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(46)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000346)</onclick>
-                <onup>SetFocus(7000346)</onup>
-            </item>
-            <item id="7000347">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(47)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000347)</onclick>
-                <onup>SetFocus(7000347)</onup>
-            </item>
-            <item id="7000348">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(48)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000348)</onclick>
-                <onup>SetFocus(7000348)</onup>
-            </item>
-            <item id="7000349">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.2))+Container(300).HasFocus(49)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.2)]</label>
-                <onclick>SetFocus(7000349)</onclick>
-                <onup>SetFocus(7000349)</onup>
-            </item>
-
-            <!--WIDGET 4-->
-            <item id="700041">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(1)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700041)</onclick>
-                <onup>SetFocus(700041)</onup>
-            </item>
-            <item id="700042">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(2)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700042)</onclick>
-                <onup>SetFocus(700042)</onup>
-            </item>
-            <item id="700043">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(3)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700043)</onclick>
-                <onup>SetFocus(700043)</onup>
-            </item>
-            <item id="700044">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(4)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700044)</onclick>
-                <onup>SetFocus(700044)</onup>
-            </item>
-            <item id="700045">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(5)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700045)</onclick>
-                <onup>SetFocus(700045)</onup>
-            </item>
-            <item id="700046">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(6)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700046)</onclick>
-                <onup>SetFocus(700046)</onup>
-            </item>
-            <item id="700047">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(7)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700047)</onclick>
-                <onup>SetFocus(700047)</onup>
-            </item>
-            <item id="700048">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(8)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700048)</onclick>
-                <onup>SetFocus(700048)</onup>
-            </item>
-            <item id="700049">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(9)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(700049)</onclick>
-                <onup>SetFocus(700049)</onup>
-            </item>
-            <item id="7000410">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(10)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000410)</onclick>
-                <onup>SetFocus(7000410)</onup>
-            </item>
-            <item id="7000411">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(11)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000411)</onclick>
-                <onup>SetFocus(7000411)</onup>
-            </item>
-            <item id="7000412">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(12)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000412)</onclick>
-                <onup>SetFocus(7000412)</onup>
-            </item>
-            <item id="7000413">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(13)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000413)</onclick>
-                <onup>SetFocus(7000413)</onup>
-            </item>
-            <item id="7000414">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(14)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000414)</onclick>
-                <onup>SetFocus(7000414)</onup>
-            </item>
-            <item id="7000415">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(15)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000415)</onclick>
-                <onup>SetFocus(7000415)</onup>
-            </item>
-            <item id="7000416">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(16)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000416)</onclick>
-                <onup>SetFocus(7000416)</onup>
-            </item>
-            <item id="7000417">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(17)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000417)</onclick>
-                <onup>SetFocus(7000417)</onup>
-            </item>
-            <item id="7000418">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(18)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000418)</onclick>
-                <onup>SetFocus(7000418)</onup>
-            </item>
-            <item id="7000419">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(19)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000419)</onclick>
-                <onup>SetFocus(7000419)</onup>
-            </item>
-            <item id="7000420">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(20)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000420)</onclick>
-                <onup>SetFocus(7000420)</onup>
-            </item>
-            <item id="7000421">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(21)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000421)</onclick>
-                <onup>SetFocus(7000421)</onup>
-            </item>
-            <item id="7000422">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(22)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000422)</onclick>
-                <onup>SetFocus(7000422)</onup>
-            </item>
-            <item id="7000423">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(23)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000423)</onclick>
-                <onup>SetFocus(7000423)</onup>
-            </item>
-            <item id="7000424">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(24)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000424)</onclick>
-                <onup>SetFocus(7000424)</onup>
-            </item>
-            <item id="7000425">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(25)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000425)</onclick>
-                <onup>SetFocus(7000425)</onup>
-            </item>
-            <item id="7000426">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(26)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000426)</onclick>
-                <onup>SetFocus(7000426)</onup>
-            </item>
-            <item id="7000427">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(27)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000427)</onclick>
-                <onup>SetFocus(7000427)</onup>
-            </item>
-            <item id="7000428">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(28)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000428)</onclick>
-                <onup>SetFocus(7000428)</onup>
-            </item>
-            <item id="7000429">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(29)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000429)</onclick>
-                <onup>SetFocus(7000429)</onup>
-            </item>
-            <item id="7000430">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(30)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000430)</onclick>
-                <onup>SetFocus(7000430)</onup>
-            </item>
-            <item id="7000431">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(31)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000431)</onclick>
-                <onup>SetFocus(7000431)</onup>
-            </item>
-            <item id="7000432">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(32)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000432)</onclick>
-                <onup>SetFocus(7000432)</onup>
-            </item>
-            <item id="7000433">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(33)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000433)</onclick>
-                <onup>SetFocus(7000433)</onup>
-            </item>
-            <item id="7000434">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(34)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000434)</onclick>
-                <onup>SetFocus(7000434)</onup>
-            </item>
-            <item id="7000435">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(35)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000435)</onclick>
-                <onup>SetFocus(7000435)</onup>
-            </item>
-            <item id="7000436">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(36)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000436)</onclick>
-                <onup>SetFocus(7000436)</onup>
-            </item>
-            <item id="7000437">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(37)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000437)</onclick>
-                <onup>SetFocus(7000437)</onup>
-            </item>
-            <item id="7000438">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(38)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000438)</onclick>
-                <onup>SetFocus(7000438)</onup>
-            </item>
-            <item id="7000439">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(39)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000439)</onclick>
-                <onup>SetFocus(7000439)</onup>
-            </item>
-            <item id="7000440">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(40)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000440)</onclick>
-                <onup>SetFocus(7000440)</onup>
-            </item>
-            <item id="7000441">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(41)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000441)</onclick>
-                <onup>SetFocus(7000441)</onup>
-            </item>
-            <item id="7000442">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(42)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000442)</onclick>
-                <onup>SetFocus(7000442)</onup>
-            </item>
-            <item id="7000443">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(43)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000443)</onclick>
-                <onup>SetFocus(7000443)</onup>
-            </item>
-            <item id="7000444">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(44)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000444)</onclick>
-                <onup>SetFocus(7000444)</onup>
-            </item>
-            <item id="7000445">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(45)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000445)</onclick>
-                <onup>SetFocus(7000445)</onup>
-            </item>
-            <item id="7000446">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(46)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000446)</onclick>
-                <onup>SetFocus(7000446)</onup>
-            </item>
-            <item id="7000447">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(47)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000447)</onclick>
-                <onup>SetFocus(7000447)</onup>
-            </item>
-            <item id="7000448">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(48)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000448)</onclick>
-                <onup>SetFocus(7000448)</onup>
-            </item>
-            <item id="7000449">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.3))+Container(300).HasFocus(49)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.3)]</label>
-                <onclick>SetFocus(7000449)</onclick>
-                <onup>SetFocus(7000449)</onup>
-            </item>
-
-
-            <!--WIDGET 5-->
-            <item id="700051">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(1)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700051)</onclick>
-                <onup>SetFocus(700051)</onup>
-            </item>
-            <item id="700052">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(2)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700052)</onclick>
-                <onup>SetFocus(700052)</onup>
-            </item>
-            <item id="700053">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(3)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700053)</onclick>
-                <onup>SetFocus(700053)</onup>
-            </item>
-            <item id="700054">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(4)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700054)</onclick>
-                <onup>SetFocus(700054)</onup>
-            </item>
-            <item id="700055">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(5)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700055)</onclick>
-                <onup>SetFocus(700055)</onup>
-            </item>
-            <item id="700056">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(6)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700056)</onclick>
-                <onup>SetFocus(700056)</onup>
-            </item>
-            <item id="700057">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(7)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700057)</onclick>
-                <onup>SetFocus(700057)</onup>
-            </item>
-            <item id="700058">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(8)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700058)</onclick>
-                <onup>SetFocus(700058)</onup>
-            </item>
-            <item id="700059">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(9)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(700059)</onclick>
-                <onup>SetFocus(700059)</onup>
-            </item>
-            <item id="7000510">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(10)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000510)</onclick>
-                <onup>SetFocus(7000510)</onup>
-            </item>
-            <item id="7000511">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(11)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000511)</onclick>
-                <onup>SetFocus(7000511)</onup>
-            </item>
-            <item id="7000512">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(12)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000512)</onclick>
-                <onup>SetFocus(7000512)</onup>
-            </item>
-            <item id="7000513">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(13)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000513)</onclick>
-                <onup>SetFocus(7000513)</onup>
-            </item>
-            <item id="7000514">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(14)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000514)</onclick>
-                <onup>SetFocus(7000514)</onup>
-            </item>
-            <item id="7000515">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(15)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000515)</onclick>
-                <onup>SetFocus(7000515)</onup>
-            </item>
-            <item id="7000516">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(16)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000516)</onclick>
-                <onup>SetFocus(7000516)</onup>
-            </item>
-            <item id="7000517">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(17)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000517)</onclick>
-                <onup>SetFocus(7000517)</onup>
-            </item>
-            <item id="7000518">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(18)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000518)</onclick>
-                <onup>SetFocus(7000518)</onup>
-            </item>
-            <item id="7000519">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(19)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000519)</onclick>
-                <onup>SetFocus(7000519)</onup>
-            </item>
-            <item id="7000520">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(20)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000520)</onclick>
-                <onup>SetFocus(7000520)</onup>
-            </item>
-            <item id="7000521">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(21)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000521)</onclick>
-                <onup>SetFocus(7000521)</onup>
-            </item>
-            <item id="7000522">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(22)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000522)</onclick>
-                <onup>SetFocus(7000522)</onup>
-            </item>
-            <item id="7000523">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(23)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000523)</onclick>
-                <onup>SetFocus(7000523)</onup>
-            </item>
-            <item id="7000524">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(24)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000524)</onclick>
-                <onup>SetFocus(7000524)</onup>
-            </item>
-            <item id="7000525">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(25)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000525)</onclick>
-                <onup>SetFocus(7000525)</onup>
-            </item>
-            <item id="7000526">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(26)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000526)</onclick>
-                <onup>SetFocus(7000526)</onup>
-            </item>
-            <item id="7000527">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(27)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000527)</onclick>
-                <onup>SetFocus(7000527)</onup>
-            </item>
-            <item id="7000528">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(28)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000528)</onclick>
-                <onup>SetFocus(7000528)</onup>
-            </item>
-            <item id="7000529">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(29)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000529)</onclick>
-                <onup>SetFocus(7000529)</onup>
-            </item>
-            <item id="7000530">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(30)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000530)</onclick>
-                <onup>SetFocus(7000530)</onup>
-            </item>
-            <item id="7000531">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(31)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000531)</onclick>
-                <onup>SetFocus(7000531)</onup>
-            </item>
-            <item id="7000532">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(32)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000532)</onclick>
-                <onup>SetFocus(7000532)</onup>
-            </item>
-            <item id="7000533">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(33)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000533)</onclick>
-                <onup>SetFocus(7000533)</onup>
-            </item>
-            <item id="7000534">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(34)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000534)</onclick>
-                <onup>SetFocus(7000534)</onup>
-            </item>
-            <item id="7000535">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(35)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000535)</onclick>
-                <onup>SetFocus(7000535)</onup>
-            </item>
-            <item id="7000536">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(36)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000536)</onclick>
-                <onup>SetFocus(7000536)</onup>
-            </item>
-            <item id="7000537">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(37)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000537)</onclick>
-                <onup>SetFocus(7000537)</onup>
-            </item>
-            <item id="7000538">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(38)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000538)</onclick>
-                <onup>SetFocus(7000538)</onup>
-            </item>
-            <item id="7000539">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(39)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000539)</onclick>
-                <onup>SetFocus(7000539)</onup>
-            </item>
-            <item id="7000540">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(40)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000540)</onclick>
-                <onup>SetFocus(7000540)</onup>
-            </item>
-            <item id="7000541">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(41)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000541)</onclick>
-                <onup>SetFocus(7000541)</onup>
-            </item>
-            <item id="7000542">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(42)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000542)</onclick>
-                <onup>SetFocus(7000542)</onup>
-            </item>
-            <item id="7000543">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(43)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000543)</onclick>
-                <onup>SetFocus(7000543)</onup>
-            </item>
-            <item id="7000544">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(44)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000544)</onclick>
-                <onup>SetFocus(7000544)</onup>
-            </item>
-            <item id="7000545">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(45)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000545)</onclick>
-                <onup>SetFocus(7000545)</onup>
-            </item>
-            <item id="7000546">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(46)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000546)</onclick>
-                <onup>SetFocus(7000546)</onup>
-            </item>
-            <item id="7000547">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(47)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000547)</onclick>
-                <onup>SetFocus(7000547)</onup>
-            </item>
-            <item id="7000548">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(48)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000548)</onclick>
-                <onup>SetFocus(7000548)</onup>
-            </item>
-            <item id="7000549">
-                <visible>!String.IsEmpty(Container(300).ListItem.Property(widgetname.4))+Container(300).HasFocus(49)</visible>
-                <include>VisibleFadeEffect</include>
-                <label>$INFO[Container(300).ListItem.Property(widgetname.4)]</label>
-                <onclick>SetFocus(7000549)</onclick>
-                <onup>SetFocus(7000549)</onup>
-            </item>
+                <onclick>SetFocus(8003)</onclick>
+                <onup>SetFocus(8003)</onup>
+            </item>
+            <item id="8004">
+                <visible>Container(300).HasFocus(6)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[134]  •  $LOCALIZE[31961]</label>
+                <onclick>SetFocus(8004)</onclick>
+                <onup>SetFocus(8004)</onup>
+            </item>
+            <item id="8010">
+                <visible>Container(300).HasFocus(4)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[682]</label>
+                <onclick>SetFocus(8010)</onclick>
+                <onup>SetFocus(8010)</onup>
+            </item>
+            <item id="8011">
+                <visible>Container(300).HasFocus(5)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[682]</label>
+                <onclick>SetFocus(8011)</onclick>
+                <onup>SetFocus(8011)</onup>
+            </item>
+            <item id="8021">
+                <visible>Container(300).HasFocus(300)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[19017]</label>
+                <onclick>SetFocus(8021)</onclick>
+                <onup>SetFocus(8021)</onup>
+            </item>
+            <item id="8022">
+                <visible>Container(300).HasFocus(300)</visible>
+                <include>VisibleFadeEffect</include>
+                <label>$LOCALIZE[19023]</label>
+                <onclick>SetFocus(8022)</onclick>
+                <onup>SetFocus(8022)</onup>
+            </item>
+            <!--<item id="8023">-->
+                <!--<visible>Container(300).HasFocus(301)</visible>-->
+                <!--<include>VisibleFadeEffect</include>-->
+                <!--<label>$LOCALIZE[19017]</label>-->
+                <!--<onclick>SetFocus(8023)</onclick>-->
+                <!--<onup>SetFocus(8023)</onup>-->
+            <!--</item>-->
+            <!--<item id="8024">-->
+                <!--<visible>Container(300).HasFocus(301)</visible>-->
+                <!--<include>VisibleFadeEffect</include>-->
+                <!--<label>$LOCALIZE[19024]</label>-->
+                <!--<onclick>SetFocus(8024)</onclick>-->
+                <!--<onup>SetFocus(8024)</onup>-->
+            <!--</item>-->
         </content>
     </include>
     <include name="WidgetsCollection">
         <control type="group" id="700">
             <posy>-490</posy>
-
-            <!-- -->
-            <!--PLEX-->
-            <!-- -->
-
-            <!--PICTURES-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Square"/>
-                <param name="content" value="PlexRecentPhotoContent"/>
-                <param name="id" value="900"/>
-                <param name="labelTitle" value="$INFO[Container(900).ListItem.Label]"/>
-                <param name="labelLeft" value=""/>
-                <param name="labelCenter" value=""/>
-                <param name="labelRight" value=""/>
-                <param name="visibilityLabelRight" value="false"/>
-            </include>
-            <!--QUEUE-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Square"/>
-                <param name="content" value="PlexQueueContent"/>
-                <param name="id" value="901"/>
-                <param name="labelTitle" value="$INFO[Container(901).ListItem.Label]"/>
-                <param name="labelLeft" value=""/>
-                <param name="labelCenter" value=""/>
-                <param name="labelRight" value=""/>
-                <param name="visibilityLabelRight" value="false"/>
-            </include>
             <!--MOVIES-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMC">
                 <param name="gfxType" value="Poster"/>
-                <param name="content" value="PlexRecentMovieContent"/>
-                <param name="id" value="311"/>
-                <param name="labelTitle" value="$INFO[Container(311).ListItem.Label]"/>
-                <param name="labelLeft" value="$INFO[Container(311).ListItem.Property(Runtime),, $LOCALIZE[31297]]"/>
-                <param name="labelCenter" value="$INFO[Container(311).ListItem.Property(Year)]$INFO[Container(311).ListItem.Property(Mpaa),  •  ]$INFO[Container(311).ListItem.Property(Genre),  •  ]"/>
-                <param name="labelRight" value="$INFO[Container(311).ListItem.Property(Rating)]"/>
+                <param name="id" value="8000"/>
+                <param name="labelTitle" value="$INFO[Container(8000).ListItem.Label]"/>
+                <param name="labelLeft" value="$INFO[Container(8000).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8000).ListItem.Year]$INFO[Container(8000).ListItem.Mpaa,  •  ]$INFO[Container(8000).ListItem.Genre,  •  ]"/>
+                <param name="labelRight" value="$INFO[Container(8000).ListItem.Rating]"/>
                 <param name="visibilityLabelRight" value="true"/>
             </include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMC">
                 <param name="gfxType" value="Poster"/>
-                <param name="content" value="PlexOnDeckMovieContent"/>
-                <param name="id" value="312"/>
-                <param name="labelTitle" value="$INFO[Container(312).ListItem.Label]"/>
-                <param name="labelLeft" value="$INFO[Container(312).ListItem.Property(Runtime),, $LOCALIZE[31297]]"/>
-                <param name="labelCenter" value="$INFO[Container(312).ListItem.Property(Year)]$INFO[Container(312).ListItem.Property(Mpaa),  •  ]$INFO[Container(312).ListItem.Property(Genre),  •  ]"/>
-                <param name="labelRight" value="$INFO[Container(312).ListItem.Property(Rating)]"/>
+                <param name="id" value="8010"/>
+                <param name="labelTitle" value="$INFO[Container(8010).ListItem.Label]"/>
+                <param name="labelLeft" value="$INFO[Container(8010).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8010).ListItem.Year]$INFO[Container(8010).ListItem.Mpaa,  •  ]$INFO[Container(8010).ListItem.Genre,  •  ]"/>
+                <param name="labelRight" value="$INFO[Container(8010).ListItem.Rating]"/>
                 <param name="visibilityLabelRight" value="true"/>
-            </include>
-            <!--ALBUMS-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Square"/>
-                <param name="content" value="PlexRecentAlbumContent"/>
-                <param name="id" value="511"/>
-                <param name="labelTitle" value="$INFO[Container(511).ListItem.Label]"/>
-                <param name="labelLeft" value=""/>
-                <param name="labelCenter" value="$INFO[Container(511).ListItem.Label2]"/>
-                <param name="labelRight" value=""/>
-                <param name="visibilityLabelRight" value="false"/>
-            </include>
-            <!--CHANNELS-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Square"/>
-                <param name="content" value="PlexRecentChannelContent"/>
-                <param name="id" value="212"/>
-                <param name="labelTitle" value="$INFO[Container(212).ListItem.Label]"/>
-                <param name="labelLeft" value=""/>
-                <param name="labelCenter" value=""/>
-                <param name="labelRight" value=""/>
-                <param name="visibilityLabelRight" value="false"/>
             </include>
             <!--EPISODES-->
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Poster"/>
-                <param name="content" value="PlexRecentEpisodeContent"/>
-                <param name="id" value="411"/>
-                <param name="labelTitle" value="$INFO[Container(411).ListItem.Property(TVshowTitle)]"/>
-                <param name="labelLeft" value="$INFO[Container(411).ListItem.Property(Runtime),, $LOCALIZE[31297]]"/>
-                <param name="labelCenter" value="$INFO[Container(411).ListItem.Property(SeasonEpisode),,  •  ]$INFO[Container(411).ListItem.Label]"/>
-                <param name="labelRight" value="$INFO[Container(411).ListItem.Property(Rating)]"/>
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)+!Skin.HasSetting(WidgetEpisodePoster)" name="WidgetMrMC">
+                <param name="gfxType" value="Episode"/>
+                <param name="id" value="8001"/>
+                <param name="labelTitle" value="$INFO[Container(8001).ListItem.TVShowTitle]"/>
+                <param name="labelLeft" value="$INFO[Container(8001).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8001).ListItem.Season]$INFO[Container(8001).ListItem.Episode,x,  •  ]$INFO[Container(8001).ListItem.Label]"/>
+                <param name="labelRight" value="$INFO[Container(8001).ListItem.Rating]"/>
                 <param name="visibilityLabelRight" value="true"/>
             </include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
-                <param name="gfxType" value="Poster"/>
-                <param name="content" value="PlexOnDeckEpisodeContent"/>
-                <param name="id" value="412"/>
-                <param name="labelTitle" value="$INFO[Container(412).ListItem.Property(TVshowTitle)]"/>
-                <param name="labelLeft" value="$INFO[Container(412).ListItem.Property(Runtime),, $LOCALIZE[31297]]"/>
-                <param name="labelCenter" value="$INFO[Container(412).ListItem.Property(SeasonEpisode),,  •  ]$INFO[Container(412).ListItem.Label]"/>
-                <param name="labelRight" value="$INFO[Container(412).ListItem.Property(Rating)]"/>
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)+!Skin.HasSetting(WidgetEpisodePoster)" name="WidgetMrMC">
+                <param name="gfxType" value="Episode"/>
+                <param name="id" value="8011"/>
+                <param name="labelTitle" value="$INFO[Container(8011).ListItem.TVShowTitle]"/>
+                <param name="labelLeft" value="$INFO[Container(8011).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8011).ListItem.Season]$INFO[Container(8011).ListItem.Episode,x,  •  ]$INFO[Container(8011).ListItem.Label]"/>
+                <param name="labelRight" value="$INFO[Container(8011).ListItem.Rating]"/>
                 <param name="visibilityLabelRight" value="true"/>
             </include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded) + Skin.HasSetting(plexbmc)" content="WidgetPlex">
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)+Skin.HasSetting(WidgetEpisodePoster)" name="WidgetMrMC">
                 <param name="gfxType" value="Poster"/>
-                <param name="content" value="PlexRecentlyViewedShowContent"/>
-                <param name="id" value="413"/>
-                <param name="labelTitle" value="$INFO[Container(413).ListItem.Label]"/>
-                <param name="labelLeft" value="$INFO[Container(413).ListItem.Property(Runtime),, $LOCALIZE[31297]]"/>
-                <param name="labelCenter" value="$INFO[Container(413).ListItem.Property(Year)]$INFO[Container(413).ListItem.Property(Mpaa),  •  ]$INFO[Container(413).ListItem.Property(Genre),  •  ]"/>
-                <param name="labelRight" value="$INFO[Container(413).ListItem.Property(Rating)]"/>
+                <param name="id" value="8001"/>
+                <param name="labelTitle" value="$INFO[Container(8001).ListItem.TVShowTitle]"/>
+                <param name="labelLeft" value="$INFO[Container(8001).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8001).ListItem.Season]$INFO[Container(8001).ListItem.Episode,x,  •  ]$INFO[Container(8001).ListItem.Label]"/>
+                <param name="labelRight" value="$INFO[Container(8001).ListItem.Rating]"/>
                 <param name="visibilityLabelRight" value="true"/>
             </include>
-            
-
-            <!-- -->
-            <!--CUSTOM WIDGETS-->
-            <!-- -->
-
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)">skinshortcuts-template-widget</include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)">skinshortcuts-template-widget.1</include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)">skinshortcuts-template-widget.2</include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)">skinshortcuts-template-widget.3</include>
-            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)">skinshortcuts-template-widget.4</include>
-
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)+Skin.HasSetting(WidgetEpisodePoster)" name="WidgetMrMC">
+                <param name="gfxType" value="Poster"/>
+                <param name="id" value="8011"/>
+                <param name="labelTitle" value="$INFO[Container(8011).ListItem.TVShowTitle]"/>
+                <param name="labelLeft" value="$INFO[Container(8011).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8011).ListItem.Season]$INFO[Container(8011).ListItem.Episode,x,  •  ]$INFO[Container(8011).ListItem.Label]"/>
+                <param name="labelRight" value="$INFO[Container(8011).ListItem.Rating]"/>
+                <param name="visibilityLabelRight" value="true"/>
+            </include>
+            <!--MUSIC-->
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMC">
+                <param name="gfxType" value="Square"/>
+                <param name="id" value="8002"/>
+                <param name="labelTitle" value="$INFO[Container(8002).ListItem.Label]"/>
+                <param name="labelLeft" value="-"/>
+                <param name="labelCenter" value="$INFO[Container(8002).ListItem.Artist]$INFO[Container(8002).ListItem.Year,  •  ]$INFO[Container(8002).ListItem.MPAA,  •  ]$INFO[Container(8002).ListItem.Genre,  •  ]"/>
+                <param name="labelRight" value="-"/>
+                <param name="visibilityLabelRight" value="false"/>
+            </include>
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMC">
+                <param name="gfxType" value="Square"/>
+                <param name="id" value="8004"/>
+                <param name="labelTitle" value="$INFO[Container(8004).ListItem.Label]"/>
+                <param name="labelLeft" value="-"/>
+                <param name="labelCenter" value="$INFO[Container(8004).ListItem.Artist]$INFO[Container(8004).ListItem.Year,  •  ]$INFO[Container(8004).ListItem.MPAA,  •  ]$INFO[Container(8004).ListItem.Genre,  •  ]"/>
+                <param name="labelRight" value="-"/>
+                <param name="visibilityLabelRight" value="false"/>
+            </include>
+            <!--MUSICVIDEOS-->
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMC">
+                <param name="gfxType" value="Square"/>
+                <param name="id" value="8003"/>
+                <param name="labelTitle" value="$INFO[Container(8003).ListItem.Label]"/>
+                <param name="labelLeft" value="$INFO[Container(8003).ListItem.Duration,, $LOCALIZE[31297]]"/>
+                <param name="labelCenter" value="$INFO[Container(8003).ListItem.Artist]$INFO[Container(8003).ListItem.Year,  •  ]$INFO[Container(8003).ListItem.MPAA,  •  ]$INFO[Container(8003).ListItem.Genre,  •  ]"/>
+                <param name="labelRight" value="-"/>
+                <param name="visibilityLabelRight" value="false"/>
+            </include>
+            <!--TV-->
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMCCustom">
+                <param name="gfxType" value="Channel"/>
+                <param name="id" value="8021"/>
+                <param name="labelTitle" value="$INFO[Container(8021).ListItem.Label]"/>
+                <param name="labelLeft" value="-"/>
+                <param name="labelCenter" value="$INFO[Container(8021).ListItem.Label2]$INFO[Container(8021).ListItem.Duration, $LOCALIZE[31297]  •  ]"/>
+                <param name="labelRight" value="-"/>
+                <param name="visibilityLabelRight" value="false"/>
+                <param name="limit" value="-"/>
+                <param name="sortby" value="date"/>
+                <param name="sortorder" value="descending"/>
+                <param name="target" value="pvr"/>
+                <param name="content" value="pvr://recordings/tv"/>
+            </include>
+            <include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMCCustom">
+                <param name="gfxType" value="Channel"/>
+                <param name="id" value="8022"/>
+                <param name="labelTitle" value="$INFO[Container(8022).ListItem.Label]"/>
+                <param name="labelLeft" value="-"/>
+                <param name="labelCenter" value="$INFO[Container(8022).ListItem.Label2]$INFO[Container(8022).ListItem.Duration, $LOCALIZE[31297]  •  ]"/>
+                <param name="labelRight" value="-"/>
+                <param name="visibilityLabelRight" value="false"/>
+                <param name="limit" value="-"/>
+                <param name="sortby" value="number"/>
+                <param name="sortorder" value="ascending"/>
+                <param name="target" value="pvr"/>
+                <param name="content" value="pvr://channels/tv/*"/>
+            </include>
+            <!--RADIO-->
+            <!--<include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMCCustom">-->
+                <!--<param name="gfxType" value="Channel"/>-->
+                <!--<param name="id" value="8023"/>-->
+                <!--<param name="labelTitle" value="$INFO[Container(8023).ListItem.Label]"/>-->
+                <!--<param name="labelLeft" value="-"/>-->
+                <!--<param name="labelCenter" value="$INFO[Container(8023).ListItem.Label2]$INFO[Container(8023).ListItem.Duration, $LOCALIZE[31297]  •  ]"/>-->
+                <!--<param name="labelRight" value="-"/>-->
+                <!--<param name="visibilityLabelRight" value="false"/>-->
+                <!--<param name="limit" value="-"/>-->
+                <!--<param name="sortby" value="date"/>-->
+                <!--<param name="sortorder" value="descending"/>-->
+                <!--<param name="target" value="pvr"/>-->
+                <!--<param name="content" value="pvr://recordings/radio"/>-->
+            <!--</include>-->
+            <!--<include condition="!Skin.HasSetting(Hide.RecentlyAdded)" name="WidgetMrMCCustom">-->
+                <!--<param name="gfxType" value="Channel"/>-->
+                <!--<param name="id" value="8024"/>-->
+                <!--<param name="labelTitle" value="$INFO[Container(8024).ListItem.Label]"/>-->
+                <!--<param name="labelLeft" value="-"/>-->
+                <!--<param name="labelCenter" value="$INFO[Container(8024).ListItem.Label2]$INFO[Container(8024).ListItem.Duration, $LOCALIZE[31297]  •  ]"/>-->
+                <!--<param name="labelRight" value="-"/>-->
+                <!--<param name="visibilityLabelRight" value="false"/>-->
+                <!--<param name="limit" value="-"/>-->
+                <!--<param name="sortby" value="number"/>-->
+                <!--<param name="sortorder" value="ascending"/>-->
+                <!--<param name="target" value="pvr"/>-->
+                <!--<param name="content" value="pvr://channels/radio/*"/>-->
+            <!--</include>-->
         </control>
+    </include>
+    <include name="Home.Main.Menu.Items">
+        <item id="3">
+            <visible>!Skin.HasSetting(Videos.Hide)</visible>
+            <label>$LOCALIZE[3]</label>
+            <thumb>$VAR[Videos.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Videos.jpg">$INFO[Skin.String(Videos.Icon)]</icon>
+            <onclick>ActivateWindow(Videos,root)</onclick>
+        </item>
+        <item id="4">
+            <visible>!Skin.HasSetting(Movies.Hide) + [Library.HasContent(Movies) | Library.HasServices]</visible>
+            <label fallback="20342">$VAR[MovieEntryPointLabel2]</label>
+            <thumb>$VAR[Movies.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Movies.jpg">$INFO[Skin.String(Movies.Icon)]</icon>
+            <onclick>$VAR[MovieEntryPoint]</onclick>
+        </item>
+        <item id="5">
+            <visible>!Skin.HasSetting(TVShows.Hide) + [Library.HasContent(TVShows) | Library.HasServices]</visible>
+            <label fallback="20343">$VAR[TVShowEntryPointLabel2]</label>
+            <thumb>$VAR[TVShows.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/TVShows.jpg">$INFO[Skin.String(TVShows.Icon)]</icon>
+            <onclick>$VAR[TvShowEntryPoint]</onclick>
+        </item>
+        <item id="51">
+            <visible>!Skin.HasSetting(PlexAddon.Hide)</visible>
+            <label fallback="20343">Plex</label>
+            <thumb>special://skin/backgrounds/Channels.jpg</thumb>
+            <icon fallback="special://skin/backgrounds/TVShows.jpg">special://skin/backgrounds/Channels.jpg</icon>
+            <onclick>ActivateWindow(MediaSources,mediasources://plex/,return)</onclick>
+        </item>
+        <item id="13">
+            <visible>Skin.HasSetting(Clips.Show) + Library.HasContent(MusicVideos)</visible>
+            <label>$LOCALIZE[31972]</label>
+            <thumb>$VAR[Clips.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Clips.jpg">$INFO[Skin.String(Clips.Icon)]</icon>
+            <onclick condition="Library.HasContent(music)">ActivateWindow(10501,"videodb://musicvideos/")</onclick>
+            <onclick condition="!Library.HasContent(music)">ActivateWindow(10502,"videodb://musicvideos/")</onclick>
+        </item>
+        <item id="14">
+            <visible>Skin.HasSetting(Concerts.Show) + Library.HasContent(MusicVideos)</visible>
+            <label>$LOCALIZE[31971]</label>
+            <thumb>$VAR[Concerts.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Concerts.jpg">$INFO[Skin.String(Concerts.Icon)]</icon>
+            <onclick>ActivateWindow(VideoLibrary,MusicVideoTitles,return)</onclick>
+        </item>
+        <item id="6">
+            <visible>!Skin.HasSetting(Music.Hide) + [Library.HasContent(Music) | Library.HasServices]</visible>
+            <label>$LOCALIZE[2]</label>
+            <thumb>$VAR[Music.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Music.jpg">$INFO[Skin.String(Music.Icon)]</icon>
+            <onclick>$VAR[MusicEntryPoint]</onclick>
+        </item>
+        <item id="300">
+            <visible>!Skin.HasSetting(PvrTv.Hide) + PVR.HasTVChannels</visible>
+            <label>$LOCALIZE[31500]</label>
+            <thumb>$VAR[Tv.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Tv.jpg">$INFO[Skin.String(Tv.Icon)]</icon>
+            <onclick>ActivateWindow(TVChannels)</onclick>
+        </item>
+        <item id="301">
+            <visible>!Skin.HasSetting(PvrRadio.Hide) + PVR.HasRadioChannels</visible>
+            <label>$LOCALIZE[19021]</label>
+            <thumb>$VAR[Radio.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Radio.jpg">$INFO[Skin.String(Radio.Icon)]</icon>
+            <onclick>ActivateWindow(RadioChannels)</onclick>
+        </item>
+        <item id="2">
+            <visible>!Skin.HasSetting(Addons.Hide)</visible>
+            <label>$LOCALIZE[24001]</label>
+            <thumb>$VAR[Addons.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Addons.jpg">$INFO[Skin.String(Addons.Icon)]</icon>
+            <onclick>ActivateWindow(1119)</onclick>
+        </item>
+        <item id="1">
+            <visible>!Skin.HasSetting(Pictures.Hide)</visible>
+            <label>$LOCALIZE[1]</label>
+            <thumb>$VAR[Pictures.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Pictures.jpg">$INFO[Skin.String(Pictures.Icon)]</icon>
+            <onclick>ActivateWindow(Pictures,root)</onclick>
+        </item>
+        <item id="7">
+            <visible>!Skin.HasSetting(Favourites.Hide)+!Skin.HasSetting(BlackGlassMode)</visible>
+            <label>$LOCALIZE[1036]</label>
+            <thumb>$VAR[Favourites.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Favourites.jpg">$INFO[Skin.String(Favourites.Icon)]</icon>
+            <onclick>ActivateWindow(Favourites)</onclick>
+        </item>
+        <item id="7">
+            <visible>!Skin.HasSetting(Favourites.Hide)+Skin.HasSetting(BlackGlassMode)</visible>
+            <label>$LOCALIZE[1036]</label>
+            <thumb>$VAR[Favourites.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Favourites2.jpg">$INFO[Skin.String(Favourites.Icon)]</icon>
+            <onclick>ActivateWindow(Favourites)</onclick>
+        </item>
+        <item id="8">
+            <visible>System.HasMediaDVD + !Skin.HasSetting(DVD.Hide) + !System.Platform.IOS + !System.Platform.TVOS</visible>
+            <label>$LOCALIZE[427]</label>
+            <thumb>$VAR[DVD.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Dvds.jpg">$INFO[Skin.String(DVD.Icon)]</icon>
+            <onclick condition="System.HasMediaDvd">PlayDVD()</onclick>
+            <onclick condition="!System.HasMediaDvd">Notification($LOCALIZE[164],$LOCALIZE[219],5,DefaultIconWarning.png)</onclick>
+        </item>
+        <!--<item id="15">-->
+            <!--<visible>!Skin.HasSetting(Weather.Hide)</visible>-->
+            <!--<label>$LOCALIZE[8]</label>-->
+            <!--<thumb fallback="special://skin/backgrounds/Weather.jpg">$INFO[Weather.fanartcode,special://skin/backgrounds/weather/,.jpg]</thumb>-->
+            <!--<icon fallback="special://skin/backgrounds/Weather.jpg">$INFO[Weather.fanartcode,special://skin/backgrounds/weather/,.jpg]</icon>-->
+            <!--<onclick>ActivateWindow(Weather)</onclick>-->
+        <!--</item>-->
+        <item id="10">
+            <visible>!Skin.HasSetting(Settings.Hide)</visible>
+            <label>$LOCALIZE[5]</label>
+            <thumb>$VAR[Settings.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Settings.jpg">$INFO[Skin.String(Settings.Icon)]</icon>
+            <onclick>ActivateWindow(Settings)</onclick>
+        </item>
+        <item id="11">
+            <visible>!Skin.HasSetting(Quit.Hide) + !System.Platform.IOS + !System.Platform.TVOS</visible>
+            <label fallback="13009">$VAR[QuitLabel2]</label>
+            <thumb>$VAR[Quit.Art]</thumb>
+            <icon fallback="special://skin/backgrounds/Quit.jpg">$INFO[Skin.String(Quit.Icon)]</icon>
+            <onclick>ActivateWindow(shutdownmenu)</onclick>
+        </item>
+    </include>
+    <include name="Home.Submenu.Items">
+        <item id="0" description="Update Library">
+            <visible>!Skin.HasSetting(Hide.LibraryUpdate.Button)</visible>
+            <visible>Container(300).HasFocus(3) | Container(300).HasFocus(4) | Container(300).HasFocus(5) | Container(300).HasFocus(13) | Container(300).HasFocus(14)</visible>
+            <label>$LOCALIZE[653]</label>
+            <onclick>UpdateLibrary(video)</onclick>
+        </item>
+        <item id="0" description="Update Library">
+            <visible>!Skin.HasSetting(Hide.LibraryUpdate.Button)</visible>
+            <visible>Container(300).HasFocus(6)</visible>
+            <label>$LOCALIZE[653]</label>
+            <onclick>UpdateLibrary(music)</onclick>
+        </item>
+        <item id="1" description="DVD eject">
+            <visible>Container(300).HasFocus(8)</visible>
+            <label>$LOCALIZE[13391]</label>
+            <onclick>EjectTray()</onclick>
+        </item>
+        <item id="2" description="Program apps">
+            <visible>Container(300).HasFocus(2) + !Skin.HasSetting(Addons2)</visible>
+            <label>$LOCALIZE[0]</label>
+            <onclick condition="!System.Platform.Android">ActivateWindow(Programs,Addons,return)</onclick>
+            <onclick condition="System.Platform.Android">ActivateWindow(Programs)</onclick>
+        </item>
+        <item id="3" description="Video apps">
+            <visible>Container(300).HasFocus(2) + !Skin.HasSetting(Addons4)</visible>
+            <label>$LOCALIZE[157]</label>
+            <onclick>ActivateWindow(VideoLibrary,Addons,return)</onclick>
+        </item>
+        <item id="4" description="Music apps">
+            <visible>Container(300).HasFocus(2) + !Skin.HasSetting(Addons5)</visible>
+            <label>$LOCALIZE[2]</label>
+            <onclick condition="Library.HasContent(Music)">ActivateWindow(Music,Addons,return)</onclick>
+        </item>
+        <item id="5" description="Picture apps">
+            <visible>Container(300).HasFocus(2) + !Skin.HasSetting(Addons3)</visible>
+            <label>$LOCALIZE[1]</label>
+            <onclick>XBMC.ActivateWindow(Pictures,Addons,return)</onclick>
+        </item>
+        <item id="6" description="MyTV">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[136]</label>
+            <onclick>ActivateWindow(Videos,playlists,return)</onclick>
+        </item>
+        <item id="36" description="MyMovies">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[135]</label>
+            <onclick>ActivateWindow(Videos,TVShowGenres,return)</onclick>
+        </item>
+        <item id="7" description="RA TV">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[575]</label>
+            <onclick>ActivateWindow(Videos,InProgressShows,return)</onclick>
+        </item>
+        <item id="8" description="RA TV">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[31020]</label>
+            <onclick>ActivateWindow(VideoLibrary,RecentlyAddedEpisodes,return)</onclick>
+        </item>
+        <item id="9" description="Library">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[1024]</label>
+            <onclick>ActivateWindow(Videolibrary,root)</onclick>
+        </item>
+        <item id="10" description="Search">
+            <visible>Container(300).HasFocus(5)</visible>
+            <label>$LOCALIZE[137]</label>
+            <onclick>ActivateWindow(VideoLibrary)</onclick>
+            <onclick>SendClick(8)</onclick>
+        </item>
+        <item id="11" description="MyMovies">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies1)</visible>
+            <label>$LOCALIZE[136]</label>
+            <onclick>ActivateWindow(Videos,playlists,return)</onclick>
+        </item>
+        <item id="35" description="MyMovies">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies1)</visible>
+            <label>$LOCALIZE[135]</label>
+            <onclick>ActivateWindow(Videos,Moviegenres,return)</onclick>
+        </item>
+        <item id="12" description="RA Movies">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies2)</visible>
+            <label>$LOCALIZE[20434]</label>
+            <onclick>ActivateWindow(Videos,Moviesets,return)</onclick>
+        </item>
+        <item id="7" description="RA TV">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies2)</visible>
+            <label>$LOCALIZE[575]</label>
+            <onclick>ActivateWindow(Videos,InProgressMovies,return)</onclick>
+        </item>
+        <item id="13" description="RA Movies">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies2)</visible>
+            <label>$LOCALIZE[31020]</label>
+            <onclick>ActivateWindow(Videos,RecentlyAddedMovies,return)</onclick>
+        </item>
+        <item id="14" description="RA Movies">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies2)</visible>
+            <label>$LOCALIZE[20459]</label>
+            <onclick>ActivateWindow(Videos,MovieTags,return)</onclick>
+        </item>
+        <item id="15" description="Library">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies4)</visible>
+            <label>$LOCALIZE[1024]</label>
+            <onclick>ActivateWindow(Videolibrary,root)</onclick>
+        </item>
+        <item id="16" description="Search">
+            <visible>Container(300).HasFocus(4) + !Skin.HasSetting(Movies5)</visible>
+            <label>$LOCALIZE[137]</label>
+            <onclick>ActivateWindow(VideoLibrary)</onclick>
+            <onclick>SendClick(8)</onclick>
+        </item>
+        <item id="17" description="Videos">
+            <visible>Container(300).HasFocus(3)</visible>
+            <label>$LOCALIZE[136]</label>
+            <onclick>ActivateWindow(Videos,playlists,return)</onclick>
+        </item>
+        <item id="18" description="Music Videos">
+            <visible>Container(300).HasFocus(3) + Library.HasContent(MusicVideos)</visible>
+            <label>$LOCALIZE[31971]</label>
+            <onclick>ActivateWindow(Videos,MusicVideoTitles,return)</onclick>
+        </item>
+        <item id="19" description="Files Videos">
+            <visible>Container(300).HasFocus(3) + !Skin.HasSetting(Movies4)</visible>
+            <label>$LOCALIZE[744]</label>
+            <onclick>ActivateWindow(Videos,files,return)</onclick>
+        </item>
+        <item id="20" description="Search">
+            <visible>Container(300).HasFocus(3) + !Skin.HasSetting(Movies5)</visible>
+            <label>$LOCALIZE[137]</label>
+            <onclick>ActivateWindow(VideoLibrary)</onclick>
+            <onclick>SendClick(8)</onclick>
+        </item>
+        <item id="21" description="Music Videos">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music2) + [Library.HasContent(Music)| Library.HasServices]</visible>
+            <label>$LOCALIZE[132]</label>
+            <onclick>ActivateWindow(Music,Albums)</onclick>
+        </item>
+        <item id="22" description="Artists">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music1) + [Library.HasContent(Music)| Library.HasServices]</visible>
+            <label>$LOCALIZE[133]</label>
+            <onclick>ActivateWindow(Music,Artists)</onclick>
+        </item>
+        <item id="23" description="Top 100">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music1) + [Library.HasContent(Music)| Library.HasServices]</visible>
+            <label>$LOCALIZE[271]</label>
+            <onclick>ActivateWindow(Music,top100,return)</onclick>
+        </item>
+        <item id="23" description="Music Videos">
+            <visible>Container(300).HasFocus(6) + Library.HasContent(MusicVideos)</visible>
+            <label>$LOCALIZE[31972]</label>
+            <onclick condition="Library.HasContent(music)">ActivateWindow(10501,"videodb://musicvideos/")</onclick>
+            <onclick condition="!Library.HasContent(music)">ActivateWindow(10502,"videodb://musicvideos/")</onclick>
+        </item>
+        <item id="24" description="Recently added">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music1) + [Library.HasContent(Music)| Library.HasServices]</visible>
+            <label>$LOCALIZE[31020]</label>
+            <onclick>ActivateWindow(Music,recentlyaddedalbums,return)</onclick>
+        </item>
+        <item id="25" description="Files">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music4)</visible>
+            <label>$LOCALIZE[744]</label>
+            <onclick>ActivateWindow(Music,Files,return)</onclick>
+        </item>
+        <item id="26" description="Search">
+            <visible>Container(300).HasFocus(6) + !Skin.HasSetting(Music5) + Library.HasContent(Music)</visible>
+            <label>$LOCALIZE[137]</label>
+            <onclick>ActivateWindow(Music,root)</onclick>
+            <onclick>SendClick(8)</onclick>
+        </item>
+        <item id="27" description="Master mode button">
+            <visible>Container(300).HasFocus(4) | Container(300).HasFocus(5) | Container(300).HasFocus(6) | Container(300).HasFocus(10)</visible>
+            <visible>System.HasLocks + System.IsMaster</visible>
+            <label>$LOCALIZE[12332]</label>
+            <onclick>xbmc.mastermode</onclick>
+        </item>
+        <item id="28" description="Master mode button">
+            <visible>Container(300).HasFocus(4) | Container(300).HasFocus(5) | Container(300).HasFocus(6) | Container(300).HasFocus(10)</visible>
+            <visible>System.HasLocks + !System.IsMaster</visible>
+            <label>$LOCALIZE[12333]</label>
+            <onclick>xbmc.mastermode</onclick>
+        </item>
+        <item id="29" description="Concerts artists">
+            <visible>Container(300).HasFocus(14)</visible>
+            <label>$LOCALIZE[133]</label>
+            <onclick>ActivateWindow(Videos,MusicVideoArtists,return)</onclick>
+        </item>
+        <item id="30" description="Recent concerts">
+            <visible>Container(300).HasFocus(14)</visible>
+            <label>$LOCALIZE[31020]</label>
+            <onclick>ActivateWindow(Videos,RecentlyAddedMusicVideos,return)</onclick>
+        </item>
+        <item id="31" description="Concerts genres">
+            <visible>Container(300).HasFocus(14)</visible>
+            <label>$LOCALIZE[135]</label>
+            <onclick>ActivateWindow(Videos,MusicVideoGenres,return)</onclick>
+        </item>
+        <item id="32" description="Clips albums">
+            <visible>Container(300).HasFocus(13)</visible>
+            <label>$LOCALIZE[132]</label>
+            <onclick condition="Library.HasContent(music)">ActivateWindow(10501,"videodb://musicvideos/5")</onclick>
+            <onclick condition="!Library.HasContent(music)">ActivateWindow(10502,"videodb://musicvideos/5")</onclick>
+        </item>
+        <item id="33" description="Clips artists">
+            <visible>Container(300).HasFocus(13)</visible>
+            <label>$LOCALIZE[133]</label>
+            <onclick condition="Library.HasContent(music)">ActivateWindow(10501,"videodb://musicvideos/4")</onclick>
+            <onclick condition="!Library.HasContent(music)">ActivateWindow(10502,"videodb://musicvideos/4")</onclick>
+        </item>
+        <item id="34" description="Clips genres">
+            <visible>Container(300).HasFocus(13)</visible>
+            <label>$LOCALIZE[135]</label>
+            <onclick condition="Library.HasContent(music)">ActivateWindow(10501,"videodb://musicvideos/1")</onclick>
+            <onclick condition="!Library.HasContent(music)">ActivateWindow(10502,"videodb://musicvideos/1")</onclick>
+        </item>
+        <item id="41" description="Add-ons">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>$LOCALIZE[24001]</label>
+            <onclick>ActivateWindow(AddonBrowser,root)</onclick>
+        </item>
+        <item id="42" description="Appearance">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>$LOCALIZE[480]</label>
+            <onclick>activatewindow(AppearanceSettings)</onclick>
+        </item>
+        <item id="43" description="System">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>$LOCALIZE[13000]</label>
+            <onclick>ActivateWindow(SystemSettings)</onclick>
+        </item>
+        <item id="44" description="System information">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>$LOCALIZE[130]</label>
+            <onclick>ActivateWindow(SystemInfo)</onclick>
+        </item>
+        <item id="45" description="Profiles">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>20092</label>
+            <onclick>ActivateWindow(Loginscreen)</onclick>
+        </item>
+        <item id="50" description="Reload skin">
+            <visible>Container(300).HasFocus(10)</visible>
+            <label>$LOCALIZE[20183]</label>
+            <onclick>XBMC.ReloadSkin()</onclick>
+        </item>
+        <item id="100" description="Tv Channels">
+            <visible>Container(300).HasFocus(300)</visible>
+            <label>19019</label>
+            <onclick>ActivateWindow(TVChannels)</onclick>
+        </item>
+        <item id="102" description="TV Timeline">
+            <visible>Container(300).HasFocus(300)</visible>
+            <label>$LOCALIZE[22020]</label>
+            <onclick>ActivateWindow(TVGuide)</onclick>
+        </item>
+        <item id="103" description="TV Recordings">
+            <visible>Container(300).HasFocus(300)</visible>
+            <label>19163</label>
+            <onclick>ActivateWindow(TVRecordings)</onclick>
+        </item>
+        <item id="104" description="TV Timer">
+            <visible>Container(300).HasFocus(300)</visible>
+            <label>19040</label>
+            <onclick>ActivateWindow(TVTimers)</onclick>
+        </item>
+        <item id="100" description="Radio Channels">
+            <visible>Container(300).HasFocus(301)</visible>
+            <label>19019</label>
+            <onclick>ActivateWindow(RadioChannels)</onclick>
+        </item>
+        <item id="102" description="Radio Timeline">
+            <visible>Container(300).HasFocus(301)</visible>
+            <label>$LOCALIZE[22020]</label>
+            <onclick>ActivateWindow(RadioGuide)</onclick>
+        </item>
+        <item id="103" description="Radio Recordings">
+            <visible>Container(300).HasFocus(301)</visible>
+            <label>19163</label>
+            <onclick>ActivateWindow(RadioRecordings)</onclick>
+        </item>
+        <item id="104" description="Radio Timer">
+            <visible>Container(300).HasFocus(301)</visible>
+            <label>19040</label>
+            <onclick>ActivateWindow(RadioTimers)</onclick>
+        </item>
     </include>
 </includes>

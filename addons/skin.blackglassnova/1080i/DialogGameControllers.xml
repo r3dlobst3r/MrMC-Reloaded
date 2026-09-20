@@ -7,7 +7,7 @@
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <posy>-189</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1787"/>
                 <param name="y" value="240"/>
@@ -100,9 +100,9 @@
             </control>
             <control type="gamecontroller" id="31">
                 <posx>658</posx>
-                <posy>392</posy>
+                <posy>402</posy>
                 <width>604</width>
-                <height>604</height>
+                <height>360</height>
             </control>
             <control type="group">
                 <posx>1312</posx>
@@ -183,7 +183,7 @@
                 </control>
                 <control type="button" id="19">
                     <width>308</width>
-                    <label>$LOCALIZE[13007]</label>
+                    <label>$LOCALIZE[10035]</label>
                 </control>
                 <control type="button" id="20">
                     <width>308</width>
@@ -195,7 +195,7 @@
                 </control>
                 <control type="button" id="21">
                     <width>308</width>
-                    <label>$LOCALIZE[35019]</label>
+                    <label>$LOCALIZE[35013]</label>
                 </control>
             </control>
         </control>

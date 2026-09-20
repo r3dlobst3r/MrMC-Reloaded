@@ -50,20 +50,20 @@
         <posx>0</posx>
         <posy>-37</posy>
         <height>73</height>
-        <texturebg></texturebg>
+        <texturebg>-</texturebg>
         <reveal>true</reveal>
-        <lefttexture></lefttexture>
-        <righttexture></righttexture>
-        <overlaytexture></overlaytexture>
+        <lefttexture>-</lefttexture>
+        <righttexture>-</righttexture>
+        <overlaytexture>-</overlaytexture>
         <info>ListItem.Progress</info>
     </include>
     <include name="ChannelsView_BG">
         <control type="group">
-            <visible>Control.IsVisible(50)+ !String.IsEmpty(ListItem.Plot)</visible>
+            <visible>Control.IsVisible(50)+ !IsEmpty(ListItem.Plot)</visible>
             <include>Icon_Fade</include>
             <posy>37</posy>
             <control type="image">
-                <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>18</posx>
                 <posy>110</posy>
                 <width>568</width>
@@ -73,7 +73,7 @@
                 <include>ThumbBorder</include>
             </control>
             <control type="image">
-                <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>18</posx>
                 <posy>110</posy>
                 <width>568</width>
@@ -116,7 +116,7 @@
                         <label fallback="416">$INFO[Container(50).ListItem.StartTime,, / ]$INFO[Container(50).ListItem.EndTime]</label>
                     </control>
                     <control type="label">
-                        <visible>!String.IsEmpty(Container(50).ListItem.NextTitle)</visible>
+                        <visible>!IsEmpty(Container(50).ListItem.NextTitle)</visible>
                         <posx>TextMargin</posx>
                         <posy>573</posy>
                         <width>630</width>
@@ -164,7 +164,7 @@
             <texture border="3">list/bg_facade_nofocus_top.png</texture>
         </control>
         <control type="image">
-            <visible>!Integer.IsGreater(Container(50).NumItems,10)</visible>
+            <visible>!IntegerGreaterThan(Container(50).NumItems,10)</visible>
             <posx>740</posx>
             <posy>937</posy>
             <width>1180</width>
@@ -210,7 +210,7 @@
                     <include>PVRProgress_BG</include>
                 </control>
                 <control type="label">
-                    <visible>String.IsEmpty(ListItem.Title)</visible>
+                    <visible>IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <height>71</height>
                     <width>1037</width>
@@ -220,7 +220,7 @@
                     <scroll>false</scroll>
                 </control>
                 <control type="label">
-                    <visible>!String.IsEmpty(ListItem.Title)</visible>
+                    <visible>!IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <height>42</height>
                     <width>1037</width>
@@ -230,7 +230,7 @@
                     <scroll>false</scroll>
                 </control>
                 <control type="label">
-                    <visible>!String.IsEmpty(ListItem.Title)</visible>
+                    <visible>!IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <posy>39</posy>
                     <height>28</height>
@@ -241,7 +241,7 @@
                     <scroll>false</scroll>
                 </control>
                 <control type="image">
-                    <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>23</posx>
                     <height>71</height>
                     <width>73</width>
@@ -250,7 +250,7 @@
                     <aspectratio>keep</aspectratio>
                 </control>
                 <control type="image">
-                    <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>23</posx>
                     <height>71</height>
                     <width>73</width>
@@ -283,7 +283,7 @@
                     <include>PVRProgress_BG</include>
                 </control>
                 <control type="label">
-                    <visible>String.IsEmpty(ListItem.Title)</visible>
+                    <visible>IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <height>71</height>
                     <width>1037</width>
@@ -292,7 +292,7 @@
                     <label>$INFO[ListItem.ChannelNumberLabel,, • ]$INFO[ListItem.Label]</label>
                 </control>
                 <control type="label">
-                    <visible>!String.IsEmpty(ListItem.Title)</visible>
+                    <visible>!IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <height>42</height>
                     <width>1037</width>
@@ -301,7 +301,7 @@
                     <label>$INFO[ListItem.Title]</label>
                 </control>
                 <control type="label">
-                    <visible>!String.IsEmpty(ListItem.Title)</visible>
+                    <visible>!IsEmpty(ListItem.Title)</visible>
                     <posx>116</posx>
                     <posy>39</posy>
                     <height>28</height>
@@ -311,7 +311,7 @@
                     <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
                 </control>
                 <control type="image">
-                    <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>23</posx>
                     <height>71</height>
                     <width>73</width>
@@ -319,7 +319,7 @@
                     <aspectratio>keep</aspectratio>
                 </control>
                 <control type="image">
-                    <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>23</posx>
                     <height>71</height>
                     <width>73</width>
@@ -342,11 +342,11 @@
     <!-- RECORDINGS -->
     <include name="RecordingsView_BG">
         <control type="group">
-            <visible>Control.IsVisible(50)+ !String.IsEmpty(ListItem.Plot)</visible>
+            <visible>Control.IsVisible(50)+ !IsEmpty(ListItem.Plot)</visible>
             <include>Icon_Fade</include>
             <posy>37</posy>
             <control type="image">
-                <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>18</posx>
                 <posy>110</posy>
                 <width>568</width>
@@ -356,7 +356,7 @@
                 <include>ThumbBorder</include>
             </control>
             <control type="image">
-                <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>18</posx>
                 <posy>110</posy>
                 <width>568</width>
@@ -435,7 +435,7 @@
             <texture border="3">list/bg_facade_nofocus_top.png</texture>
         </control>
         <control type="image">
-            <visible>!Integer.IsGreater(Container(50).NumItems,10)</visible>
+            <visible>!IntegerGreaterThan(Container(50).NumItems,10)</visible>
             <posx>740</posx>
             <posy>937</posy>
             <width>1180</width>
@@ -486,7 +486,7 @@
                     <scroll>false</scroll>
                 </control>
                 <control type="image">
-                    <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>34</posx>
                     <posy>0</posy>
                     <height>71</height>
@@ -498,7 +498,7 @@
                     <texture background="true" fallback="defaultChannelTvBig.png">$VAR[Thumbs]</texture>
                 </control>
                 <control type="image">
-                    <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>34</posx>
                     <posy>0</posy>
                     <height>71</height>
@@ -542,7 +542,7 @@
                     <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.Date,  •  ]</label>
                 </control>
                 <control type="image">
-                    <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>34</posx>
                     <posy>0</posy>
                     <height>71</height>
@@ -553,7 +553,7 @@
                     <texture background="true" fallback="defaultChannelTvBig.png">$VAR[Thumbs]</texture>
                 </control>
                 <control type="image">
-                    <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                     <posx>34</posx>
                     <posy>0</posy>
                     <height>71</height>
@@ -603,7 +603,7 @@
             <control type="group">
                 <posy>438</posy>
                 <control type="image">
-                    <visible>!Integer.IsGreater(Container(14).NumItems,10)</visible>
+                    <visible>!IntegerGreaterThan(Container(14).NumItems,10)</visible>
                     <posx>TextMargin</posx>
                     <posy>933</posy>
                     <width>1840</width>
@@ -637,7 +637,7 @@
                         <texture border="3">list/bg_facade_nofocus.png</texture>
                     </control>
                     <control type="image">
-                        <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -646,7 +646,7 @@
                         <aspectratio>keep</aspectratio>
                     </control>
                     <control type="image">
-                        <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -704,7 +704,7 @@
                         <include>FacadeFocus</include>
                     </control>
                     <control type="image">
-                        <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -712,7 +712,7 @@
                         <aspectratio>keep</aspectratio>
                     </control>
                     <control type="image">
-                        <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -835,7 +835,7 @@
             <control type="group">
                 <posy>438</posy>
                 <control type="image">
-                    <visible>!Integer.IsGreater(Container(50).NumItems,10)</visible>
+                    <visible>!IntegerGreaterThan(Container(50).NumItems,10)</visible>
                     <posx>TextMargin</posx>
                     <posy>933</posy>
                     <width>1840</width>
@@ -869,7 +869,7 @@
                         <texture border="3">list/bg_facade_nofocus.png</texture>
                     </control>
                     <control type="image">
-                        <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -878,7 +878,7 @@
                         <aspectratio>keep</aspectratio>
                     </control>
                     <control type="image">
-                        <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -966,7 +966,7 @@
                         <include>FacadeFocus</include>
                     </control>
                     <control type="image">
-                        <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -974,7 +974,7 @@
                         <aspectratio>keep</aspectratio>
                     </control>
                     <control type="image">
-                        <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                         <posx>15</posx>
                         <height>71</height>
                         <width>73</width>
@@ -1108,7 +1108,7 @@
     <!-- EPG TIMELINE -->
     <include name="GuideEPGView_BG">
         <control type="group">
-            <visible>Control.IsVisible(50)</visible>
+            <visible>Control.IsVisible(10)</visible>
             <include>VisibleFadeEffect</include>
             <description>TV Guide Timeline</description>
             <control type="image">
@@ -1140,7 +1140,7 @@
                 <height>490</height>
                 <texture>list/bg_facade_vertical.png</texture>
             </control>
-            <control type="epggrid" id="50">
+            <control type="epggrid" id="10">
                 <viewtype label="19032">list</viewtype>
                 <posx>TextMargin</posx>
                 <posy>140</posy>
@@ -1152,10 +1152,9 @@
                 <rulerunit>6</rulerunit>
                 <onleft>9000</onleft>
                 <onright>31</onright>
-                <onup>50</onup>
-                <ondown>50</ondown>
+                <onup>10</onup>
+                <ondown>10</ondown>
                 <!-- <onback>50</onback> -->
-                <orientation>vertical</orientation>
                 <progresstexture border="0,85,20,20">common/EPGMarker.png</progresstexture>
                 <rulerlayout height="70" width="60">
                     <control type="image" id="1">
@@ -1163,7 +1162,7 @@
                         <height>70</height>
                         <posx>0</posx>
                         <posy>0</posy>
-                        <texture></texture>
+                        <texture>-</texture>
                     </control>
                     <control type="label" id="2">
                         <posx>20</posx>
@@ -1278,7 +1277,7 @@
                 <posy>210</posy>
                 <height>490</height>
                 <include>VerticalScroller</include>
-                <onleft>50</onleft>
+                <onleft>10</onleft>
                 <onright>60</onright>
             </control>
             <!-- INFO -->
@@ -1305,7 +1304,7 @@
                 <texture>list/bg_facade_vertical.png</texture>
             </control>
             <control type="image">
-                <visible>String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>95</posx>
                 <posy>798</posy>
                 <width>318</width>
@@ -1315,7 +1314,7 @@
                 <include>ThumbBorder</include>
             </control>
             <control type="image">
-                <visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
+                <visible>!IsEmpty(Window.Property(IsRadio))</visible>
                 <posx>95</posx>
                 <posy>798</posy>
                 <width>318</width>
@@ -1380,6 +1379,799 @@
                     <label>$INFO[ListItem.Plot]</label>
                     <autoscroll time="3000" delay="4000" repeat="5000">true</autoscroll>
                 </control>
+            </control>
+        </control>
+    </include>
+    <!-- EPG NOW -->
+    <include name="GuideNowView_BG">
+        <control type="group">
+            <visible>Control.IsVisible(11)</visible>
+            <include>VisibleFadeEffect</include>
+            <control type="group">
+                <visible>Control.IsVisible(11) + !IsEmpty(Container(11).ListItem.Plot)</visible>
+                <include>Icon_Fade</include>
+                <posy>37</posy>
+                <control type="image">
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="defaultChannelTvBig.png">$INFO[Container(11).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="image">
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="DefaultRadioBig.png">$INFO[Container(11).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>116</posy>
+                    <control type="group">
+                        <control type="label">
+                            <posx>TextMargin</posx>
+                            <posy>393</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label fallback="416">$INFO[Container(11).ListItem.ChannelNumberLabel,,  •  ]$INFO[Container(11).ListItem.ChannelName]</label>
+                        </control>
+                        <control type="label">
+                            <visible>Container(11).ListItem.HasEpg</visible>
+                            <posx>TextMargin</posx>
+                            <posy>453</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(11).ListItem.Genre]</label>
+                        </control>
+                        <control type="label">
+                            <visible>Container(11).ListItem.HasEpg</visible>
+                            <posx>TextMargin</posx>
+                            <posy>513</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label fallback="416">$INFO[Container(11).ListItem.StartTime,, / ]$INFO[Container(11).ListItem.EndTime]</label>
+                        </control>
+                        <control type="label">
+                            <visible>!IsEmpty(Container(11).ListItem.NextTitle)</visible>
+                            <posx>TextMargin</posx>
+                            <posy>573</posy>
+                            <width>630</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(11).ListItem.NextTitle,$LOCALIZE[19031]: ]</label>
+                        </control>
+                        <control type="textbox">
+                            <posx>TextMargin</posx>
+                            <posy>650</posy>
+                            <width>635</width>
+                            <height>240</height>
+                            <font>InfoPlotFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label>$INFO[Container(11).ListItem.Plot]</label>
+                            <pagecontrol>6066</pagecontrol>
+                        </control>
+                        <control type="scrollbar" id="6066">
+                            <visible>Skin.HasSetting(ManualScroll)</visible>
+                            <posx>680</posx>
+                            <posy>650</posy>
+                            <height>240</height>
+                            <include>VerticalScroller</include>
+                            <onleft>9000</onleft>
+                            <onright>11</onright>
+                        </control>
+                    </control>
+                </control>
+            </control>
+            <include>ScrollOffsetLabel_50_BG</include>
+            <control type="image">
+                <posx>704</posx>
+                <posy>125</posy>
+                <width>1445</width>
+                <height>1160</height>
+                <include condition="!Skin.HasSetting(BlackGlassMode)">bg_tvguide</include>
+                <include condition="Skin.HasSetting(BlackGlassMode)">bg_tvguide_BG</include>
+            </control>
+            <control type="image">
+                <posx>740</posx>
+                <posy>134</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="image">
+                <visible>!IntegerGreaterThan(Container(11).NumItems,10)</visible>
+                <posx>740</posx>
+                <posy>937</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="label">
+                <include>FacadeNumItems</include>
+                <label>$INFO[Container.NumItems] $LOCALIZE[31025]</label>
+            </control>
+            <control type="panel" id="11">
+                <viewtype label="19030">list</viewtype>
+                <posx>740</posx>
+                <posy>207</posy>
+                <width>1180</width>
+                <height>803</height>
+                <onleft>6066</onleft>
+                <onright>76</onright>
+                <onup>11</onup>
+                <ondown>11</ondown>
+                <pagecontrol>76</pagecontrol>
+                <scrolltime tween="sine" easing="inout">280</scrolltime>
+                <itemlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texture border="3">list/bg_facade_nofocus.png</texture>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>NoFocusedProgressColor</colordiffuse>
+                        <visible>!ListItem.IsRecording</visible>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid_red.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>NoFocusedProgressColor</colordiffuse>
+                        <visible>ListItem.IsRecording</visible>
+                    </control>
+                    <include>RecOverlayNoFocus_BG</include>
+                    <control type="image">
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="defaultChannelTvBig.png">$INFO[ListItem.Icon]</texture>
+                        <colordiffuse>NoFocusedColor</colordiffuse>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="DefaultRadioBig.png">$INFO[ListItem.Icon]</texture>
+                        <colordiffuse>NoFocusedColor</colordiffuse>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <height>42</height>
+                        <width>1030</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                        <scroll>false</scroll>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1030</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                        <scroll>false</scroll>
+                    </control>
+                </itemlayout>
+                <focusedlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <include>FacadeFocus</include>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>FocusedProgressColor</colordiffuse>
+                        <visible>!ListItem.IsRecording</visible>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid_red.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>FocusedProgressColor</colordiffuse>
+                        <visible>ListItem.IsRecording</visible>
+                    </control>
+                    <include>RecOverlayFocus_BG</include>
+                    <control type="image">
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="defaultChannelTvBig.png">$INFO[ListItem.Icon]</texture>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="DefaultRadioBig.png">$INFO[ListItem.Icon]</texture>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <height>42</height>
+                        <width>1030</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1030</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="scrollbar" id="76">
+                <include>ScrollabarVerticalHasFocus</include>
+                <posx>1899</posx>
+                <posy>207</posy>
+                <height>803</height>
+                <include>VerticalScroller</include>
+                <onleft>11</onleft>
+                <onright>505050</onright>
+            </control>
+        </control>
+    </include>
+    <!-- EPG Next -->
+    <include name="GuideNextView_BG">
+        <control type="group">
+            <visible>Control.IsVisible(12)</visible>
+            <include>VisibleFadeEffect</include>
+            <control type="group">
+                <visible>Control.IsVisible(12) + !IsEmpty(Container(12).ListItem.Plot)</visible>
+                <include>Icon_Fade</include>
+                <posy>37</posy>
+                <control type="image">
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="defaultChannelTvBig.png">$INFO[Container(12).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="image">
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="DefaultRadioBig.png">$INFO[Container(12).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>116</posy>
+                    <control type="group">
+                        <control type="label">
+                            <posx>TextMargin</posx>
+                            <posy>393</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label fallback="416">$INFO[Container(12).ListItem.ChannelNumberLabel,,  •  ]$INFO[Container(12).ListItem.ChannelName]</label>
+                        </control>
+                        <control type="label">
+                            <visible>Container(12).ListItem.HasEpg</visible>
+                            <posx>TextMargin</posx>
+                            <posy>453</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(12).ListItem.Genre]</label>
+                        </control>
+                        <control type="label">
+                            <visible>Container(12).ListItem.HasEpg</visible>
+                            <posx>TextMargin</posx>
+                            <posy>513</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label fallback="416">$INFO[Container(12).ListItem.StartTime,, / ]$INFO[Container(12).ListItem.EndTime]</label>
+                        </control>
+                        <control type="label">
+                            <visible>!IsEmpty(Container(12).ListItem.NextTitle)</visible>
+                            <posx>TextMargin</posx>
+                            <posy>573</posy>
+                            <width>630</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(12).ListItem.NextTitle,$LOCALIZE[19031]: ]</label>
+                        </control>
+                        <control type="textbox">
+                            <posx>TextMargin</posx>
+                            <posy>650</posy>
+                            <width>635</width>
+                            <height>240</height>
+                            <font>InfoPlotFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label>$INFO[Container(12).ListItem.Plot]</label>
+                            <pagecontrol>6066</pagecontrol>
+                        </control>
+                        <control type="scrollbar" id="6066">
+                            <visible>Skin.HasSetting(ManualScroll)</visible>
+                            <posx>680</posx>
+                            <posy>650</posy>
+                            <height>240</height>
+                            <include>VerticalScroller</include>
+                            <onleft>9000</onleft>
+                            <onright>12</onright>
+                        </control>
+                    </control>
+                </control>
+            </control>
+            <include>ScrollOffsetLabel_50_BG</include>
+            <control type="image">
+                <posx>704</posx>
+                <posy>125</posy>
+                <width>1445</width>
+                <height>1160</height>
+                <include condition="!Skin.HasSetting(BlackGlassMode)">bg_tvguide</include>
+                <include condition="Skin.HasSetting(BlackGlassMode)">bg_tvguide_BG</include>
+            </control>
+            <control type="image">
+                <posx>740</posx>
+                <posy>134</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="image">
+                <visible>!IntegerGreaterThan(Container(11).NumItems,10)</visible>
+                <posx>740</posx>
+                <posy>937</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="label">
+                <include>FacadeNumItems</include>
+                <label>$INFO[Container.NumItems] $LOCALIZE[31025]</label>
+            </control>
+            <control type="panel" id="12">
+                <viewtype label="19031">list</viewtype>
+                <posx>740</posx>
+                <posy>207</posy>
+                <width>1180</width>
+                <height>803</height>
+                <onleft>6066</onleft>
+                <onright>76</onright>
+                <onup>12</onup>
+                <ondown>12</ondown>
+                <pagecontrol>76</pagecontrol>
+                <scrolltime tween="sine" easing="inout">280</scrolltime>
+                <itemlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texture border="3">list/bg_facade_nofocus.png</texture>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>NoFocusedProgressColor</colordiffuse>
+                        <visible>!ListItem.IsRecording</visible>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid_red.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>NoFocusedProgressColor</colordiffuse>
+                        <visible>ListItem.IsRecording</visible>
+                    </control>
+                    <include>RecOverlayNoFocus_BG</include>
+                    <control type="image">
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="defaultChannelTvBig.png">$INFO[ListItem.Icon]</texture>
+                        <colordiffuse>NoFocusedColor</colordiffuse>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="DefaultRadioBig.png">$INFO[ListItem.Icon]</texture>
+                        <colordiffuse>NoFocusedColor</colordiffuse>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <height>42</height>
+                        <width>1030</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                        <scroll>false</scroll>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1030</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                        <scroll>false</scroll>
+                    </control>
+                </itemlayout>
+                <focusedlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <include>FacadeFocus</include>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>FocusedProgressColor</colordiffuse>
+                        <visible>!ListItem.IsRecording</visible>
+                    </control>
+                    <control type="progress">
+                        <posx>0</posx>
+                        <posy>-37</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texturebg>-</texturebg>
+                        <reveal>true</reveal>
+                        <lefttexture>-</lefttexture>
+                        <midtexture>OSD/osd_progress_mid_red.png</midtexture>
+                        <righttexture>-</righttexture>
+                        <overlaytexture>-</overlaytexture>
+                        <info>ListItem.Progress</info>
+                        <colordiffuse>FocusedProgressColor</colordiffuse>
+                        <visible>ListItem.IsRecording</visible>
+                    </control>
+                    <include>RecOverlayFocus_BG</include>
+                    <control type="image">
+                        <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="defaultChannelTvBig.png">$INFO[ListItem.Icon]</texture>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                        <posx>15</posx>
+                        <height>71</height>
+                        <width>73</width>
+                        <texture background="true" fallback="DefaultRadioBig.png">$INFO[ListItem.Icon]</texture>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <height>42</height>
+                        <width>1030</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <posx>103</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1030</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="scrollbar" id="76">
+                <include>ScrollabarVerticalHasFocus</include>
+                <posx>1899</posx>
+                <posy>207</posy>
+                <height>803</height>
+                <include>VerticalScroller</include>
+                <onleft>12</onleft>
+                <onright>505050</onright>
+            </control>
+        </control>
+    </include>
+    <!-- EPG CHANNEL -->
+    <include name="GuideChannelView_BG">
+        <control type="group">
+            <visible>Control.IsVisible(13)</visible>
+            <include>VisibleFadeEffect</include>
+            <control type="group">
+                <visible>Control.IsVisible(13) + !IsEmpty(Container(13).ListItem.Plot)</visible>
+                <include>Icon_Fade</include>
+                <posy>37</posy>
+                <control type="image">
+                    <visible>IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="defaultChannelTvBig.png">$INFO[Container(13).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="image">
+                    <visible>!IsEmpty(Window.Property(IsRadio))</visible>
+                    <posx>18</posx>
+                    <posy>110</posy>
+                    <width>568</width>
+                    <height>358</height>
+                    <aspectratio align="left" aligny="top" scalediffuse="false">keep</aspectratio>
+                    <texture background="true" fallback="DefaultRadioBig.png">$INFO[Container(13).ListItem.Icon]</texture>
+                    <include>ThumbBorder</include>
+                </control>
+                <control type="group">
+                    <posx>0</posx>
+                    <posy>116</posy>
+                    <control type="group">
+                        <!--<control type="label">-->
+                        <!--<posx>TextMargin</posx>-->
+                        <!--<posy>393</posy>-->
+                        <!--<width>631</width>-->
+                        <!--<height>71</height>-->
+                        <!--<font>InfoDetailsFont</font>-->
+                        <!--<textcolor>MainColor</textcolor>-->
+                        <!--<label fallback="416">$INFO[Container(13).ListItem.ChannelNumberLabel,,  •  ]$INFO[Container(13).ListItem.ChannelName]</label>-->
+                        <!--</control>-->
+                        <control type="label">
+                            <visible>Container(13).ListItem.HasEpg</visible>
+                            <posx>TextMargin</posx>
+                            <posy>453</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(13).ListItem.Genre]</label>
+                        </control>
+                        <control type="label">
+                            <posx>TextMargin</posx>
+                            <posy>513</posy>
+                            <width>631</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label fallback="416">$INFO[Container(13).ListItem.StartTime,, / ]$INFO[Container(13).ListItem.EndTime]</label>
+                        </control>
+                        <control type="label">
+                            <visible>!IsEmpty(Container(13).ListItem.NextTitle)</visible>
+                            <posx>TextMargin</posx>
+                            <posy>573</posy>
+                            <width>630</width>
+                            <height>71</height>
+                            <font>InfoDetailsFont</font>
+                            <textcolor>AlternateColor</textcolor>
+                            <label fallback="416">$INFO[Container(13).ListItem.NextTitle,$LOCALIZE[19031]: ]</label>
+                        </control>
+                        <control type="textbox">
+                            <posx>TextMargin</posx>
+                            <posy>650</posy>
+                            <width>635</width>
+                            <height>240</height>
+                            <font>InfoPlotFont</font>
+                            <textcolor>MainColor</textcolor>
+                            <label>$INFO[Container(13).ListItem.Plot]</label>
+                            <pagecontrol>6065</pagecontrol>
+                        </control>
+                        <control type="scrollbar" id="6065">
+                            <visible>Skin.HasSetting(ManualScroll)</visible>
+                            <posx>680</posx>
+                            <posy>650</posy>
+                            <height>240</height>
+                            <include>VerticalScroller</include>
+                            <onleft>9000</onleft>
+                            <onright>13</onright>
+                        </control>
+                    </control>
+                </control>
+            </control>
+            <include>ScrollOffsetLabel_50_BG</include>
+            <control type="image">
+                <posx>704</posx>
+                <posy>125</posy>
+                <width>1445</width>
+                <height>1160</height>
+                <include condition="!Skin.HasSetting(BlackGlassMode)">bg_tvguide</include>
+                <include condition="Skin.HasSetting(BlackGlassMode)">bg_tvguide_BG</include>
+            </control>
+            <control type="image">
+                <posx>740</posx>
+                <posy>134</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="image">
+                <visible>!IntegerGreaterThan(Container(13).NumItems,10)</visible>
+                <posx>740</posx>
+                <posy>937</posy>
+                <width>1180</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="label">
+                <include>FacadeNumItems</include>
+                <label>$INFO[Container.NumItems] $LOCALIZE[31025]</label>
+            </control>
+            <control type="panel" id="13">
+                <viewtype label="19029">list</viewtype>
+                <posx>740</posx>
+                <posy>207</posy>
+                <width>1180</width>
+                <height>803</height>
+                <onleft>6065</onleft>
+                <onright>75</onright>
+                <onup>13</onup>
+                <ondown>13</ondown>
+                <pagecontrol>75</pagecontrol>
+                <scrolltime tween="sine" easing="inout">280</scrolltime>
+                <itemlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <texture border="3">list/bg_facade_nofocus.png</texture>
+                    </control>
+                    <include>RecOverlayNoFocus_BG</include>
+                    <control type="label">
+                        <posx>15</posx>
+                        <height>42</height>
+                        <width>1050</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                        <scroll>false</scroll>
+                    </control>
+                    <control type="label">
+                        <posx>15</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1050</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistNoFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                        <scroll>false</scroll>
+                    </control>
+                </itemlayout>
+                <focusedlayout height="73" width="1180">
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <height>73</height>
+                        <width>1180</width>
+                        <include>FacadeFocus</include>
+                    </control>
+                    <include>RecOverlayFocus_BG</include>
+                    <control type="label">
+                        <posx>15</posx>
+                        <height>42</height>
+                        <width>1050</width>
+                        <font>FacadeListMainFont</font>
+                        <textcolor>ListFocusColor</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <posx>15</posx>
+                        <posy>39</posy>
+                        <height>28</height>
+                        <width>1050</width>
+                        <font>FacadeListSubFont</font>
+                        <textcolor>SublistFocusColor</textcolor>
+                        <label>$INFO[ListItem.ChannelNumberLabel,,  •  ]$INFO[ListItem.ChannelName]$INFO[ListItem.StartTime,  •  ]$INFO[ListItem.EndTime, - ]</label>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="scrollbar" id="75">
+                <include>ScrollabarVerticalHasFocus</include>
+                <posx>1899</posx>
+                <posy>207</posy>
+                <height>803</height>
+                <include>VerticalScroller</include>
+                <onleft>13</onleft>
+                <onright>505050</onright>
             </control>
         </control>
     </include>

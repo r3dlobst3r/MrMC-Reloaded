@@ -22,7 +22,7 @@
             <include>HeaderSlideEffectTopBar</include>
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <posy>-189</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1787"/>
                 <param name="y" value="240"/>
@@ -100,18 +100,18 @@
                     <texture flipy="true" border="10">common/basichome_upper_gradient.png</texture>
                 </control>
                 <control type="image">
-                    <posx>647</posx>
-                    <posy>801</posy>
-                    <width>195</width>
-                    <height>54</height>
+                    <posx>651</posx>
+                    <posy>771</posy>
+                    <width>187</width>
+                    <height>74</height>
                     <texture>common/logo.png</texture>
                     <colordiffuse>ff000000</colordiffuse>
                 </control>
                 <control type="image">
-                    <posx>646</posx>
-                    <posy>800</posy>
-                    <width>195</width>
-                    <height>54</height>
+                    <posx>650</posx>
+                    <posy>770</posy>
+                    <width>187</width>
+                    <height>74</height>
                     <texture>common/logo.png</texture>
                 </control>
                 <control type="label">
@@ -144,7 +144,7 @@
                     <align>center</align>
                     <font>WindowTitleSubFont</font>
                     <textcolor>MainColor</textcolor>
-                    <label>$INFO[Window(Home).Property(SkinHelper.skin_version)] by Tgx</label>
+                    <label>by Tgx</label>
                 </control>
             </control>
             <control type="list" id="9001">
@@ -195,69 +195,88 @@
                 </focusedlayout>
                 <content>
                     <item>
-                        <label>$LOCALIZE[14206]</label>
-                        <onclick>ActivateWindow(InterfaceSettings)</onclick>
-                        <label2>$VAR[Favourites.Art]</label2>
+                        <visible>!Skin.HasSetting(BlackGlassMode)</visible>
+                        <label>$LOCALIZE[480]</label>
+                        <label2>$VAR[Default.Art]</label2>
+                        <onclick>activatewindow(AppearanceSettings)</onclick>
                     </item>
                     <item>
-                        <label>$LOCALIZE[166]</label>
-                        <onclick>ActivateWindow(SkinSettings)</onclick>
-                        <label2>$VAR[Favourites.Art]</label2>
+                        <visible>Skin.HasSetting(BlackGlassMode)</visible>
+                        <label>$LOCALIZE[480]</label>
+                        <label2>$VAR[Default.Art]</label2>
+                        <onclick>activatewindow(AppearanceSettings)</onclick>
                     </item>
                     <item>
-                        <label>$LOCALIZE[14200]</label>
-                        <onclick>ActivateWindow(PlayerSettings)</onclick>
+                        <visible>!Skin.HasSetting(BlackGlassMode)</visible>
+                        <label>$LOCALIZE[20077]</label>
+                        <label2>$VAR[Default.Art]</label2>
+                        <onclick>activatewindow(skinsettings)</onclick>
+                    </item>
+                    <item>
+                        <visible>Skin.HasSetting(BlackGlassMode)</visible>
+                        <label>$LOCALIZE[20077]</label>
+                        <label2>$VAR[Default.Art]</label2>
+                        <onclick>activatewindow(skinsettings)</onclick>
+                    </item>
+                    <item>
+                        <label>$LOCALIZE[3]</label>
                         <label2>$VAR[Videos.Art]</label2>
+                        <onclick>activatewindow(VideosSettings)</onclick>
                     </item>
                     <item>
-                        <label>$LOCALIZE[14211]</label>
-                        <onclick>ActivateWindow(MediaSettings)</onclick>
-                        <label2>$VAR[Videos.Art]</label2>
+                        <label>$LOCALIZE[2]</label>
+                        <label2>$VAR[Music.Art]</label2>
+                        <onclick>activatewindow(MusicSettings)</onclick>
                     </item>
                     <item>
-                        <label>$LOCALIZE[14204]</label>
-                        <onclick>ActivateWindow(PVRSettings)</onclick>
+                        <label>$LOCALIZE[1]</label>
+                        <label2>$VAR[Pictures.Art]</label2>
+                        <onclick>activatewindow(PicturesSettings)</onclick>
+                    </item>
+                    <item>
+                        <label>$LOCALIZE[31500]</label>
                         <label2>$VAR[Tv.Art]</label2>
+                        <onclick>activateWindow(PVRSettings)</onclick>
                     </item>
                     <item>
-                        <label>$LOCALIZE[15016]</label>
-                        <onclick>ActivateWindow(GameSettings)</onclick>
-                        <label2>$VAR[Games.Art]</label2>
+                        <label>$LOCALIZE[24001]</label>
+                        <label2>$VAR[Addons.Art]</label2>
+                        <onclick>ActivateWindow(AddonBrowser,root)</onclick>
                     </item>
+                    <!--<item>-->
+                        <!--<label>$LOCALIZE[8]</label>-->
+                        <!--<label2>$VAR[Weather.Art]</label2>-->
+                        <!--<onclick>ActivateWindow(WeatherSettings)</onclick>-->
+                    <!--</item>-->
                     <item>
                         <label>$LOCALIZE[14036]</label>
-                        <onclick>ActivateWindow(ServiceSettings)</onclick>
                         <label2>$VAR[Settings.Art]</label2>
+                        <onclick>activatewindow(ServiceSettings)</onclick>
                     </item>
                     <item>
                         <label>$LOCALIZE[13000]</label>
-                        <onclick>ActivateWindow(SystemSettings)</onclick>
-                        <label2>$VAR[Settings.Art]</label2>
+                        <label2>$VAR[Quit.Art]</label2>
+                        <onclick>activatewindow(SystemSettings)</onclick>
                     </item>
                     <item>
                         <label>$LOCALIZE[138]</label>
                         <onclick>ActivateWindow(systeminfo)</onclick>
                         <label2>$VAR[Settings.Art]</label2>
                     </item>
-                    <item>
-                        <label>$LOCALIZE[14114]</label>
-                        <onclick>ActivateWindow(eventlog)</onclick>
-                        <label2>$VAR[Settings.Art]</label2>
-                    </item>
+                    <!--<item>-->
+                        <!--<label>$LOCALIZE[14114]</label>-->
+                        <!--<onclick>ActivateWindow(eventlog)</onclick>-->
+                        <!--<label2>$VAR[Settings.Art]</label2>-->
+                    <!--</item>-->
                     <item>
                         <label>$LOCALIZE[7]</label>
                         <onclick>ActivateWindow(FileManager)</onclick>
                         <label2>$VAR[Settings.Art]</label2>
                     </item>
                     <item>
-                        <label>$LOCALIZE[14210]</label>
+                        <label>$LOCALIZE[13200]</label>
                         <onclick>ActivateWindow(Profiles)</onclick>
                         <label2>$VAR[Favourites.Art]</label2>
-                    </item>
-                    <item>
-                        <label>$LOCALIZE[24001]</label>
-                        <label2>$VAR[Addons.Art]</label2>
-                        <onclick>ActivateWindow(AddonBrowser,root)</onclick>
                     </item>
                 </content>
             </control>

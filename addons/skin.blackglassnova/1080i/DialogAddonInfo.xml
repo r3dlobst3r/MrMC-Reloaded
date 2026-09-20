@@ -7,7 +7,7 @@
         <control type="group">
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <posy>-219</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1737"/>
                 <param name="y" value="240"/>
@@ -34,7 +34,7 @@
                 <align>center</align>
                 <font>InfoTitleFont</font>
                 <textcolor>MainColor</textcolor>
-                <label>$INFO[ListItem.AddonName,$LOCALIZE[24003] - ]</label>
+                <label>$INFO[ListItem.Property(Addon.Name),$LOCALIZE[24003] - ]</label>
             </control>
             <control type="image">
                 <posx>1309</posx>
@@ -78,13 +78,13 @@
                     <include>LeftMenuButton</include>
                     <onleft>8060</onleft>
                 </control>
-                <control type="button" id="100">
+                <control type="button" id="10">
                     <label>$LOCALIZE[24036]</label>
                     <include>LeftMenuButton</include>
                     <onleft>8070</onleft>
                 </control>
                 <control type="button" id="705">
-                    <visible>Integer.IsGreater(Container(50).NumItems,0)</visible>
+                    <visible>IntegerGreaterThan(Container(50).NumItems,0)</visible>
                     <label>$LOCALIZE[20008]</label>
                     <include>LeftMenuButton</include>
                     <onleft>50</onleft>
@@ -103,9 +103,12 @@
                     <include>LeftMenuButton</include>
                     <onleft>8060</onleft>
                 </control>
-                <control type="button" id="13">
+                <control type="radiobutton" id="13">
+                    <visible>Control.IsEnabled(13)</visible>
                     <description>Auto-update button</description>
                     <label>$LOCALIZE[21340]</label>
+                    <radioposx>350</radioposx>
+                    <textwidth>300</textwidth>
                     <width>433</width>
                     <height>73</height>
                     <include>LeftMenuButton</include>
@@ -155,7 +158,7 @@
                     <posy>0</posy>
                     <width>1041</width>
                     <height>71</height>
-                    <label>$LOCALIZE[146] $INFO[ListItem.AddonType]</label>
+                    <label>$LOCALIZE[146] $INFO[ListItem.Property(Addon.Type)]</label>
                     <font>InfoDetailsFont</font>
                     <textcolor>MainColor</textcolor>
                 </control>
@@ -171,7 +174,7 @@
                     <posy>73</posy>
                     <width>1041</width>
                     <height>71</height>
-                    <label>$LOCALIZE[21863]: $INFO[ListItem.AddonCreator]</label>
+                    <label>$LOCALIZE[21863]: $INFO[ListItem.Property(Addon.Creator)]</label>
                     <font>InfoDetailsFont</font>
                     <textcolor>AlternateColor</textcolor>
                 </control>
@@ -187,7 +190,7 @@
                     <posy>146</posy>
                     <width>1041</width>
                     <height>71</height>
-                    <label>$LOCALIZE[24051] $INFO[ListItem.AddonVersion]</label>
+                    <label>$LOCALIZE[24051] $INFO[ListItem.Property(Addon.Version)]</label>
                     <font>InfoDetailsFont</font>
                     <textcolor>MainColor</textcolor>
                 </control>
@@ -216,7 +219,7 @@
                     <height>440</height>
                     <font>InfoPlotFont</font>
                     <align>justify</align>
-                    <label>$INFO[ListItem.AddonDescription]</label>
+                    <label>$INFO[ListItem.Property(Addon.Description)]</label>
                     <pagecontrol>6060</pagecontrol>
                 </control>
                 <control type="scrollbar" id="6060">
@@ -236,7 +239,7 @@
                     <texture>list/bg_facade_nofocus_top.png</texture>
                 </control>
                 <control type="label">
-                    <visible>String.IsEmpty(ListItem.AddonBroken)</visible>
+                    <visible>IsEmpty(ListItem.AddonBroken)</visible>
                     <posx>228</posx>
                     <posy>768</posy>
                     <width>1041</width>
@@ -245,7 +248,7 @@
                     <label>$INFO[ListItem.AddonDisclaimer,[COLOR=WarningColor]$LOCALIZE[24052]: [/COLOR]]</label>
                 </control>
                 <control type="label">
-                    <visible>!String.IsEmpty(ListItem.AddonBroken)</visible>
+                    <visible>!IsEmpty(ListItem.AddonBroken)</visible>
                     <posx>228</posx>
                     <posy>768</posy>
                     <width>1041</width>
@@ -284,7 +287,7 @@
             <!--SCREENSHOTS-->
             <control type="group" id="7050">
                 <visible>control.hasfocus(705)|ControlGroup(7050).HasFocus</visible>
-                <visible>Integer.IsGreater(Container(50).NumItems,0)</visible>
+                <visible>IntegerGreaterThan(Container(50).NumItems,0)</visible>
                 <include>VisibleFadeEffectDelay</include>
                 <posx>178</posx>
                 <posy>382</posy>

@@ -28,8 +28,8 @@
             <include condition="!Skin.HasSetting(BlackGlassMode)">View_570_EventLog</include>
             <include condition="!Skin.HasSetting(BlackGlassMode)">Info_570_EventLog</include>
             <control type="group" id="81257">
-                <visible>[ListItem.IsParentFolder]|
-                    [String.IsEmpty(ListItem.Property(Event.Description))]|
+                <visible>[StringCompare(ListItem.Label,..)]|
+                    [IsEmpty(ListItem.Property(Event.Description))]|
                     [control.hasfocus(60)]</visible>
                 <include>Icon_Fade</include>
                 <control type="image">
@@ -53,8 +53,8 @@
                 <include condition="Skin.HasSetting(BlackGlassMode)">Info_570_EventLog_BG</include>
                 <!-- COMMON -->
                 <control type="group">
-                    <visible>[ListItem.IsParentFolder]|
-                        [String.IsEmpty(ListItem.Property(Event.Description))]</visible>
+                    <visible>[StringCompare(ListItem.Label,..)]|
+                        [IsEmpty(ListItem.Property(Event.Description))]</visible>
                     <include>Icon_Fade</include>
                     <control type="image">
                         <posx>18</posx>
@@ -101,12 +101,12 @@
                 <control type="button" id="21">
                     <description>Level button</description>
                     <include>LeftMenuButton</include>
-                    <label></label>
+                    <label>-</label>
                 </control>
                 <control type="radiobutton" id="22">
                     <description>Only show current level</description>
                     <include>LeftMenuButton</include>
-                    <label></label>
+                    <label>-</label>
                 </control>
                 <control type="button" id="20">
                     <description>Clear button</description>

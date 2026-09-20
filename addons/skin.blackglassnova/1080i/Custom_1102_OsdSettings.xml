@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window type="dialog" id="1102">
+    <onload>Dialog.Close(fullscreeninfo)</onload>
+    <onload condition="VideoPlayer.Content(LiveTV) + !Player.PauseEnabled">SetFocus(704)</onload>
+    <defaultcontrol always="true">704</defaultcontrol>
+    <zorder>5</zorder>
+    <include>OSDFade</include>
+    <controls>
+        <control type="button">
+            <description>background close area</description>
+            <left>0</left>
+            <top>0</top>
+            <width>100%</width>
+            <bottom>280</bottom>
+            <texturefocus />
+            <texturenofocus />
+            <onclick>Action(close)</onclick>
+        </control>
+        <control type="group">
+            <visible>![
+                Window.IsVisible(SubtitleSearch) |
+                Window.IsVisible(DialogSlider.xml) |
+                Window.IsVisible(DialogAudioDSPManager.xml) |
+                Window.IsVisible(DialogAudioDSPSettings.xml) |
+                Window.IsVisible(DialogSelect.xml)|
+                Window.IsVisible(VideoOSDSettings.xml)
+                ]</visible>
+            <include>OSDFade</include>
+            <control type="grouplist" id="202">
+                <posx>0</posx>
+                <posy>65</posy>
+                <width>1920</width>
+                <align>center</align>
+                <itemgap>10</itemgap>
+                <orientation>horizontal</orientation>
+                <control type="button" id="704">
+                    <label>$LOCALIZE[24012]</label>
+                    <include>TopBarButton</include>
+                    <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_subtitles_focus.png</texturefocus>
+                    <texturenofocus>topbar/topbar_subtitles_nofocus.png</texturenofocus>
+                    <onclick>SetProperty(settingslist_content,subtitle,home)</onclick>
+                    <onclick>SetProperty(settingslist_header,$LOCALIZE[24012],home)</onclick>
+                    <onclick>ActivateWindow(1101)</onclick>
+                    <visible>!VideoPlayer.Content(LiveTV) | VideoPlayer.HasSubtitles</visible>
+                </control>
+                <control type="button" id="255">
+                    <label>$LOCALIZE[36501]</label>
+                    <include>TopBarButton</include>
+                    <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_3d_focus.png</texturefocus>
+                    <texturenofocus>topbar/topbar_3d_nofocus.png</texturenofocus>
+                    <visible>VideoPlayer.IsStereoscopic</visible>
+                    <onclick>SetProperty(settingslist_content,3d,home)</onclick>
+                    <onclick>SetProperty(settingslist_header,$LOCALIZE[36501],home)</onclick>
+                    <onclick>ActivateWindow(1101)</onclick>
+                </control>
+                <control type="button" id="70043">
+                    <label>$LOCALIZE[10004]</label>
+                    <include>TopBarButton</include>
+                    <texturefocus colordiffuse="$VAR[Picked.Highlight.Color]">topbar/topbar_settings_focus.png</texturefocus>
+                    <texturenofocus>topbar/topbar_settings_nofocus.png</texturenofocus>
+                    <onclick>SetProperty(settingslist_content,osd,home)</onclick>
+                    <onclick>SetProperty(settingslist_header,$LOCALIZE[5],home)</onclick>
+                    <onclick>ActivateWindow(1101)</onclick>
+                </control>
+            </control>
+            <control type="image">
+                <posx>0</posx>
+                <posy>55</posy>
+                <width>1920</width>
+                <height>73</height>
+                <texture border="3">list/bg_facade_nofocus_top.png</texture>
+            </control>
+            <control type="label">
+                <visible>!Window.IsActive(Custom_1101_SettingsList.xml)</visible>
+                <posx>0</posx>
+                <posy>128</posy>
+                <width>1920</width>
+                <height>50</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>NotificationFont</font>
+                <textcolor>AlternateColor</textcolor>
+                <label>$VAR[TopbarOSDSettingsLabel]</label>
+            </control>
+        </control>
+    </controls>
+</window>

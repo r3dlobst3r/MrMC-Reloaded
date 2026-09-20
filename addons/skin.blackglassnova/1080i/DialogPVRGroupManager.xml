@@ -8,7 +8,7 @@
             <include condition="Skin.HasSetting(BlackGlassMode)+!Skin.HasSetting(DisableSlidingAnimations)">OpenCloseSlideRight</include>
             <visible>!Window.IsVisible(FileBrowser)</visible>
             <posy>-10</posy>
-            <include content="WindowClosingButton">
+            <include name="WindowClosingButton">
                 <param name="id" value="0"/>
                 <param name="x" value="1867"/>
                 <param name="y" value="80"/>
@@ -35,7 +35,7 @@
                 <align>center</align>
                 <font>InfoTitleFont</font>
                 <textcolor>MainColor</textcolor>
-                <label>$VAR[PVRGroupMgrHeader]</label>
+                <label>$LOCALIZE[19143]</label>
             </control>
             <control type="group">
                 <posx>48</posx>
@@ -321,7 +321,7 @@
                     <control type="radiobutton" id="25">
                         <description>Hide Group</description>
                         <width>433</width>
-                        <radioposx>349</radioposx>
+                        <radioposx>363</radioposx>
                         <include>LeftMenuButton</include>
                         <label>$LOCALIZE[19289]</label>
                     </control>
@@ -330,12 +330,6 @@
                         <width>433</width>
                         <include>LeftMenuButton</include>
                         <label>$LOCALIZE[31505]</label>
-                    </control>
-                    <control type="togglebutton" id="34">
-                        <description>TV/Radio toggle</description>
-                        <include>LeftMenuButton</include>
-                        <label>$LOCALIZE[19174]</label>
-                        <altlabel>$LOCALIZE[19173]</altlabel>
                     </control>
                     <control type="button" id="29">
                         <description>OK</description>
