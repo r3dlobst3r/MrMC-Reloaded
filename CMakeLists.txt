@@ -360,6 +360,10 @@ copy_files_from_filelist_to_buildtree(${CMAKE_SOURCE_DIR}/cmake/installdata/comm
 list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.estuary\;${CMAKE_SOURCE_DIR}")
 list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.ariana\;${CMAKE_SOURCE_DIR}")
 list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.mrmc\;${CMAKE_SOURCE_DIR}")
+list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.amber\;${CMAKE_SOURCE_DIR}")
+list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.blackglassnova\;${CMAKE_SOURCE_DIR}")
+list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.opacity\;${CMAKE_SOURCE_DIR}")
+list(APPEND SKINS "${CMAKE_SOURCE_DIR}/addons/skin.ariana.touch\;${CMAKE_SOURCE_DIR}")
 
 if(NOT ${CORE_SYSTEM_NAME} MATCHES "windows")
   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/system/players/VideoPlayer)

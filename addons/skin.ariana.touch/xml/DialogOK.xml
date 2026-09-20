@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">10</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" id="1" description="Heading">
+        <label>-</label>
+        <include>CenterHeading</include>
+      </control>
+      <control type="textbox" id="9" description="Labels">
+        <centertop>50%</centertop>
+        <centerleft>50%</centerleft>
+        <width>60%</width>
+        <height>40%</height>
+        <align>center</align>
+        <font>size22</font>
+        <autoscroll time="3000" delay="4000" repeat="5000">true</autoscroll>
+      </control>
+      <control type="grouplist" id="9000">
+        <include>9000GrouplistParameters</include>
+        <control type="button" id="10" description="Yes">
+          <include>9000Buttons</include>
+          <label>107</label>
+          <onup>10</onup>
+          <ondown>10</ondown>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

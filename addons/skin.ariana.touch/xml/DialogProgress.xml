@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">10</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" id="1" description="Heading">
+        <include>CenterHeading</include>
+        <label>-</label>
+      </control>
+      <control type="group">
+      <centertop>50%</centertop>
+      <height>160</height>
+      <control type="label" id="2" description="Line 1">
+        <top>0</top>
+        <centerleft>50%</centerleft>
+        <width>70%</width>
+        <height>40</height>
+        <align>center</align>
+      </control>
+      <control type="label" id="3" description="Line 2">
+        <top>40</top>
+        <centerleft>50%</centerleft>
+        <width>70%</width>
+        <height>40</height>
+        <align>center</align>
+      </control>
+      <control type="label" id="4" description="Line 3">
+        <top>80</top>
+        <centerleft>50%</centerleft>
+        <width>70%</width>
+        <height>40</height>
+        <align>center</align>
+      </control>
+      <control type="label" id="21" description="Progress">
+        <top>120</top>
+        <centerleft>50%</centerleft>
+        <width>70%</width>
+        <height>40</height>
+        <align>center</align>
+        <label>[B]$INFO[Control.GetLabel(20),,%][/B]</label>
+      </control>
+      <control type="progress" id="20" description="Progressbar">
+        <top/>
+        <left/>
+        <info>System.Progressbar</info>
+        <texturebg/>
+        <lefttexture/>
+        <midtexture/>
+        <righttexture/>
+        <overlaytexture/>
+      </control>
+    </control>
+      <control type="grouplist" id="9000">
+        <include>9000GrouplistParameters</include>
+        <control type="button" id="10" description="Cancel">
+          <include>9000Buttons</include>
+          <pulseonselect>true</pulseonselect>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

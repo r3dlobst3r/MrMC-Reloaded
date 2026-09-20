@@ -44,6 +44,10 @@
   <addon>script.module.pycryptodome</addon>
   <addon>skin.estuary</addon>
   <addon>skin.ariana</addon>
+  <addon>skin.amber</addon>
+  <addon>skin.blackglassnova</addon>
+  <addon>skin.opacity</addon>
+  <addon>skin.ariana.touch</addon>
   <addon>webinterface.default</addon>
   <addon>xbmc.addon</addon>
   <addon>xbmc.core</addon>

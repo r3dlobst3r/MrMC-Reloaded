@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">11</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="label" id="2" description="Heading">
+      <include>CenterHeading</include>
+      <label>-</label>
+    </control>
+    <control type="group" description="Content">
+      <include>OpenClose</include>
+      <centerleft>50%</centerleft>
+      <top>120</top>
+      <width>930</width>
+      <control type="grouplist" id="9000">
+        <top>120</top>
+        <width>930</width>
+        <itemgap>33</itemgap>
+        <orientation>horizontal</orientation>
+        <onleft>9001</onleft>
+        <onright>9001</onright>
+        <ondown>10</ondown>
+        <align>center</align>
+        <control type="button" id="11" description="Browse">
+          <width>285</width>
+          <label>1024</label>
+        </control>
+        <control type="button" id="13" description="Add">
+          <width>285</width>
+          <label>15019</label>
+        </control>
+        <control type="button" id="14" description="Remove">
+          <width>285</width>
+          <label>1210</label>
+        </control>
+      </control>
+      <control type="panel" id="10">
+        <left>0</left>
+        <top>210</top>
+        <width>930</width>
+        <height>243</height>
+        <onup>9000</onup>
+        <ondown>12</ondown>
+        <itemlayout height="80">
+          <control type="image">
+            <width>100%</width>
+            <height>100%</height>
+            <texture border="9">img/SettingsButtonNF.png</texture>
+          </control>
+          <control type="label">
+            <left>20</left>
+            <right>20</right>
+            <height>100%</height>
+            <info>ListItem.Label</info>
+          </control>
+        </itemlayout>
+        <focusedlayout height="80">
+          <control type="group">
+            <control type="image">
+              <width>100%</width>
+              <height>100%</height>
+              <texture border="9">img/SettingsButtonFO.png</texture>
+            </control>
+            <control type="label" description="Path label">
+              <left>20</left>
+              <right>20</right>
+              <height>100%</height>
+              <info>ListItem.Label</info>
+            </control>
+          </control>
+        </focusedlayout>
+      </control>
+      <control type="label" id="0" description="Source Name Label">
+        <top>492</top>
+        <width>930</width>
+        <label>1022</label>
+      </control>
+      <control type="edit" id="12" description="Source Name Button Field">
+        <top>567</top>
+        <label>-</label>
+        <width>930</width>
+        <align>left</align>
+        <textoffsetx>20</textoffsetx>
+        <onup>10</onup>
+        <ondown>1800</ondown>
+      </control>
+      <control type="grouplist" id="1800" description="9000 options">
+        <include>9000GrouplistParameters</include>
+        <control type="button" id="18" description="OK">
+          <include>9000Buttons</include>
+          <label>186</label>
+          <onleft>20</onleft>
+          <onright>19</onright>
+        </control>
+        <control type="button" id="19" description="Cancel">
+          <include>9000Buttons</include>
+          <label>222</label>
+          <onleft>18</onleft>
+          <onright>20</onright>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

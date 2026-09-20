@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <menucontrol>9000</menucontrol>
+  <views>570</views>
+  <defaultcontrol>9000</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" description="Heading">
+        <include>CenterHeading</include>
+        <label>$LOCALIZE[14111]</label>
+      </control>
+      <control type="panel" id="570">
+        <centerleft>50%</centerleft>
+        <top>120</top>
+        <width>1204</width>
+        <height>720</height>
+        <onup>570</onup>
+        <ondown>570</ondown>
+        <onleft>9000</onleft>
+        <itemlayout width="1204" height="120">
+          <control type="image">
+            <left>2</left>
+            <top>2</top>
+            <width>1200</width>
+            <height>116</height>
+            <texture border="9">img/SettingsButtonNF.png</texture>
+            <bordersize>0</bordersize>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="image" description="Thumb">
+            <top>4</top>
+            <left>4</left>
+            <width>112</width>
+            <height>112</height>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <aspectratio>scale</aspectratio>
+          </control>
+          <control type="label" description="Main Label">
+            <left>140</left>
+            <right>20</right>
+            <top>0</top>
+            <height>50</height>
+            <font>size19</font>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.Label2] - $INFO[ListItem.Label]</label>
+          </control>
+          <control type="textbox" description="Description">
+            <left>140</left>
+            <right>20</right>
+            <top>40</top>
+            <height>60</height>
+            <align>left</align>
+            <font>size19</font>
+            <textcolor>$VAR[Label2Color]</textcolor>
+            <label>$INFO[ListItem.Property(Event.Description)]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="1204" height="120">
+          <control type="group">
+
+            <control type="image">
+              <left>4</left>
+              <top>4</top>
+              <width>1196</width>
+              <height>112</height>
+              <texture border="9">img/SettingsButtonFO.png</texture>
+              <bordersize>-10</bordersize>
+              <aspectratio>stretch</aspectratio>
+            </control>
+            <control type="image" description="Thumb">
+              <top>4</top>
+              <left>4</left>
+              <width>112</width>
+              <height>112</height>
+              <texture>$INFO[ListItem.Icon]</texture>
+              <aspectratio>scale</aspectratio>
+            </control>
+            <control type="label" description="Main Label">
+              <left>140</left>
+              <right>20</right>
+              <top>0</top>
+              <height>50</height>
+              <autoscroll>true</autoscroll>
+              <font>size19</font>
+              <textcolor>$VAR[LabelFOColor]</textcolor>
+              <label>$INFO[ListItem.Label2] - $INFO[ListItem.Label]</label>
+            </control>
+            <control type="textbox" description="Description">
+              <left>140</left>
+              <right>20</right>
+              <top>40</top>
+              <height>60</height>
+              <align>left</align>
+              <autoscroll>true</autoscroll>
+              <font>size19</font>
+              <textcolor>$VAR[Label2Color]</textcolor>
+              <label>$INFO[ListItem.Property(Event.Description)]</label>
+            </control>
+          </control>
+        </focusedlayout>
+      </control>
+      <control type="grouplist" id="9000" description="Left - Button Area">
+        <include>9000GrouplistParameters</include>
+        <control type="togglebutton" id="4">
+          <description>Sort asc</description>
+          <label>$LOCALIZE[21430]</label>
+          <altlabel>$LOCALIZE[21431]</altlabel>
+          <usealttexture>Container.SortDirection(Ascending)</usealttexture>
+          <include>9000Buttons</include>
+
+        </control>
+        <control type="button" id="20" description="clear">
+          <include>9000Buttons</include>
+          <label>19185</label>
+
+        </control>
+        <control type="button" id="21" description="Levels">
+          <include>9000Buttons</include>
+          <align>left</align>
+
+        </control>
+        <control type="radiobutton" id="22" description="current level">
+          <include>9000Buttons</include>
+          <align>left</align>
+
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

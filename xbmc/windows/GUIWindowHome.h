@@ -22,6 +22,11 @@
 
 #include "FileItem.h"
 #include "guilib/GUIWindow.h"
+#include "services/emby/EmbyClient.h"
+#include "services/emby/EmbyViewCache.h"
+#include "services/emby/EmbyServices.h"
+#include "services/emby/EmbyUtils.h"
+#include "services/plex/PlexServices.h"
 #include "interfaces/IAnnouncer.h"
 #include "threads/CriticalSection.h"
 #include "utils/Job.h"
@@ -67,4 +72,14 @@ private:
   void ClearHomeShelfItems();
   void SetContextMenuItems(int iControl);
   int GetSelectedItem(int iControl);
+
+  // dynamic home menu (dynamichome="true" skins: opacity, ariana.touch)
+  void SetupServices();
+  void SetupStaticHomeButtons();
+  void SetupMrMCHomeButtons();
+  CFileItemPtr MakeButton(const CFileItem& item);
+  void AddPlexSection(CPlexClientPtr client);
+  void AddEmbySection(CEmbyClientPtr client);
+  bool m_triggerRA{false};
+  CFileItemList* m_buttonSections;
 };

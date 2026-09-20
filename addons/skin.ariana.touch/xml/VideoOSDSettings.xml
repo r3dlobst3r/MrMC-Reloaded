@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">5</defaultcontrol>
+  <controls>
+    <control type="group">
+      <visible>Window.IsTopMostModal(VideoOSDSettings.xml)</visible>
+      <include>VisibleFadeEffect</include>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>60%</width>
+        <height>100%</height>
+        <texture colordiffuse="black">dot/White80.png</texture>
+      </control>
+      <control type="label" id="2" description="Settings">
+        <centerleft>25%</centerleft>
+        <top>60</top>
+        <width>50%</width>
+        <font>-</font>
+        <align>center</align>
+      </control>
+      <control type="grouplist" id="5" description="Control Area">
+        <left>10%</left>
+        <top>75</top>
+        <width>40%</width>
+        <height>930</height>
+        <aligny>top</aligny>
+        <itemgap>5</itemgap>
+        <orientation>vertical</orientation>
+        <onup>5</onup>
+        <ondown>5</ondown>
+      </control>
+      <control type="button" id="7">
+        <align>left</align>
+        <font>size22</font>
+        <height>80</height>
+        <textcolor>white</textcolor>
+        <focusedcolor>black</focusedcolor>
+      </control>
+      <control type="radiobutton" id="8">
+        <align>left</align>
+        <font>size22</font>
+        <height>80</height>
+        <textcolor>white</textcolor>
+        <focusedcolor>black</focusedcolor>
+      </control>
+      <control type="spincontrolex" id="9">
+        <align>left</align>
+        <font>size22</font>
+        <height>80</height>
+        <textcolor>white</textcolor>
+        <focusedcolor>black</focusedcolor>
+        <reverse>yes</reverse>
+      </control>
+      <control type="sliderex" id="13">
+        <align>left</align>
+        <font>size22</font>
+        <height>80</height>
+        <textcolor>white</textcolor>
+        <focusedcolor>black</focusedcolor>
+      </control>
+      <include condition="[StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]">CloseButton</include>
+      <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="CloseButton">
+        <param name="Left" value="120"/>
+      </include>
+    </control>
+  </controls>
+</window>

@@ -153,5 +153,8 @@ constexpr const int GUI_MSG_PLAYBACK_SPEED_CHANGED = GUI_MSG_USER + 50;
 // Audio/Video flags of which shelves need to be re-queried.
 constexpr const int GUI_MSG_SEND_HOME_UPDATE = GUI_MSG_USER + 51;
 
+// MrMC dynamic home: rebuild the server/home menu sections
+constexpr const int GUI_MSG_SETUP_HOME_SERVICES = GUI_MSG_USER + 52;
+
 // MrMC home shelf: an item was removed from a home shelf list
-constexpr const int GUI_MSG_REMOVE_ITEM = GUI_MSG_USER + 52;
+constexpr const int GUI_MSG_REMOVE_ITEM = GUI_MSG_USER + 53;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+  <zorder>2</zorder>
+  <onunload>Dialog.Close(osdsettings)</onunload>
+  <visible>[[Player.Seeking | Player.DisplayAfterSeek | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Window.IsActive(videoosd) | Window.IsActive(osdsettings.xml)] + Window.IsActive(fullscreenvideo)] | !IsEmpty(Player.SeekNumeric)</visible>
+  <visible>![Window.IsActive(sliderdialog) | Window.IsActive(locksettings) | Window.IsActive(dialogsubtitles.xml) | Window.IsActive(videoosdsettings.xml) | Window.IsActive(PVROSDGuide)]</visible>
+  <include>VisibleFadeEffect</include>
+  <controls>
+    <control type="group">
+      <include>OpenClose</include>
+      <top>86%</top>
+      <control type="group" description="feedback labels">
+        <top>-250</top>
+        <control type="label" description="2x RW FW label">
+          <visible>player.forwarding2x | player.rewinding2x</visible>
+          <include>SeekbarLabels</include>
+          <label>2 x</label>
+        </control>
+        <control type="label" description="4x RW FW label">
+          <visible>player.forwarding4x | player.rewinding4x</visible>
+          <include>SeekbarLabels</include>
+          <label>4 x</label>
+        </control>
+        <control type="label" description="8x RW FW label">
+          <visible>player.forwarding8x | player.rewinding8x</visible>
+          <include>SeekbarLabels</include>
+          <label>8 x</label>
+        </control>
+        <control type="label" description="16x RW FW label">
+          <visible>player.forwarding16x | player.rewinding16x</visible>
+          <include>SeekbarLabels</include>
+          <label>16 x</label>
+        </control>
+        <control type="label" description="32x RW FW label">
+          <visible>player.forwarding32x | player.rewinding32x</visible>
+          <include>SeekbarLabels</include>
+          <label>32 x</label>
+        </control>
+        <control type="label" description="Seek time label">
+          <visible>![player.forwarding | player.rewinding]</visible>
+          <visible>Player.DisplayAfterSeek</visible>
+          <include>SeekbarLabels</include>
+          <label>$INFO[Player.SeekOffset]</label>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <animation effect="fade" time="200">WindowClose</animation>
+  <controls>
+    <control type="group">
+      <visible>!System.Platform.IOS</visible>
+      <include>OpenClose</include>
+      <centerleft>50%</centerleft>
+      <centertop>50%</centertop>
+      <width>400</width>
+      <height>120</height>
+      <control type="image">
+        <top>0</top>
+				<width>400</width>
+        <height>120</height>
+        <bordersize>-8</bordersize>
+        <texture border="20">HUD/HUDBackground.png</texture>
+      </control>
+      <control type="image">
+        <visible>!player.passthrough + IntegerGreaterThan(player.volume,0)</visible>
+        <top>0</top>
+				<height>120</height>
+        <width>120</width>
+        <bordersize>32</bordersize>
+        <aspectratio align="left">keep</aspectratio>
+        <texture>OSD/VolMax.png</texture>
+      </control>
+      <control type="image">
+        <visible>player.passthrough | !IntegerGreaterThan(player.volume,0)</visible>
+        <top>0</top>
+				<height>120</height>
+        <width>120</width>
+        <bordersize>32</bordersize>
+        <aspectratio align="left">keep</aspectratio>
+        <texture>OSD/VolOff.png</texture>
+			</control>
+      <control type="progress" id="20">
+        <left>110</left>
+				<top>46</top>
+				<width>196</width>
+        <height>27</height>
+        <reveal>true</reveal>
+        <texturebg>HUD/VolumeBarBackground.png</texturebg>
+        <lefttexture>-</lefttexture>
+        <midtexture>HUD/VolumeBar.png</midtexture>
+        <righttexture>-</righttexture>
+        <info>Player.Volume</info>
+      </control>
+      <control type="label">
+        <right>32</right>
+				<width>50</width>
+        <height>120</height>
+        <font>size24</font>
+        <align>right</align>
+				<label>$INFO[Control.GetLabel(20)]</label>
+				<textcolor>white</textcolor>
+      </control>
+    </control>
+  </controls>
+</window>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <controls>
+    <control type="group">
+      <visible>Slideshow.IsActive</visible>
+      <include>VisibleFadeEffect</include>
+      <animation condition="Slideshow.IsPaused" effect="fade" start="100" end="0" time="200">conditional</animation>
+      <animation condition="!Slideshow.IsPaused" effect="fade" start="0" end="100" time="400">conditional</animation>
+      <animation condition="!Slideshow.IsPaused" effect="fade" start="100" end="0" delay="2000" time="400">conditional</animation>
+      <right>200</right>
+      <top>200</top>
+      <width>120</width>
+      <height>120</height>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>120</width>
+        <height>120</height>
+        <texture border="20">HUD/HUDBackground.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>120</width>
+        <height>120</height>
+        <bordersize>20</bordersize>
+        <texture>OSD/Play.png</texture>
+      </control>
+    </control>
+    <control type="group" id="13">
+      <visible>Slideshow.IsPaused</visible>
+      <include>VisibleFadeEffect</include>
+      <right>200</right>
+      <top>200</top>
+      <width>120</width>
+      <height>120</height>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>120</width>
+        <height>120</height>
+        <texture border="20">HUD/HUDBackground.png</texture>
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>0</top>
+        <width>120</width>
+        <height>120</height>
+        <bordersize>20</bordersize>
+        <texture>OSD/Pause.png</texture>
+      </control>
+    </control>
+    <include>BackButton</include>
+  </controls>
+</window>

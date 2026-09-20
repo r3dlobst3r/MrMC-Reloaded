@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol>9100</defaultcontrol>
+  <controls>
+    <include>PlainBackground</include>
+    <control type="button" id="4004" description="Users">
+      <include>HiddenButton</include>
+    </control>
+    <control type="button" id="4000" description="Server">
+      <include>HiddenButton</include>
+    </control>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" description="mrmc">
+        <left>65</left>
+        <top>20</top>
+        <height>28</height>
+        <width>200</width>
+        <align>left</align>
+        <font>size19</font>
+        <label>MrMC</label>
+      </control>
+      <control type="label" description="Clock">
+        <centerleft>50%</centerleft>
+        <top>20</top>
+        <height>28</height>
+        <width>300</width>
+        <align>center</align>
+        <font>size19</font>
+        <label>$INFO[System.Time]</label>
+      </control>
+      <control type="group" description="Battery Level">
+        <animation effect="slide" end="-144,0" time="0" reversible="true" condition="!StringCompare(Skin.AspectRatio,4:3)">Conditional</animation>
+      <control type="image" description="battery img">
+        <right>25</right>
+        <top>7</top>
+        <height>60</height>
+        <width>60</width>
+        <texture colordiffuse="$VAR[Label2Color]">icons/touch/battery.png</texture>
+        <aspectratio align="right">keep</aspectratio>
+      </control>
+      <control type="progress" id="9900">
+        <right>38</right>
+        <top>-7</top>
+        <height>86</height>
+        <width>39</width>
+        <texturebg colordiffuse="$VAR[Label2Color]" border="2">HUD/SliderBGempty.png</texturebg>
+        <lefttexture/>
+        <righttexture/>
+        <midtexture colordiffuse="$VAR[Label2Color]" border="1">HUD/ProgressFill.png</midtexture>
+        <info>System.BatteryLevel</info>
+      </control>
+      <control type="label" description="battery percent">
+        <top>20</top>
+        <right>90</right>
+        <width>90</width>
+        <height>28</height>
+        <align>right</align>
+        <font>size19</font>
+        <label>$INFO[Control.GetLabel(9900),,%]</label>
+      </control>
+    </control>
+      <control type="panel" id="9000" description="Library sections">
+        <visible>Skin.HasSetting(library)</visible>
+        <include>VisibleFadeEffect</include>
+        <centerleft>50%</centerleft>
+        <width>1580</width>
+        <include condition="StringCompare(Skin.AspectRatio,4:3)">MainMenuMarginsTablet</include>
+        <include condition="!StringCompare(Skin.AspectRatio,4:3)">MainMenuMargins</include>
+        <itemlayout condition="[!StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,7)] | [StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,10)]" height="115">
+          <include>MainMenuLayout</include>
+        </itemlayout>
+        <focusedlayout condition="[!StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,7)] | [StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,10)]" height="115">
+          <include>MainMenuLayout</include>
+        </focusedlayout>
+        <itemlayout condition="![!StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,7)] | [StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,10)]" height="115" width="790">
+          <include>MainMenuLayout</include>
+        </itemlayout>
+        <focusedlayout condition="![!StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,7)] | [StringCompare(Skin.AspectRatio,4:3) + !IntegerGreaterThan(Container(9000).NumItems,10)]" height="115" width="790">
+          <include>MainMenuLayout</include>
+        </focusedlayout>
+      </control>
+      <control type="list" id="9100" description="Shelf menu">
+        <animation effect="slide" end="400,0" time="0" reversible="true" condition="Skin.HasSetting(library)">Conditional</animation>
+        <include>VisibleFadeEffect</include>
+        <centerleft>50%</centerleft>
+        <top>60</top>
+        <height>90</height>
+        <width>1200</width>
+        <orientation>horizontal</orientation>
+        <itemlayout width="400">
+          <control type="label">
+            <left>0</left>
+            <right>0</right>
+            <height>100%</height>
+            <width>100%</width>
+            <align>center</align>
+            <font>size22CU</font>
+            <textcolor>$VAR[Label2Color]</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="400">
+          <control type="image">
+            <visible>!Skin.HasSetting(library)</visible>
+            <left>12</left>
+            <bottom>12</bottom>
+            <right>12</right>
+            <height>3</height>
+            <texture border="1" colordiffuse="$VAR[SelectedColor]">dot/White50.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="label">
+            <visible>!Skin.HasSetting(library)</visible>
+            <left>0</left>
+            <right>0</right>
+            <height>100%</height>
+            <width>100%</width>
+            <align>center</align>
+            <font>size22CU</font>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="label">
+            <visible>Skin.HasSetting(library)</visible>
+            <left>0</left>
+            <right>0</right>
+            <height>100%</height>
+            <width>100%</width>
+            <align>center</align>
+            <font>size22CU</font>
+            <textcolor>$VAR[SelectedColor]</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+
+        </focusedlayout>
+        <content>
+          <item id="1">
+            <visible>!Skin.HasSetting(library)</visible>
+            <label>$LOCALIZE[681]</label>
+            <onclick>SetFocus(9001)</onclick>
+          </item>
+          <item id="2">
+            <visible>!Skin.HasSetting(library)</visible>
+            <label>$LOCALIZE[31026]</label>
+            <onclick>SetFocus(9001)</onclick>
+          </item>
+          <item id="3">
+            <visible>!Skin.HasSetting(library)</visible>
+            <label>$LOCALIZE[31043]</label>
+            <onclick>SetFocus(9001)</onclick>
+          </item>
+          <item id="4">
+            <visible>Skin.HasSetting(library)</visible>
+            <label>$LOCALIZE[14022]</label>
+            <onclick>-</onclick>
+          </item>
+        </content>
+      </control>
+      <control type="grouplist" id="9001" description="Home Shelves">
+        <visible>!Skin.HasSetting(library)</visible>
+        <include>VisibleFadeEffect</include>
+        <include condition="[StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="LeftMargin">
+          <param name="Left" value="0"/>
+        </include>
+        <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="LeftMargin">
+          <param name="Left" value="120"/>
+        </include>
+        <right>0</right>
+        <bottom>0</bottom>
+        <top>150</top>
+        <itemgap>30</itemgap>
+        <aligny>top</aligny>
+        <control type="list" id="8020" description="Shelf">
+          <visible>IntegerGreaterThan(Container(8020).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(2)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="FanartShelf">
+            <param name="ID" value="8020"/>
+            <param name="Height" value="540"/>
+            <param name="Width" value="962"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="FanartShelf">
+            <param name="ID" value="8020"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="748"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="FanartShelf">
+            <param name="ID" value="8020"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="748"/>
+          </include>
+        </control>
+        <control type="list" id="8010" description="Shelf">
+          <visible>!Control.IsVisible(8020)</visible>
+          <visible>IntegerGreaterThan(Container(8010).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(2)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="FanartShelf">
+            <param name="ID" value="8010"/>
+            <param name="Height" value="540"/>
+            <param name="Width" value="962"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="FanartShelf">
+            <param name="ID" value="8010"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="748"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="FanartShelf">
+            <param name="ID" value="8010"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="748"/>
+          </include>
+        </control>
+        <control type="list" id="8011" description="Shelf">
+          <visible>IntegerGreaterThan(Container(8011).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(2)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="PosterShelf">
+            <param name="ID" value="8011"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="PosterShelf">
+            <param name="ID" value="8011"/>
+            <param name="Height" value="540"/>
+            <param name="Width" value="386"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="PosterShelf">
+            <param name="ID" value="8011"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+        </control>
+        <control type="list" id="8000" description="Shelf">
+          <visible>IntegerGreaterThan(Container(8000).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(1)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="PosterShelf">
+            <param name="ID" value="8000"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="PosterShelf">
+            <param name="ID" value="8000"/>
+            <param name="Height" value="540"/>
+            <param name="Width" value="386"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="PosterShelf">
+            <param name="ID" value="8000"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+        </control>
+        <control type="list" id="8001" description="Shelf">
+          <visible>IntegerGreaterThan(Container(8001).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(1)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="PosterShelf">
+            <param name="ID" value="8001"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="PosterShelf">
+            <param name="ID" value="8001"/>
+            <param name="Height" value="540"/>
+            <param name="Width" value="386"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="PosterShelf">
+            <param name="ID" value="8001"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="420"/>
+            <param name="Width" value="300"/>
+          </include>
+        </control>
+        <control type="panel" id="8002" description="Shelf">
+          <visible>IntegerGreaterThan(Container(8002).NumItems,0)</visible>
+          <visible>Container(9100).HasFocus(3)</visible>
+          <include>VisibleFadeEffect</include>
+          <include condition="StringCompare(Skin.AspectRatio,4:3)" content="AlbumShelf">
+            <param name="ID" value="8002"/>
+            <param name="Height" value="570"/>
+            <param name="Width" value="540"/>
+            <param name="ContainerHeight" value="1140"/>
+          </include>
+          <include condition="StringCompare(Skin.AspectRatio,16:9)" content="AlbumShelf">
+            <param name="ID" value="8002"/>
+            <param name="Height" value="450"/>
+            <param name="Width" value="420"/>
+            <param name="ContainerHeight" value="900"/>
+          </include>
+          <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="AlbumShelf">
+            <param name="ID" value="8002"/>
+            <param name="Left" value="90"/>
+            <param name="Height" value="450"/>
+            <param name="Width" value="420"/>
+            <param name="ContainerHeight" value="900"/>
+          </include>
+        </control>
+      </control>
+      <control type="group" description="HomeBar phone">
+        <visible>!StringCompare(Skin.AspectRatio,4:3)</visible>
+        <control type="image" description="SideMenu">
+          <top>0</top>
+          <bottom>0</bottom>
+          <right>0</right>
+          <width>140</width>
+          <aspectratio>stretch</aspectratio>
+          <texture colordiffuse="$VAR[OverlayColor]">dot/White.png</texture>
+        </control>
+        <control type="grouplist" description="SideMenu">
+          <top>150</top>
+          <bottom>60</bottom>
+          <centerright>70</centerright>
+          <width>90</width>
+          <orientation>vertical</orientation>
+          <itemgap>90</itemgap>
+          <include>HomeSideMenuItems</include>
+        </control>
+      </control>
+      <control type="group" description="Tablet">
+        <visible>StringCompare(Skin.AspectRatio,4:3)</visible>
+        <control type="image" description="SideMenu">
+          <bottom>0</bottom>
+          <left>0</left>
+          <right>0</right>
+          <height>150</height>
+          <aspectratio>stretch</aspectratio>
+          <texture colordiffuse="$VAR[OverlayColor]">dot/White.png</texture>
+        </control>
+        <control type="grouplist" description="SideMenu">
+          <left>0</left>
+          <right>0</right>
+          <bottom>-15</bottom>
+          <height>150</height>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <aligny>center</aligny>
+          <itemgap>120</itemgap>
+          <include>HomeSideMenuItems</include>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

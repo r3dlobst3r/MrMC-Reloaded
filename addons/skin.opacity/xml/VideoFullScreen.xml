@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<animation effect="fade" time="500">WindowOpen</animation>
+	<animation effect="fade" time="200">WindowClose</animation>
+	<defaultcontrol always="true">17</defaultcontrol>
+	<controls>
+		<control type="button" id="17">
+			<width>330</width>
+			<height>120</height>
+			<label>Skip Intro</label>
+			<font>font25_title</font>
+			<bottom>100</bottom>
+			<right>100</right>
+			<textoffsetx>20</textoffsetx>
+			<align>center</align>
+			<texturefocus border="40" colordiffuse="primary_color">buttons/dialogbutton-fo.png</texturefocus>
+			<texturenofocus border="40">buttons/dialogbutton-nofo.png</texturenofocus>
+			<animation effect="fade" time="700">VisibleChange</animation>
+			<visible>!IsEmpty(Window.Property(EnableSkip))</visible>
+		</control>
+		<control type="group" id="0">
+			<control type="image">
+				<top>0</top>
+				<left>0</left>
+				<width>1920</width>
+				<height>350</height>
+				<texture>dialogs/dialog-bg-nobo.png</texture>
+			</control>
+			<control type="label" id="10">
+				<left>45</left>
+				<top>15</top>
+				<width>1770</width>
+				<height>100</height>
+				<label></label>
+				<font>font12</font>
+				<shadowcolor>black</shadowcolor>
+			</control>
+			<control type="label" id="11">
+				<left>45</left>
+				<top>115</top>
+				<width>1770</width>
+				<height>100</height>
+				<label></label>
+				<font>font12</font>
+				<shadowcolor>black</shadowcolor>
+			</control>
+			<control type="label" id="12">
+				<left>45</left>
+				<top>215</top>
+				<width>1770</width>
+				<height>100</height>
+				<label></label>
+				<font>font12</font>
+				<shadowcolor>black</shadowcolor>
+			</control>
+		</control>
+		<control type="group" id="1">
+			<depth>DepthOSD+</depth>
+			<visible>Player.Caching + !Stringcompare(Player.Filenameandpath,special://xbmc/media/Splash.mp4)</visible>
+			<animation delay="300" effect="fade" time="200">Visible</animation>
+			<animation effect="fade" delay="200" time="150">Hidden</animation>
+			<centerleft>50%</centerleft>
+			<width>110</width>
+			<centertop>50%</centertop>
+			<height>110</height>
+			<control type="image" id="1">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>110</width>
+				<height>110</height>
+				<texture colordiffuse="BFFFFFFF">osd/buffer-bg.png</texture>
+			</control>
+			<control type="image" id="1">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>92</width>
+				<height>92</height>
+				<texture>dialogs/extendedprogress/loading-back.png</texture>
+			</control>
+			<control type="image" id="1">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>92</width>
+				<height>92</height>
+				<texture colordiffuse="primary_color">$INFO[Player.CacheLevel,dialogs/volume/progress/p,.png]</texture>
+			</control>
+			<control type="label" id="1">
+				<description>buffering value</description>
+				<label>$INFO[Player.CacheLevel]</label>
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>200</width>
+				<height>200</height>
+				<aligny>center</aligny>
+				<align>center</align>
+				<font>font11</font>
+			</control>
+		</control>
+	</controls>
+</window>

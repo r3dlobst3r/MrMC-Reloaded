@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">5</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group" description="Content">
+      <include>OpenClose</include>
+      <control type="label" id="2" description="Heading">
+        <include>CenterHeading</include>
+      </control>
+      <control type="grouplist" id="5">
+        <centerleft>50%</centerleft>
+        <include>VerticalMargins</include>
+        <width>60%</width>
+        <ondown>28</ondown>
+        <onup>28</onup>
+      </control>
+      <control type="button" id="7">
+        <align>left</align>
+        <width>60%</width>
+      </control>
+      <control type="radiobutton" id="8">
+        <align>left</align>
+        <width>60%</width>
+      </control>
+      <control type="spincontrolex" id="9">
+        <align>left</align>
+        <width>60%</width>
+      </control>
+      <control type="grouplist">
+        <include>9000GrouplistParameters</include>
+        <control type="button" id="28" description="Ok">
+          <include>9000Buttons</include>
+          <label>186</label>
+        </control>
+        <control type="button" id="29" description="Cancel">
+          <include>9000Buttons</include>
+          <label>222</label>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

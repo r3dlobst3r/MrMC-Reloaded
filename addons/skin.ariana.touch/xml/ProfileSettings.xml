@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+  <defaultcontrol always="true">5</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" id="102" description="Profile Name">
+        <include>CenterHeading</include>
+      </control>
+      <control type="image" id="101" description="Profile image">
+        <centerleft>50%</centerleft>
+        <top>100</top>
+        <width>168</width>
+        <height>168</height>
+        <texture aligny="top" align="center" diffuse="img/UserDiffuse.png">
+        </texture>
+        <aspectratio scalediffuse="false">scale</aspectratio>
+      </control>
+      <control type="label" id="103" description="Profile Directory">
+        <top>270</top>
+        <height>30</height>
+        <font>size20CU</font>
+        <include>CenterHeading</include>
+      </control>
+      <control type="group">
+        <control type="grouplist" id="5">
+          <top>310</top>
+          <bottom>96</bottom>
+          <centerleft>50%</centerleft>
+          <width>60%</width>
+          <ondown>28</ondown>
+        </control>
+        <control type="button" id="7">
+          <align>left</align>
+          <width>60%</width>
+        </control>
+        <control type="radiobutton" id="8">
+          <align>left</align>
+          <width>60%</width>
+        </control>
+        <control type="spincontrolex" id="9">
+          <align>left</align>
+          <width>60%</width>
+        </control>
+      </control>
+      <control type="grouplist" id="9000">
+        <include>9000GrouplistParameters</include>
+        <control type="button" id="28" description="OK">
+          <label>186</label>
+          <include>9000Buttons</include>
+        </control>
+        <control type="button" id="29" description="Cancel">
+          <include>9000Buttons</include>
+          <label>222</label>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>

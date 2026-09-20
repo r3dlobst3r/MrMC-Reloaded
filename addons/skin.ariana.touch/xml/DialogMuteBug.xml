@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <include>OpenClose</include>
+  <controls>
+    <control type="image">
+      <top>120</top>
+      <right>120</right>
+      <width>120</width>
+      <height>120</height>
+      <texture border="20">HUD/HUDBackground.png</texture>
+    </control>
+    <control type="image" id="901" description="Muted">
+      <top>120</top>
+      <right>120</right>
+      <width>120</width>
+      <height>120</height>
+      <bordersize>32</bordersize>
+      <aspectratio>keep</aspectratio>
+      <texture>OSD/VolOff.png</texture>
+    </control>
+  </controls>
+</window>

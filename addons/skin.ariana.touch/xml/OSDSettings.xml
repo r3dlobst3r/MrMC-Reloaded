@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">9000</defaultcontrol>
+  <controls>
+    <control type="group" description="Video TopMenu">
+      <visible>Player.HasVideo + ![Window.IsActive(pvrosdguide) | Window.IsActive(pvrosdchannels) | Window.IsActive(sliderdialog) | Window.IsActive(subtitlesearch) | Window.IsActive(videoosdsettings.xml) | Window.IsActive(PVROSDGuide)]</visible>
+      <include>VisibleFadeEffect</include>
+      <include>OpenClose</include>
+      <control type="image" description="Background">
+        <animation condition="!Container(9000).HasFocus(101)" effect="slide" start="0,0" end="0,-60" time="170" tween="cubic" easing="inout" reversible="true">Conditional</animation>
+        <left>0</left>
+        <top>0</top>
+        <width>100%</width>
+        <height>270</height>
+        <texture>dot/Black75.png</texture>
+      </control>
+      <control type="image" description="Background Line">
+        <left>0</left>
+        <top>90</top>
+        <width>1920</width>
+        <height>1</height>
+        <texture>img/LineST.png</texture>
+      </control>
+      <control type="list" id="9000" description="Main menu">
+        <centerleft>50%</centerleft>
+        <top>15</top>
+        <height>90</height>
+        <include condition="VideoPlayer.Content(livetv) | Pvr.IsPlayingRecording">PVRwidth</include>
+        <width>1000</width>
+        <onup>noop</onup>
+        <ondown>9009</ondown>
+        <onleft>noop</onleft>
+        <onright>noop</onright>
+        <orientation>horizontal</orientation>
+        <itemlayout width="250">
+          <control type="label">
+            <left>0</left>
+            <right>0</right>
+            <height>100%</height>
+            <width>100%</width>
+            <align>center</align>
+            <font>size22CU</font>
+            <textcolor>grey</textcolor>
+            <label>[B]$INFO[ListItem.Label][/B]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="250">
+          <control type="label">
+            <left>0</left>
+            <right>0</right>
+            <height>100%</height>
+            <width>100%</width>
+            <align>center</align>
+            <font>size22CU</font>
+            <textcolor>white</textcolor>
+            <label>[B]$INFO[ListItem.Label][/B]</label>
+          </control>
+        </focusedlayout>
+        <content>
+          <item id="102">
+            <label>$LOCALIZE[287]</label>
+            <onclick>SetFocus(9002)</onclick>
+          </item>
+          <item id="103">
+            <label>$LOCALIZE[292]</label>
+            <onclick>SetFocus(9003)</onclick>
+          </item>
+          <item id="104">
+            <label>$LOCALIZE[10004]</label>
+            <onclick>SetFocus(9004)</onclick>
+          </item>
+          <item id="105">
+            <visible>VideoPlayer.Content(livetv)</visible>
+            <label>$LOCALIZE[31033]</label>
+            <onclick>SetFocus(9005)</onclick>
+          </item>
+          <item id="101">
+            <label>$LOCALIZE[31030]</label>
+            <onclick>noop</onclick>
+          </item>
+        </content>
+      </control>
+      <!--<control type="grouplist" id="9000" description="Main Menu">
+        <centerleft>50%</centerleft>
+        <top>15</top>
+        <width>1800</width>
+        <height>90</height>
+        <itemgap>0</itemgap>
+        <onup>Close</onup>
+        <align>center</align>
+        <ondown>9009</ondown>
+        <orientation>horizontal</orientation>
+        <control type="button" id="101" description="Info">
+          <ondown>4</ondown>
+          <font>size22</font>
+          <include>VideoMenuButtons</include>
+          <label>[B]$LOCALIZE[31030][/B]</label>
+        </control>
+        <control type="button" id="105" description="LiveTv">
+          <visible>VideoPlayer.Content(livetv)</visible>
+          <font>size22</font>
+          <include>VideoMenuButtons</include>
+          <label>[B]$LOCALIZE[31033][/B]</label>
+        </control>
+        <control type="button" id="102" description="Subs">
+          <font>size22</font>
+          <include>VideoMenuButtons</include>
+          <label>[B]$LOCALIZE[287][/B]</label>
+        </control>
+        <control type="button" id="103" description="Audio">
+          <font>size22</font>
+          <include>VideoMenuButtons</include>
+          <label>[B]$LOCALIZE[292][/B]</label>
+        </control>
+        <control type="button" id="104" description="Player settings">
+          <font>size22</font>
+          <include>VideoMenuButtons</include>
+          <label>[B]$LOCALIZE[10004][/B]</label>
+        </control>
+      </control> -->
+      <control type="group" description="101 Info">
+        <visible>Container(9000).HasFocus(101)</visible>
+        <include>VisibleFadeEffect</include>
+        <include>VideoMenuInfo</include>
+        <height>190</height>
+      </control>
+      <control type="group" id="9009" description="Grouping for navigation sake">
+        <height>190</height>
+        <control type="grouplist" id="9002" description="SubMenu Subtitles">
+          <visible>Container(9000).HasFocus(102)</visible>
+          <include>VisibleFadeEffect</include>
+          <top>100</top>
+          <centerleft>50%</centerleft>
+          <left>100</left>
+          <right>100</right>
+          <height>80</height>
+          <onup>9000</onup>
+          <ondown>4</ondown>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <control type="button" id="2000" description="SubtitlesSubMenuTemplateButton">
+            <include>VideoMenuButtons</include>
+          </control>
+        </control>
+        <control type="grouplist" id="9003" description="SubMenu Audio">
+          <visible>Container(9000).HasFocus(103)</visible>
+          <include>VisibleFadeEffect</include>
+          <top>100</top>
+          <centerleft>50%</centerleft>
+          <left>100</left>
+          <right>100</right>
+          <height>80</height>
+          <onup>9000</onup>
+          <ondown>4</ondown>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <control type="button" id="3000" description="AudioSubMenuTemplateButton">
+            <include>VideoMenuButtons</include>
+          </control>
+        </control>
+        <control type="grouplist" id="9004" description="Player Settings Submenu">
+          <visible>Container(9000).HasFocus(104)</visible>
+          <include>VisibleFadeEffect</include>
+          <top>100</top>
+          <centerleft>50%</centerleft>
+          <left>100</left>
+          <right>100</right>
+          <height>80</height>
+          <onup>9000</onup>
+          <ondown>4</ondown>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <control type="button" id="4000">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[292]</label>
+            <onclick>ActivateWindow(osdaudiosettings)</onclick>
+          </control>
+          <control type="button" id="4001">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[157]</label>
+            <onclick>ActivateWindow(osdvideosettings)</onclick>
+          </control>
+          <control type="button" id="4002">
+            <visible>System.HasCMS</visible>
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>CMS</label>
+            <onclick>ActivateWindow(osdcmssettings)</onclick>
+          </control>
+        </control>
+        <control type="grouplist" id="9005" description="PVR">
+          <visible>VideoPlayer.Content(livetv)</visible>
+          <visible>Container(9000).HasFocus(105)</visible>
+          <include>VisibleFadeEffect</include>
+          <top>100</top>
+          <centerleft>50%</centerleft>
+          <left>100</left>
+          <right>100</right>
+          <height>80</height>
+          <onup>9000</onup>
+          <ondown>4</ondown>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <control type="button" id="5000" description="record">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[264]</label>
+            <onclick>PlayerControl(Record)</onclick>
+            <enable>Player.CanRecord</enable>
+          </control>
+          <control type="button" id="5003" description="channels">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[19019]</label>
+            <onclick>ActivateWindow(pvrosdchannels)</onclick>
+          </control>
+          <control type="button" id="5001" description="guide">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[19069]</label>
+            <onclick>ActivateWindow(PVROSDGuide)</onclick>
+          </control>
+          <control type="button" id="5002" description="Teletext">
+            <include>VisibleFadeEffect</include>
+            <include>VideoMenuButtons</include>
+            <label>$LOCALIZE[31022]</label>
+            <onclick>ActivateWindow(Teletext)</onclick>
+          </control>
+        </control>
+      </control>
+    </control>
+    <!--
+    <include condition="[StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]">CloseButton</include>
+    <include condition="![StringCompare(Skin.AspectRatio,16:9) | StringCompare(Skin.AspectRatio,4:3)]" content="CloseButton">
+      <param name="Left" value="120"/>
+    </include>
+  -->
+    <control type="group" description="fake button to close osd ios style">
+      <top>360</top>
+      <bottom>90</bottom>
+      <width>100%</width>
+      <control type="button" id="444">
+        <width>100%</width>
+        <height>100%</height>
+        <texturenofocus/>
+        <texturefocus/>
+        <font/>
+        <onclick>Close</onclick>
+      </control>
+    </control>
+  </controls>
+</window>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+  <defaultcontrol always="true">11</defaultcontrol>
+  <controls>
+    <include>FullBackground</include>
+    <control type="group">
+      <include>OpenClose</include>
+      <control type="label" description="MainHeading">
+        <include>CenterHeading</include>
+        <label>$LOCALIZE[19222] - $INFO[VideoPlayer.ChannelName]</label>
+      </control>
+        <control type="group" description="11 furniture">
+          <visible>Control.IsVisible(11)</visible>
+          <include>VisibleFadeEffect</include>
+          <include>InfoPVR</include>
+        </control>
+      <control type="list" id="11">
+        <centerleft>50%</centerleft>
+        <top>120</top>
+        <width>800</width>
+        <bottom>120</bottom>
+        <onup>11</onup>
+        <ondown>11</ondown>
+        <itemlayout height="100">
+          <control type="image">
+            <left>20</left>
+            <bottom>0</bottom>
+            <right>20</right>
+            <height>1</height>
+            <texture border="1" colordiffuse="$VAR[Label2Color]">dot/Grey.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="label" description="Main Label">
+            <right>20</right>
+            <left>20</left>
+            <top>0</top>
+            <height>50%</height>
+            <font>size20</font>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="label" description="Label2">
+            <left>20</left>
+            <right>20</right>
+            <top>50%</top>
+            <height>50%</height>
+            <font>size16</font>
+            <scroll>false</scroll>
+            <align>left</align>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.StartTime] - $INFO[ListItem.EndTime]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout height="100">
+          <control type="image">
+            <left>20</left>
+            <bottom>0</bottom>
+            <right>20</right>
+            <height>1</height>
+            <texture border="1" colordiffuse="$VAR[Label2Color]">dot/Grey.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="label" description="Main Label">
+            <right>20</right>
+            <left>20</left>
+            <top>0</top>
+            <height>50%</height>
+            <font>size20</font>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="label" description="Label2">
+            <left>20</left>
+            <right>20</right>
+            <top>50%</top>
+            <height>50%</height>
+            <font>size16</font>
+            <scroll>false</scroll>
+            <align>left</align>
+            <textcolor>$VAR[LabelNFColor]</textcolor>
+            <label>$INFO[ListItem.StartTime] - $INFO[ListItem.EndTime]</label>
+          </control>
+        </focusedlayout>
+      </control>
+    </control>
+  </controls>
+</window>
