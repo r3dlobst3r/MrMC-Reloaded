@@ -66,6 +66,10 @@ const CWindowTranslator::WindowMapByName CWindowTranslator::WindowMappingByName 
     {"playersettings", WINDOW_SETTINGS_PLAYER},
     {"mediasettings", WINDOW_SETTINGS_MEDIA},
     {"interfacesettings", WINDOW_SETTINGS_INTERFACE},
+    {"videosettings", WINDOW_SETTINGS_MEDIA},      // MrMC: video settings (media)
+    {"musicsettings", WINDOW_SETTINGS_MEDIA},      // MrMC: music settings (media)
+    {"picturessettings", WINDOW_SETTINGS_MEDIA},   // MrMC: pictures settings (media)
+    {"mediasources", WINDOW_MEDIA_SOURCES},        // MrMC: media sources browser
     {"appearancesettings", WINDOW_SETTINGS_INTERFACE}, // backward compatibility to v16
     {"gamesettings", WINDOW_SETTINGS_MYGAMES},
     {"videoplaylist", WINDOW_VIDEO_PLAYLIST},

@@ -157,6 +157,9 @@
 #define WINDOW_DIALOG_GAME_SAVES 10830
 #define WINDOW_DIALOG_GAME_AGENTS 10831
 
+// MrMC media-sources window (Video/Music/Pictures/Playlists/PVR/Plex/Emby)
+#define WINDOW_MEDIA_SOURCES              10900
+
 //#define WINDOW_VIRTUAL_KEYBOARD           11000
 // WINDOW_ID's from 11100 to 11199 reserved for Skins
 

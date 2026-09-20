@@ -59,6 +59,7 @@
 #include "windows/GUIWindowFileManager.h"
 #include "windows/GUIWindowHome.h"
 #include "windows/GUIWindowLoginScreen.h"
+#include "windows/GUIWindowMediaSources.h"
 #include "windows/GUIWindowPointer.h"
 #include "windows/GUIWindowScreensaver.h"
 #include "windows/GUIWindowScreensaverDim.h"
@@ -195,6 +196,7 @@ void CGUIWindowManager::CreateWindows()
   Add(new CGUIWindowVideoNav);
   Add(new CGUIWindowVideoPlaylist);
   Add(new CGUIWindowLoginScreen);
+  Add(new CGUIWindowMediaSources);
   Add(new CGUIWindowSettingsProfile);
   Add(new CGUIWindow(WINDOW_SKIN_SETTINGS, "SkinSettings.xml"));
   Add(new CGUIWindowAddonBrowser);
@@ -421,6 +423,7 @@ bool CGUIWindowManager::DestroyWindows()
 #endif
     DestroyWindow(WINDOW_STARTUP_ANIM);
     DestroyWindow(WINDOW_LOGIN_SCREEN);
+    DestroyWindow(WINDOW_MEDIA_SOURCES);
     DestroyWindow(WINDOW_VISUALISATION);
     DestroyWindow(WINDOW_SETTINGS_MENU);
     DestroyWindow(WINDOW_SETTINGS_PROFILES);
