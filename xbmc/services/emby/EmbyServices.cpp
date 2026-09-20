@@ -233,8 +233,8 @@ void CEmbyServices::OnSettingAction(const std::shared_ptr<const CSetting>& setti
 
   bool startThread = false;
   std::string strMessage;
-  std::string strSignIn = g_localizeStrings.Get(2115);
-  std::string strSignOut = g_localizeStrings.Get(2116);
+  std::string strSignIn = g_localizeStrings.Get(41052);
+  std::string strSignOut = g_localizeStrings.Get(41053);
   const std::string& settingId = setting->GetId();
   if (settingId == CSettings::SETTING_SERVICES_EMBYSIGNIN)
   {
@@ -359,8 +359,8 @@ void CEmbyServices::InitiateSignIn()
 {
   bool startThread = false;
   std::string strMessage;
-  std::string strSignIn = g_localizeStrings.Get(2115);
-  std::string strSignOut = g_localizeStrings.Get(2116);
+  std::string strSignIn = g_localizeStrings.Get(41052);
+  std::string strSignOut = g_localizeStrings.Get(41053);
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SERVICES_EMBYSIGNINPIN) == strSignIn)
   {
     if (PostSignInPinCode())
@@ -502,7 +502,7 @@ void CEmbyServices::Process()
   GetUserSettings();
 
   bool signInByPin, signInByManual;
-  std::string strSignOut = g_localizeStrings.Get(2116);
+  std::string strSignOut = g_localizeStrings.Get(41053);
     // if set to strSignOut, we are signed in by pin
   signInByPin = (CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SERVICES_EMBYSIGNINPIN) == strSignOut);
   // if set to strSignOut, we are signed in by user/pass
@@ -791,9 +791,9 @@ bool CEmbyServices::PostSignInPinCode()
 
     CGUIDialogProgress *waitPinReplyDialog;
     waitPinReplyDialog = (CGUIDialogProgress*)CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_DIALOG_PROGRESS);
-    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(2115));
-    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(2117));
-    std::string prompt = g_localizeStrings.Get(2118) + m_signInByPinCode;
+    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(41052));
+    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(41054));
+    std::string prompt = g_localizeStrings.Get(41055) + m_signInByPinCode;
     waitPinReplyDialog->SetLine(1, prompt);
 
     waitPinReplyDialog->Open();

@@ -269,8 +269,8 @@ void CTraktServices::OnSettingAction(const std::shared_ptr<const CSetting>& sett
 
   bool startThread = false;
   std::string strMessage;
-  std::string strSignIn = g_localizeStrings.Get(1240);
-  std::string strSignOut = g_localizeStrings.Get(1241);
+  std::string strSignIn = g_localizeStrings.Get(41008);
+  std::string strSignOut = g_localizeStrings.Get(41009);
   const std::string& settingId = setting->GetId();
 
   if (settingId == CSettings::SETTING_SERVICES_TRAKTSIGNINPIN)
@@ -314,7 +314,7 @@ void CTraktServices::OnSettingAction(const std::shared_ptr<const CSetting>& sett
     CGUIDialogYesNo* pDialog = (CGUIDialogYesNo*)CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_DIALOG_YES_NO);
     if (!pDialog) return;
 
-    std::string line1 = (settingId == CSettings::SETTING_SERVICES_TRAKTPULLWATCHED) ? g_localizeStrings.Get(36633):g_localizeStrings.Get(36635);
+    std::string line1 = (settingId == CSettings::SETTING_SERVICES_TRAKTPULLWATCHED) ? g_localizeStrings.Get(41252):g_localizeStrings.Get(41254);
     pDialog->SetHeading(CVariant{"Trakt.tv"});
     pDialog->SetLine(1, CVariant{line1});
     pDialog->SetLine(2, CVariant{36637});
@@ -419,9 +419,9 @@ bool CTraktServices::GetSignInPinCode()
 
     CGUIDialogProgress *waitPinReplyDialog;
     waitPinReplyDialog = (CGUIDialogProgress*)CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_DIALOG_PROGRESS);
-    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(2115));
-    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(2117));
-    std::string prompt = verification_url + g_localizeStrings.Get(2119) + user_code;
+    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(41052));
+    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(41054));
+    std::string prompt = verification_url + g_localizeStrings.Get(41056) + user_code;
     waitPinReplyDialog->SetLine(1, prompt);
 
     waitPinReplyDialog->Open();

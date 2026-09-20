@@ -283,7 +283,7 @@ void CServicesManager::GetAllRecentlyAddedMovies(CFileItemList &recentlyAdded, i
     for (int i = 0; i < recentlyAdded.Size() && i < itemLimit; i++)
     {
       CFileItemPtr item = recentlyAdded.Get(i);
-      item->SetProperty("ItemType", g_localizeStrings.Get(681));
+      item->SetProperty("ItemType", g_localizeStrings.Get(41000));
       temp.Add(item);
     }
 
@@ -307,7 +307,7 @@ void CServicesManager::GetAllRecentlyAddedShows(CFileItemList &recentlyAdded, in
     for (int i = 0; i < recentlyAdded.Size() && i < itemLimit; i++)
     {
       CFileItemPtr item = recentlyAdded.Get(i);
-      item->SetProperty("ItemType", g_localizeStrings.Get(681));
+      item->SetProperty("ItemType", g_localizeStrings.Get(41000));
       temp.Add(item);
     }
 
@@ -331,7 +331,7 @@ void CServicesManager::GetAllRecentlyAddedAlbums(CFileItemList &recentlyAdded, i
     for (int i = 0; i < recentlyAdded.Size() && i < itemLimit; i++)
     {
       CFileItemPtr item = recentlyAdded.Get(i);
-      item->SetProperty("ItemType", g_localizeStrings.Get(681));
+      item->SetProperty("ItemType", g_localizeStrings.Get(41000));
       temp.Add(item);
     }
     
@@ -355,7 +355,7 @@ void CServicesManager::GetAllInProgressShows(CFileItemList &inProgress, int item
     for (int i = 0; i < inProgress.Size() && i < itemLimit; i++)
     {
       CFileItemPtr item = inProgress.Get(i);
-      item->SetProperty("ItemType", g_localizeStrings.Get(682));
+      item->SetProperty("ItemType", g_localizeStrings.Get(41001));
       temp.Add(item);
     }
     
@@ -381,7 +381,7 @@ void CServicesManager::GetAllInProgressMovies(CFileItemList &inProgress, int ite
     for (int i = 0; i < inProgress.Size() && i < itemLimit; i++)
     {
       CFileItemPtr item = inProgress.Get(i);
-      item->SetProperty("ItemType", g_localizeStrings.Get(682));
+      item->SetProperty("ItemType", g_localizeStrings.Get(41001));
       temp.Add(item);
     }
     
@@ -409,7 +409,7 @@ void CServicesManager::GetRecentlyAddedMovies(CFileItemList &recentlyAdded, int 
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -433,7 +433,7 @@ void CServicesManager::GetRecentlyAddedMovies(CFileItemList &recentlyAdded, int 
       for (int item = 0; item < embyItems.Size(); ++item)
       {
         CEmbyUtils::SetEmbyItemProperties(*embyItems[item], "movies", embyClient);
-        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
       }
       recentlyAdded.Append(embyItems);
       embyItems.ClearItems();
@@ -457,7 +457,7 @@ void CServicesManager::GetContinueWatching(CFileItemList &continueWatching, std:
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(13558));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41067));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -486,7 +486,7 @@ void CServicesManager::GetRecentlyAddedShows(CFileItemList &recentlyAdded, int i
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -510,7 +510,7 @@ void CServicesManager::GetRecentlyAddedShows(CFileItemList &recentlyAdded, int i
       for (int item = 0; item < embyItems.Size(); ++item)
       {
         CEmbyUtils::SetEmbyItemProperties(*embyItems[item], "tvshows", embyClient);
-        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
       }
       recentlyAdded.Append(embyItems);
       embyItems.ClearItems();
@@ -539,7 +539,7 @@ void CServicesManager::GetRecentlyAddedAlbums(CFileItemList &recentlyAdded, int 
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -568,7 +568,7 @@ void CServicesManager::GetRecentlyAddedAlbums(CFileItemList &recentlyAdded, int 
       for (int item = 0; item < embyItems.Size(); ++item)
       {
         CEmbyUtils::SetEmbyItemProperties(*embyItems[item], "music", embyClient);
-        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(681));
+        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41000));
       }
       recentlyAdded.Append(embyItems);
       embyItems.ClearItems();
@@ -592,7 +592,7 @@ void CServicesManager::GetInProgressShows(CFileItemList &inProgress, int itemLim
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(13559));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41068));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -614,7 +614,7 @@ void CServicesManager::GetInProgressShows(CFileItemList &inProgress, int itemLim
     for (int item = 0; item < embyItems.Size(); ++item)
     {
       CEmbyUtils::SetEmbyItemProperties(*embyItems[item], "tvshows", embyClient);
-      embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(13601));
+      embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41069));
     }
     inProgress.Append(embyItems);
     embyItems.ClearItems();
@@ -637,7 +637,7 @@ void CServicesManager::GetInProgressMovies(CFileItemList &inProgress, int itemLi
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(682));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41001));
     }
     
     CPlexUtils::SetPlexItemProperties(plexItems);
@@ -661,7 +661,7 @@ void CServicesManager::GetInProgressMovies(CFileItemList &inProgress, int itemLi
       for (int item = 0; item < embyItems.Size(); ++item)
       {
         CEmbyUtils::SetEmbyItemProperties(*embyItems[item], "movies", embyClient);
-        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(682));
+        embyItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41001));
       }
       inProgress.Append(embyItems);
       embyItems.ClearItems();
@@ -693,7 +693,7 @@ void CServicesManager::GetMostPlayedSongs(CFileItemList &songs, int itemLimit, s
     for (int item = 0; item < plexItems.Size(); ++item)
     {
       CPlexUtils::SetPlexItemProperties(*plexItems[item], plexClient);
-      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(682));
+      plexItems[item]->SetProperty("ItemType", g_localizeStrings.Get(41001));
     }
 
     CPlexUtils::SetPlexItemProperties(plexItems);

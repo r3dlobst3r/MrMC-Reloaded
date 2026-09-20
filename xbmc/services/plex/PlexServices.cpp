@@ -220,8 +220,8 @@ void CPlexServices::OnSettingAction(const std::shared_ptr<const CSetting>& setti
 
   bool startThread = false;
   std::string strMessage;
-  std::string strSignIn = g_localizeStrings.Get(1240);
-  std::string strSignOut = g_localizeStrings.Get(1241);
+  std::string strSignIn = g_localizeStrings.Get(41008);
+  std::string strSignOut = g_localizeStrings.Get(41009);
   const std::string& settingId = setting->GetId();
   if (settingId == CSettings::SETTING_SERVICES_PLEXSIGNIN)
   {
@@ -313,8 +313,8 @@ void CPlexServices::InitiateSignIn()
 {
   std::string strMessage;
   bool startThread = false;
-  std::string strSignIn = g_localizeStrings.Get(1240);
-  std::string strSignOut = g_localizeStrings.Get(1241);
+  std::string strSignIn = g_localizeStrings.Get(41008);
+  std::string strSignOut = g_localizeStrings.Get(41009);
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SERVICES_PLEXSIGNINPIN) == strSignIn)
   {
     if (GetSignInPinCode())
@@ -824,9 +824,9 @@ bool CPlexServices::GetSignInPinCode()
 
     CGUIDialogProgress *waitPinReplyDialog;
     waitPinReplyDialog = (CGUIDialogProgress*)CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_DIALOG_PROGRESS);
-    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(1246));
-    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(1248));
-    std::string prompt = g_localizeStrings.Get(1249) + code;
+    waitPinReplyDialog->SetHeading(g_localizeStrings.Get(41014));
+    waitPinReplyDialog->SetLine(0, g_localizeStrings.Get(41016));
+    std::string prompt = g_localizeStrings.Get(41017) + code;
     waitPinReplyDialog->SetLine(1, prompt);
 
     waitPinReplyDialog->Open();

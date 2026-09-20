@@ -286,7 +286,7 @@ bool CLightEffectServices::InitConnection()
   {
     m_turnStaticON = false;
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-      g_localizeStrings.Get(882), g_localizeStrings.Get(883), 3000, true);
+      g_localizeStrings.Get(41002), g_localizeStrings.Get(41003), 3000, true);
 
     delete m_lighteffect; m_lighteffect = nullptr;
     return false;

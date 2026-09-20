@@ -24363,3 +24363,1369 @@ msgid "50th Anniversary Edition"
 msgstr ""
 
 # 40000 to 40800 are reserved for Video Versions feature
+# MrMC additions (reserved 41000-41999) ~ MrMC Reloaded port
+
+#: mrmc-reloaded (was #681)
+msgctxt "#41000"
+msgid "Recently Added"
+msgstr ""
+
+#: mrmc-reloaded (was #682)
+msgctxt "#41001"
+msgid "In Progress"
+msgstr ""
+
+#: mrmc-reloaded (was #882)
+msgctxt "#41002"
+msgid "Error, check your settings"
+msgstr ""
+
+#: mrmc-reloaded (was #883)
+msgctxt "#41003"
+msgid "Try disabling LightEffects client"
+msgstr ""
+
+#: mrmc-reloaded (was #1236)
+msgctxt "#41004"
+msgid "Plex client"
+msgstr ""
+
+#: mrmc-reloaded (was #1237)
+msgctxt "#41005"
+msgid "Enable Plex server sign-in/discovery"
+msgstr ""
+
+#: mrmc-reloaded (was #1238)
+msgctxt "#41006"
+msgid "Plex.TV Manual Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #1239)
+msgctxt "#41007"
+msgid "Plex.TV Manual Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #1240)
+msgctxt "#41008"
+msgid "Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #1241)
+msgctxt "#41009"
+msgid "Sign-out"
+msgstr ""
+
+#: mrmc-reloaded (was #1242)
+msgctxt "#41010"
+msgid "Plex Server GDM Discovery"
+msgstr ""
+
+#: mrmc-reloaded (was #1243)
+msgctxt "#41011"
+msgid "Choice of GDM Plex Server discovery"
+msgstr ""
+
+#: mrmc-reloaded (was #1244)
+msgctxt "#41012"
+msgid "Plex Home User"
+msgstr ""
+
+#: mrmc-reloaded (was #1245)
+msgctxt "#41013"
+msgid "Change the Plex Home User"
+msgstr ""
+
+#: mrmc-reloaded (was #1246)
+msgctxt "#41014"
+msgid "Plex.TV Pin Request Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #1247)
+msgctxt "#41015"
+msgid "Plex.TV Pin Request Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #1248)
+msgctxt "#41016"
+msgid "From your computer, go to this url"
+msgstr ""
+
+#: mrmc-reloaded (was #1249)
+msgctxt "#41017"
+msgid "https://plex.tv/link and enter this code -> "
+msgstr ""
+
+#: mrmc-reloaded (was #1250)
+msgctxt "#41018"
+msgid "Plex Library update interval (mins)"
+msgstr ""
+
+#: mrmc-reloaded (was #1251)
+msgctxt "#41019"
+msgid "Amount of time (in mins) that Plex servers are checked for updates"
+msgstr ""
+
+#: mrmc-reloaded (was #1252)
+msgctxt "#41020"
+msgid "Enable Transcode"
+msgstr ""
+
+#: mrmc-reloaded (was #1253)
+msgctxt "#41021"
+msgid "Request transcoded stream from Plex Server"
+msgstr ""
+
+#: mrmc-reloaded (was #1254)
+msgctxt "#41022"
+msgid "Transcode quality"
+msgstr ""
+
+#: mrmc-reloaded (was #1255)
+msgctxt "#41023"
+msgid "Set transcode quality that matches your server or internet speed"
+msgstr ""
+
+#: mrmc-reloaded (was #1276)
+msgctxt "#41024"
+msgid "320Kbps|576x320"
+msgstr ""
+
+#: mrmc-reloaded (was #1277)
+msgctxt "#41025"
+msgid "720Kbps|720x480"
+msgstr ""
+
+#: mrmc-reloaded (was #1278)
+msgctxt "#41026"
+msgid "1.5Mbps|1024x768"
+msgstr ""
+
+#: mrmc-reloaded (was #1279)
+msgctxt "#41027"
+msgid "2Mbps|1280x720"
+msgstr ""
+
+#: mrmc-reloaded (was #1280)
+msgctxt "#41028"
+msgid "3Mbps|1280x720"
+msgstr ""
+
+#: mrmc-reloaded (was #1281)
+msgctxt "#41029"
+msgid "4Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1282)
+msgctxt "#41030"
+msgid "8Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1283)
+msgctxt "#41031"
+msgid "10Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1284)
+msgctxt "#41032"
+msgid "12Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1285)
+msgctxt "#41033"
+msgid "20Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1286)
+msgctxt "#41034"
+msgid "40Mbps|1920x1080"
+msgstr ""
+
+#: mrmc-reloaded (was #1288)
+msgctxt "#41035"
+msgid "Transcode local files"
+msgstr ""
+
+#: mrmc-reloaded (was #1289)
+msgctxt "#41036"
+msgid "Transcode Plex videos over local LAN network"
+msgstr ""
+
+#: mrmc-reloaded (was #1291)
+msgctxt "#41037"
+msgid "Force transcode of H265 or VC-1 files over local network, helps with some hardware limitations"
+msgstr ""
+
+#: mrmc-reloaded (was #1292)
+msgctxt "#41038"
+msgid "Transcode audio to AAC"
+msgstr ""
+
+#: mrmc-reloaded (was #1293)
+msgctxt "#41039"
+msgid "Force transcode of all audio to AAC, disabling this will keep audio intact"
+msgstr ""
+
+#: mrmc-reloaded (was #1294)
+msgctxt "#41040"
+msgid "Transcode local VC-1 files"
+msgstr ""
+
+#: mrmc-reloaded (was #1295)
+msgctxt "#41041"
+msgid "Transcode local H265 files"
+msgstr ""
+
+#: mrmc-reloaded (was #2105)
+msgctxt "#41042"
+msgid "Emby client"
+msgstr ""
+
+#: mrmc-reloaded (was #2106)
+msgctxt "#41043"
+msgid "Enable Emby server sign-in/discovery"
+msgstr ""
+
+#: mrmc-reloaded (was #2107)
+msgctxt "#41044"
+msgid "Emby Manual Sign-in (local)"
+msgstr ""
+
+#: mrmc-reloaded (was #2108)
+msgctxt "#41045"
+msgid "Emby Manual Sign-in (via local broadcast)"
+msgstr ""
+
+#: mrmc-reloaded (was #2109)
+msgctxt "#41046"
+msgid "Emby Pin Request Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #2110)
+msgctxt "#41047"
+msgid "Emby Pin Request Sign-in (via https://emby.media/pin)"
+msgstr ""
+
+#: mrmc-reloaded (was #2111)
+msgctxt "#41048"
+msgid "Emby Servers Sources"
+msgstr ""
+
+#: mrmc-reloaded (was #2112)
+msgctxt "#41049"
+msgid "Emby Servers Sources"
+msgstr ""
+
+#: mrmc-reloaded (was #2113)
+msgctxt "#41050"
+msgid "Limit Home Shelf to selected Emby servers"
+msgstr ""
+
+#: mrmc-reloaded (was #2114)
+msgctxt "#41051"
+msgid "Only selected Emby servers will be displayed in Home Shelf, recently added and in progress"
+msgstr ""
+
+#: mrmc-reloaded (was #2115)
+msgctxt "#41052"
+msgid "Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #2116)
+msgctxt "#41053"
+msgid "Sign-out"
+msgstr ""
+
+#: mrmc-reloaded (was #2117)
+msgctxt "#41054"
+msgid "From your computer, go to this url"
+msgstr ""
+
+#: mrmc-reloaded (was #2118)
+msgctxt "#41055"
+msgid "https://emby.media/pin and enter this code -> "
+msgstr ""
+
+#: mrmc-reloaded (was #2119)
+msgctxt "#41056"
+msgid " and enter this code -> "
+msgstr ""
+
+#: mrmc-reloaded (was #2120)
+msgctxt "#41057"
+msgid "Trakt.tv client"
+msgstr ""
+
+#: mrmc-reloaded (was #2121)
+msgctxt "#41058"
+msgid "Enable Trakt.tv server sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #2122)
+msgctxt "#41059"
+msgid "Trakt.tv Pin Request Sign-in"
+msgstr ""
+
+#: mrmc-reloaded (was #2123)
+msgctxt "#41060"
+msgid "Trakt.tv Pin Request Sign-in (via https://trakt.tv/activate)"
+msgstr ""
+
+#: mrmc-reloaded (was #13414)
+msgctxt "#41061"
+msgid "Include artists who appear only on compilations"
+msgstr ""
+
+#: mrmc-reloaded (was #13417)
+msgctxt "#41062"
+msgid "Basic shaders (ARB)"
+msgstr ""
+
+#: mrmc-reloaded (was #13418)
+msgctxt "#41063"
+msgid "Advanced shaders (GLSL)"
+msgstr ""
+
+#: mrmc-reloaded (was #13429)
+msgctxt "#41064"
+msgid "Allow hardware acceleration - VDADecoder"
+msgstr ""
+
+#: mrmc-reloaded (was #13436)
+msgctxt "#41065"
+msgid "Allow hardware acceleration - libstagefright"
+msgstr ""
+
+#: mrmc-reloaded (was #13550)
+msgctxt "#41066"
+msgid "Pause during refresh rate change"
+msgstr ""
+
+#: mrmc-reloaded (was #13558)
+msgctxt "#41067"
+msgid "Continue Watching"
+msgstr ""
+
+#: mrmc-reloaded (was #13559)
+msgctxt "#41068"
+msgid "On Deck"
+msgstr ""
+
+#: mrmc-reloaded (was #13601)
+msgctxt "#41069"
+msgid "Next Up"
+msgstr ""
+
+#: mrmc-reloaded (was #14089)
+msgctxt "#41070"
+msgid "Font to use for text subtitles"
+msgstr ""
+
+#: mrmc-reloaded (was #14094)
+msgctxt "#41071"
+msgid "Input devices"
+msgstr ""
+
+#: mrmc-reloaded (was #14200)
+msgctxt "#41072"
+msgid "Hue client"
+msgstr ""
+
+#: mrmc-reloaded (was #14201)
+msgctxt "#41073"
+msgid "Setup Hue connection"
+msgstr ""
+
+#: mrmc-reloaded (was #14202)
+msgctxt "#41074"
+msgid "Enable Hue"
+msgstr ""
+
+#: mrmc-reloaded (was #14203)
+msgctxt "#41075"
+msgid "Enable Hue client, ambilight clone"
+msgstr ""
+
+#: mrmc-reloaded (was #14204)
+msgctxt "#41076"
+msgid "Please press the link Button on the Hue bridge"
+msgstr ""
+
+#: mrmc-reloaded (was #14205)
+msgctxt "#41077"
+msgid "Cannot find any bridge"
+msgstr ""
+
+#: mrmc-reloaded (was #14206)
+msgctxt "#41078"
+msgid "Hue bridge pairing"
+msgstr ""
+
+#: mrmc-reloaded (was #14207)
+msgctxt "#41079"
+msgid "Pair MrMC with the bridge"
+msgstr ""
+
+#: mrmc-reloaded (was #14208)
+msgctxt "#41080"
+msgid "Pair"
+msgstr ""
+
+#: mrmc-reloaded (was #14209)
+msgctxt "#41081"
+msgid "Dissociate"
+msgstr ""
+
+#: mrmc-reloaded (was #14211)
+msgctxt "#41082"
+msgid "Mode"
+msgstr ""
+
+#: mrmc-reloaded (was #14212)
+msgctxt "#41083"
+msgid "Usage mode of this light"
+msgstr ""
+
+#: mrmc-reloaded (was #14213)
+msgctxt "#41084"
+msgid "Ambilight"
+msgstr ""
+
+#: mrmc-reloaded (was #14214)
+msgctxt "#41085"
+msgid "Dimming"
+msgstr ""
+
+#: mrmc-reloaded (was #14216)
+msgctxt "#41086"
+msgid "Transition time (seconds)"
+msgstr ""
+
+#: mrmc-reloaded (was #14217)
+msgctxt "#41087"
+msgid "Proportional transition time"
+msgstr ""
+
+#: mrmc-reloaded (was #14218)
+msgctxt "#41088"
+msgid "Dimmed brightness"
+msgstr ""
+
+#: mrmc-reloaded (was #14219)
+msgctxt "#41089"
+msgid "Override paused state"
+msgstr ""
+
+#: mrmc-reloaded (was #14220)
+msgctxt "#41090"
+msgid "Paused brightness"
+msgstr ""
+
+#: mrmc-reloaded (was #14221)
+msgctxt "#41091"
+msgid "Override stopped state"
+msgstr ""
+
+#: mrmc-reloaded (was #14222)
+msgctxt "#41092"
+msgid "Undimmed brightness"
+msgstr ""
+
+#: mrmc-reloaded (was #14224)
+msgctxt "#41093"
+msgid "Ambilight minimum brightness"
+msgstr ""
+
+#: mrmc-reloaded (was #14225)
+msgctxt "#41094"
+msgid "Ambilight maximum brightness"
+msgstr ""
+
+#: mrmc-reloaded (was #14226)
+msgctxt "#41095"
+msgid "Lights"
+msgstr ""
+
+#: mrmc-reloaded (was #14227)
+msgctxt "#41096"
+msgid "Ignore"
+msgstr ""
+
+#: mrmc-reloaded (was #14228)
+msgctxt "#41097"
+msgid "Light"
+msgstr ""
+
+#: mrmc-reloaded (was #14229)
+msgctxt "#41098"
+msgid "Force lights ON"
+msgstr ""
+
+#: mrmc-reloaded (was #14230)
+msgctxt "#41099"
+msgid "Entertainment group"
+msgstr ""
+
+#: mrmc-reloaded (was #14231)
+msgctxt "#41100"
+msgid "Colors"
+msgstr ""
+
+#: mrmc-reloaded (was #14232)
+msgctxt "#41101"
+msgid "Color precision"
+msgstr ""
+
+#: mrmc-reloaded (was #14233)
+msgctxt "#41102"
+msgid "100% is each transition is sent; Lesser values avoid flickering"
+msgstr ""
+
+#: mrmc-reloaded (was #14234)
+msgctxt "#41103"
+msgid "Force lights ON only after sunset"
+msgstr ""
+
+#: mrmc-reloaded (was #14235)
+msgctxt "#41104"
+msgid "Continuous"
+msgstr ""
+
+#: mrmc-reloaded (was #14236)
+msgctxt "#41105"
+msgid "Synchronize Hue with your device even if no video is playing; Needs Mediacodec(Surface)-Capture enabled"
+msgstr ""
+
+#: mrmc-reloaded (was #14237)
+msgctxt "#41106"
+msgid "Dimming mode"
+msgstr ""
+
+#: mrmc-reloaded (was #14238)
+msgctxt "#41107"
+msgid "Individual lights"
+msgstr ""
+
+#: mrmc-reloaded (was #14239)
+msgctxt "#41108"
+msgid "Scene"
+msgstr ""
+
+#: mrmc-reloaded (was #14240)
+msgctxt "#41109"
+msgid "Startup scene"
+msgstr ""
+
+#: mrmc-reloaded (was #14241)
+msgctxt "#41110"
+msgid "Paused scene"
+msgstr ""
+
+#: mrmc-reloaded (was #14242)
+msgctxt "#41111"
+msgid "End scene"
+msgstr ""
+
+#: mrmc-reloaded (was #15108)
+msgctxt "#41112"
+msgid "GUI sounds"
+msgstr ""
+
+#: mrmc-reloaded (was #19086)
+msgctxt "#41113"
+msgid "Mo-__-__-__-__-__-__"
+msgstr ""
+
+#: mrmc-reloaded (was #19087)
+msgctxt "#41114"
+msgid "__-Tu-__-__-__-__-__"
+msgstr ""
+
+#: mrmc-reloaded (was #19088)
+msgctxt "#41115"
+msgid "__-__-We-__-__-__-__"
+msgstr ""
+
+#: mrmc-reloaded (was #19089)
+msgctxt "#41116"
+msgid "__-__-__-Th-__-__-__"
+msgstr ""
+
+#: mrmc-reloaded (was #19096)
+msgctxt "#41117"
+msgid "__-__-__-__-__-Sa-Su"
+msgstr ""
+
+#: mrmc-reloaded (was #19171)
+msgctxt "#41118"
+msgid "Start playback minimised"
+msgstr ""
+
+#: mrmc-reloaded (was #19180)
+msgctxt "#41119"
+msgid "TV"
+msgstr ""
+
+#: mrmc-reloaded (was #19182)
+msgctxt "#41120"
+msgid "Days to display"
+msgstr ""
+
+#: mrmc-reloaded (was #19183)
+msgctxt "#41121"
+msgid "Radio"
+msgstr ""
+
+#: mrmc-reloaded (was #19195)
+msgctxt "#41122"
+msgid "Client actions"
+msgstr ""
+
+#: mrmc-reloaded (was #19215)
+msgctxt "#41123"
+msgid "The PVR backend does not support timers."
+msgstr ""
+
+#: mrmc-reloaded (was #19229)
+msgctxt "#41124"
+msgid "Close channel OSD after switching channels"
+msgstr ""
+
+#: mrmc-reloaded (was #19240)
+msgctxt "#41125"
+msgid "No PVR extension enabled"
+msgstr ""
+
+#: mrmc-reloaded (was #19250)
+msgctxt "#41126"
+msgid "Loading guide from database"
+msgstr ""
+
+#: mrmc-reloaded (was #19269)
+msgctxt "#41127"
+msgid "Disable \"Connection lost\" warnings"
+msgstr ""
+
+#: mrmc-reloaded (was #19279)
+msgctxt "#41128"
+msgid "Client specific"
+msgstr ""
+
+#: mrmc-reloaded (was #20369)
+msgctxt "#41129"
+msgid "Show plot for unwatched items"
+msgstr ""
+
+#: mrmc-reloaded (was #20433)
+msgctxt "#41130"
+msgid "Extract thumbnails and video information"
+msgstr ""
+
+#: mrmc-reloaded (was #20458)
+msgctxt "#41131"
+msgid "Group movies in sets"
+msgstr ""
+
+#: mrmc-reloaded (was #20470)
+msgctxt "#41132"
+msgid "Use movie sets for single movies"
+msgstr ""
+
+#: mrmc-reloaded (was #20472)
+msgctxt "#41133"
+msgid "Import all videos"
+msgstr ""
+
+#: mrmc-reloaded (was #21368)
+msgctxt "#41134"
+msgid "Override ASS / SSA subtitles fonts"
+msgstr ""
+
+#: mrmc-reloaded (was #21460)
+msgctxt "#41135"
+msgid "Subtitle position on screen"
+msgstr ""
+
+#: mrmc-reloaded (was #21461)
+msgctxt "#41136"
+msgid "Fixed"
+msgstr ""
+
+#: mrmc-reloaded (was #21463)
+msgctxt "#41137"
+msgid "Below video"
+msgstr ""
+
+#: mrmc-reloaded (was #21465)
+msgctxt "#41138"
+msgid "Above video"
+msgstr ""
+
+#: mrmc-reloaded (was #24001)
+msgctxt "#41139"
+msgid "Extensions"
+msgstr ""
+
+#: mrmc-reloaded (was #24996)
+msgctxt "#41140"
+msgid "Dependencies"
+msgstr ""
+
+#: mrmc-reloaded (was #29983)
+msgctxt "#41141"
+msgid "RDS inform you about traffic advisory messages"
+msgstr ""
+
+#: mrmc-reloaded (was #34129)
+msgctxt "#41142"
+msgid "Default"
+msgstr ""
+
+#: mrmc-reloaded (was #34130)
+msgctxt "#41143"
+msgid "2 times less"
+msgstr ""
+
+#: mrmc-reloaded (was #35100)
+msgctxt "#41144"
+msgid "Enable joystick and gamepad support"
+msgstr ""
+
+#: mrmc-reloaded (was #36043)
+msgctxt "#41145"
+msgid "Disable limited to full video rescaling"
+msgstr ""
+
+#: mrmc-reloaded (was #36116)
+msgctxt "#41146"
+msgid "Choose which character set is used for displaying text in the user interface."
+msgstr ""
+
+#: mrmc-reloaded (was #36121)
+msgctxt "#41147"
+msgid "This category contains the settings for how file lists are displayed."
+msgstr ""
+
+#: mrmc-reloaded (was #36128)
+msgctxt "#41148"
+msgid "This category contains the settings for how the screensaver extensions are handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36131)
+msgctxt "#41149"
+msgid "Select to change the screensaver specific settings. Which options are available for configuration depends on the features provided by the screensaver extension."
+msgstr ""
+
+#: mrmc-reloaded (was #36141)
+msgctxt "#41150"
+msgid "Show plot information for unwatched media in the video library."
+msgstr ""
+
+#: mrmc-reloaded (was #36145)
+msgctxt "#41151"
+msgid "When enabled, movies belonging to a \"Movie set\" are grouped together under one entry for the set in the movie library, this entry can then be opened to display the individual movies. When disabled, each movie will have it's own entry in the movie library even if it belongs to a set."
+msgstr ""
+
+#: mrmc-reloaded (was #36150)
+msgctxt "#41152"
+msgid "Import a XML file into the video library database."
+msgstr ""
+
+#: mrmc-reloaded (was #36152)
+msgctxt "#41153"
+msgid "Enable automatic playback of the next file in the list."
+msgstr ""
+
+#: mrmc-reloaded (was #36160)
+msgctxt "#41154"
+msgid "Enable VDA hardware decoding of video files."
+msgstr ""
+
+#: mrmc-reloaded (was #36161)
+msgctxt "#41155"
+msgid "Enable OpenMax hardware decoding of video files."
+msgstr ""
+
+#: mrmc-reloaded (was #36165)
+msgctxt "#41156"
+msgid "Pause for a small amount of time during a refresh rate change."
+msgstr ""
+
+#: mrmc-reloaded (was #36166)
+msgctxt "#41157"
+msgid "Synchronise the video to the refresh rate of the monitor."
+msgstr ""
+
+#: mrmc-reloaded (was #36177)
+msgctxt "#41158"
+msgid "Toggle between [Choose], [Play] (default), [Resume] and [Show information].[CR][Choose] Will select an item, e.g. open a directory in files mode.[CR][Resume] Will automatically resume videos from the last position that you were viewing them, even after restarting the system."
+msgstr ""
+
+#: mrmc-reloaded (was #36178)
+msgctxt "#41159"
+msgid "Extract thumbnails and metadata information such as codec and aspect ratio from videos."
+msgstr ""
+
+#: mrmc-reloaded (was #36180)
+msgctxt "#41160"
+msgid "Extract thumbnails and information, such as codecs and aspect ratio, to display in library mode."
+msgstr ""
+
+#: mrmc-reloaded (was #36185)
+msgctxt "#41161"
+msgid "Set the font type to be used for text based (usually downloaded) subtitles."
+msgstr ""
+
+#: mrmc-reloaded (was #36190)
+msgctxt "#41162"
+msgid "Override ASS / SSA subtitles fonts."
+msgstr ""
+
+#: mrmc-reloaded (was #36192)
+msgctxt "#41163"
+msgid "Location of subtitles on the screen."
+msgstr ""
+
+#: mrmc-reloaded (was #36193)
+msgctxt "#41164"
+msgid "This category contains the settings for how DVDs are handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36198)
+msgctxt "#41165"
+msgid "Select the default movie information source. See the extensions manager for options."
+msgstr ""
+
+#: mrmc-reloaded (was #36199)
+msgctxt "#41166"
+msgid "Select the default TV show information source. See the extensions manager for options."
+msgstr ""
+
+#: mrmc-reloaded (was #36200)
+msgctxt "#41167"
+msgid "Select the default music videos information source. See the extensions manager for options."
+msgstr ""
+
+#: mrmc-reloaded (was #36201)
+msgctxt "#41168"
+msgid "Settings for PVR / Live TV."
+msgstr ""
+
+#: mrmc-reloaded (was #36202)
+msgctxt "#41169"
+msgid "This category contains the general settings for the PVR / Live TV."
+msgstr ""
+
+#: mrmc-reloaded (was #36204)
+msgctxt "#41170"
+msgid "Import channel groups from the PVR backend (if supported). Will delete user created groups if they're not found on the backend."
+msgstr ""
+
+#: mrmc-reloaded (was #36205)
+msgctxt "#41171"
+msgid "Sort the channels by channel number from the backend, but use own numbering for channels."
+msgstr ""
+
+#: mrmc-reloaded (was #36206)
+msgctxt "#41172"
+msgid "Use the channel numbering from the backend, instead of configuring them manually in the channel manager. Only works with one enabled PVR extension!"
+msgstr ""
+
+#: mrmc-reloaded (was #36209)
+msgctxt "#41173"
+msgid "Delete the databases for channels and guide and reimport the data from the backend afterwards."
+msgstr ""
+
+#: mrmc-reloaded (was #36210)
+msgctxt "#41174"
+msgid "Prevent the \"Connection lost\" notification window from displaying when the PVR backend server is not available."
+msgstr ""
+
+#: mrmc-reloaded (was #36211)
+msgctxt "#41175"
+msgid "This category contains the settings for PVR menus and on-screen display (OSD), as well as channel information windows."
+msgstr ""
+
+#: mrmc-reloaded (was #36214)
+msgctxt "#41176"
+msgid "Close the on screen display controls after switching channels."
+msgstr ""
+
+#: mrmc-reloaded (was #36220)
+msgctxt "#41177"
+msgid "Number of days to show in the guide and import data for from backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36227)
+msgctxt "#41178"
+msgid "Display stream of selected channel in a small box instead of fullscreen."
+msgstr ""
+
+#: mrmc-reloaded (was #36228)
+msgctxt "#41179"
+msgid "Continue with the last viewed channel on startup."
+msgstr ""
+
+#: mrmc-reloaded (was #36229)
+msgctxt "#41180"
+msgid "Display signal quality information in the codec information window (if supported by the extension and backend)."
+msgstr ""
+
+#: mrmc-reloaded (was #36230)
+msgctxt "#41181"
+msgid "Time to wait for a channel to be received after a channel change. Useful for over-the-air channels that occasionally lose signal strength."
+msgstr ""
+
+#: mrmc-reloaded (was #36231)
+msgctxt "#41182"
+msgid "When flipping through channels using channel up/down buttons or when pressing a number button in full screen mode, channel switches must be confirmed using the OK button."
+msgstr ""
+
+#: mrmc-reloaded (was #36233)
+msgctxt "#41183"
+msgid "This category contains the default recording duration settings."
+msgstr ""
+
+#: mrmc-reloaded (was #36234)
+msgctxt "#41184"
+msgid "Duration of instant recordings when pressing the record button."
+msgstr ""
+
+#: mrmc-reloaded (was #36235)
+msgctxt "#41185"
+msgid "Priority of the recording. Higher number means higher priority. Not supported by all extensions and backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36236)
+msgctxt "#41186"
+msgid "Delete recording after this time. Not supported by all extensions and backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36237)
+msgctxt "#41187"
+msgid "Additional time to record before the scheduled start time to allow for minor broadcasting changes. Not supported by all extensions and backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36238)
+msgctxt "#41188"
+msgid "Additional time to record after the scheduled end time to allow for minor broadcasting changes. Not supported by all extensions and backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36251)
+msgctxt "#41189"
+msgid "This category contains the settings for your PVR backend specifically, if supported by the PVR extension and backend."
+msgstr ""
+
+#: mrmc-reloaded (was #36252)
+msgctxt "#41190"
+msgid "This option will bring you to any specific settings for your PVR backend, if supported by the PVR extension and backend."
+msgstr ""
+
+#: mrmc-reloaded (was #36255)
+msgctxt "#41191"
+msgid "Determine if artists that appear only on compilations are shown in the library artist view."
+msgstr ""
+
+#: mrmc-reloaded (was #36262)
+msgctxt "#41192"
+msgid "Export the music library database to XML files. This will optionally overwrite your current XML files."
+msgstr ""
+
+#: mrmc-reloaded (was #36263)
+msgctxt "#41193"
+msgid "Import a XML file into the music library database."
+msgstr ""
+
+#: mrmc-reloaded (was #36270)
+msgctxt "#41194"
+msgid "Reduce the volume of the file if clipping will occur."
+msgstr ""
+
+#: mrmc-reloaded (was #36274)
+msgctxt "#41195"
+msgid "Read the tag information from song files. For large directories this can increase read time, especially over a network."
+msgstr ""
+
+#: mrmc-reloaded (was #36284)
+msgctxt "#41196"
+msgid "Read the information belonging to an audio CD, like song title and artist, from the Internet database freedb.org."
+msgstr ""
+
+#: mrmc-reloaded (was #36292)
+msgctxt "#41197"
+msgid "Wait time before starting LiveTV playback."
+msgstr ""
+
+#: mrmc-reloaded (was #36293)
+msgctxt "#41198"
+msgid "Set the color to be used for the subtitle background."
+msgstr ""
+
+#: mrmc-reloaded (was #36294)
+msgctxt "#41199"
+msgid "Set the the subtitle background opacity."
+msgstr ""
+
+#: mrmc-reloaded (was #36316)
+msgctxt "#41200"
+msgid "This category contains the settings for how weather extensions are handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36318)
+msgctxt "#41201"
+msgid "Specify the default weather information source. See the extensions manager for options."
+msgstr ""
+
+#: mrmc-reloaded (was #36319)
+msgctxt "#41202"
+msgid "Section containing settings for how network services are handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36326)
+msgctxt "#41203"
+msgid "Enable the UPnP control point. This allows you to stream media to any UPnP client and control it's playback."
+msgstr ""
+
+#: mrmc-reloaded (was #36327)
+msgctxt "#41204"
+msgid "This category contains the settings for how the web server service is handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36328)
+msgctxt "#41205"
+msgid "Enable remote users to control this application through the built-in web server."
+msgstr ""
+
+#: mrmc-reloaded (was #36330)
+msgctxt "#41206"
+msgid "Define the web server username. This only takes effect when both the username and the password are set."
+msgstr ""
+
+#: mrmc-reloaded (was #36331)
+msgctxt "#41207"
+msgid "Define the web server password. This only takes effect when both the username and the password are set."
+msgstr ""
+
+#: mrmc-reloaded (was #36332)
+msgctxt "#41208"
+msgid "Select between web interfaces installed via the extension manager."
+msgstr ""
+
+#: mrmc-reloaded (was #36334)
+msgctxt "#41209"
+msgid "Allow programs on this computer to control this application via the web interface or the JSON-RPC interface protocol."
+msgstr ""
+
+#: mrmc-reloaded (was #36338)
+msgctxt "#41210"
+msgid "Allow programs on the network to control this application."
+msgstr ""
+
+#: mrmc-reloaded (was #36356)
+msgctxt "#41211"
+msgid "Eliminates tearing."
+msgstr ""
+
+#: mrmc-reloaded (was #36358)
+msgctxt "#41212"
+msgid "Test patterns for display hardware calibration."
+msgstr ""
+
+#: mrmc-reloaded (was #36366)
+msgctxt "#41213"
+msgid "Select this option if your receiver is capable of decoding DTS streams. Note: Enabling this will disable \"Support 8 channel DTS-HD audio decoding\" option"
+msgstr ""
+
+#: mrmc-reloaded (was #36368)
+msgctxt "#41214"
+msgid "Select to enable the passthrough audio options for playback of encoded audio such as Dolby Digital (AC3), DTS, etc."
+msgstr ""
+
+#: mrmc-reloaded (was #36370)
+msgctxt "#41215"
+msgid "Select this option if your receiver is capable of decoding DTS-HD streams. Note: Enabling this will disable \"Support 8 channel DTS-HD audio decoding\" option"
+msgstr ""
+
+#: mrmc-reloaded (was #36378)
+msgctxt "#41216"
+msgid "Use a joystick to control the interface."
+msgstr ""
+
+#: mrmc-reloaded (was #36423)
+msgctxt "#41217"
+msgid "Repeating schedules shall only record new episodes. Not supported by all extensions and backends."
+msgstr ""
+
+#: mrmc-reloaded (was #36424)
+msgctxt "#41218"
+msgid "Select what will happen when an item is selected in the guide: [Show context menu] Will trigger the context menu from where you can choose further actions; [Switch to channel] Will instantly tune to the related channel; [Show information] Will display a detailed information with plot and further options; [Record] Will create a recording timer for the selected item."
+msgstr ""
+
+#: mrmc-reloaded (was #36434)
+msgctxt "#41219"
+msgid "Allow hardware acceleration - MMAL"
+msgstr ""
+
+#: mrmc-reloaded (was #36435)
+msgctxt "#41220"
+msgid "Use DVDPlayer for decoding of video files with MMAL acceleration."
+msgstr ""
+
+#: mrmc-reloaded (was #36437)
+msgctxt "#41221"
+msgid "Allows to configure available modes for different stages in audio processing and to arrange the steps within the processing chain of each selected mode."
+msgstr ""
+
+#: mrmc-reloaded (was #36438)
+msgctxt "#41222"
+msgid "Enables digital signal processing (DSP) of audio channels specified by the speaker configuration."
+msgstr ""
+
+#: mrmc-reloaded (was #36439)
+msgctxt "#41223"
+msgid "All data (extension settings and audio DSP manager settings) in the audio DSP database will be erased."
+msgstr ""
+
+#: mrmc-reloaded (was #36547)
+msgctxt "#41224"
+msgid "Use higher quality textures for covers and fanart (uses more memory)"
+msgstr ""
+
+#: mrmc-reloaded (was #36552)
+msgctxt "#41225"
+msgid "Minimize from Home"
+msgstr ""
+
+#: mrmc-reloaded (was #36603)
+msgctxt "#41226"
+msgid "This category contains the settings for how video output is handled."
+msgstr ""
+
+#: mrmc-reloaded (was #36605)
+msgctxt "#41227"
+msgid "It will sort library items by date added (current date, modified time or creation time)"
+msgstr ""
+
+#: mrmc-reloaded (was #36606)
+msgctxt "#41228"
+msgid "Current date/time"
+msgstr ""
+
+#: mrmc-reloaded (was #36607)
+msgctxt "#41229"
+msgid "File modify time"
+msgstr ""
+
+#: mrmc-reloaded (was #36608)
+msgctxt "#41230"
+msgid "File change time"
+msgstr ""
+
+#: mrmc-reloaded (was #36609)
+msgctxt "#41231"
+msgid "Timeout in seconds"
+msgstr ""
+
+#: mrmc-reloaded (was #36610)
+msgctxt "#41232"
+msgid "Timeout in seconds for libcurl (http/ftp) connections"
+msgstr ""
+
+#: mrmc-reloaded (was #36611)
+msgctxt "#41233"
+msgid "Connection lowspeed time"
+msgstr ""
+
+#: mrmc-reloaded (was #36612)
+msgctxt "#41234"
+msgid "Time in seconds for libcurl to consider a connection lowspeed"
+msgstr ""
+
+#: mrmc-reloaded (was #36613)
+msgctxt "#41235"
+msgid "Amount of retries"
+msgstr ""
+
+#: mrmc-reloaded (was #36614)
+msgctxt "#41236"
+msgid "Amount of retries for certain failed libcurl operations (e.g. timeout)"
+msgstr ""
+
+#: mrmc-reloaded (was #36615)
+msgctxt "#41237"
+msgid "Disable ipv6"
+msgstr ""
+
+#: mrmc-reloaded (was #36616)
+msgctxt "#41238"
+msgid "Certain hardware/OS combinations have trouble with ipv6"
+msgstr ""
+
+#: mrmc-reloaded (was #36619)
+msgctxt "#41239"
+msgid "Buffer mode"
+msgstr ""
+
+#: mrmc-reloaded (was #36620)
+msgctxt "#41240"
+msgid "Choose what to buffer(all internet filesystems, all filesystems, true internet filesystems)"
+msgstr ""
+
+#: mrmc-reloaded (was #36621)
+msgctxt "#41241"
+msgid "Buffer all internet filesystems"
+msgstr ""
+
+#: mrmc-reloaded (was #36622)
+msgctxt "#41242"
+msgid "Buffer all filesystems"
+msgstr ""
+
+#: mrmc-reloaded (was #36623)
+msgctxt "#41243"
+msgid "Only buffer true internet filesystems"
+msgstr ""
+
+#: mrmc-reloaded (was #36624)
+msgctxt "#41244"
+msgid "No buffer"
+msgstr ""
+
+#: mrmc-reloaded (was #36625)
+msgctxt "#41245"
+msgid "SMB stat"
+msgstr ""
+
+#: mrmc-reloaded (was #36626)
+msgctxt "#41246"
+msgid "Disable to speed up listings of large directories over SMB network"
+msgstr ""
+
+#: mrmc-reloaded (was #36627)
+msgctxt "#41247"
+msgid "SMB timeout"
+msgstr ""
+
+#: mrmc-reloaded (was #36628)
+msgctxt "#41248"
+msgid "SMB timeout (in seconds)"
+msgstr ""
+
+#: mrmc-reloaded (was #36629)
+msgctxt "#41249"
+msgid "Max readrate factor"
+msgstr ""
+
+#: mrmc-reloaded (was #36630)
+msgctxt "#41250"
+msgid "This can help on bad connections to keep the cache filled. It will also greatly speed up buffering"
+msgstr ""
+
+#: mrmc-reloaded (was #36631)
+msgctxt "#41251"
+msgid "Allow hardware decoding of interlaced files."
+msgstr ""
+
+#: mrmc-reloaded (was #36633)
+msgctxt "#41252"
+msgid "Pull watched status from Trakt.tv server"
+msgstr ""
+
+#: mrmc-reloaded (was #36634)
+msgctxt "#41253"
+msgid "Function to retreive watched status for items on Trakt.tv server, MySql and sqlite(internal MrMC database) only."
+msgstr ""
+
+#: mrmc-reloaded (was #36635)
+msgctxt "#41254"
+msgid "Push watched status to Trakt.tv server"
+msgstr ""
+
+#: mrmc-reloaded (was #36636)
+msgctxt "#41255"
+msgid "Function to send watched status to Trakt.tv server, MySql and sqlite(internal MrMC database) only."
+msgstr ""
+
+#: mrmc-reloaded (was #36638)
+msgctxt "#41256"
+msgid "Action to take after Libarary Scan has completed"
+msgstr ""
+
+#: mrmc-reloaded (was #36639)
+msgctxt "#41257"
+msgid "This setting will trigger push or pull trakt action after Library Scan has been completed."
+msgstr ""
+
+#: mrmc-reloaded (was #36640)
+msgctxt "#41258"
+msgid "No Action"
+msgstr ""
+
+#: mrmc-reloaded (was #36641)
+msgctxt "#41259"
+msgid "Push watched status"
+msgstr ""
+
+#: mrmc-reloaded (was #36642)
+msgctxt "#41260"
+msgid "Pull watched status"
+msgstr ""
+
+#: mrmc-reloaded (was #37033)
+msgctxt "#41261"
+msgid "Video playback related accessibility settings, e.g. \"Prefer subtitles for the hearing impaired\"."
+msgstr ""
+
+#: mrmc-reloaded (was #37047)
+msgctxt "#41262"
+msgid "Increase this value to make the dialogue louder compared to background sounds; If AC3 transcoding is enabled, works for multi-channel as well (but forces AC3 transcoding for *all* passthrough formats)"
+msgstr ""
+
+#: mrmc-reloaded (was #37048)
+msgctxt "#41263"
+msgid "%i dB"
+msgstr ""
+
+#: mrmc-reloaded (was #37049)
+msgctxt "#41264"
+msgid "Remove dangling thumbnails."
+msgstr ""
+
+#: mrmc-reloaded (was #37050)
+msgctxt "#41265"
+msgid "Local server only"
+msgstr ""
+
+#: mrmc-reloaded (was #37051)
+msgctxt "#41266"
+msgid "All servers"
+msgstr ""
+
+#: mrmc-reloaded (was #37052)
+msgctxt "#41267"
+msgid "Limit Home Shelf to selected Plex servers"
+msgstr ""
+
+#: mrmc-reloaded (was #37053)
+msgctxt "#41268"
+msgid "Only selected Plex servers will be displayed in Home Shelf, recently added and in progress"
+msgstr ""
+
+#: mrmc-reloaded (was #37054)
+msgctxt "#41269"
+msgid "Disable scrubbing for selected extensions"
+msgstr ""
+
+#: mrmc-reloaded (was #37055)
+msgctxt "#41270"
+msgid "Selected extensions will not show the new scrubbing OSD, selecting more than one item is possible."
+msgstr ""
+
+#: mrmc-reloaded (was #38112)
+msgctxt "#41271"
+msgid "Use Full HD HDMI modes for 3D"
+msgstr ""
+
+#: mrmc-reloaded (was #39004)
+msgctxt "#41272"
+msgid "Always (including DVD)"
+msgstr ""

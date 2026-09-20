@@ -355,8 +355,8 @@ void CHueServices::OnSettingAction(const std::shared_ptr<const CSetting>& settin
   if (setting == nullptr)
     return;
 
-  std::string strSignIn = g_localizeStrings.Get(14208);
-  std::string strSignOut = g_localizeStrings.Get(14209);
+  std::string strSignIn = g_localizeStrings.Get(41080);
+  std::string strSignOut = g_localizeStrings.Get(41081);
 
   const std::string& settingId = setting->GetId();
   if (settingId == CSettings::SETTING_SERVICES_HUE_DISCOVER)
@@ -620,15 +620,15 @@ void CHueServices::Process()
 
 bool CHueServices::SignIn()
 {
-  std::string strSignIn = g_localizeStrings.Get(14208);
-  std::string strSignOut = g_localizeStrings.Get(14209);
+  std::string strSignIn = g_localizeStrings.Get(41080);
+  std::string strSignOut = g_localizeStrings.Get(41081);
 
   std::vector<CHueBridge> bridges = CHueBridge::discover();
   CHueBridge curBridge;
 
   if (bridges.size() == 0)
   {
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, "Hue Service", g_localizeStrings.Get(14205), 5000, true);
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, "Hue Service", g_localizeStrings.Get(41077), 5000, true);
     return false;
   }
 
@@ -667,8 +667,8 @@ bool CHueServices::SignIn()
 
 bool CHueServices::SignOut()
 {
-  std::string strSignIn = g_localizeStrings.Get(14208);
-  std::string strSignOut = g_localizeStrings.Get(14209);
+  std::string strSignIn = g_localizeStrings.Get(41080);
+  std::string strSignOut = g_localizeStrings.Get(41081);
 
   // prompt is 'sign-out'
   CServiceBroker::GetSettingsComponent()->GetSettings()->SetString(CSettings::SETTING_SERVICES_HUE_IP, "");
@@ -690,7 +690,7 @@ bool CHueServices::InitConnection()
 
   if (ip.empty() || username.empty())
   {
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, "Hue Service", g_localizeStrings.Get(14205), 5000, true);
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, "Hue Service", g_localizeStrings.Get(41077), 5000, true);
     return false;
   }
 

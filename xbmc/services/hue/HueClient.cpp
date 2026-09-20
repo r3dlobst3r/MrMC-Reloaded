@@ -146,8 +146,8 @@ bool CHueBridge::pair()
 
   CGUIDialogProgress *waitPinDialog;
   waitPinDialog = (CGUIDialogProgress*)CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_DIALOG_PROGRESS);
-  waitPinDialog->SetHeading(g_localizeStrings.Get(14201));
-  waitPinDialog->SetLine(0, g_localizeStrings.Get(14204));
+  waitPinDialog->SetHeading(g_localizeStrings.Get(41073));
+  waitPinDialog->SetLine(0, g_localizeStrings.Get(41076));
 
   waitPinDialog->Open();
   waitPinDialog->ShowProgressBar(true);
