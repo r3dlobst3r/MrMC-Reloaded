@@ -67,7 +67,7 @@ bool CEmbyDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       curl1.SetFileName("dummy");
       item->SetPath(curl1.Get());
       item->SetLabel("dummy");
-      item->SetLabelPreformated(true);
+      item->SetLabelPreformatted(true);
       //just set the default folder icon
       item->FillInDefaultIcon();
       item->m_bIsShareOrDrive = true;
@@ -561,7 +561,7 @@ bool CEmbyDirectory::FindByBroadcast(CFileItemList& items)
             curl1.SetFileName("local");
             local->SetPath(curl1.Get());
             local->SetLabel(embyServerInfo.ServerName + " (local)");
-            local->SetLabelPreformated(true);
+            local->SetLabelPreformatted(true);
             //just set the default folder icon
             local->FillInDefaultIcon();
             local->m_bIsShareOrDrive = true;
@@ -575,7 +575,7 @@ bool CEmbyDirectory::FindByBroadcast(CFileItemList& items)
             curl2.SetFileName("wan");
             remote->SetPath(curl2.Get());
             remote->SetLabel(embyServerInfo.ServerName + " (wan)");
-            remote->SetLabelPreformated(true);
+            remote->SetLabelPreformatted(true);
             //just set the default folder icon
             remote->FillInDefaultIcon();
             remote->m_bIsShareOrDrive = true;

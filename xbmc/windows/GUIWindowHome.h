@@ -37,7 +37,6 @@ public:
   CGUIWindowHome(void);
   ~CGUIWindowHome(void) override;
   void OnInitWindow() override;
-  void OnDeinitWindow(int nextWindowID) override;
 
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,
@@ -55,7 +54,7 @@ private:
   void AddHomeShelfJobs(int flag);
   bool OnClickHomeShelfItem(const CFileItem& itemPtr, int action);
   bool PlayHomeShelfItem(const CFileItem& itemPtr);
-  int m_HomeShelfRunningId{-1};
+  bool m_HomeShelfRunning{false};
   int m_cumulativeUpdateFlag{0};
   CCriticalSection m_critsection;
   CFileItemList* m_HomeShelfTVRA;

@@ -118,14 +118,6 @@ void CGUIWindowHome::OnInitWindow()
   CGUIWindow::OnInitWindow();
 }
 
-void CGUIWindowHome::OnDeinitWindow(int nextWindowID)
-{
-  CServiceBroker::GetJobManager()->CancelJob(m_HomeShelfRunningId);
-  m_HomeShelfRunningId = -1;
-
-  CGUIWindow::OnDeinitWindow(nextWindowID);
-}
-
 void CGUIWindowHome::Announce(AnnouncementFlag flag,
                               const std::string& sender,
                               const std::string& message,
@@ -173,21 +165,32 @@ void CGUIWindowHome::Announce(AnnouncementFlag flag,
 
 void CGUIWindowHome::AddHomeShelfJobs(int flag)
 {
-  std::unique_lock<CCriticalSection> lockMe(*this);
-  if (m_HomeShelfRunningId == -1)
+  bool getAJob = false;
+
+  // this block checks to see if another one is running
+  // and keeps track of the flag
   {
-    flag |= m_cumulativeUpdateFlag; // add the flags from previous calls to AddHomeShelfJobs
+    std::unique_lock<CCriticalSection> lockMe(*this);
+    if (!m_HomeShelfRunning)
+    {
+      getAJob = true;
 
-    m_cumulativeUpdateFlag = 0; // now taken care of in flag.
-                                // reset this since we're going to execute a job
+      flag |= m_cumulativeUpdateFlag; // add the flags from previous calls to AddHomeShelfJobs
 
-    if (flag)
-      m_HomeShelfRunningId =
-          CServiceBroker::GetJobManager()->AddJob(new CHomeShelfJob(flag), this);
+      m_cumulativeUpdateFlag = 0; // now taken care of in flag.
+                                  // reset this since we're going to execute a job
+
+      // we're about to add one so set the indicator
+      if (flag)
+        m_HomeShelfRunning = true;
+    }
+    else
+      // since we're going to skip a job, mark that one came in and ...
+      m_cumulativeUpdateFlag |= flag; // this will be used later
   }
-  else
-    // since we're going to skip a job, mark that one came in and ...
-    m_cumulativeUpdateFlag |= flag; // this will be used later
+
+  if (flag && getAJob)
+    CServiceBroker::GetJobManager()->AddJob(new CHomeShelfJob(flag), this);
 
   m_updateHS = 0;
 }
@@ -246,7 +249,7 @@ void CGUIWindowHome::OnJobComplete(unsigned int jobID, bool success, CJob* job)
     // the job is finished.
     // did one come in in the meantime?
     flag = m_cumulativeUpdateFlag;
-    m_HomeShelfRunningId = -1; /// we're done.
+    m_HomeShelfRunning = false; /// we're done.
   }
 
   if (flag)
