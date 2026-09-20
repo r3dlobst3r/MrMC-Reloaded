@@ -82,7 +82,7 @@
 			<width>525</width>
             <label>636</label>
             <onclick>Skin.Reset(movie_entries)</onclick>
-			<onclick>RunScript(script.favourites,changetitle=true&amp;property=CustomMovie.1)</onclick>
+			<onclick>noop</onclick>
 			<selected>false</selected>
 		  </control>
 		  <control type="radiobutton" id="706" description="Custom">
@@ -90,7 +90,7 @@
 			<width>525</width>
             <label>$INFO[Skin.String(CustomMovie.1.Label)]</label>
             <onclick>Skin.Reset(movie_entries)</onclick>
-			<onclick>RunScript(script.favourites,changetitle=true&amp;property=CustomMovie.1)</onclick>
+			<onclick>noop</onclick>
 			<selected>!IsEmpty(Skin.String(CustomMovie.1.Path))</selected>
           </control>
         </control>

@@ -598,7 +598,7 @@
               <label>[COLOR=Highlight]$INFO[Skin.String(CustomHome.1.Label)][/COLOR]</label>
               <label2>[COLOR=Highlight]$LOCALIZE[305][/COLOR]</label2>
               <thumb fallback="special://skin/backgrounds/default/default.jpg">$INFO[Skin.String(CustomHome.1.Background)]</thumb>
-              <onclick>RunScript(script.favourites,changetitle=true&amp;property=CustomHome.1)</onclick>
+              <onclick>noop</onclick>
             </item>
             <item id="1" description="Pictures">
               <visible>!Skin.HasSetting(Pictures.Hide)</visible>
@@ -619,7 +619,7 @@
               <label>[COLOR=Highlight]$INFO[Skin.String(CustomHome.2.Label)][/COLOR]</label>
               <label2>[COLOR=Highlight]$LOCALIZE[305][/COLOR]</label2>
               <thumb fallback="special://skin/backgrounds/default/default.jpg">$INFO[Skin.String(CustomHome.2.Background)]</thumb>
-              <onclick>RunScript(script.favourites,changetitle=true&amp;property=CustomHome.2)</onclick>
+              <onclick>noop</onclick>
             </item>
             <item id="2" description="Addons">
               <visible>!Skin.HasSetting(Addons.Hide)</visible>
@@ -1247,13 +1247,13 @@
               <visible>Skin.HasSetting(Shelf.Favs)</visible>
               <label>$LOCALIZE[1036] 1</label>
               <label2>$INFO[Skin.String(ShelfFavs.1.Label)]</label2>
-              <onclick>RunScript(script.favourites,changetitle=true&amp;property=ShelfFavs.1)</onclick>
+              <onclick>noop</onclick>
             </item>
             <item id="4" description="FAVS">
               <visible>Skin.HasSetting(Shelf.Favs)</visible>
               <label>$LOCALIZE[1036] 2</label>
               <label2>$INFO[Skin.String(ShelfFavs.2.Label)]</label2>
-              <onclick>RunScript(script.favourites,changetitle=true&amp;property=ShelfFavs.2)</onclick>
+              <onclick>noop</onclick>
             </item>-->
           </content>
         </control>
