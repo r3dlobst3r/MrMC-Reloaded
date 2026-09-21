@@ -248,7 +248,7 @@ void CPlexServices::OnSettingAction(const std::shared_ptr<const CSetting>& setti
           else
           {
             strMessage = "Could not get authToken via manual sign-in";
-            CLog::Log(LOGERROR, "CPlexServices: %s", strMessage.c_str());
+            CLog::Log(LOGERROR, "CPlexServices: {}", strMessage.c_str());
           }
         }
         else
@@ -329,7 +329,7 @@ void CPlexServices::InitiateSignIn()
     else
     {
       strMessage = "Could not get authToken via pin request sign-in";
-      CLog::Log(LOGERROR, "CPlexServices: %s", strMessage.c_str());
+      CLog::Log(LOGERROR, "CPlexServices: {}", strMessage.c_str());
     }
   }
   else
@@ -652,7 +652,7 @@ bool CPlexServices::GetPlexToken(std::string user, std::string pass)
   std::string strPostData;
   if (plex.Post(url.Get(), strPostData, response))
   {
-    //CLog::Log(LOGDEBUG, "CPlexServices: myPlex %s", strResponse.c_str());
+    //CLog::Log(LOGDEBUG, "CPlexServices: myPlex {}", strResponse.c_str());
 
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))
@@ -671,7 +671,7 @@ bool CPlexServices::GetPlexToken(std::string user, std::string pass)
   {
     std::string strMessage = "Could not connect to retreive PlexToken";
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Plex Services", strMessage, 3000, true);
-    CLog::Log(LOGERROR, "CPlexServices:FetchPlexToken failed %s", response.c_str());
+    CLog::Log(LOGERROR, "CPlexServices:FetchPlexToken failed {}", response.c_str());
   }
 
   return rtn;
@@ -696,7 +696,7 @@ bool CPlexServices::GetMyPlexServers(bool includeHttps)
   if (m_plextv->Get(url.Get(), strResponse))
   {
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexServices:GetMyPlexServers %d, %s", includeHttps, strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexServices:GetMyPlexServers {}, {}", includeHttps, strResponse.c_str());
 #endif
     TiXmlDocument xml;
     xml.Parse(strResponse.c_str());
@@ -721,7 +721,7 @@ bool CPlexServices::GetMyPlexServers(bool includeHttps)
   {
     std::string strMessage = "Error getting Plex servers";
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Plex Services", strMessage, 3000, true);
-    CLog::Log(LOGDEBUG, "CPlexServices::GetMyPlexServers failed %s, code %d", strResponse.c_str(), m_plextv->GetResponseCode());
+    CLog::Log(LOGDEBUG, "CPlexServices::GetMyPlexServers failed {}, code {}", strResponse.c_str(), m_plextv->GetResponseCode());
     return false;
   }
 
@@ -743,14 +743,14 @@ bool CPlexServices::GetMyPlexServers(bool includeHttps)
         if (AddClient(client))
         {
           // new client
-          CLog::Log(LOGINFO, "CPlexServices: Server found via plex.tv %s", client->GetServerName().c_str());
+          CLog::Log(LOGINFO, "CPlexServices: Server found via plex.tv {}", client->GetServerName().c_str());
           AddJob(new CPlexServiceJob(0, "FoundNewClient", client->GetUuid()));
         }
         else if (GetClient(client->GetUuid()) == nullptr)
         {
           // lost client
           lostClients.push_back(client);
-          CLog::Log(LOGINFO, "CPlexServices: Server was lost %s", client->GetServerName().c_str());
+          CLog::Log(LOGINFO, "CPlexServices: Server was lost {}", client->GetServerName().c_str());
         }
       }
     }
@@ -788,7 +788,7 @@ bool CPlexServices::GetSignInPinCode()
   if (plex.Post(url.Get(), "", strResponse))
   {
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexServices:FetchSignInPin %s", strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexServices:FetchSignInPin {}", strResponse.c_str());
 #endif
 
     TiXmlDocument xml;
@@ -882,7 +882,7 @@ bool CPlexServices::GetSignInPinCode()
   else
   {
     strMessage = "Could not connect to retreive AuthToken";
-    CLog::Log(LOGERROR, "CPlexServices:FetchSignInPin failed %s", strResponse.c_str());
+    CLog::Log(LOGERROR, "CPlexServices:FetchSignInPin failed {}", strResponse.c_str());
   }
   if (!rtn)
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Plex Services", strMessage, 3000, true);
@@ -905,7 +905,7 @@ bool CPlexServices::GetSignInByPinReply()
   if (plex.Get(url.Get(), strResponse))
   {
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexServices:WaitForSignInByPin %s", strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexServices:WaitForSignInByPin {}", strResponse.c_str());
 #endif
     TiXmlDocument xml;
     xml.Parse(strResponse.c_str());
@@ -926,7 +926,7 @@ bool CPlexServices::GetSignInByPinReply()
   }
   else
   {
-    CLog::Log(LOGERROR, "CPlexServices:WaitForSignInByPin failed %s", strResponse.c_str());
+    CLog::Log(LOGERROR, "CPlexServices:WaitForSignInByPin failed {}", strResponse.c_str());
   }
   return rtn;
 }
@@ -945,7 +945,7 @@ void CPlexServices::CheckForGDMServers()
         {
           if (!socket->Bind(false, NS_PLEX_MEDIA_SERVER_PORT, 0))
           {
-            CLog::Log(LOGERROR, "CPlexServices:CheckforGDMServers Could not listen on port %d", NS_PLEX_MEDIA_SERVER_PORT);
+            CLog::Log(LOGERROR, "CPlexServices:CheckforGDMServers Could not listen on port {}", NS_PLEX_MEDIA_SERVER_PORT);
             delete m_gdmListener; m_gdmListener = nullptr;
             m_useGDMServer = false;
             return;
@@ -1000,13 +1000,13 @@ void CPlexServices::CheckForGDMServers()
           {
             if (AddClient(client))
             {
-              CLog::Log(LOGINFO, "CPlexServices:CheckforGDMServers Server found via GDM %s", client->GetServerName().c_str());
+              CLog::Log(LOGINFO, "CPlexServices:CheckforGDMServers Server found via GDM {}", client->GetServerName().c_str());
               uuid = client->GetUuid();
             }
             else if (GetClient(client->GetUuid()) == nullptr)
             {
               // lost client
-              CLog::Log(LOGINFO, "CPlexServices:CheckforGDMServers Server was lost %s", client->GetServerName().c_str());
+              CLog::Log(LOGINFO, "CPlexServices:CheckforGDMServers Server was lost {}", client->GetServerName().c_str());
             }
           }
         }
@@ -1159,7 +1159,7 @@ bool CPlexServices::GetMyHomeUsers(std::string &homeUserName)
   if (plex.Get(url.Get(), strResponse))
   {
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexServices:GetMyHomeUsers %s", strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexServices:GetMyHomeUsers {}", strResponse.c_str());
 #endif
 
     TiXmlDocument xml;
@@ -1269,7 +1269,7 @@ bool CPlexServices::GetMyHomeUsers(std::string &homeUserName)
   else
   {
     strMessage = "Could not connect to retreive Home users";
-    CLog::Log(LOGDEBUG, "CPlexServices:GetMyHomeUsers failed %s", strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexServices:GetMyHomeUsers failed {}", strResponse.c_str());
   }
 
   if (!rtn)

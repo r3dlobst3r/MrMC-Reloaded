@@ -205,7 +205,7 @@ bool CHueBridge::pair()
         m_username = answer[0]["success"]["username"].asString();
         if (hasStreaming)
           m_clientkey = answer[0]["success"]["clientkey"].asString();;
-        CLog::Log(LOGINFO, "Hue - Pairing complete: u: %s; k:%s", m_username.c_str(), m_clientkey.c_str());
+        CLog::Log(LOGINFO, "Hue - Pairing complete: u: {}; k:{}", m_username.c_str(), m_clientkey.c_str());
         break;
       }
       if (!answer[0]["error"].isNull())
@@ -236,7 +236,7 @@ void CHueBridge::logConfig()
   if (!CJSONVariantParser::Parse(sanswer, tmpV))
     return;
 
-  CLog::Log(LOGINFO, "Hue - Bridge connection: model (%s) sw(%s) api(%s)",
+  CLog::Log(LOGINFO, "Hue - Bridge connection: model ({}) sw({}) api({})",
       tmpV["modelid"].asString().c_str(),
       tmpV["swversion"].asString().c_str(),
       tmpV["apiversion"].asString().c_str()
@@ -260,7 +260,7 @@ void CHueBridge::refreshGroupsState()
   if (tmpV.isObject())
     m_groupsState = tmpV;
   else
-    CLog::Log(LOGERROR, "Hue - Error refreshing groups state: %s, ", sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue - Error refreshing groups state: {}, ", sanswer.c_str());
 
   m_groups.clear();
   for (CVariant::iterator_map it = m_groupsState.begin_map(); it != m_groupsState.end_map(); ++it)
@@ -287,7 +287,7 @@ void CHueBridge::refreshLightsState()
   if (tmpV.isObject())
     m_lightsState = tmpV;
   else
-    CLog::Log(LOGERROR, "Hue - Error refreshing lights state: %s", sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue - Error refreshing lights state: {}", sanswer.c_str());
 
   m_lights.clear();
   for (CVariant::iterator_map it = m_lightsState.begin_map(); it != m_lightsState.end_map(); ++it)
@@ -304,7 +304,7 @@ bool CHueBridge::checkReply(std::string id, std::string request, std::string rep
 
   if (!answer[0]["success"].isObject())
   {
-    CLog::Log(LOGERROR, "Hue - Error: id:%s, request: %s, reply: %s", id.c_str(), request.c_str(), reply.c_str());
+    CLog::Log(LOGERROR, "Hue - Error: id:{}, request: {}, reply: {}", id.c_str(), request.c_str(), reply.c_str());
     return false;
   }
   return true;
@@ -339,7 +339,7 @@ unsigned int CHueBridge::psk_client_cb(SSL *ssl, const char *hint, char *identit
   if (!hint)
     CLog::Log(LOGWARNING, "NULL received PSK identity hint, continuing anyway\n");
   else
-    CLog::Log(LOGINFO, "Received PSK identity hint '%s'\n", hint);
+    CLog::Log(LOGINFO, "Received PSK identity hint '{}'\n", hint);
 
   ret = snprintf(identity, max_identity_len, "%s", m_sslbridge->getUsername().c_str());
   if (ret < 0 || (unsigned int)ret > max_identity_len)
@@ -359,7 +359,7 @@ unsigned int CHueBridge::psk_client_cb(SSL *ssl, const char *hint, char *identit
   ret = hex2bin(psk_key.c_str(), psk);
   if (ret<=0)
   {
-    CLog::Log(LOGERROR, "Error, Could not convert PSK key '%s' to binary key\n", psk_key.c_str());
+    CLog::Log(LOGERROR, "Error, Could not convert PSK key '{}' to binary key\n", psk_key.c_str());
     return 0;
   }
   return ret;
@@ -380,7 +380,7 @@ int CHueBridge::dtls_InitContext(SDTLSParams* params)
   if (!params->ctx)
   {
     ERR_print_errors_fp (stdout);
-    CLog::Log(LOGERROR, "Hue %s - Error: cannot create SSL_CTX", __FUNCTION__);
+    CLog::Log(LOGERROR, "Hue {} - Error: cannot create SSL_CTX", __FUNCTION__);
     return -1;
   }
 
@@ -389,7 +389,7 @@ int CHueBridge::dtls_InitContext(SDTLSParams* params)
   if (result != 1)
   {
     ERR_print_errors_fp (stdout);
-    CLog::Log(LOGERROR, "Hue %s - Error: cannot set the cipher list", __FUNCTION__);
+    CLog::Log(LOGERROR, "Hue {} - Error: cannot set the cipher list", __FUNCTION__);
     return -2;
   }
 
@@ -408,7 +408,7 @@ int CHueBridge::dtls_InitClient(SDTLSParams* params, const char *address)
   int sock = socket(PF_INET, SOCK_DGRAM, 0);
   if (sock < 0)
   {
-    CLog::Log(LOGERROR, "%s - error creating socket", __FUNCTION__);
+    CLog::Log(LOGERROR, "{} - error creating socket", __FUNCTION__);
     return -1;
   }
 
@@ -416,7 +416,7 @@ int CHueBridge::dtls_InitClient(SDTLSParams* params, const char *address)
   if (!params->bio)
   {
     ERR_print_errors_fp (stdout);
-    CLog::Log(LOGERROR, "%s - error creating BIO", __FUNCTION__);
+    CLog::Log(LOGERROR, "{} - error creating BIO", __FUNCTION__);
     return -1;
   }
 
@@ -455,7 +455,7 @@ bool CHueBridge::initDTLSConnection()
   int result = SSL_connect(m_dtls_client.ssl);
   if (result != 1)
   {
-      CLog::Log(LOGERROR, "%s - Unable to connect to the DTLS server.", __FUNCTION__);
+      CLog::Log(LOGERROR, "{} - Unable to connect to the DTLS server.", __FUNCTION__);
       return false;
   }
   return true;
@@ -523,7 +523,7 @@ std::vector<std::pair<std::string, std::string> > CHueBridge::getScenesNames()
 
   if (!tmpV.isObject())
   {
-    CLog::Log(LOGERROR, "Hue - Error getting scenes: %s", sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue - Error getting scenes: {}", sanswer.c_str());
     return result;
   }
 
@@ -646,7 +646,7 @@ bool CHueBridge::startStreaming(int streamgroupid)
   curlf.SetCustomRequest("PUT");
   if (!curlf.Get(getUsernameUrl() + "/groups/" + std::to_string(m_streamgroupid), sanswer))
   {
-    CLog::Log(LOGERROR, "Hue - Error in %s", __FUNCTION__);
+    CLog::Log(LOGERROR, "Hue - Error in {}", __FUNCTION__);
     return false;
   }
 
@@ -666,7 +666,7 @@ bool CHueBridge::startStreaming(int streamgroupid)
   m_streamingbuffer = (char *)malloc(m_streamingbuffersize);
   memcpy(m_streamingbuffer, header, sizeof (SStreamPacketHeader));
 
-  CLog::Log(LOGINFO, "Hue - Ready to stream on group %d", m_streamgroupid);
+  CLog::Log(LOGINFO, "Hue - Ready to stream on group {}", m_streamgroupid);
 
   return true;
 }
@@ -694,7 +694,7 @@ void CHueBridge::stopStreaming()
   curlf.SetCustomRequest("PUT");
   if (!curlf.Get(getUsernameUrl() + "/groups/" + std::to_string(m_streamgroupid), sanswer))
   {
-    CLog::Log(LOGERROR, "Hue - Error in %s", __FUNCTION__);
+    CLog::Log(LOGERROR, "Hue - Error in {}", __FUNCTION__);
   }
 }
 
@@ -733,7 +733,7 @@ bool CHueBridge::streamXYB(float x, float y, float B)
   int written = SSL_write(m_dtls_client.ssl, m_streamingbuffer, m_streamingbuffersize);
   if (written != m_streamingbuffersize)
   {
-    CLog::Log(LOGERROR, "Hue - Error writing stream (%d)", written);
+    CLog::Log(LOGERROR, "Hue - Error writing stream ({})", written);
     return false;
   }
   return true;
@@ -768,7 +768,7 @@ bool CHueBridge::putLightStateRequest(std::string sid, const CVariant& request)
   curlf.SetCustomRequest("PUT");
   if (!curlf.Get(getUsernameUrl() + "/lights/" + sid + "/state", sanswer))
   {
-    CLog::Log(LOGERROR, "Hue - Error in %s: %s", __FUNCTION__, sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue - Error in {}: {}", __FUNCTION__, sanswer.c_str());
     return false;
   }
 
@@ -784,7 +784,7 @@ bool CHueBridge::putGroupStateRequest(std::string sid, const CVariant& request)
   curlf.SetCustomRequest("PUT");
   if (!curlf.Get(getUsernameUrl() + "/groups/" + sid + "/action", sanswer))
   {
-    CLog::Log(LOGERROR, "Hue - Error in %s: %s", __FUNCTION__, sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue - Error in {}: {}", __FUNCTION__, sanswer.c_str());
     return false;
   }
 
@@ -805,7 +805,7 @@ bool CHueBridge::isDaylight()
     if (CJSONVariantParser::Parse(sanswer, tmpV))
     {
       bool isDaylight = tmpV["state"]["daylight"].asBoolean();
-      CLog::Log(LOGINFO, "CHueBridge::isDaylight(): Is Daylight (%s)", isDaylight ? "true":"false");
+      CLog::Log(LOGINFO, "CHueBridge::isDaylight(): Is Daylight ({})", isDaylight ? "true":"false");
       return isDaylight;
     }
   }
@@ -833,7 +833,7 @@ bool CHueGroup::setOn(bool val)
   bool ret;
   if((ret = m_bridge->putGroupStateRequest(m_gid, request)))
   {
-    CLog::Log(LOGINFO, "Hue - Group (%s) on (%s)", m_gid.c_str(), val ? "true" : "false");
+    CLog::Log(LOGINFO, "Hue - Group ({}) on ({})", m_gid.c_str(), val ? "true" : "false");
     m_state["on"] = val;
   }
   return ret;
@@ -859,7 +859,7 @@ void CHueGroup::refreshState()
     m_lights = tmpV["lights"];
   }
   else
-    CLog::Log(LOGERROR, "Hue: Error refreshing group state (%s): %s", m_gid.c_str(), sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue: Error refreshing group state ({}): {}", m_gid.c_str(), sanswer.c_str());
 }
 
 CHueLight::CHueLight(std::string sid, CHueBridge* bridge, CVariant state)
@@ -883,7 +883,7 @@ bool CHueLight::setOn(bool val)
   bool ret;
   if((ret = m_bridge->putLightStateRequest(m_sid, request)))
   {
-    CLog::Log(LOGINFO, "Hue - Light (%s) on (%s)", m_sid.c_str(), val ? "true" : "false");
+    CLog::Log(LOGINFO, "Hue - Light ({}) on ({})", m_sid.c_str(), val ? "true" : "false");
     m_state["on"] = val;
   }
   return ret;
@@ -970,7 +970,7 @@ void CHueLight::saveState()
   m_savstate["hue"] = m_state["hue"];
   m_savstate["sat"] = m_state["sat"];
 
-  CLog::Log(LOGINFO, "Hue - Light (%s) savestate: on (%s) h(%lld) s(%lld) b(%lld)", m_sid.c_str(),
+  CLog::Log(LOGINFO, "Hue - Light ({}) savestate: on ({}) h({}) s({}) b({})", m_sid.c_str(),
       m_savstate["on"].asBoolean() ? "true" : "false",
       m_savstate["hue"].asInteger(),
       m_savstate["sat"].asInteger(),
@@ -995,7 +995,7 @@ bool CHueLight::restoreState(uint32_t dur)
     m_state["hue"] = m_savstate["hue"];
     m_state["sat"] = m_savstate["sat"];
 
-    CLog::Log(LOGINFO, "Hue - Light (%s) restorestate: on (%s) h(%lld) s(%lld) b(%lld)", m_sid.c_str(),
+    CLog::Log(LOGINFO, "Hue - Light ({}) restorestate: on ({}) h({}) s({}) b({})", m_sid.c_str(),
         m_savstate["on"].asBoolean() ? "true" : "false",
         m_savstate["hue"].asInteger(),
         m_savstate["sat"].asInteger(),
@@ -1032,5 +1032,5 @@ void CHueLight::refreshState()
   if (tmpV.isObject())
     m_state = tmpV["state"];
   else
-    CLog::Log(LOGERROR, "Hue: Error refreshing light state (%s): %s", m_sid.c_str(), sanswer.c_str());
+    CLog::Log(LOGERROR, "Hue: Error refreshing light state ({}): {}", m_sid.c_str(), sanswer.c_str());
 }

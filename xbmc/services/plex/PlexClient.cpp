@@ -176,11 +176,11 @@ CFileItemPtr CPlexClient::FindViewItemByServiceId(const std::string &serviceId)
   {
     if (item->GetMediaServiceId() == serviceId)
     {
-      CLog::Log(LOGDEBUG, "CPlexClient::FindViewItemByServiceId: \"%s\"", item->GetLabel().c_str());
+      CLog::Log(LOGDEBUG, "CPlexClient::FindViewItemByServiceId: \"{}\"", item->GetLabel().c_str());
       return item;
     }
   }
-  CLog::Log(LOGERROR, "CPlexClient::FindViewItemByServiceId: failed to get details for item with id \"%s\"", serviceId.c_str());
+  CLog::Log(LOGERROR, "CPlexClient::FindViewItemByServiceId: failed to get details for item with id \"{}\"", serviceId.c_str());
   return nullptr;
 }
 
@@ -271,7 +271,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
   {
 #if defined(PLEX_DEBUG_VERBOSE)
     if (parser == PlexSectionParsing::newSection)
-      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %d, %s", parser, strResponse.c_str());
+      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {}, {}", parser, strResponse.c_str());
 #endif
     if (parser == PlexSectionParsing::updateSection)
     {
@@ -333,7 +333,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
                 if (contents.updatedAt != content.updatedAt)
                 {
 #if defined(PLEX_DEBUG_VERBOSE)
-                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on %s:%s",
+                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on {}:{}",
                     m_serverName.c_str(), content.title.c_str());
 #endif
                   m_needUpdate = true;
@@ -360,7 +360,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
                 if (contents.updatedAt != content.updatedAt)
                 {
 #if defined(PLEX_DEBUG_VERBOSE)
-                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on %s:%s",
+                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on {}:{}",
                     m_serverName.c_str(), content.title.c_str());
 #endif
                   m_needUpdate = true;
@@ -387,7 +387,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
                 if (contents.updatedAt != content.updatedAt)
                 {
 #if defined(PLEX_DEBUG_VERBOSE)
-                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on %s:%s",
+                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on {}:{}",
                             m_serverName.c_str(), content.title.c_str());
 #endif
                   m_needUpdate = true;
@@ -414,7 +414,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
                 if (contents.updatedAt != content.updatedAt)
                 {
 #if defined(PLEX_DEBUG_VERBOSE)
-                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on %s:%s",
+                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on {}:{}",
                             m_serverName.c_str(), content.title.c_str());
 #endif
                   m_needUpdate = true;
@@ -430,7 +430,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
         }
         else
         {
-          CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found unhandled content type %s",
+          CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found unhandled content type {}",
             m_serverName.c_str(), content.type.c_str());
         }
         DirectoryNode = DirectoryNode->NextSiblingElement("Directory");
@@ -438,13 +438,13 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
 
       if (parser == PlexSectionParsing::newSection)
       {
-        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found %d movie sections",
+        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found {} movie sections",
           m_serverName.c_str(), (int)m_movieSectionsContents.size());
-        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found %d shows sections",
+        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found {} shows sections",
           m_serverName.c_str(), (int)m_showSectionsContents.size());
-        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found %d artist sections",
+        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found {} artist sections",
                   m_serverName.c_str(), (int)m_artistSectionsContents.size());
-        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found %d photo sections",
+        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found {} photo sections",
                   m_serverName.c_str(), (int)m_photoSectionsContents.size());
       }
 
@@ -461,7 +461,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
     // and these require an access token. Only local servers that are
     // not is PMS can be accessed via GDM.
     if (plex.GetResponseCode() != 401)
-      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections failed %s", strResponse.c_str());
+      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections failed {}", strResponse.c_str());
     rtn = false;
   }
   
@@ -471,7 +471,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
   {
 #if defined(PLEX_DEBUG_VERBOSE)
     if (parser == PlexSectionParsing::newSection)
-      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %d, %s", parser, strResponse.c_str());
+      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {}, {}", parser, strResponse.c_str());
 #endif
     if (parser == PlexSectionParsing::updateSection)
     {
@@ -518,7 +518,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
                 if (contents.updatedAt != content.updatedAt)
                 {
 #if defined(PLEX_DEBUG_VERBOSE)
-                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on %s:%s",
+                  CLog::Log(LOGDEBUG, "CPlexClient::ParseSections need update on {}:{}",
                             m_serverName.c_str(), content.title.c_str());
 #endif
                   m_needUpdate = true;
@@ -534,7 +534,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
         }
         else
         {
-          CLog::Log(LOGDEBUG, "CPlexClient::ParseSections Playlists %s found unhandled content type %s",
+          CLog::Log(LOGDEBUG, "CPlexClient::ParseSections Playlists {} found unhandled content type {}",
                     m_serverName.c_str(), content.type.c_str());
         }
         PlaylistNode = PlaylistNode->NextSiblingElement("Playlist");
@@ -542,7 +542,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
       
       if (parser == PlexSectionParsing::newSection)
       {
-        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections %s found %d playlist sections",
+        CLog::Log(LOGDEBUG, "CPlexClient::ParseSections {} found {} playlist sections",
                   m_serverName.c_str(), (int)m_playlistSectionsContents.size());
       }
       rtn = true;
@@ -558,7 +558,7 @@ bool CPlexClient::ParseSections(enum PlexSectionParsing parser)
     // and these require an access token. Only local servers that are
     // not is PMS can be accessed via GDM.
     if (plex.GetResponseCode() != 401)
-      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections Playlists failed %s", strResponse.c_str());
+      CLog::Log(LOGDEBUG, "CPlexClient::ParseSections Playlists failed {}", strResponse.c_str());
     rtn = false;
   }
   return rtn;

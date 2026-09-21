@@ -101,7 +101,7 @@ void CPlexClientSync::Stop()
 
 void CPlexClientSync::ProcessSyncByPolling()
 {
-  CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByPolling connected to %s", m_name.c_str());
+  CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByPolling connected to {}", m_name.c_str());
   CStopWatch checkUpdatesTimer;
   checkUpdatesTimer.StartZero();
   while (!m_stop)
@@ -167,11 +167,11 @@ void CPlexClientSync::ProcessSyncByWebSockets()
   m_websocket = easywsclient::WebSocket::from_url(curl.Get() /* TODO: , origin */);
   if (!m_websocket)
   {
-    CLog::Log(LOGERROR, "CPlexClientSync:ProcessSyncByWebSockets connection failed from %s", m_name.c_str());
+    CLog::Log(LOGERROR, "CPlexClientSync:ProcessSyncByWebSockets connection failed from {}", m_name.c_str());
     m_stop = true;
   }
   else
-    CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets connected to %s", m_name.c_str());
+    CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets connected to {}", m_name.c_str());
 
   while (!m_stop && m_websocket->getReadyState() != easywsclient::WebSocket::CLOSED)
   {
@@ -182,7 +182,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
         CVariant msgObject;
         if (!CJSONVariantParser::Parse(msg, msgObject))
         {
-          CLog::Log(LOGERROR, "CPlexClientSync:ProcessSyncByWebSockets invalid msg %s from %s",
+          CLog::Log(LOGERROR, "CPlexClientSync:ProcessSyncByWebSockets invalid msg {} from {}",
             msg.c_str(), m_name.c_str());
           return;
         }
@@ -190,7 +190,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
         if (msgObject.isMember(_elementType))
         {
           // old style messages
-          CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets ignoring old style msg %s", msg.c_str());
+          CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets ignoring old style msg {}", msg.c_str());
           return;
         }
         else if (msgObject.isMember(NotificationContainer))
@@ -247,7 +247,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
           {
             // even more messages we do not care about
             CVariant progress = variant[ActivityNotification];
-            CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets ActivityNotification: msg %s", msg.c_str());
+            CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets ActivityNotification: msg {}", msg.c_str());
           }
           else if (variant.isMember(PlaySessionStateNotification))
           {
@@ -259,7 +259,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
                 const std::string key = (*item)["key"].asString();
                 const std::string state = (*item)["state"].asString();
                 const std::string sessionKey = (*item)["sessionKey"].asString();
-                CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets PlaySessionStateNotification:sessionKey=%s, state=%s",
+                CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets PlaySessionStateNotification:sessionKey={}, state={}",
                   sessionKey.c_str(), state.c_str());
               }
             }
@@ -283,7 +283,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
           {
             // even more messages we do not care about
             CVariant progress = variant[TranscodeSession];
-            //CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets TranscodeSession: msg %s", msg.c_str());
+            //CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets TranscodeSession: msg {}", msg.c_str());
           }
           else if (variant.isMember(BackgroundProcessingQueueEventNotification))
           {
@@ -302,7 +302,7 @@ void CPlexClientSync::ProcessSyncByWebSockets()
           }
           else
           {
-            CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets unknown %s", msg.c_str());
+            CLog::Log(LOGDEBUG, "CPlexClientSync:ProcessSyncByWebSockets unknown {}", msg.c_str());
           }
         }
       });

@@ -86,7 +86,7 @@ static bool IsInSubNet(CURL url)
   std::string temp2IpAddress;
   if (inet_neta(temp2, buffer, sizeof(buffer)))
     temp2IpAddress = buffer;
-  CLog::Log(LOGDEBUG, "IsInSubNet = yes(%d), testAddress(%s), localAddress(%s)", rtn, temp1IpAddress.c_str(), temp2IpAddress.c_str());
+  CLog::Log(LOGDEBUG, "IsInSubNet = yes({}), testAddress({}), localAddress({})", rtn, temp1IpAddress.c_str(), temp2IpAddress.c_str());
 #endif
   return rtn;
 }
@@ -261,7 +261,7 @@ void CEmbyServices::OnSettingAction(const std::shared_ptr<const CSetting>& setti
           else
           {
             strMessage = "Could not get authToken via manual sign-in";
-            CLog::Log(LOGERROR, "CEmbyServices: %s", strMessage.c_str());
+            CLog::Log(LOGERROR, "CEmbyServices: {}", strMessage.c_str());
           }
         }
         else
@@ -373,7 +373,7 @@ void CEmbyServices::InitiateSignIn()
     else
     {
       std::string strMessage = "Could not get authToken via pin request sign-in";
-      CLog::Log(LOGERROR, "CEmbyServices: %s", strMessage.c_str());
+      CLog::Log(LOGERROR, "CEmbyServices: {}", strMessage.c_str());
     }
   }
   else
@@ -577,12 +577,12 @@ void CEmbyServices::Process()
             {
               CURL curl(server.ServerURL);
               CWakeOnAccess::GetInstance().WakeUpHost(curl.GetHostName(), "Emby Server");
-              CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server found %s", client->GetServerName().c_str());
+              CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server found {}", client->GetServerName().c_str());
             }
             else if (GetClient(client->GetUuid()) == nullptr)
             {
               // lost client
-              CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server was lost %s", client->GetServerName().c_str());
+              CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server was lost {}", client->GetServerName().c_str());
             }
           }
         }
@@ -645,7 +645,7 @@ bool CEmbyServices::AuthenticateByName(const CURL& url)
   {
     std::string strMessage = "Could not connect to retreive EmbyToken";
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Emby Services", strMessage, 3000, true);
-    CLog::Log(LOGERROR, "CEmbyServices:AuthenticateByName failed %d, %s", emby.GetResponseCode(), response.c_str());
+    CLog::Log(LOGERROR, "CEmbyServices:AuthenticateByName failed {}, {}", emby.GetResponseCode(), response.c_str());
     return false;
   }
 
@@ -692,7 +692,7 @@ EmbyServerInfo CEmbyServices::GetEmbyLocalServerInfo(const std::string url)
   {
     std::string strMessage = "Could not connect to retreive EmbyServerInfo";
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Emby Services", strMessage, 3000, true);
-    CLog::Log(LOGERROR, "CEmbyServices:GetEmbyServerInfo failed %d, %s", emby.GetResponseCode(), response.c_str());
+    CLog::Log(LOGERROR, "CEmbyServices:GetEmbyServerInfo failed {}, {}", emby.GetResponseCode(), response.c_str());
     return serverInfo;
   }
 
@@ -741,12 +741,12 @@ bool CEmbyServices::GetEmbyLocalServers(const std::string &serverURL, const std:
     {
       if (AddClient(client))
       {
-        CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server found %s", client->GetServerName().c_str());
+        CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server found {}", client->GetServerName().c_str());
       }
       else if (GetClient(client->GetUuid()) == nullptr)
       {
         // lost client
-        CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server was lost %s", client->GetServerName().c_str());
+        CLog::Log(LOGINFO, "CEmbyServices::CheckEmbyServers Server was lost {}", client->GetServerName().c_str());
       }
     }
   }
@@ -776,7 +776,7 @@ bool CEmbyServices::PostSignInPinCode()
   if (curlfile.Post(curl.Get(), jsonBody, response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyServices:FetchSignInPin %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyServices:FetchSignInPin {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))
@@ -842,7 +842,7 @@ bool CEmbyServices::PostSignInPinCode()
   else
   {
     strMessage = "Could not connect to retreive AuthToken";
-    CLog::Log(LOGERROR, "CEmbyServices:FetchSignInPin failed %s", response.c_str());
+    CLog::Log(LOGERROR, "CEmbyServices:FetchSignInPin failed {}", response.c_str());
   }
   if (!rtn)
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Emby Services", strMessage, 3000, true);
@@ -879,7 +879,7 @@ bool CEmbyServices::GetSignInByPinReply()
   if (curlfile.Get(curl.Get(), response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyServices:WaitForSignInByPin %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyServices:WaitForSignInByPin {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))
@@ -899,7 +899,7 @@ bool CEmbyServices::GetSignInByPinReply()
 
   if (!rtn)
   {
-    CLog::Log(LOGERROR, "CEmbyServices:WaitForSignInByPin failed %s", response.c_str());
+    CLog::Log(LOGERROR, "CEmbyServices:WaitForSignInByPin failed {}", response.c_str());
   }
   return rtn;
 }
@@ -926,7 +926,7 @@ bool CEmbyServices::AuthenticatePinReply(const std::string &deviceId, const std:
   if (curlfile.Post(curl.Get(), jsondata, response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyServices:AuthenticatePinReply %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyServices:AuthenticatePinReply {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))
@@ -970,7 +970,7 @@ EmbyServerInfoVector CEmbyServices::GetConnectServerList(const std::string &conn
   if (curlfile.Get(curl.Get(), response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyServices:GetConnectServerList %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyServices:GetConnectServerList {}", response.c_str());
 #endif
     CVariant vservers;
     if (!CJSONVariantParser::Parse(response, vservers))
@@ -1022,7 +1022,7 @@ bool CEmbyServices::ExchangeAccessKeyForAccessToken(EmbyServerInfo &connectServe
   if (curlfile.Get(curl.Get(), response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyServices:ExchangeAccessKeyForAccessToken %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyServices:ExchangeAccessKeyForAccessToken {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))

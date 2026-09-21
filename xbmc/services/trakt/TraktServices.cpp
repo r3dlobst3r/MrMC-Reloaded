@@ -89,18 +89,18 @@ public:
     switch(mkhash(m_function.c_str()))
     {
       case "OnPlay"_mkhash:
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnPlay currentTime = %f", m_currentTime);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnPlay currentTime = {}", m_currentTime);
         CTraktServices::ReportProgress(m_item, "start", m_percentage);
         break;
       case "OnSeek"_mkhash:
         // Trakt API only as start/pause/stop. It is unclear what
         // to do about if you are seeking, others seem to just do
         // start again. We can too.
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnSeek currentTime = %f", m_currentTime);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnSeek currentTime = {}", m_currentTime);
         CTraktServices::ReportProgress(m_item, "start", m_percentage);
         break;
       case "OnPause"_mkhash:
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnPause currentTime = %f", m_currentTime);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::OnPause currentTime = {}", m_currentTime);
         CTraktServices::ReportProgress(m_item, "pause", m_percentage);
         break;
       case "TraktSetStopped"_mkhash:
@@ -194,19 +194,19 @@ void CTraktServices::Announce(AnnouncementFlag flag, const std::string& sender, 
         if (percentage < 0.0)
           percentage = 0.0;
         SetPlayState(item, MediaServicesPlayerState::playing);
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnPlay currentSeconds = %f", percentage);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnPlay currentSeconds = {}", percentage);
         AddJob(new CTraktServiceJob(item, percentage, message));
         break;
       case "OnPause"_mkhash:
         SetPlayState(item, MediaServicesPlayerState::paused);
         percentage = 100.0 * g_application.GetTime() / g_application.GetTotalTime();
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnPause currentSeconds = %f", percentage);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnPause currentSeconds = {}", percentage);
         AddJob(new CTraktServiceJob(item, percentage, message));
         break;
       case "OnSeek"_mkhash:
         // Ahh, finally someone actually gives us the right playtime.
         percentage = 100.0 * (data["player"]["time"]["hours"].asInteger() * 3600 + data["player"]["time"]["minutes"].asInteger() * 60 + data["player"]["time"]["seconds"].asInteger()) * 1000 / g_application.GetTotalTime();
-        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnSeek currentSeconds = %f", percentage);
+        CLog::Log(LOGDEBUG, "CTraktServiceJob::Announce OnSeek currentSeconds = {}", percentage);
         AddJob(new CTraktServiceJob(item, percentage, message));
         break;
       case "OnStop"_mkhash:
@@ -288,7 +288,7 @@ void CTraktServices::OnSettingAction(const std::shared_ptr<const CSetting>& sett
       else
       {
         std::string strMessage = "Could not get authToken via pin request sign-in";
-        CLog::Log(LOGERROR, "CTraktServices: %s", strMessage.c_str());
+        CLog::Log(LOGERROR, "CTraktServices: {}", strMessage.c_str());
         m_canSync = false;
       }
     }
@@ -398,7 +398,7 @@ bool CTraktServices::GetSignInPinCode()
   if (curlfile.Post(curl.Get(), jsonBody, response))
   {
 #if defined(TRAKT_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CTraktServices:FetchSignInPin %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices:FetchSignInPin {}", response.c_str());
 #endif
     CVariant reply;
     std::string verification_url;
@@ -467,7 +467,7 @@ bool CTraktServices::GetSignInPinCode()
   else
   {
     strMessage = "Could not connect to retreive AuthToken";
-    CLog::Log(LOGERROR, "CTraktServices::FetchSignInPin failed %s", response.c_str());
+    CLog::Log(LOGERROR, "CTraktServices::FetchSignInPin failed {}", response.c_str());
   }
   if (!rtn)
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "Trakt Service", strMessage, 3000, true);
@@ -498,7 +498,7 @@ bool CTraktServices::GetSignInByPinReply()
   if (curlfile.Post(curl.Get(), jsondata, response))
   {
 #if defined(TRAKT_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CTraktServices:AuthenticatePinReply %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices:AuthenticatePinReply {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))
@@ -666,7 +666,7 @@ void CTraktServices::ReportProgress(CFileItem &item, const std::string &status, 
 
   if (!status.empty())
   {
-    CLog::Log(LOGDEBUG, "CTraktServices::ReportProgress status = %s, percentage = %f", status.c_str(), percentage);
+    CLog::Log(LOGDEBUG, "CTraktServices::ReportProgress status = {}, percentage = {}", status.c_str(), percentage);
     CVariant data;
     if (item.HasVideoInfoTag() && item.GetVideoInfoTag()->m_type == MediaTypeEpisode)
     {
@@ -783,7 +783,7 @@ void CTraktServices::PullWatchedStatus()
         if (itemDefault.empty())
           continue;
 
-        CLog::Log(LOGDEBUG, "CTraktServices::PullWatchedStatus() - Matching movie [%s] to {%s} {%s}",
+        CLog::Log(LOGDEBUG, "CTraktServices::PullWatchedStatus() - Matching movie [{}] to {{}} {{}}",
                   itemDefault.c_str(),
                   movieItem["movie"]["ids"]["tmdb"].asString().c_str(),
                   movieItem["movie"]["ids"]["imdb"].asString().c_str());
@@ -791,7 +791,7 @@ void CTraktServices::PullWatchedStatus()
         if (itemDefault == movieItem["movie"]["ids"]["tmdb"].asString() ||
             itemDefault == movieItem["movie"]["ids"]["imdb"].asString())
         {
-          CLog::Log(LOGDEBUG, "CTraktServices::PullWatchedStatus() - Matched movie [%s]", items[i]->GetVideoInfoTag()->GetTitle().c_str());
+          CLog::Log(LOGDEBUG, "CTraktServices::PullWatchedStatus() - Matched movie [{}]", items[i]->GetVideoInfoTag()->GetTitle().c_str());
           CDateTime date;
           date.SetFromW3CDateTime(movieItem["last_watched_at"].asString());
           videodb.ClearBookMarksOfFile(items[i]->GetVideoInfoTag()->GetPath(), CBookmark::RESUME);
@@ -1064,8 +1064,8 @@ CVariant CTraktServices::GetTraktCVariant(const std::string &url)
         return CVariant(CVariant::VariantTypeNull);
     }
 #if defined(TRAKT_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CTraktServices::GetTraktCVariant %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CTraktServices::GetTraktCVariant - response %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::GetTraktCVariant {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::GetTraktCVariant - response {}", response.c_str());
 #endif
     CVariant resultObject;
     if (CJSONVariantParser::Parse(response, resultObject))
@@ -1099,8 +1099,8 @@ void CTraktServices::ServerChat(const std::string &url, const CVariant &data)
   if (curlfile.Post(curl.Get(), jsondata, response))
   {
 #if defined(TRAKT_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CTraktServices::ServerChat %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CTraktServices::ServerChat - response %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::ServerChat {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::ServerChat - response {}", response.c_str());
 #endif
   }
   else
@@ -1108,7 +1108,7 @@ void CTraktServices::ServerChat(const std::string &url, const CVariant &data)
     // If the same item was just scrobbled, a 409 HTTP status code
     // will returned to avoid scrobbling a duplicate
     if (curlfile.GetResponseCode() != 409)
-      CLog::Log(LOGDEBUG, "CTraktServices::ServerChat - failed, response %s", response.c_str());
+      CLog::Log(LOGDEBUG, "CTraktServices::ServerChat - failed, response {}", response.c_str());
   }
 
 }
@@ -1138,8 +1138,8 @@ void CTraktServices::RefreshAccessToken()
   if (curlfile.Post(curl.Get(), jsondata, response))
   {
 #if defined(TRAKT_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CTraktServices::RefreshAccessToken() %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CTraktServices::RefreshAccessToken() - response %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::RefreshAccessToken() {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CTraktServices::RefreshAccessToken() - response {}", response.c_str());
 #endif
     CVariant reply;
     if (!CJSONVariantParser::Parse(response, reply))

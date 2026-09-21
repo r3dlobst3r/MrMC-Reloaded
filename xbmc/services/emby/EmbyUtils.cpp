@@ -278,7 +278,7 @@ void CEmbyUtils::ReportProgress(CFileItem &item, double currentSeconds)
       {
 #if defined(EMBY_DEBUG_VERBOSE)
         if (!response.empty())
-          CLog::Log(LOGDEBUG, "CEmbyUtils::ReportProgress %s", response.c_str());
+          CLog::Log(LOGDEBUG, "CEmbyUtils::ReportProgress {}", response.c_str());
 #endif
       }
       // mrmc assumes that less than 3 min, we want to start at beginning
@@ -896,7 +896,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     if (type == EmbyTypeMovie)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMovie: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMovie: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbyVideos(items, url2, variant, MediaTypeMovie);
@@ -904,7 +904,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeSeries)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeSeries: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeSeries: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbySeries(items, url2, variant);
@@ -912,7 +912,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeSeason)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeSeason: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeSeason: {}",
         variantItem["Name"].asString().c_str());
 #endif
       CURL url3(url2);
@@ -926,7 +926,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeEpisode)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeEpisode: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeEpisode: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbyVideos(items, url2, variant, MediaTypeEpisode);
@@ -934,7 +934,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeAudio)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeAudio: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeAudio: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbyAudio(items, url2, variant);
@@ -942,7 +942,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeMusicAlbum)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMusicAlbum: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMusicAlbum: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbyAlbum(items, url2, variant);
@@ -950,7 +950,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     else if (type == EmbyTypeMusicArtist)
     {
 #if defined(EMBY_DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMusicArtist: %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr EmbyTypeMusicArtist: {}",
         variantItem["Name"].asString().c_str());
 #endif
       ParseEmbyArtists(items, url2, variant);
@@ -961,7 +961,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     }
     else
     {
-      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr unknown type: %s with name %s",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::ToFileItemPtr unknown type: {} with name {}",
         type.c_str(), variantItem["Name"].asString().c_str());
     }
 
@@ -975,7 +975,7 @@ bool CEmbyUtils::ParseEmbyVideos(CFileItemList &items, CURL url, const CVariant 
 {
   if (variant.isNull() || !variant.isObject() || !variant.isMember("Items"))
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyVideos invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyVideos invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1024,7 +1024,7 @@ bool CEmbyUtils::ParseEmbyVideos(CFileItemList &items, CURL url, const CVariant 
   int delta = XbmcThreads::SystemClockMillis() - currentTime;
   if (delta > 1)
   {
-    CLog::Log(LOGDEBUG, "CEmbyUtils::GetVideoItems %d(msec) for %d items",
+    CLog::Log(LOGDEBUG, "CEmbyUtils::GetVideoItems {}(msec) for {} items",
       XbmcThreads::SystemClockMillis() - currentTime, variantItems.size());
   }
 #endif
@@ -1035,7 +1035,7 @@ bool CEmbyUtils::ParseEmbySeries(CFileItemList &items, const CURL &url, const CV
 {
   if (variant.isNull() || !variant.isObject() || !variant.isMember("Items"))
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbySeries invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbySeries invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1143,7 +1143,7 @@ bool CEmbyUtils::ParseEmbySeasons(CFileItemList &items, const CURL &url, const C
 {
   if (variant.isNull() || !variant.isObject() || series.isNull() || !series.isObject())
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbySeasons invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbySeasons invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1285,7 +1285,7 @@ bool CEmbyUtils::ParseEmbyAudio(CFileItemList &items, const CURL &url, const CVa
 {
   if (variant.isNull() || !variant.isObject())
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyAudio invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyAudio invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1351,7 +1351,7 @@ bool CEmbyUtils::ParseEmbyAlbum(CFileItemList &items, const CURL &url, const CVa
 {
   if (variant.isNull() || !variant.isObject() || !variant.isMember("Items"))
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyAlbum invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyAlbum invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1424,7 +1424,7 @@ bool CEmbyUtils::ParseEmbyArtists(CFileItemList &items, const CURL &url, const C
 {
   if (variant.isNull() || !variant.isObject())
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyArtists invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyArtists invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1494,7 +1494,7 @@ bool CEmbyUtils::ParseEmbyMoviesFilter(CFileItemList &items, CURL url, const CVa
 {
   if (variant.isNull() || !variant.isObject() || !variant.isMember("Items"))
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyMoviesFilter invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyMoviesFilter invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1540,7 +1540,7 @@ bool CEmbyUtils::ParseEmbyTVShowsFilter(CFileItemList &items, const CURL url, co
 {
   if (variant.isNull() || !variant.isObject() || !variant.isMember("Items"))
   {
-    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyTVShowsFilter invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CEmbyUtils::ParseEmbyTVShowsFilter invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1600,7 +1600,7 @@ CVariant CEmbyUtils::GetEmbyCVariant(std::string url, std::string filter)
   if (emby.Get(curl.Get(), response))
   {
 #if defined(EMBY_DEBUG_TIMING)
-    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant %d(msec) for %lu bytes",
+    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant {}(msec) for {} bytes",
               XbmcThreads::SystemClockMillis() - currentTime, response.size());
 #endif
     if (emby.GetContentEncoding() == "gzip")
@@ -1612,8 +1612,8 @@ CVariant CEmbyUtils::GetEmbyCVariant(std::string url, std::string filter)
         return CVariant(CVariant::VariantTypeNull);
     }
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant {}", response.c_str());
 #endif
 #if defined(EMBY_DEBUG_TIMING)
     currentTime = XbmcThreads::SystemClockMillis();
@@ -1622,7 +1622,7 @@ CVariant CEmbyUtils::GetEmbyCVariant(std::string url, std::string filter)
     if (CJSONVariantParser::Parse(response, resultObject))
     {
 #if defined(EMBY_DEBUG_TIMING)
-      CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant parsed in %d(msec)",
+      CLog::Log(LOGDEBUG, "CEmbyUtils::GetEmbyCVariant parsed in {}(msec)",
                 XbmcThreads::SystemClockMillis() - currentTime);
 #endif
       // recently added does not return proper object, we make one up later

@@ -216,7 +216,7 @@ void CEmbyClient::SetWatched(CFileItem &item)
   {
 #if defined(EMBY_DEBUG_VERBOSE)
     if (!response.empty())
-      CLog::Log(LOGDEBUG, "CEmbyClient::SetWatched %s", response.c_str());
+      CLog::Log(LOGDEBUG, "CEmbyClient::SetWatched {}", response.c_str());
 #endif
   }
 }
@@ -263,7 +263,7 @@ void CEmbyClient::SetUnWatched(CFileItem &item)
   {
 #if defined(EMBY_DEBUG_VERBOSE)
     if (!response.empty())
-      CLog::Log(LOGDEBUG, "CEmbyUtils::SetUnWatched %s", response.c_str());
+      CLog::Log(LOGDEBUG, "CEmbyUtils::SetUnWatched {}", response.c_str());
 #endif
   }
 }
@@ -359,7 +359,7 @@ bool CEmbyClient::GetMoviesFilters(CFileItemList &items, std::string url)
 //  CVariant variant = CEmbyUtils::GetEmbyCVariant(path);
 //  if (variant.isNull())
 //  {
-//    CLog::Log(LOGERROR, "CEmbyClient::GetMoviesFilters: invalid response for views items from %s", CURL::GetRedacted(path).c_str());
+//    CLog::Log(LOGERROR, "CEmbyClient::GetMoviesFilters: invalid response for views items from {}", CURL::GetRedacted(path).c_str());
 //    return rtn;
 //  }
   // Set Title item as emby doesnt have that??
@@ -458,7 +458,7 @@ bool CEmbyClient::GetTVShowFilters(CFileItemList &items, std::string url)
 //  CVariant variant = CEmbyUtils::GetEmbyCVariant(path);
 //  if (variant.isNull())
 //  {
-//    CLog::Log(LOGERROR, "CEmbyClient::GetMoviesFilters: invalid response for views items from %s", CURL::GetRedacted(path).c_str());
+//    CLog::Log(LOGERROR, "CEmbyClient::GetMoviesFilters: invalid response for views items from {}", CURL::GetRedacted(path).c_str());
 //    return rtn;
 //  }
   // Set Title item as emby doesnt have that??
@@ -759,7 +759,7 @@ bool CEmbyClient::FetchViews()
   if (emby.Get(path, response))
   {
 #if defined(EMBY_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CEmbyClient::FetchViews %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyClient::FetchViews {}", response.c_str());
 #endif
 
     // clear all views
@@ -788,7 +788,7 @@ bool CEmbyClient::FetchViews()
     if (!CJSONVariantParser::Parse(response, resultObject) ||
         !resultObject.isObject() || !resultObject.isMember("Items"))
     {
-      CLog::Log(LOGERROR, "CEmbyClient::FetchViews: invalid response for library views from %s", CURL::GetRedacted(path).c_str());
+      CLog::Log(LOGERROR, "CEmbyClient::FetchViews: invalid response for library views from {}", CURL::GetRedacted(path).c_str());
       return false;
     }
 
@@ -880,20 +880,20 @@ bool CEmbyClient::FetchViews()
       }
       else
       {
-        CLog::Log(LOGDEBUG, "CEmbyClient::ParseView %s found unhandled content type %s",
+        CLog::Log(LOGDEBUG, "CEmbyClient::ParseView {} found unhandled content type {}",
           m_serverInfo.ServerName.c_str(), content.name.c_str());
       }
     }
 
     if (!views.empty())
     {
-      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView %s found %d movies view",
+      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView {} found {} movies view",
         m_serverInfo.ServerName.c_str(), (int)m_viewMovies.size());
-      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView %s found %d tvshows view",
+      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView {} found {} tvshows view",
         m_serverInfo.ServerName.c_str(), (int)m_viewTVShows.size());
-      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView %s found %d Music view",
+      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView {} found {} Music view",
         m_serverInfo.ServerName.c_str(), (int)m_viewMusic.size());
-      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView %s found %d photos view",
+      CLog::Log(LOGDEBUG, "CEmbyClient::ParseView {} found {} photos view",
         m_serverInfo.ServerName.c_str(), (int)m_viewPhotos.size());
       rtn = true;
     }
@@ -940,14 +940,14 @@ bool CEmbyClient::FetchViewItems(CEmbyViewCachePtr &view, const CURL &url, const
   }
   else
   {
-    CLog::Log(LOGDEBUG, "CEmbyClient::FetchViewItems unknown type: %s", type.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyClient::FetchViewItems unknown type: {}", type.c_str());
     //return false;
   }
   std::string path = curl.Get();
   CVariant variant = CEmbyUtils::GetEmbyCVariant(path);
   if (variant.isNull())
   {
-    CLog::Log(LOGERROR, "CEmbyClient::FetchViewItems: invalid response for views items from %s", CURL::GetRedacted(path).c_str());
+    CLog::Log(LOGERROR, "CEmbyClient::FetchViewItems: invalid response for views items from {}", CURL::GetRedacted(path).c_str());
     return false;
   }
 
@@ -988,14 +988,14 @@ bool CEmbyClient::FetchFilterItems(CEmbyViewCachePtr &view, const CURL &url, con
   }
   else
   {
-    CLog::Log(LOGDEBUG, "CEmbyClient::FetchFilterItems unknown type: %s", type.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyClient::FetchFilterItems unknown type: {}", type.c_str());
     return false;
   }
   std::string path = curl.Get();
   CVariant variant = CEmbyUtils::GetEmbyCVariant(path);
   if (variant.isNull())
   {
-    CLog::Log(LOGERROR, "CEmbyClient::FetchFilterItems: invalid response for views items from %s", CURL::GetRedacted(path).c_str());
+    CLog::Log(LOGERROR, "CEmbyClient::FetchFilterItems: invalid response for views items from {}", CURL::GetRedacted(path).c_str());
     return false;
   }
 
@@ -1092,7 +1092,7 @@ bool CEmbyClient::AppendItemToCache(const std::string &viewId, const CVariant &v
 {
   if (viewId.empty())
   {
-    CLog::Log(LOGDEBUG, "CEmbyClient::AppendItemToCache viewId is null: %s",
+    CLog::Log(LOGDEBUG, "CEmbyClient::AppendItemToCache viewId is null: {}",
       variant["Type"].asString().c_str());
     return false;
   }

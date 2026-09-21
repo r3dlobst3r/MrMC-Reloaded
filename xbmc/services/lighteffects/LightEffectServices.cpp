@@ -330,11 +330,11 @@ void CLightEffectServices::SetOption(std::string setting)
     
   std::string data = StringUtils::Format("%s %s", option.c_str(), value.c_str());
   if (!m_lighteffect->SetOption(data.c_str()))
-    CLog::Log(LOGDEBUG, "CLightEffectServices::SetOption - error: for option '%s' and value '%s'",
+    CLog::Log(LOGDEBUG, "CLightEffectServices::SetOption - error: for option '{}' and value '{}'",
       option.c_str(), value.c_str());
   else
   {
-    CLog::Log(LOGDEBUG, "CLightEffectServices::SetOption - option '%s' and value '%s' - Done!",
+    CLog::Log(LOGDEBUG, "CLightEffectServices::SetOption - option '{}' and value '{}' - Done!",
       option.c_str(), value.c_str());
     // this will refresh static colours once options are changed
     m_turnStaticON = true;

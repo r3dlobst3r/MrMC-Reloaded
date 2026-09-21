@@ -80,11 +80,11 @@ void CEmbyClientSync::Process()
   m_websocket = easywsclient::WebSocket::from_url(m_address /* TODO: , origin */);
   if (!m_websocket)
   {
-    CLog::Log(LOGERROR, "CEmbyClientSync: websocket connection failed from %s", m_name.c_str());
+    CLog::Log(LOGERROR, "CEmbyClientSync: websocket connection failed from {}", m_name.c_str());
     m_stop = true;
   }
   else
-    CLog::Log(LOGDEBUG, "CEmbyClientSync: websocket connected to %s", m_name.c_str());
+    CLog::Log(LOGDEBUG, "CEmbyClientSync: websocket connected to {}", m_name.c_str());
 
   while (!m_stop && m_websocket->getReadyState() != easywsclient::WebSocket::CLOSED)
   {
@@ -98,7 +98,7 @@ void CEmbyClientSync::Process()
           !msgObject.isMember("MessageType")
           || !msgObject.isMember("Data"))
         {
-          CLog::Log(LOGERROR, "CEmbyClientSync: invalid websocket notification from %s", m_name.c_str());
+          CLog::Log(LOGERROR, "CEmbyClientSync: invalid websocket notification from {}", m_name.c_str());
           return;
         }
 
@@ -119,12 +119,12 @@ void CEmbyClientSync::Process()
         if (msgType == "ScheduledTaskEnded")
           return;
 
-        //CLog::Log(LOGDEBUG, "[%s] %s: %s", this->m_name.c_str(), msgType.c_str(), msg.c_str());
+        //CLog::Log(LOGDEBUG, "[{}] {}: {}", this->m_name.c_str(), msgType.c_str(), msg.c_str());
 
         const auto msgData = msgObject["Data"];
         if (!msgData.isObject())
         {
-          CLog::Log(LOGDEBUG, "CEmbyClientSync: ignoring websocket notification of type \"%s\" from %s", msgType.c_str(), m_name.c_str());
+          CLog::Log(LOGDEBUG, "CEmbyClientSync: ignoring websocket notification of type \"{}\" from {}", msgType.c_str(), m_name.c_str());
           return;
         }
 
@@ -135,7 +135,7 @@ void CEmbyClientSync::Process()
           {
 #if defined(EMBY_DEBUG_VERBOSE)
             CLog::Log(LOGDEBUG, "CEmbyClientSync: processing LibraryChanged");
-            CLog::Log(LOGDEBUG, "[%s] %s: %s", this->m_name.c_str(), msgType.c_str(), msg.c_str());
+            CLog::Log(LOGDEBUG, "[{}] {}: {}", this->m_name.c_str(), msgType.c_str(), msg.c_str());
 #endif
             const auto itemsAdded = msgData["ItemsAdded"];
             if (itemsAdded.isArray())
@@ -185,7 +185,7 @@ void CEmbyClientSync::Process()
           {
 #if defined(EMBY_DEBUG_VERBOSE)
             CLog::Log(LOGDEBUG, "CEmbyClientSync: processing UserDataChanged");
-            CLog::Log(LOGDEBUG, "[%s] %s: %s", this->m_name.c_str(), msgType.c_str(), msg.c_str());
+            CLog::Log(LOGDEBUG, "[{}] {}: {}", this->m_name.c_str(), msgType.c_str(), msg.c_str());
 #endif
             const auto userDataList = msgData["UserDataList"];
             std::vector<std::string> ids;
@@ -200,7 +200,7 @@ void CEmbyClientSync::Process()
         }
         else
         {
-          CLog::Log(LOGDEBUG, "[%s] %s: %s", this->m_name.c_str(), msgType.c_str(), msg.c_str());
+          CLog::Log(LOGDEBUG, "[{}] {}: {}", this->m_name.c_str(), msgType.c_str(), msg.c_str());
         }
       });
   }

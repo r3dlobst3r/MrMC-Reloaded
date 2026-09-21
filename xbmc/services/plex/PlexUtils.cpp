@@ -125,7 +125,7 @@ bool CPlexUtils::GetIdentity(CURL url, int timeout)
   if (plex.Get(url.Get(), strResponse))
   {
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexClient::GetIdentity() %s", strResponse.c_str());
+    CLog::Log(LOGDEBUG, "CPlexClient::GetIdentity() {}", strResponse.c_str());
 #endif
     return true;
   }
@@ -299,7 +299,7 @@ void CPlexUtils::ReportProgress(CFileItem &item, double currentSeconds)
           (int)currentSeconds * 1000, totalSeconds * 1000);
 
       ReportToServer(url, filename);
-      //CLog::Log(LOGDEBUG, "CPlexUtils::ReportProgress %s", filename.c_str());
+      //CLog::Log(LOGDEBUG, "CPlexUtils::ReportProgress {}", filename.c_str());
     }
     if (g_playbackState == MediaServicesPlayerState::stopped &&
         item.GetProperty("PlexTranscoder").asBoolean())
@@ -1306,7 +1306,7 @@ bool CPlexUtils::GetURL(CFileItem &item)
       break;
   }
 
-  CLog::Log(LOGDEBUG, "CPlexUtils::GetURL - bitrate [%s] res [%s]", maxBitrate.c_str(), resolution.c_str());
+  CLog::Log(LOGDEBUG, "CPlexUtils::GetURL - bitrate [{}] res [{}]", maxBitrate.c_str(), resolution.c_str());
 
   std::string plexID = item.GetMediaServiceId();
   std::string uuidStr = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SERVICES_UUID);
@@ -1320,7 +1320,7 @@ bool CPlexUtils::GetURL(CFileItem &item)
   curl.SetOption("session", uuidStr);
   /*
   std::string resumeTime = StringUtils::Format("%f", item.GetVideoInfoTag()->GetResumePoint().timeInSeconds);
-  CLog::Log(LOGINFO, "resumeTime: %s seconds", resumeTime.c_str());
+  CLog::Log(LOGINFO, "resumeTime: {} seconds", resumeTime.c_str());
   curl.SetOption("offset", resumeTime);
   */
   curl.SetOption("offset", "0");
@@ -1339,7 +1339,7 @@ bool CPlexUtils::GetURL(CFileItem &item)
   curl.SetOption("maxVideoBitrate", maxBitrate);
   curl.SetOption("session", uuidStr);
   std::string resumeTime = StringUtils::Format("%f", item.GetVideoInfoTag()->GetResumePoint().timeInSeconds);
-  CLog::Log(LOGINFO, "resumeTime: %s seconds", resumeTime.c_str());
+  CLog::Log(LOGINFO, "resumeTime: {} seconds", resumeTime.c_str());
   curl.SetOption("offset", resumeTime);
   curl.SetOption("videoQuality", "100");
   curl.SetOption("videoResolution", resolution);
@@ -1729,7 +1729,7 @@ bool CPlexUtils::ParsePlexSeries(CFileItemList &items, const CURL &url, const CV
   const CVariant variantDirectory = makeVariantArrayIfSingleItem(directory);
   if (variantDirectory.isNull() || !variantDirectory.isArray())
   {
-    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSeries invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSeries invalid response from {}", url.GetRedacted().c_str());
     return rtn;
   }
 
@@ -1819,7 +1819,7 @@ bool CPlexUtils::ParsePlexSeasons(CFileItemList &items, const CURL &url, const C
 {
   if (mediacontainer.isNull() || !mediacontainer.isObject() || directory.isNull())
   {
-    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSeasons invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSeasons invalid response from {}", url.GetRedacted().c_str());
     return false;
   }
 
@@ -1957,7 +1957,7 @@ bool CPlexUtils::ParsePlexSongs(CFileItemList &items, const CURL &url, const CVa
   const CVariant variantTrack = makeVariantArrayIfSingleItem(track);
   if (variantTrack.isNull() || !variantTrack.isArray())
   {
-    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSongs invalid response from %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexSongs invalid response from {}", url.GetRedacted().c_str());
     return rtn;
   }
 
@@ -2027,7 +2027,7 @@ bool CPlexUtils::ParsePlexArtistsAlbum(CFileItemList &items, const CURL &url, co
   bool rtn = false;
   if (directory.isNull())
   {
-    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexArtistsAlbum directory is null %s", url.GetRedacted().c_str());
+    CLog::Log(LOGERROR, "CPlexUtils::ParsePlexArtistsAlbum directory is null {}", url.GetRedacted().c_str());
     return rtn;
   }
 
@@ -2356,7 +2356,7 @@ void CPlexUtils::GetMediaDetals(CFileItem &item, CURL url, const CVariant &media
       if (iPart > 1)
       {
         filePath = filePath + " , " + url.Get();
-        CLog::Log(LOGDEBUG, "CPlexUtils::GetMediaDetals iPart > 1 %s", item.GetLabel().c_str());
+        CLog::Log(LOGDEBUG, "CPlexUtils::GetMediaDetals iPart > 1 {}", item.GetLabel().c_str());
       }
       else
         filePath = url.Get();
@@ -2388,7 +2388,7 @@ CVariant CPlexUtils::GetPlexCVariant(std::string url, std::string filter)
   {
 
 #if defined(PLEX_DEBUG_TIMING)
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant %d(msec) for %lu bytes",
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant {}(msec) for {} bytes",
               XbmcThreads::SystemClockMillis() - currentTime, response.size());
 #endif
 
@@ -2402,8 +2402,8 @@ CVariant CPlexUtils::GetPlexCVariant(std::string url, std::string filter)
     }
 
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant {}", response.c_str());
 #endif
 #if defined(PLEX_DEBUG_TIMING)
     currentTime = XbmcThreads::SystemClockMillis();
@@ -2415,7 +2415,7 @@ CVariant CPlexUtils::GetPlexCVariant(std::string url, std::string filter)
     if (CJSONVariantParser::Parse(jsonBody, resultObject))
     {
   #if defined(PLEX_DEBUG_TIMING)
-      CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant parsed in %d(msec)",
+      CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexCVariant parsed in {}(msec)",
                   XbmcThreads::SystemClockMillis() - currentTime);
   #endif
       // recently added does not return proper object, we make one up later
@@ -2447,7 +2447,7 @@ TiXmlDocument CPlexUtils::GetPlexXML(std::string url, std::string filter)
   {
 
 #if defined(PLEX_DEBUG_TIMING)
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML %d(msec) for %lu bytes",
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML {}(msec) for {} bytes",
               XbmcThreads::SystemClockMillis() - currentTime, response.size());
 #endif
     if (curlfile.GetContentEncoding() == "gzip")
@@ -2463,8 +2463,8 @@ TiXmlDocument CPlexUtils::GetPlexXML(std::string url, std::string filter)
     }
 
 #if defined(PLEX_DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML %s", curl.Get().c_str());
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML %s", response.c_str());
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML {}", curl.Get().c_str());
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML {}", response.c_str());
 #endif
 #if defined(PLEX_DEBUG_TIMING)
     currentTime = XbmcThreads::SystemClockMillis();
@@ -2473,7 +2473,7 @@ TiXmlDocument CPlexUtils::GetPlexXML(std::string url, std::string filter)
     TiXmlDocument xml;
     xml.Parse(response.c_str());
 #if defined(PLEX_DEBUG_TIMING)
-    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML parsed in %d(msec)",
+    CLog::Log(LOGDEBUG, "CPlexUtils::GetPlexXML parsed in {}(msec)",
                 XbmcThreads::SystemClockMillis() - currentTime);
 #endif
     return xml;

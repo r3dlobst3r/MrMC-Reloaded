@@ -117,7 +117,7 @@ CServicesManager& CServicesManager::GetInstance()
 void CServicesManager::Announce(AnnouncementFlag flag, const std::string& sender, const std::string& message, const CVariant& data)
 {
   using namespace StringHasher;
-  //CLog::Log(LOGDEBUG, "CServicesManager::Announce [%s], [%s], [%s]", ANNOUNCEMENT::AnnouncementFlagToString(flag), sender, message);
+  //CLog::Log(LOGDEBUG, "CServicesManager::Announce [{}], [{}], [{}]", ANNOUNCEMENT::AnnouncementFlagToString(flag), sender, message);
   if ((flag & AnnouncementFlag::Player) && sender == "xbmc")
   {
     if (g_application.CurrentFileItem().HasProperty("MediaServicesItem"))

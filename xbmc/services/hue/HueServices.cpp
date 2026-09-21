@@ -101,7 +101,7 @@ void CHueServices::RevertLight(int lightid, bool force)
   if (!force && !m_bridge->getLight(lightid)->isOn() && !m_forceON)
     return;
 
-  CLog::Log(LOGINFO, "Hue - Restoring Light (%d)", lightid);
+  CLog::Log(LOGINFO, "Hue - Restoring Light ({})", lightid);
 
   uint32_t dur = uint32_t(CServiceBroker::GetSettingsComponent()->GetSettings()->GetNumber(CSettings::SETTING_SERVICES_HUE_DIMDUR) * 1000);
   m_bridge->getLight(lightid)->restoreState(dur);
@@ -126,7 +126,7 @@ void CHueServices::DimLight(int lightid, int status)
   if (!m_bridge->getLight(lightid)->isOn() && !m_forceON)
     return;
 
-  CLog::Log(LOGINFO, "Hue - Dimming light(%d) status(%d)", lightid, status);
+  CLog::Log(LOGINFO, "Hue - Dimming light({}) status({})", lightid, status);
 
   switch (status)
   {
@@ -159,7 +159,7 @@ void CHueServices::DimLight(int lightid, int status)
 
 void CHueServices::DimScene(int status)
 {
-  CLog::Log(LOGINFO, "Hue - Dimming scene status(%d)", status);
+  CLog::Log(LOGINFO, "Hue - Dimming scene status({})", status);
 
   switch (status)
   {
@@ -456,7 +456,7 @@ void CHueServices::Process()
     captureNeeded |= (CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT4MODE) == MODE_COLOR);
   }
 
-  CLog::Log(LOGINFO, "Hue - Entering loop capture: %s; continuous: %s", captureNeeded ? "true" : "false", m_continuous ? "true" : "false");
+  CLog::Log(LOGINFO, "Hue - Entering loop capture: {}; continuous: {}", captureNeeded ? "true" : "false", m_continuous ? "true" : "false");
   while (!m_bStop)
   {
     uint8_t curstatus = m_status;
@@ -557,7 +557,7 @@ void CHueServices::Process()
 
           if (color_dist > static_cast<double>(biasC))
           {
-            //CLog::Log(LOGDEBUG, "Hue - Color bias = %f, dist = %f", biasC, color_dist);
+            //CLog::Log(LOGDEBUG, "Hue - Color bias = {}, dist = {}", biasC, color_dist);
             fx = x;
             fy = y;
             fu_old = u;
@@ -636,7 +636,7 @@ bool CHueServices::SignIn()
 
   for(auto &bridge : bridges)
   {
-    CLog::Log(LOGDEBUG, "Hue: Found bridge at %s", bridge.getIp().c_str());
+    CLog::Log(LOGDEBUG, "Hue: Found bridge at {}", bridge.getIp().c_str());
     if (bridge.getIp() == CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SERVICES_HUE_IP))
     {
       curBridge = bridge;
@@ -648,7 +648,7 @@ bool CHueServices::SignIn()
 
   if (!curBridge.pair())
   {
-    CLog::Log(LOGERROR, "Hue: Unable to pair with bridge at %s", curBridge.getIp().c_str());
+    CLog::Log(LOGERROR, "Hue: Unable to pair with bridge at {}", curBridge.getIp().c_str());
     return false;
   }
 
@@ -660,7 +660,7 @@ bool CHueServices::SignIn()
   CServiceBroker::GetSettingsComponent()->GetSettings()->SetString(CSettings::SETTING_SERVICES_HUE_DISCOVER, strSignOut);
   CServiceBroker::GetSettingsComponent()->GetSettings()->Save();
 
-  CLog::Log(LOGINFO, "Hue: connected to bridge at %s", curBridge.getIp().c_str());
+  CLog::Log(LOGINFO, "Hue: connected to bridge at {}", curBridge.getIp().c_str());
 
   Start();
 
@@ -710,7 +710,7 @@ bool CHueServices::InitConnection()
     {
       lights[id]->setMode(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT1MODE));
       lights[id]->saveState();
-      CLog::Log(LOGINFO, "Hue - Light (%zu) configured as %d", id, lights[id]->getMode());
+      CLog::Log(LOGINFO, "Hue - Light ({}) configured as {}", id, lights[id]->getMode());
     }
   }
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT2ID) > 0)
@@ -720,7 +720,7 @@ bool CHueServices::InitConnection()
     {
       lights[id]->setMode(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT2MODE));
       lights[id]->saveState();
-      CLog::Log(LOGINFO, "Hue - Light (%zu) configured as %d", id, lights[id]->getMode());
+      CLog::Log(LOGINFO, "Hue - Light ({}) configured as {}", id, lights[id]->getMode());
     }
   }
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT3ID) > 0)
@@ -730,7 +730,7 @@ bool CHueServices::InitConnection()
     {
       lights[id]->setMode(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT3MODE));
       lights[id]->saveState();
-      CLog::Log(LOGINFO, "Hue - Light (%zu) configured as %d", id, lights[id]->getMode());
+      CLog::Log(LOGINFO, "Hue - Light ({}) configured as {}", id, lights[id]->getMode());
     }
   }
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT4ID) > 0)
@@ -740,7 +740,7 @@ bool CHueServices::InitConnection()
     {
       lights[id]->setMode(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SERVICES_HUE_LIGHT4MODE));
       lights[id]->saveState();
-      CLog::Log(LOGINFO, "Hue - Light (%zu) configured as %d", id, lights[id]->getMode());
+      CLog::Log(LOGINFO, "Hue - Light ({}) configured as {}", id, lights[id]->getMode());
     }
   }
 
