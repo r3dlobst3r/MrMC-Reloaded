@@ -17,7 +17,7 @@ all: .installed-$(PLATFORM)
 $(PLATFORM): $(DEPS) | $(TARBALLS_LOCATION)/$(ARCHIVE).$(HASH_TYPE)
 	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
-ifeq ($(TARGET_PLATFORM),appletvos)
+ifeq ($(findstring appletv,$(TARGET_PLATFORM)),appletv)
 	cd $(PLATFORM); patch -p1 -i ../tvos_remove-fork.patch
 endif
 	cd $(PLATFORM); $(AUTORECONF) -vif

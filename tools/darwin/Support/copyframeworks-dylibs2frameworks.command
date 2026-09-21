@@ -26,7 +26,7 @@ TARGET_FRAMEWORKS=$TARGET_BUILD_DIR/$FRAMEWORKS_FOLDER_PATH
 BUNDLE_REVISION=$(date -u +%y%m%d.%H%M)
 
 # ios/tvos use different framework plists
-if [ "${PLATFORM_NAME}" == "appletvos" ]; then
+if [[ "${PLATFORM_NAME}" == appletv* ]]; then
   SEEDFRAMEWORKPLIST="${SRCROOT}/xbmc/platform/darwin/tvos/FrameworkSeed_Info.plist"
 # todo: implement soft frameworks for ios
 #elif [ "$PLATFORM_NAME" == "iphoneos" ]; then
@@ -94,7 +94,7 @@ function convert2framework
 }
 
 # todo: convert ios to soft frameworks as well to remove this if guard
-if [ "$PLATFORM_NAME" == "appletvos" ]; then
+if [[ "$PLATFORM_NAME" == appletv* ]]; then
   # loop over all xxx.dylibs in xxx.app/Frameworks
   for dylib in $(find "${TARGET_FRAMEWORKS}" -name "*.dylib" -type f); do
     convert2framework "${dylib}"

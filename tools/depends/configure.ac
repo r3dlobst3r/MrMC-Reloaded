@@ -50,7 +50,7 @@ AC_ARG_WITH([toolchain],
 
 AC_ARG_WITH([platform],
   [AS_HELP_STRING([--with-platform],
-  [target platform [auto]])],
+  [target platform: tvos, tvossimulator, ios, macos [auto]])],
   [use_platform=$withval],
   [use_platform=auto])
 
@@ -431,6 +431,10 @@ case $host in
         target_platform=appletvos
         platform_os="darwin_embedded"
       ;;
+      tvossimulator)
+        target_platform=appletvsimulator
+        platform_os="darwin_embedded"
+      ;;
       ios)
         target_platform=iphoneos
         platform_os="darwin_embedded"
@@ -508,7 +512,7 @@ case $host in
 esac
 
 case $use_platform in
-  ios|tvos|macos)
+  ios|tvos|tvossimulator|macos)
     ;;
   webos)
     ;;

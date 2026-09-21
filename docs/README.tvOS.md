@@ -285,8 +285,12 @@ This will create a `Kodi.app` file located in `$HOME/kodi-build/build/Debug-appl
 > [!WARNING]  
 > If you have selected a specific tvOS SDK Version in step 4 then you might need to adapt the active target to use the same tvOS SDK version, otherwise build will fail. Be sure to select a device configuration.
 
-> [!WARNING]  
-> Building for simulator is NOT supported.
+> [!NOTE]
+> To build for the tvOS simulator, use a separate dependency prefix: configure with
+> `--with-platform=tvossimulator` (dependencies land in `appletvsimulator<sdk>_arm64-target-<type>`),
+> generate the project as above into a different `BUILD_DIR`, then build with
+> `xcodebuild -config Debug -sdk appletvsimulator`. The app is created in
+> `Debug-appletvsimulator`. Device and simulator dependency prefixes cannot be shared (different Mach-O platform).
 
 ### 6.2. Build with xcodebuild
 Alternatively, you can also build via Xcode from the command-line with `xcodebuild`, triggered by CMake:

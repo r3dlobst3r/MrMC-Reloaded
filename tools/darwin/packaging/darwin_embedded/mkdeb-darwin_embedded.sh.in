@@ -10,9 +10,9 @@ DIRNAME=`dirname $0`
 DSYM_TARGET_DIR=/Users/Shared/xbmc-depends/dSyms
 DSYM_FILENAME=@APP_NAME@.app.dSYM
 PP_DEVICE=iOS
-if [ "@PLATFORM@" == "appletvos" ]; then
-  PP_DEVICE=tvOS
-fi
+case "@PLATFORM@" in
+  appletv*) PP_DEVICE=tvOS ;;
+esac
 
 if [ "${SWITCH#*debug}" != "${SWITCH}" ]; then
   echo "Packaging Debug target for ${PP_DEVICE}"
