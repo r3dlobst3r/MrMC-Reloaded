@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface XBMCApplicationDelegate : UIResponder <UIApplicationDelegate>
+@end
+
+// Owns the window and drives the XBMCController through the UIScene lifecycle.
+// Required by apps built with the Xcode 27 SDK (UIKit traps at launch otherwise).
+@interface XBMCSceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property(nullable, nonatomic, strong) UIWindow* window;
 @end
