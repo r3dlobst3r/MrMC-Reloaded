@@ -1081,7 +1081,8 @@ bool CCurlFile::Open(const CURL& url)
   ParseAndCorrectUrl(url2);
 
   std::string redactPath = CURL::GetRedacted(m_url);
-  CLog::Log(LOGDEBUG, "CurlFile::{} - <{}>", __FUNCTION__, redactPath);
+  if (!m_silent)
+    CLog::Log(LOGDEBUG, "CurlFile::{} - <{}>", __FUNCTION__, redactPath);
 
   assert(!(!m_state->m_easyHandle ^ !m_state->m_multiHandle));
   if( m_state->m_easyHandle == NULL )
@@ -1108,8 +1109,9 @@ bool CCurlFile::Open(const CURL& url)
       ReadString(&error[0], 4095);
     }
 
-    CLog::Log(LOGERROR, "CCurlFile::{} - <{}> Failed with code {}:\n{}", __FUNCTION__,
-              redactPath, m_httpresponse, error);
+    if (!m_silent)
+      CLog::Log(LOGERROR, "CCurlFile::{} - <{}> Failed with code {}:\n{}", __FUNCTION__,
+                redactPath, m_httpresponse, error);
 
     return false;
   }
@@ -1168,8 +1170,9 @@ bool CCurlFile::Open(const CURL& url)
     if (m_url != efurl)
     {
       std::string redactEfpath = CURL::GetRedacted(efurl);
-      CLog::Log(LOGDEBUG, "CCurlFile::{} - <{}> Effective URL is {}", __FUNCTION__, redactPath,
-                redactEfpath);
+      if (!m_silent)
+        CLog::Log(LOGDEBUG, "CCurlFile::{} - <{}> Effective URL is {}", __FUNCTION__, redactPath,
+                  redactEfpath);
     }
     m_url = efurl;
   }

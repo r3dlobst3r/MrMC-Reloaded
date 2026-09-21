@@ -863,6 +863,9 @@ bool CEmbyServices::GetSignInByPinReply()
   std::string strMessage;
 
   XFILE::CCurlFile curlfile;
+  // the pin code is sent as a URL query param below, so keep this request out of the
+  // debug log rather than have it echoed in cleartext every second while polling
+  curlfile.SetSilent(true);
   curlfile.SetRequestHeader("Cache-Control", "no-cache");
   curlfile.SetRequestHeader("Content-Type", "application/json");
 

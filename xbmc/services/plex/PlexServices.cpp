@@ -1236,6 +1236,9 @@ bool CPlexServices::GetMyHomeUsers(std::string &homeUserName)
 
     XFILE::CCurlFile plex;
     plex.SetTimeout(20);
+    // pinUrl may carry the Plex Home user's PIN as a URL query param (?pin=1234) -
+    // keep this request out of the debug log rather than have it echoed in cleartext
+    plex.SetSilent(true);
     CPlexUtils::GetDefaultHeaders(&plex);
     if (MyPlexSignedIn())
       plex.SetRequestHeader("X-Plex-Token", m_authToken);

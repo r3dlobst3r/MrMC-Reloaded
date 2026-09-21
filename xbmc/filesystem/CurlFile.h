@@ -81,8 +81,7 @@ namespace XFILE
 
       const CHttpHeader& GetHttpHeader() const { return m_state->m_httpheader; }
       // MrMC service helpers: response code / content encoding access.
-      // Kodi 21 removed the public accessors; verbosity is now global,
-      // so SetSilent only records the request.
+      // Kodi 21 removed the public accessors.
       long GetResponseCode() const { return m_httpresponse; }
       std::string GetContentEncoding() const
       {
