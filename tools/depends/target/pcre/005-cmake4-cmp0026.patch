@@ -1,0 +1,15 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -77,7 +77,11 @@
+ # CMP0026 to avoid warnings for the use of LOCATION in GET_TARGET_PROPERTY.
+ 
+ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
+-CMAKE_POLICY(SET CMP0026 OLD)
++# CMP0026's OLD behavior was removed in CMake 3.31; setting it there is a
++# hard error rather than a no-op, so only request it on older CMake.
++if(${CMAKE_VERSION} VERSION_LESS 3.31)
++  CMAKE_POLICY(SET CMP0026 OLD)
++endif()
+ 
+ # For FindReadline.cmake. This was changed to allow setting CMAKE_MODULE_PATH
+ # on the command line.
