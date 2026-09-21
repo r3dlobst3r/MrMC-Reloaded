@@ -472,7 +472,10 @@ case $host in
 
         case $platform_os in
           darwin_embedded)
-            target_minver="12.0"
+            # Xcode 27 SDKs: libc++ warns "The selected platform is no longer supported"
+            # below 15.0 (an error for dependencies built with -Werror, e.g. glm).
+            # Keep in sync with CMAKE_OSX_DEPLOYMENT_TARGET in cmake/scripts/darwin_embedded.
+            target_minver="15.0"
           ;;
           osx)
             # Xcode 27 SDKs refuse deployment targets below 12.0
