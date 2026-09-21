@@ -27,6 +27,7 @@
         <height>60</height>
         <align>right</align>
 				<font>-</font>
+        <visible>false</visible>
       </control>
       <control type="label" id="402" description="Message">
         <top>3</top>
@@ -35,6 +36,7 @@
         <height>60</height>
         <align>left</align>
 				<font>-</font>
+        <visible>false</visible>
       </control>
     </control>
   </controls>
