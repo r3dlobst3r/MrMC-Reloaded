@@ -115,11 +115,17 @@
 #include "pvr/PVRManager.h"
 #include "pvr/guilib/PVRGUIActionsPlayback.h"
 #include "pvr/guilib/PVRGUIActionsPowerManagement.h"
+#include "services/emby/EmbyServices.h"
+#include "services/hue/HueServices.h"
+#include "services/lighteffects/LightEffectServices.h"
+#include "services/plex/PlexServices.h"
+#include "services/trakt/TraktServices.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/DisplaySettings.h"
 #include "settings/MediaSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
+#include "settings/lib/SettingsManager.h"
 #include "speech/ISpeechRecognition.h"
 #include "storage/MediaManager.h"
 #include "threads/SingleLock.h"
@@ -176,6 +182,7 @@
 #include <cmath>
 #include <memory>
 #include <mutex>
+#include <set>
 
 //TODO: XInitThreads
 #ifdef HAVE_X11
@@ -766,6 +773,86 @@ bool CApplication::Initialize()
     // because we need a real window in the background which gets
     // rendered while we load the main window or enter the master lock key
     CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow(WINDOW_SPLASH);
+
+    // Wire up the MrMC media services. This intentionally happens here rather
+    // than from CSettings::InitializeISettingCallbacks() (which would be the
+    // usual place): that runs during CAppEnvironment::SetUp(), well before
+    // CServiceBroker::RegisterAnnouncementManager() is ever called, and each of
+    // these services registers itself as an announcer in its own constructor --
+    // first touching CXxxServices::GetInstance() that early would dereference a
+    // not-yet-registered announcement manager. By this point in Initialize()
+    // every ServiceBroker-registered manager these constructors touch is long
+    // since up, so it's safe.
+    {
+      CSettingsManager* settingsManager = settings->GetSettingsManager();
+      std::set<std::string> settingSet;
+
+      settingSet = {CSettings::SETTING_SERVICES_EMBYSIGNIN,
+                    CSettings::SETTING_SERVICES_EMBYSIGNINPIN,
+                    CSettings::SETTING_SERVICES_EMBYSERVERSOURCES};
+      settingsManager->RegisterCallback(&CEmbyServices::GetInstance(), settingSet);
+
+      settingSet = {CSettings::SETTING_SERVICES_PLEXSIGNIN,
+                    CSettings::SETTING_SERVICES_PLEXSIGNINPIN,
+                    CSettings::SETTING_SERVICES_PLEXHOMEUSER,
+                    CSettings::SETTING_SERVICES_PLEXGDMSERVER,
+                    CSettings::SETTING_SERVICES_PLEXUPDATEMINS};
+      settingsManager->RegisterCallback(&CPlexServices::GetInstance(), settingSet);
+
+      settingSet = {CSettings::SETTING_SERVICES_TRAKTSIGNINPIN,
+                    CSettings::SETTING_SERVICES_TRAKTPULLWATCHED,
+                    CSettings::SETTING_SERVICES_TRAKTPUSHWATCHED};
+      settingsManager->RegisterCallback(&CTraktServices::GetInstance(), settingSet);
+
+      settingSet = {CSettings::SETTING_SERVICES_HUE_DISCOVER,
+                    CSettings::SETTING_SERVICES_HUE_ENABLE,
+                    CSettings::SETTING_SERVICES_HUE_DIMDUR,
+                    CSettings::SETTING_SERVICES_HUE_DIMBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_DIMOVERPAUSEDBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_DIMPAUSEDBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_DIMOVERUNBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_DIMUNBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_MINBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_MAXBRIGHT,
+                    CSettings::SETTING_SERVICES_HUE_STREAMGROUPID,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT1ID,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT1MODE,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT2ID,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT2MODE,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT3ID,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT3MODE,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT4ID,
+                    CSettings::SETTING_SERVICES_HUE_LIGHT4MODE,
+                    CSettings::SETTING_SERVICES_HUE_FORCEON,
+                    CSettings::SETTING_SERVICES_HUE_FORCEONAFTERSUNSET,
+                    CSettings::SETTING_SERVICES_HUE_CONTINUOUS};
+      settingsManager->RegisterCallback(&CHueServices::GetInstance(), settingSet);
+
+      settingSet = {CSettings::SETTING_SERVICES_LIGHTEFFECTSENABLE,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSIP,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSPORT,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSATURATION,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSPEED,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSVALUE,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSINTERPOLATION,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSTHRESHOLD,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSTATICR,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSTATICG,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSTATICB,
+                    CSettings::SETTING_SERVICES_LIGHTEFFECTSSTATICON};
+      settingsManager->RegisterCallback(&CLightEffectServices::GetInstance(), settingSet);
+    }
+
+    // Start the MrMC media services. Each Start() is self-gated (Emby/Plex spin
+    // up a background thread that resumes a stored session if one exists and is
+    // otherwise idle; Hue/LightEffects additionally check their own "enabled"
+    // setting before doing anything), so this is safe to call unconditionally on
+    // every launch. Without this, a previously signed-in session is never resumed
+    // and the Settings -> Services sign-in screens have nothing running behind them.
+    CEmbyServices::GetInstance().Start();
+    CPlexServices::GetInstance().Start();
+    CHueServices::GetInstance().Start();
+    CLightEffectServices::GetInstance().Start();
 
     if (settings->GetBool(CSettings::SETTING_MASTERLOCK_STARTUPLOCK) &&
         profileManager->GetMasterProfile().getLockMode() != LOCK_MODE_EVERYONE &&
@@ -1966,6 +2053,27 @@ bool CApplication::Cleanup()
   {
     ResetCurrentItem();
     StopPlaying();
+
+    // Stop the MrMC media services before anything they depend on (settings,
+    // announcement manager, job manager, ...) starts getting torn down below.
+    // Each of these is a Meyers' singleton whose destructor would eventually
+    // call Stop() itself at static deinitialization, but that runs in an
+    // unspecified order relative to the systems its background thread uses --
+    // stop it explicitly here instead, matching StopPlaying() just above.
+    CEmbyServices::GetInstance().Stop();
+    CPlexServices::GetInstance().Stop();
+    CHueServices::GetInstance().Stop();
+    CLightEffectServices::GetInstance().Stop();
+
+    {
+      CSettingsManager* settingsManager =
+          CServiceBroker::GetSettingsComponent()->GetSettings()->GetSettingsManager();
+      settingsManager->UnregisterCallback(&CEmbyServices::GetInstance());
+      settingsManager->UnregisterCallback(&CPlexServices::GetInstance());
+      settingsManager->UnregisterCallback(&CTraktServices::GetInstance());
+      settingsManager->UnregisterCallback(&CHueServices::GetInstance());
+      settingsManager->UnregisterCallback(&CLightEffectServices::GetInstance());
+    }
 
     if (m_ServiceManager)
       m_ServiceManager->DeinitStageThree();
