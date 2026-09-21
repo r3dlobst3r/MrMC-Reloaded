@@ -437,7 +437,11 @@ public:
   static constexpr auto SETTING_SERVICES_TRAKTPULLWATCHED = "trakt.pullwatched";
   static constexpr auto SETTING_SERVICES_TRAKTPUSHWATCHED = "trakt.pushwatched";
   static constexpr auto SETTING_SERVICES_TRAKTSIGNINPIN = "trakt.signinpin";
-  static constexpr auto SETTING_SERVICES_UUID = "services.uuid";
+  // Aliases Kodi's own SETTING_SERVICES_DEVICEUUID (a stable per-install UUID,
+  // seeded once in InitializeDefaults() if empty). The Plex/Emby client-identifier
+  // call sites below historically read a "services.uuid" setting that was never
+  // defined anywhere, so every request went out with an empty client id.
+  static constexpr auto SETTING_SERVICES_UUID = "services.deviceuuid";
   static constexpr auto SETTING_VIDEOSCREEN_MONITOR = "videoscreen.monitor";
   static constexpr auto SETTING_VIDEOSCREEN_SCREEN = "videoscreen.screen";
   static constexpr auto SETTING_VIDEOSCREEN_WHITELIST = "videoscreen.whitelist";
