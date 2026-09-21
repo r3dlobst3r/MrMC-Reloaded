@@ -2386,11 +2386,21 @@
         <setting id="trakt.pullwatched" type="string" label="41252" help="41253">
           <level>0</level>
           <default>Idle</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="traktsigninpin" />
+            </dependency>
+          </dependencies>
           <control type="button" format="action"/>
         </setting>
         <setting id="trakt.pushwatched" type="string" label="41254" help="41255">
           <level>0</level>
           <default>Idle</default>
+          <dependencies>
+            <dependency type="enable">
+              <condition on="property" name="traktsigninpin" />
+            </dependency>
+          </dependencies>
           <control type="button" format="action"/>
         </setting>
         <setting id="trakt.accesstoken" type="string" label="" help="">

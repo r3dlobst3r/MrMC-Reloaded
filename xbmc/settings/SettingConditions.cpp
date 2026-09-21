@@ -16,11 +16,13 @@
 #include "cores/AudioEngine/Engines/ActiveAE/ActiveAESettings.h"
 #include "ServiceBroker.h"
 #include "GUIPassword.h"
+#include "guilib/LocalizeStrings.h"
 #if defined(HAS_WEB_SERVER)
 #include "network/WebServer.h"
 #endif
 #include "peripherals/Peripherals.h"
 #include "profiles/ProfileManager.h"
+#include "settings/Settings.h"
 #include "settings/SettingAddon.h"
 #include "settings/SettingsComponent.h"
 #include "utils/FontUtils.h"
@@ -359,6 +361,89 @@ bool LessThanOrEqual(const std::string& condition,
 
   return lhs <= rhs;
 }
+
+// MrMC media service sign-in/out gates. Each of plex.signin, plex.signinpin,
+// emby.signin, emby.signinpin, trakt.signinpin and hue.discover is a button
+// whose stored *string value* doubles as its own label, toggling between the
+// service's "sign in" and "sign out" localized strings as the user (dis)connects
+// (see e.g. CEmbyServices::OnSettingAction). These conditions read that state to
+// drive the buttons' enable/visible dependencies in settings.xml.
+bool PlexSignInEnable(const std::string& condition,
+                     const std::string& value,
+                     const SettingConstPtr& setting,
+                     void* data)
+{
+  // disable the manual sign-in button while already signed in via PIN
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41009);
+  return settings->GetString(CSettings::SETTING_SERVICES_PLEXSIGNINPIN) != strSignOut;
+}
+
+bool PlexSignInPinEnable(const std::string& condition,
+                        const std::string& value,
+                        const SettingConstPtr& setting,
+                        void* data)
+{
+  // disable the PIN sign-in button while already signed in manually
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41009);
+  return settings->GetString(CSettings::SETTING_SERVICES_PLEXSIGNIN) != strSignOut;
+}
+
+bool PlexHomeUserEnable(const std::string& condition,
+                       const std::string& value,
+                       const SettingConstPtr& setting,
+                       void* data)
+{
+  // enable the home-user picker once signed in by either method (the stored
+  // value equals the "sign out" label exactly while that method is active)
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41009);
+  return settings->GetString(CSettings::SETTING_SERVICES_PLEXSIGNIN) == strSignOut ||
+        settings->GetString(CSettings::SETTING_SERVICES_PLEXSIGNINPIN) == strSignOut;
+}
+
+bool EmbySignInEnable(const std::string& condition,
+                     const std::string& value,
+                     const SettingConstPtr& setting,
+                     void* data)
+{
+  // disable the manual sign-in button while already signed in via PIN
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41053);
+  return settings->GetString(CSettings::SETTING_SERVICES_EMBYSIGNINPIN) != strSignOut;
+}
+
+bool EmbySignInPinEnable(const std::string& condition,
+                        const std::string& value,
+                        const SettingConstPtr& setting,
+                        void* data)
+{
+  // disable the PIN sign-in button while already signed in manually
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41053);
+  return settings->GetString(CSettings::SETTING_SERVICES_EMBYSIGNIN) != strSignOut;
+}
+
+bool TraktSignInPinEnable(const std::string& condition,
+                         const std::string& value,
+                         const SettingConstPtr& setting,
+                         void* data)
+{
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41009);
+  return settings->GetString(CSettings::SETTING_SERVICES_TRAKTSIGNINPIN) == strSignOut;
+}
+
+bool HueEnabled(const std::string& condition,
+               const std::string& value,
+               const SettingConstPtr& setting,
+               void* data)
+{
+  const auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+  const std::string strSignOut = g_localizeStrings.Get(41081);
+  return settings->GetString(CSettings::SETTING_SERVICES_HUE_DISCOVER) == strSignOut;
+}
 }; // anonymous namespace
 
 const CProfileManager* CSettingConditions::m_profileManager = nullptr;
@@ -500,6 +585,13 @@ void CSettingConditions::Initialize()
   m_complexConditions.emplace("profilehasvideoslocked", ProfileHasVideosLocked);
   m_complexConditions.emplace("profilelockmode", ProfileLockMode);
   m_complexConditions.emplace("aesettingvisible", ActiveAE::CActiveAESettings::IsSettingVisible);
+  m_complexConditions.emplace("plexsignin", PlexSignInEnable);
+  m_complexConditions.emplace("plexsigninpin", PlexSignInPinEnable);
+  m_complexConditions.emplace("plexhomeuser", PlexHomeUserEnable);
+  m_complexConditions.emplace("embysignin", EmbySignInEnable);
+  m_complexConditions.emplace("embysigninpin", EmbySignInPinEnable);
+  m_complexConditions.emplace("traktsigninpin", TraktSignInPinEnable);
+  m_complexConditions.emplace("hueenabled", HueEnabled);
   m_complexConditions.emplace("gt", GreaterThan);
   m_complexConditions.emplace("gte", GreaterThanOrEqual);
   m_complexConditions.emplace("lt", LessThan);
