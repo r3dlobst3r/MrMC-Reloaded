@@ -5,10 +5,7 @@ function(generate_file file)
                 ${CMAKE_SOURCE_DIR}/tools/codegenerator
                 ${CMAKE_CURRENT_SOURCE_DIR}/../python)
   if(NOT CORE_SYSTEM_NAME STREQUAL windows AND NOT CORE_SYSTEM_NAME STREQUAL windowsstore)
-    set(devnull "/dev/null")
     string(REPLACE ";" ":" classpath "${classpath}")
-  else()
-    set(devnull "nul")
   endif()
 
   set(CPP_FILE ${file}.cpp)
@@ -24,7 +21,7 @@ function(generate_file file)
                      COMMAND ${SWIG_EXECUTABLE}
                      ARGS -w401 -c++ -o ${file}.xml -xml -I${CMAKE_SOURCE_DIR}/xbmc ${CMAKE_CURRENT_SOURCE_DIR}/../swig/${file}
                      COMMAND ${Java_JAVA_EXECUTABLE}
-                     ARGS ${JAVA_OPEN_OPTS} -cp "${classpath}" groovy.ui.GroovyMain ${CMAKE_SOURCE_DIR}/tools/codegenerator/Generator.groovy ${file}.xml ${CMAKE_CURRENT_SOURCE_DIR}/../python/PythonSwig.cpp.template ${file}.cpp > ${devnull}
+                     ARGS ${JAVA_OPEN_OPTS} -cp "${classpath}" groovy.ui.GroovyMain ${CMAKE_SOURCE_DIR}/tools/codegenerator/Generator.groovy ${file}.xml ${CMAKE_CURRENT_SOURCE_DIR}/../python/PythonSwig.cpp.template ${file}.cpp
                      ${CLANG_FORMAT_COMMAND}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../swig/${file} ${CMAKE_CURRENT_SOURCE_DIR}/../python/PythonSwig.cpp.template)
   set(SOURCES ${SOURCES} "${CPP_FILE}" PARENT_SCOPE)
@@ -35,6 +32,17 @@ find_package(SWIG REQUIRED)
 
 # Default URL/Versions/Hashes to use unless *_SOURCE_DIR are set for the relevant binary
 set(GROOVY_VER 4.0.26)
+
+# The bundled Groovy/ASM cannot parse class files emitted by JDK 22+, and previously
+# that mismatch failed silently (the Groovy invocation used to redirect its output to
+# /dev/null): what showed up instead was a zero-length generated .cpp and a wall of
+# unrelated C++ compile errors. Catch it here instead, before codegen ever runs.
+if(Java_VERSION_MAJOR AND (Java_VERSION_MAJOR LESS 17 OR Java_VERSION_MAJOR GREATER 21))
+  message(FATAL_ERROR "JAVA_HOME must point at a JDK 17-21 for the Python-binding codegen "
+                       "(found Java ${Java_VERSION}). Groovy ${GROOVY_VER}'s bundled ASM does "
+                       "not support class files from JDK 22 or newer; point JAVA_HOME at a "
+                       "JDK 17-21 installation and reconfigure.")
+endif()
 set(GROOVY_URL ${KODI_MIRROR}/build-deps/sources/apache-groovy-binary-${GROOVY_VER}.zip)
 set(GROOVY_URL_HASH URL_HASH SHA512=60d1aea85008a438a9498178dc2137385653f1ea294e7e257959e9e0f94382e160e217e1090047c2a944e328cf46e8ebcfc4b015f7d0cb9f2fcf9d880c6c1344)
 
