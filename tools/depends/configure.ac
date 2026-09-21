@@ -727,6 +727,22 @@ AC_SUBST(app_rendersystem)
 AC_SUBST(ffmpeg_options)
 
 [
+# autoconf >=2.72 may auto-select the newest C standard it detects the target compiler
+# supports and append it directly to $CC (e.g. "clang -std=gnu23"). Recent Xcode SDKs'
+# clang defaults land on gnu23, where third-party dependency code that has always relied
+# on implicit int / implicit function declarations (both silently accepted pre-C23) now
+# hard-errors. Chasing that per-dependency (zlib, libpng, gmp, ...) doesn't scale, so pin
+# a known-good standard globally: if autoconf appended a -std= flag to CC, normalize it
+# to gnu17 instead of trusting whatever it auto-detected. CC is left alone if it never
+# picked up a -std= flag in the first place.
+case "$CC" in
+  *" -std="*)
+    CC=$(echo "$CC" | sed -E 's/ -std=[^ ]*/ -std=gnu17/')
+    ;;
+esac
+]
+
+[
 if test "x$CCACHE" = "x"
 then
   # autoconf >=2.72 may append -std= flags to $CC; meson needs a word array
