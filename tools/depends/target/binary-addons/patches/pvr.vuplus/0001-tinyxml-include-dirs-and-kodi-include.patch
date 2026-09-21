@@ -1,0 +1,14 @@
+diff -urN a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,8 +8,8 @@
+ find_package(TinyXML REQUIRED)
+ 
+ include_directories(${NLOHMANNJSON_INCLUDE_DIRS}
+-                    ${TINYXML_INCLUDE_DIR}
+-                    ${KODI_INCLUDE_DIR})
++                    ${TINYXML_INCLUDE_DIRS}
++                    ${KODI_INCLUDE_DIR}/..)
+ 
+ set(VUPLUS_SOURCES src/addon.cpp
+                    src/Enigma2.cpp

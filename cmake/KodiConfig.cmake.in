@@ -17,6 +17,12 @@ endif()
 if(NOT @APP_NAME_UC@_DATA_DIR)
   set(@APP_NAME_UC@_DATA_DIR @APP_DATA_DIR@)
 endif()
+# Addon CMakeLists and AddonHelpers read the KODI_* variables; mirror them for a rebranded app.
+foreach(_var PREFIX INCLUDE_DIR LIB_DIR DATA_DIR)
+  if(NOT KODI_${_var})
+    set(KODI_${_var} ${@APP_NAME_UC@_${_var}})
+  endif()
+endforeach()
 set(APP_RENDER_SYSTEM @APP_RENDER_SYSTEM@)
 list(APPEND CMAKE_MODULE_PATH @APP_LIB_DIR@ @APP_DATA_DIR@/cmake)
 

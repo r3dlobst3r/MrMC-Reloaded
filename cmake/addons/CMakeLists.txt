@@ -198,6 +198,10 @@ list(APPEND CMAKE_MODULE_PATH ${APP_LIB_DIR})
 # include PrepareEnv.cmake which contains the logic to install the addon header bindings etc
 include(PrepareEnv)
 
+# Addons are written against Kodi: they call find_package(Kodi), which only searches
+# lib/kodi*, while a rebranded app installs its config to lib/${APP_NAME_LC}.
+list(APPEND BUILD_ARGS -DKodi_DIR=${APP_LIB_DIR})
+
 ### add the depends subdirectory for any general dependencies
 message(STATUS "\n-- ---- Preparing general dependencies ----")
 add_subdirectory(depends)
@@ -428,6 +432,21 @@ foreach(addon ${addons})
           endif()
 
           set(SOURCE_DIR ${BUILD_DIR}/${id})
+
+          # apply the in-tree patches for this addon (the sources above were just re-extracted,
+          # so this is always applied to pristine files)
+          file(GLOB addon_patches
+               "${CORE_SOURCE_DIR}/tools/depends/target/binary-addons/patches/${id}/*.patch")
+          list(SORT addon_patches)
+          foreach(addon_patch ${addon_patches})
+            message(STATUS "${id}: applying ${addon_patch}")
+            execute_process(COMMAND patch -p1 -i ${addon_patch}
+                            WORKING_DIRECTORY ${SOURCE_DIR}
+                            RESULT_VARIABLE addon_patch_result)
+            if(NOT addon_patch_result EQUAL 0)
+              message(FATAL_ERROR "${id}: failed to apply ${addon_patch}")
+            endif()
+          endforeach()
         endif()
 
         if(NOT "${SOURCE_DIR}" STREQUAL "" AND EXISTS ${SOURCE_DIR})

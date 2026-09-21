@@ -1,0 +1,12 @@
+diff -urN a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,7 +49,7 @@
+ 
+   set(SPECTRUM_SOURCES src/opengl_spectrum.cpp)
+ 
+-  include_directories(${GLM_INCLUDE_DIR})
++  include_directories(${GLM_INCLUDE_DIR}/..)
+ endif()
+ 
+ message(STATUS "Configured render system: ${APP_RENDER_SYSTEM}")

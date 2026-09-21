@@ -94,6 +94,13 @@ file(COPY ${CORE_ADDON_BINDINGS_FILES} ${CORE_ADDON_BINDINGS_DIRS}/
      DESTINATION ${APP_INCLUDE_DIR}
      REGEX ".txt" EXCLUDE)
 
+# Addons include <kodi/...>. A rebranded app installs the bindings to include/${APP_NAME_LC},
+# so provide the include/kodi alias they expect.
+if(NOT APP_NAME_LC STREQUAL kodi AND NOT EXISTS ${ADDON_DEPENDS_PATH}/include/kodi)
+  execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${APP_NAME_LC}
+                          ${ADDON_DEPENDS_PATH}/include/kodi)
+endif()
+
 ### processing additional tools required by the platform
 if(EXISTS ${CORE_SOURCE_DIR}/cmake/scripts/${CORE_SYSTEM_NAME}/tools/)
   file(GLOB platform_tools ${CORE_SOURCE_DIR}/cmake/scripts/${CORE_SYSTEM_NAME}/tools/*.cmake)
