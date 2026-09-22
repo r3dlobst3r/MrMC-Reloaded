@@ -34,7 +34,7 @@ public:
   void OnInitWindow() override;
   void OnDeinitWindow(int nextWindowID) override;
 
-  static bool ShowAndGetNetworkAddress(std::string &path);
+  static bool ShowAndGetNetworkAddress(std::string &path, bool embyOnly = false);
 
   std::string ConstructPath() const;
   bool SetPath(const std::string &path);
@@ -64,6 +64,7 @@ protected:
 
   int m_protocol; //!< Currently selected protocol
   std::vector<Protocol> m_protocols; //!< List of available protocols
+  bool m_embyOnly = false; //!< Restrict the protocol list to emby/embys (Emby/Jellyfin manual sign-in)
   std::string m_server;
   std::string m_path;
   std::string m_username;

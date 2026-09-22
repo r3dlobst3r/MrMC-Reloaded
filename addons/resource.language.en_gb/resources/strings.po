@@ -25749,3 +25749,13 @@ msgstr ""
 msgctxt "#41276"
 msgid "Would you like to sign-out of {} service?"
 msgstr ""
+
+#: mrmc-reloaded
+msgctxt "#41277"
+msgid "Emby"
+msgstr ""
+
+#: mrmc-reloaded
+msgctxt "#41278"
+msgid "Emby (secure)"
+msgstr ""

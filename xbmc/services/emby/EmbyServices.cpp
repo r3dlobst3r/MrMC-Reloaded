@@ -243,7 +243,7 @@ void CEmbyServices::OnSettingAction(const std::shared_ptr<const CSetting>& setti
       CURL curl(m_serverURL);
       curl.SetProtocol("emby");
       std::string path = curl.Get();
-      if (CGUIDialogNetworkSetup::ShowAndGetNetworkAddress(path))
+      if (CGUIDialogNetworkSetup::ShowAndGetNetworkAddress(path, true))
       {
         CURL curl2(path);
         if (!curl2.GetHostName().empty() && !curl2.GetUserName().empty())

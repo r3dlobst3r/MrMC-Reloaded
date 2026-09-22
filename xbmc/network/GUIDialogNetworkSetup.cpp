@@ -124,10 +124,11 @@ void CGUIDialogNetworkSetup::OnSettingAction(const std::shared_ptr<const CSettin
 
 // \brief Show CGUIDialogNetworkSetup dialog and prompt for a new network address.
 // \return True if the network address is valid, false otherwise.
-bool CGUIDialogNetworkSetup::ShowAndGetNetworkAddress(std::string &path)
+bool CGUIDialogNetworkSetup::ShowAndGetNetworkAddress(std::string &path, bool embyOnly /* = false */)
 {
   CGUIDialogNetworkSetup *dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogNetworkSetup>(WINDOW_DIALOG_NETWORK_SETUP);
   if (!dialog) return false;
+  dialog->m_embyOnly = embyOnly;
   dialog->Initialize();
   if (!dialog->SetPath(path))
   {
@@ -432,6 +433,17 @@ void CGUIDialogNetworkSetup::Reset()
 void CGUIDialogNetworkSetup::UpdateAvailableProtocols()
 {
   m_protocols.clear();
+
+  if (m_embyOnly)
+  {
+    // Emby/Jellyfin manual sign-in: only the emby:// scheme this dialog is being
+    // driven with makes sense here - showing smb/nfs/etc alongside it would let the
+    // user pick a protocol CEmbyServices has no idea what to do with.
+    m_protocols.emplace_back(Protocol{false, true, true, true, false, 8096, "emby", 41277, ""});
+    m_protocols.emplace_back(Protocol{false, true, true, true, false, 8920, "embys", 41278, ""});
+    return;
+  }
+
 #ifdef HAS_FILESYSTEM_SMB
   // most popular protocol at the first place
   m_protocols.emplace_back(Protocol{true, true, true, false, true, 0, "smb", 20171, ""});
