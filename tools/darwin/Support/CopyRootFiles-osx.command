@@ -30,11 +30,11 @@ mkdir -p "$TARGET_PATH/extras/user"
 ${SYNC} "$SRCROOT/LICENSE.md" "$BASE_TARGET_PATH"
 ${SYNC} "$SRCROOT/privacy-policy.txt" "$TARGET_PATH"
 ${SYNC} "$SRCROOT/xbmc/platform/darwin/Credits.html" "$BASE_TARGET_PATH"
-${SYNC} "$SRCROOT/tools/darwin/runtime" "$TARGET_PATH/tools/darwin"
+${SYNC} --delete "$SRCROOT/tools/darwin/runtime" "$TARGET_PATH/tools/darwin"
 ${ADDONSYNC} "$SRCROOT/addons" "$TARGET_PATH"
-${SYNC} "$SRCROOT/media" "$TARGET_PATH"
-${SYNC} --include 'settings/settings.xml' --include 'settings/darwin*' --exclude 'settings/*.xml' "$SRCROOT/system" "$TARGET_PATH"
-${SYNC} "$SRCROOT/userdata" "$TARGET_PATH"
+${SYNC} --delete "$SRCROOT/media" "$TARGET_PATH"
+${SYNC} --delete --include 'settings/settings.xml' --include 'settings/darwin*' --exclude 'settings/*.xml' "$SRCROOT/system" "$TARGET_PATH"
+${SYNC} --delete "$SRCROOT/userdata" "$TARGET_PATH"
 
 # copy extra packages if applicable
 if [ -d "$SRCROOT/extras/system" ]; then

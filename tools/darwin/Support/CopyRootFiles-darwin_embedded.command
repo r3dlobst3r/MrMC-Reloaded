@@ -27,12 +27,14 @@ ${SYNC} "$SRCROOT/LICENSE.md"  "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppDat
 ${SYNC} "$SRCROOT/privacy-policy.txt"  "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
 ${SYNC} "$SRCROOT/xbmc/platform/darwin/Credits.html"  "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/"
 ${ADDONSYNC} "$SRCROOT/addons"  "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
-${SYNC} "$SRCROOT/media"    "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
+${SYNC} --delete "$SRCROOT/media"    "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
 
 # extracted eggs
+# (no --delete: this and the addons sync above both merge into AppData/AppHome/addons,
+#  so --delete here would erase what that sync just placed)
 ${SYNC} "$XBMC_DEPENDS/share/$APP_NAME/addons" "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
 
-${SYNC} "$SRCROOT/system"     "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
-${SYNC} "$SRCROOT/userdata"   "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
+${SYNC} --delete "$SRCROOT/system"     "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
+${SYNC} --delete "$SRCROOT/userdata"   "$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/AppData/AppHome"
 
 fi
