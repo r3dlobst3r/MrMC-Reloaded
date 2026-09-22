@@ -28,7 +28,6 @@
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "input/actions/ActionIDs.h"
-#include "services/emby/EmbyServices.h"
 #include "services/plex/PlexClient.h"
 #include "services/plex/PlexServices.h"
 #include "settings/Settings.h"
@@ -373,19 +372,12 @@ bool CGUIWindowMediaSources::GetDirectory(const std::string& strDirectory, CFile
     }
     else if (StringUtils::StartsWithNoCase(strDirectory, "mediasources://emby/"))
     {
-      std::string strParentPath;
-      URIUtils::GetParentPath(strDirectory, strParentPath);
-      SetHistoryForPath(strParentPath);
-      std::vector<std::string> params;
-      params.push_back("mediasources://");
-      params.push_back("return");
-      params.push_back("parent_redirect=" + strParentPath);
-      const std::string strSignOut = g_localizeStrings.Get(41053);
-      if (settings->GetString(CSettings::SETTING_SERVICES_EMBYSIGNINPIN) == strSignOut &&
-          !VerifyLogout("Emby"))
-        return false;
-      CEmbyServices::GetInstance().InitiateSignIn();
-      CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow(WINDOW_MEDIA_SOURCES, params);
+      // Unlike Plex, Emby has no working quick sign-in here: this used to go straight to
+      // InitiateSignIn(), which only ever attempts the PIN/Connect flow
+      // (connect.mediabrowser.tv) - a dead external service, and the one path Jellyfin
+      // (no Connect equivalent at all) can never use. Send the user to Settings > Services
+      // instead, where both the PIN and manual sign-in options are actually reachable.
+      CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow(WINDOW_SETTINGS_SERVICE);
     }
     else if (StringUtils::StartsWithNoCase(strDirectory, "mediasources://pvr/"))
     {
