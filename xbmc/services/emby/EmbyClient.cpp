@@ -196,7 +196,7 @@ void CEmbyClient::SetWatched(CFileItem &item)
 
   // POST to /Users/{UserId}/PlayedItems/{Id}
   CURL curl(m_url);
-  curl.SetFileName("emby/Users/" + GetUserID() + "/PlayedItems/" + itemId);
+  curl.SetFileName("Users/" + GetUserID() + "/PlayedItems/" + itemId);
   curl.SetOptions("");
   // and add the DatePlayed URL parameter
   curl.SetOption("DatePlayed",
@@ -251,7 +251,7 @@ void CEmbyClient::SetUnWatched(CFileItem &item)
 
   // DELETE to /Users/{UserId}/PlayedItems/{Id}
   CURL curl(m_url);
-  curl.SetFileName("emby/Users/" + GetUserID() + "/PlayedItems/" + itemId);
+  curl.SetFileName("Users/" + GetUserID() + "/PlayedItems/" + itemId);
   curl.SetOptions("");
 
   std::string data;
@@ -367,7 +367,7 @@ bool CEmbyClient::GetMoviesFilters(CFileItemList &items, std::string url)
   newItem->m_bIsFolder = true;
   newItem->m_bIsShareOrDrive = false;
   newItem->SetLabel("Title");
-  curl.SetFileName("emby/Items");
+  curl.SetFileName("Items");
   newItem->SetPath("emby://movies/titles/" + Base64URL::Encode(curl.Get()));
   CEmbyUtils::SetEmbyItemProperties(*newItem, "filter");
   items.Add(newItem);
@@ -466,7 +466,7 @@ bool CEmbyClient::GetTVShowFilters(CFileItemList &items, std::string url)
   newItem->m_bIsFolder = true;
   newItem->m_bIsShareOrDrive = false;
   newItem->SetLabel("Title");
-  curl.SetFileName("emby/Items");
+  curl.SetFileName("Items");
   newItem->SetPath("emby://tvshows/titles/" + Base64URL::Encode(curl.Get()));
   CEmbyUtils::SetEmbyItemProperties(*newItem, "filter");
   items.Add(newItem);
@@ -968,7 +968,7 @@ bool CEmbyClient::FetchFilterItems(CEmbyViewCachePtr &view, const CURL &url, con
   {
     if (filter != "Collections")
     {
-      curl.SetFileName("emby/"+ filter);
+      curl.SetFileName(""+ filter);
       curl.SetOption("IncludeItemTypes", EmbyTypeMovie);
     }
     else
@@ -982,7 +982,7 @@ bool CEmbyClient::FetchFilterItems(CEmbyViewCachePtr &view, const CURL &url, con
   }
   else if (type == EmbyTypeSeries)
   {
-    curl.SetFileName("emby/" + filter);
+    curl.SetFileName("" + filter);
     curl.SetOption("IncludeItemTypes", EmbyTypeSeries);
     curl.SetOption("Fields", "Etag,DateCreated,PremiereDate,ProductionYear,ImageTags");
   }
@@ -1027,7 +1027,7 @@ const CVariant CEmbyClient::FetchItemByIds(const std::vector<std::string> &Ids)
   };
 
   CURL curl(m_url);
-  curl.SetFileName("emby/Users/" + GetUserID() + "/Items/");
+  curl.SetFileName("Users/" + GetUserID() + "/Items/");
   curl.SetOptions("");
   curl.SetOption("Ids", StringUtils::Join(Ids, ","));
   curl.SetOption("Fields", Fields);
@@ -1038,7 +1038,7 @@ const CVariant CEmbyClient::FetchItemByIds(const std::vector<std::string> &Ids)
 const std::string CEmbyClient::FetchViewIdByItemId(const std::string &Id)
 {
   CURL curl(m_url);
-  curl.SetFileName("emby/Items/" + Id + "/Ancestors");
+  curl.SetFileName("Items/" + Id + "/Ancestors");
   curl.SetOptions("");
   curl.SetOption("UserId", GetUserID());
   const CVariant views = CEmbyUtils::GetEmbyCVariant(curl.Get());

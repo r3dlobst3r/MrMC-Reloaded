@@ -105,7 +105,7 @@ bool CEmbyUtils::GetIdentity(CURL url, int timeout)
   curlfile.SetSilent(true);
 
   CURL curl(url);
-  curl.SetFileName("emby/system/info/public");
+  curl.SetFileName("system/info/public");
   // do not need user/pass for server info
   curl.SetUserName("");
   curl.SetPassword("");
@@ -252,12 +252,12 @@ void CEmbyUtils::ReportProgress(CFileItem &item, double currentSeconds)
       {
         if (g_progressSec < 0)
           // playback started
-          curl.SetFileName("emby/Sessions/Playing");
+          curl.SetFileName("Sessions/Playing");
         else
-          curl.SetFileName("emby/Sessions/Playing/Progress");
+          curl.SetFileName("Sessions/Playing/Progress");
       }
       else if (status == "stopped")
-        curl.SetFileName("emby/Sessions/Playing/Stopped");
+        curl.SetFileName("Sessions/Playing/Stopped");
 
       std::string id = item.GetMediaServiceId();
       curl.SetOptions("");
@@ -320,7 +320,7 @@ bool CEmbyUtils::GetMoreItemInfo(CFileItem &item)
   else
     itemId = item.GetMediaServiceId();
   
-  url2.SetFileName("emby/Users/" + client->GetUserID() + "/Items");
+  url2.SetFileName("Users/" + client->GetUserID() + "/Items");
   url2.SetOptions("");
   url2.SetOption("Fields", "Genres,People");
   url2.SetOption("IDs", itemId);
@@ -355,7 +355,7 @@ bool CEmbyUtils::GetMoreResolutions(CFileItem &item)
   CEmbyClientPtr client = CEmbyServices::GetInstance().FindClient(url);
   CURL curl(client->GetUrl());
   curl.SetProtocol(client->GetProtocol());
-  curl.SetFileName("emby/Users/" + client->GetUserID() + "/Items/" + id);
+  curl.SetFileName("Users/" + client->GetUserID() + "/Items/" + id);
 
 
   CContextButtons choices;
@@ -420,7 +420,7 @@ bool CEmbyUtils::SearchEmby(CFileItemList &items, std::string strSearchString)
       curl.SetProtocol(client->GetProtocol());
       curl.SetOption("userId", client->GetUserID());
       curl.SetOption("searchTerm", strSearchString);
-      curl.SetFileName("emby/Search/Hints");
+      curl.SetFileName("Search/Hints");
       CVariant variant = GetEmbyCVariant(curl.Get());
       
       personID = variant["SearchHints"][0]["ItemId"].asString();
@@ -456,7 +456,7 @@ bool CEmbyUtils::SearchEmby(CFileItemList &items, std::string strSearchString)
 bool CEmbyUtils::DeleteEmbyMedia(CFileItem &item)
 {
   CURL curl(item.GetURL());
-  curl.SetFileName("emby/Items/" + item.GetMediaServiceId());
+  curl.SetFileName("Items/" + item.GetMediaServiceId());
   curl.SetOptions("");
   std::string response;
   std::string data;
@@ -656,7 +656,7 @@ bool CEmbyUtils::GetAllEmbyRecentlyAddedAlbums(CFileItemList &items,int limit)
         CURL curl(client->GetUrl());
         curl.SetProtocol(client->GetProtocol());
         curl.SetOption("ParentId", viewinfo.id);
-        curl.SetFileName("emby/Users/" + userId + "/Items/Latest");
+        curl.SetFileName("Users/" + userId + "/Items/Latest");
         
         rtn = GetEmbyAlbum(embyItems, curl.Get(), 10);
         
@@ -684,7 +684,7 @@ bool CEmbyUtils::GetEmbyRecentlyAddedAlbums(CFileItemList &items, const std::str
       CURL curl(client->GetUrl());
       curl.SetProtocol(client->GetProtocol());
       curl.SetOption("ParentId", viewinfo.id);
-      curl.SetFileName("emby/Users/" + userId + "/Items/Latest");
+      curl.SetFileName("Users/" + userId + "/Items/Latest");
       
       rtn = GetEmbyAlbum(embyItems, curl.Get(), limit);
       
@@ -792,7 +792,7 @@ bool CEmbyUtils::GetEmbyAlbum(CFileItemList &items, std::string url, int limit)
     variant = CVariant(variantMap);
   }
 
-  curl.SetFileName("emby/Users/" + client->GetUserID() + "/Items");
+  curl.SetFileName("Users/" + client->GetUserID() + "/Items");
   bool rtn = ParseEmbyAlbum(items, curl, variant);
   return rtn;
 
@@ -810,7 +810,7 @@ bool CEmbyUtils::GetEmbyArtistAlbum(CFileItemList &items, std::string url)
   curl.SetOption("Fields", "Etag,Genres,DateCreated,PremiereDate,ProductionYear,");
   curl.SetOption("IncludeItemTypes", EmbyTypeMusicAlbum);
   curl.SetOption("ArtistIds", curl.GetProtocolOption("ArtistIds"));
-  curl.SetFileName("emby/Users/" + client->GetUserID() + "/Items");
+  curl.SetFileName("Users/" + client->GetUserID() + "/Items");
   const CVariant variant = GetEmbyCVariant(curl.Get());
 
   bool rtn = ParseEmbyAlbum(items, curl, variant);
@@ -891,7 +891,7 @@ CFileItemPtr CEmbyUtils::ToFileItemPtr(CEmbyClient *client, const CVariant &vari
     CURL url2(client->GetUrl());
     url2.SetProtocol(client->GetProtocol());
     url2.SetPort(client->GetPort());
-    url2.SetFileName("emby/Users/" + client->GetUserID() + "/Items");
+    url2.SetFileName("Users/" + client->GetUserID() + "/Items");
 
     if (type == EmbyTypeMovie)
     {

@@ -631,7 +631,7 @@ bool CEmbyServices::AuthenticateByName(const CURL& url)
   if (!CJSONVariantWriter::Write(body, requestBody, true))
     return false;
 
-  CURL curl("emby/Users/AuthenticateByName");
+  CURL curl("Users/AuthenticateByName");
   curl.SetPort(url.GetPort());
   if (url.GetProtocol() == "embys")
     curl.SetProtocol("https");
@@ -676,7 +676,7 @@ EmbyServerInfo CEmbyServices::GetEmbyLocalServerInfo(const std::string url)
   emby.SetRequestHeader("Content-Type", "application/json");
 
   CURL curl(url);
-  curl.SetFileName("emby/system/info/public");
+  curl.SetFileName("system/info/public");
   bool useHttps = curl.GetProtocol() == "embys";
   if (useHttps)
     curl.SetProtocol("https");
@@ -1014,7 +1014,7 @@ bool CEmbyServices::ExchangeAccessKeyForAccessToken(EmbyServerInfo &connectServe
   CEmbyUtils::PrepareApiCall(connectServerInfo.UserId, connectServerInfo.AccessKey, curlfile);
 
   CURL curl(connectServerInfo.ServerURL);
-  curl.SetFileName("emby/Connect/Exchange");
+  curl.SetFileName("Connect/Exchange");
   curl.SetOption("format", "json");
   curl.SetOption("ConnectUserId", connectServerInfo.UserId);
 
