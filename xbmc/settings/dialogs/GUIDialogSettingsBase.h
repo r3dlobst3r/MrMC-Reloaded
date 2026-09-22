@@ -11,6 +11,7 @@
 #include "guilib/GUIDialog.h"
 #include "settings/SettingControl.h"
 #include "settings/lib/ISettingCallback.h"
+#include "settings/lib/SettingLevel.h"
 #include "threads/Timer.h"
 #include "utils/ILocalizer.h"
 
@@ -88,7 +89,13 @@ protected:
 
   // new virtual methods
   virtual bool AllowResettingSettings() const { return true; }
-  virtual int GetSettingLevel() const { return 0; }
+  // MrMC: CGUIDialogSettingsManualBase::setSettingDetails() floors every manually-added
+  // setting's level at Standard (see GUIDialogSettingsManualBase.cpp), so the default
+  // viewing level here has to match - subclasses that don't override this (the vast
+  // majority: network setup, lock settings, PVR/playback settings, etc.) would otherwise
+  // filter out every setting they add, since CSettingGroup::GetSettings() only keeps
+  // settings whose level is <= this one.
+  virtual int GetSettingLevel() const { return static_cast<int>(SettingLevel::Standard); }
   virtual std::shared_ptr<CSettingSection> GetSection() = 0;
   virtual std::shared_ptr<CSetting> GetSetting(const std::string& settingId) = 0;
   virtual std::chrono::milliseconds GetDelayMs() const { return std::chrono::milliseconds(1500); }
